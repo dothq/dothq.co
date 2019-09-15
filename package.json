@@ -1,0 +1,37 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "🦄 Dot Browser official website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"next\" \"npm run browser\"",
+    "build": "concurrently \"next build\" \"npm run browser\"",
+    "start": "next start",
+    "browser": "open-cli http://localhost:3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dot-browser/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dot-browser/website/issues"
+  },
+  "homepage": "https://github.com/dot-browser/website#readme",
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "next": "^9.0.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "styled-components": "^5.0.0-beta.8"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "concurrently": "^4.1.2",
+    "open-cli": "^5.0.0",
+    "typescript": "^3.6.3"
+  }
+}
