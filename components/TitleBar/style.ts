@@ -33,4 +33,5 @@ export const NavRight = styled.div`
   margin-right: 100px;
   bottom: -14px;
   position: relative;
+  display: flex;
 `;

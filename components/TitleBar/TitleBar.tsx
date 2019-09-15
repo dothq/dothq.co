@@ -9,6 +9,7 @@ export const TitleBar = () => {
       </NavLeft>
       <NavRight>
         <Button>Download</Button>
+        <Button>Sign in</Button>
       </NavRight>
     </NavBar>
   );

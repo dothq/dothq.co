@@ -6,3 +6,8 @@ export const ButtonStandards = () => css`
   padding: 15px 13px;
   font-weight: 500;
 `;
+
+export const TextStandards = () => css`
+  text-align: center;
+  color: black;
+`;

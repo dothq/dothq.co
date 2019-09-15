@@ -10,7 +10,7 @@ import { TitleBar } from "../components/TitleBar/TitleBar";
 import { Section } from "../components/Section";
 import { StyledImage } from "./../components/Section/style";
 
-const App = () => {
+const AppDownloads = () => {
   return (
     <StyledApp>
       <TitleBar />
@@ -33,4 +33,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AppDownloads;
