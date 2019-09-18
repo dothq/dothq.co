@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0px;
         padding: 0px;
         overflow-x: hidden;
+        background-color: #f8f8f8;
         ${importFont("robotoMono")}
     }
 
@@ -36,15 +37,17 @@ export const StyledApp = styled.div`
 export const Title = styled.h1`
   font-size: 2.3em;
   color: black;
-  font-family: "Roboto Mono";
-  font-weight: 100;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 500;
 
   ${TextStandards()}
 `;
 
 export const Subtitle = styled.h2`
   font-size: 20px;
-  font-family: Segoe UI;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: #494949 !important;
   font-weight: 100;
 

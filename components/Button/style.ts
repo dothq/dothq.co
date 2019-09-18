@@ -20,6 +20,7 @@ export const StyledButton = styled.div`
       return css`
         width: 75px;
         text-align: unset !important;
+        padding: 15px 24px 17px 12px !important;
 
         &:after {
           content: "";
@@ -42,6 +43,7 @@ export const StyledButton = styled.div`
       return css`
         width: 75px;
         text-align: unset !important;
+        padding: 15px 24px 17px 12px !important;
 
         &:before {
           content: "";
