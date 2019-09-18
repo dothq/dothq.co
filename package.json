@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"next\" \"npm run browser\"",
-    "build": "concurrently \"next build\" \"npm run browser\"",
+    "build": "next build && now --prod",
     "start": "next start",
     "browser": "open-cli http://localhost:3000"
   },

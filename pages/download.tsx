@@ -9,13 +9,14 @@ import {
 import { TitleBar } from "../components/TitleBar/TitleBar";
 import { Section } from "../components/Section";
 import { StyledImage } from "./../components/Section/style";
+import { Baseplate } from "../components/Baseplate";
 
 const AppDownloads = () => {
   return (
     <StyledApp>
-      <TitleBar />
+      <Baseplate />
       <Section>
-        <Title>It's time to ditch memory hogging browsers.</Title>
+        <Title>Download Dot Browser</Title>
         <Subtitle>
           <Strong>Dot Browser</Strong> is a privacy-centric browser with an
           intuitive interface and a robust ad-blocker.

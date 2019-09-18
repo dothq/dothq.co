@@ -4,9 +4,13 @@ export const StyledSection = styled.section`
   min-height: 500px;
   height: auto;
   position: relative;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+  }
 `;
 
 export const Container = styled.div`
