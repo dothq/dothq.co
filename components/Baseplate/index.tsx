@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { TitleBar, MobileTitleBar } from "../TitleBar/TitleBar";
 import { StyledApp } from "../../pages/styles";
+import { useState } from "react";
 
 export const Baseplate = () => {
   return (

@@ -7,7 +7,8 @@
     "dev": "concurrently \"next\" \"npm run browser\"",
     "build": "next build && now --prod",
     "start": "next start",
-    "browser": "open-cli http://localhost:3000"
+    "browser": "open-cli http://localhost:3000",
+    "deploy": "now --prod && now alias website.enderdev.now.sh dotbrowser.me"
   },
   "repository": {
     "type": "git",

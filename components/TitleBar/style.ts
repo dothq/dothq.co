@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const NavBar = styled.div`
   height: 80px;
-  display: none;
 
   @media screen and (min-width: 1772px) {
     padding: 0 550px !important;
@@ -12,10 +11,6 @@ export const NavBar = styled.div`
   }
   @media screen and (min-width: 1040px) {
     padding: 0 100px;
-  }
-
-  @media screen and (min-width: 1000px) {
-    display: block;
   }
 `;
 
@@ -38,7 +33,11 @@ export const NavRight = styled.div`
   float: right;
   bottom: -14px;
   position: relative;
-  display: flex;
+  display: none;
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+  }
 `;
 
 export const Hamburger = styled.div`
@@ -50,18 +49,15 @@ export const Hamburger = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
   transition: 0.3s opacity;
 
-  ${({ onClickEvent }: { onClickEvent: boolean }) => css`
-    opacity: ${onClickEvent ? "1" : "0"};
-    pointer-events: ${onClickEvent ? "all" : "none"};
-  `}
-
-  @media screen and (min-width: 1000px) {
-    display: none;
-  }
+  ${({ visible }: { visible: boolean }) => {
+    return css`
+      opacity: ${visible ? "1" : "0"};
+      pointer-events: ${visible ? "all" : "none"};
+    `;
+    console.log(visible, "yeet");
+  }};
 `;
 
 export const HamburgerNavLeft = styled.div`
@@ -71,7 +67,9 @@ export const HamburgerNavLeft = styled.div`
 
 export const HamburgerNavRight = styled.div`
   float: right;
-  bottom: -14px;
-  position: relative;
-  transform: scale(1.5);
+  display: flex;
+
+  @media screen and (min-width: 1000px) {
+    display: none;
+  }
 `;

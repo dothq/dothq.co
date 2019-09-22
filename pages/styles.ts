@@ -6,7 +6,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0px;
         padding: 0px;
-        overflow-x: hidden;
         background-color: #f8f8f8;
         ${importFont("robotoMono")}
     }
@@ -21,17 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 export const StyledApp = styled.div`
   background-color: #f8f8f8;
   height: 100vh;
-  animation: fadein 0.00001s 0.3s forwards;
-  opacity: 0;
-
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  overflow-x: hidden;
 `;
 
 export const Title = styled.h1`

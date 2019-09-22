@@ -6,17 +6,12 @@ import {
   Subtitle,
   Strong
 } from "./styles";
-import {
-  TitleBar,
-  MobileTitleBar,
-  MobileNav
-} from "../components/TitleBar/TitleBar";
+import { TitleBar, MobileTitleBar } from "../components/TitleBar/TitleBar";
 import { Section } from "../components/Section";
 import { StyledImage } from "./../components/Section/style";
 import { Footer } from "../components/Footer";
 import Head from "next/head";
 import { Button } from "../components/Button";
-import { HamburgerIcon } from "../components/HamburgerIcon/style";
 import { Baseplate } from "./../components/Baseplate/index";
 
 const App = () => {
@@ -26,8 +21,8 @@ const App = () => {
       <Section>
         <Title>It's time to ditch memory hogging browsers.</Title>
         <Subtitle>
-          <Strong>Dot Browser</Strong> is a privacy-centric browser with an
-          intuitive interface and a robust ad-blocker.
+          <Strong>Dot</Strong> is a privacy-centric browser with an intuitive
+          interface and a robust ad-blocker.
         </Subtitle>
         <Section>
           <StyledImage
@@ -42,7 +37,7 @@ const App = () => {
             position: "absolute",
             top: "0px",
             width: "14000%",
-            height: "100%",
+            height: "87%",
             marginTop: "108px"
           }}
         ></Section>
