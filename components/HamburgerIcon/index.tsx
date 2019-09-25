@@ -1,10 +1,4 @@
 import { HamburgerImage, HamburgerImageWrap } from "./style";
-import { HamburgerState } from "../TitleBar/TitleBar";
-
-export const hamburgerState = () => {
-  if (HamburgerState.state == false) HamburgerState.state = true;
-  HamburgerState.state = false;
-};
 
 export const HamburgerIcon = ({
   onClick

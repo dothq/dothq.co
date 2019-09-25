@@ -22,10 +22,13 @@
   },
   "homepage": "https://github.com/dot-browser/website#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "bulma": "^0.7.5",
     "next": "^9.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-onclickoutside": "^6.9.0",
+    "react-style-tag": "^2.0.1",
     "styled-components": "^5.0.0-beta.8"
   },
   "devDependencies": {

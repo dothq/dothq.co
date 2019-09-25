@@ -8,7 +8,7 @@ export const Footer = () => {
     <StyledFooter>
       <FooterItems>
         <FooterItem>
-          <Logo logoImage={"https://getdot.js.org/src/icon.png"} />
+          <Logo logoImage={"https://dotbrowser.me/static/icon.png"} />
         </FooterItem>
       </FooterItems>
       <p>&copy; 2019 Dot Browser</p>

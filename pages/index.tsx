@@ -12,12 +12,12 @@ import { StyledImage } from "./../components/Section/style";
 import { Footer } from "../components/Footer";
 import Head from "next/head";
 import { Button } from "../components/Button";
-import { Baseplate } from "./../components/Baseplate/index";
+import Baseplate from "./../components/Baseplate/index";
 
 const App = () => {
   return (
     <StyledApp classList="is-desktop">
-      <Baseplate />
+      <Baseplate darkMode={false} />
       <Section>
         <Title>It's time to ditch memory hogging browsers.</Title>
         <Subtitle>

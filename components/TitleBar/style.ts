@@ -12,17 +12,25 @@ export const NavBar = styled.div`
   @media screen and (min-width: 1040px) {
     padding: 0 100px;
   }
+
+  ${({ darkMode }: { darkMode: boolean }) => {
+    return css`
+      background-color: ${darkMode == true ? "var(--accent-color)" : "none"};
+    `;
+  }};
 `;
 
 export const Logo = styled.div`
-  ${({ logoImage }: { logoImage: any }) => css`
-    background: url(${logoImage}) 50% 50% no-repeat;
-    width: 75px;
-    height: 75px;
-    background-size: 50px;
-    filter: invert(1);
-    cursor: pointer;
-  `}
+  ${({ logoImage, darkMode }: { logoImage: any; darkMode: boolean }) => {
+    return css`
+      background: url(${logoImage}) 50% 50% no-repeat;
+      width: 75px;
+      height: 75px;
+      background-size: 50px;
+      filter: ${darkMode == true ? "invert(0)" : "invert(1)"};
+      cursor: pointer;
+    `;
+  }}
 `;
 
 export const NavLeft = styled.div`
@@ -34,6 +42,14 @@ export const NavRight = styled.div`
   bottom: -14px;
   position: relative;
   display: none;
+
+  ${({ darkMode }: { darkMode: boolean }) => {
+    return css`
+      filter: ${darkMode == true
+        ? "invert(1) hue-rotate(170deg) brightness(1.5)"
+        : "unset"};
+    `;
+  }}
 
   @media screen and (min-width: 1000px) {
     display: flex;
@@ -56,7 +72,6 @@ export const Hamburger = styled.div`
       opacity: ${visible ? "1" : "0"};
       pointer-events: ${visible ? "all" : "none"};
     `;
-    console.log(visible, "yeet");
   }};
 `;
 
