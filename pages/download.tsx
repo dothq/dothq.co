@@ -20,6 +20,7 @@ import Dropdown from "../components/Dropdown";
 import { DropdownItem } from "../components/Dropdown/style";
 import { downloadDot } from "../constants/download";
 import { latestVersion } from "./../constants/version";
+import ModalBox from "./../components/Modal/index";
 
 class AppDownloads extends React.Component {
   public os: string = "...";
@@ -34,7 +35,8 @@ class AppDownloads extends React.Component {
         x: 0,
         y: 0,
         width: 0
-      }
+      },
+      modalBox: false
     };
   }
 
@@ -78,6 +80,18 @@ class AppDownloads extends React.Component {
     this.state.dropdownRect.width = dropdown.offsetWidth + 45;
   }
 
+  showModal() {
+    this.forceUpdate();
+    console.log(this.state.modalBox);
+    this.state.modalBox = true;
+    console.log(this.state.modalBox);
+  }
+
+  closeModal() {
+    this.forceUpdate();
+    this.state.modalBox = false;
+  }
+
   render() {
     return (
       <StyledApp>
@@ -118,7 +132,11 @@ class AppDownloads extends React.Component {
               </small>
             </HeroButton>
             <HeroButton
-              href={`https://github.com/dot-browser/desktop/releases/latest`}
+              onClick={() =>
+                navigate(
+                  "https://github.com/dot-browser/desktop/releases/latest"
+                )
+              }
               darkMode={false}
               noColor={true}
             >
@@ -143,7 +161,7 @@ class AppDownloads extends React.Component {
           </Dropdown>
 
           <img
-            src={"../static/dot-youtube.png"}
+            src={"../static/Dot-youtube.png"}
             style={{
               borderRadius: "10px",
               width: "1000px",

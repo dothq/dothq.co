@@ -91,6 +91,7 @@ export const HeroButton = styled.a`
   font-weight: 500;
   transition: box-shadow 0.4s cubic-bezier(0.17, 0.84, 0.24, 1.21) 0s;
   margin-right: 30px;
+  text-decoration: none;
 
   ${({ darkMode, noColor }: { darkMode: any; noColor?: boolean }) => {
     return css`
@@ -104,7 +105,6 @@ export const HeroButton = styled.a`
         : darkMode == false
         ? "black"
         : "white"};
-      text-decoration: ${noColor == true ? "underline" : "none"};
       --color-shadow: ${noColor == true ? "none" : "0 0 0px 2px #a4a4a4"};
     `;
   }}

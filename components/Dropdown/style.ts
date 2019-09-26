@@ -35,7 +35,7 @@ export const StyledDropdown = styled.div`
 
 export const DropdownFamily = styled.ul`
   height: 100%;
-  margin: 0px;
+  margin: 0px 0px 10px 0px;
   list-style-type: none;
   padding: 0px;
 `;
