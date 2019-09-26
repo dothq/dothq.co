@@ -2,9 +2,18 @@ import styled, { css } from "styled-components";
 
 export const StyledFooter = styled.div`
   height: 280px;
-  padding: 1.5em 5vw 10vh;
   text-align: center;
   background-color: white;
+
+  @media screen and (min-width: 1772px) {
+    padding: 0 550px !important;
+  }
+  @media screen and (min-width: 1772px) {
+    padding: 0 350px !important;
+  }
+  @media screen and (min-width: 1040px) {
+    padding: 0 100px;
+  }
 `;
 
 export const Container = styled.div`
