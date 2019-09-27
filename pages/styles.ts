@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
         ${importFont("robotoMono")}
     }
 
-
     :root {
         --accent-color: rgb(23, 23, 23);
         --secondary-color: #0eb8de;
@@ -19,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 
 export const StyledApp = styled.div`
   background-color: var(--theme-color);
-  height: 100vh;
   overflow: hidden;
 `;
 
@@ -139,4 +137,12 @@ export const HoverButton = styled.a`
   &:hover {
     background-color: rgba(255, 255, 255, 0.15);
   }
+`;
+
+export const Seperator = styled.hr`
+  ${({ darkMode }: { darkMode: any }) => css`
+    border-color: ${darkMode == true
+      ? "rgba(255, 255, 255, 0.28)"
+      : "rgba(0, 0, 0, 0.12)"};
+  `};
 `;

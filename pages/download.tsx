@@ -21,6 +21,7 @@ import { DropdownItem } from "../components/Dropdown/style";
 import { downloadDot } from "../constants/download";
 import { latestVersion } from "./../constants/version";
 import ModalBox from "./../components/Modal/index";
+import { Footer } from "../components/Footer";
 
 class AppDownloads extends React.Component {
   public os: string = "...";
@@ -169,6 +170,7 @@ class AppDownloads extends React.Component {
             }}
           />
         </Section>
+        <Footer darkMode={true} />
         <GlobalStyle />
       </StyledApp>
     );
