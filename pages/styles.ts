@@ -51,6 +51,18 @@ export const Subtitle = styled.h2`
   ${TextStandards()}
 `;
 
+export const Paragraph = styled.p`
+  font-family: Roboto;
+  font-weight: 300;
+`;
+
+export const CopyrightAttribution = styled.p`
+  text-align: center;
+  font-family: Roboto;
+  color: gray;
+  font-weight: 300;
+`;
+
 export const Strong = styled.strong`
   font-weight: 400;
 `;

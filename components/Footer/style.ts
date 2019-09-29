@@ -3,6 +3,10 @@ import { TextStandards } from "../../utils/standard";
 
 export const StyledFooter = styled.div`
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 
   @media screen and (min-width: 1772px) {
     padding: 0 550px !important;

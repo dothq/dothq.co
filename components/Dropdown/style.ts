@@ -57,3 +57,14 @@ export const DropdownItem = styled.li`
     background-color: var(--dropdown-hover-theme);
   }
 `;
+
+export const DropdownSeperator = styled.li`
+  padding: 0px 20px;
+  line-height: 35px;
+  font-family: Roboto;
+  color: var(--dropdown-theme);
+  user-select: none;
+  border-radius: 4px;
+  margin: 10px;
+  padding-left: 10px;
+`;

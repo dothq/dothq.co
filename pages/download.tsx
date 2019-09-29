@@ -17,11 +17,12 @@ import Baseplate from "../components/Baseplate";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Dropdown from "../components/Dropdown";
-import { DropdownItem } from "../components/Dropdown/style";
+import { DropdownItem, DropdownSeperator } from "../components/Dropdown/style";
 import { downloadDot } from "../constants/download";
 import { latestVersion } from "./../constants/version";
 import ModalBox from "./../components/Modal/index";
 import { Footer } from "../components/Footer";
+import { Heading } from "../components/Footer/style";
 
 class AppDownloads extends React.Component {
   public os: string = "...";
@@ -152,6 +153,9 @@ class AppDownloads extends React.Component {
             visible={this.state.dropdownState}
             darkMode={true}
           >
+            <DropdownSeperator>
+              <Heading style={{ color: "#646464" }}>Stable</Heading>
+            </DropdownSeperator>
             <DropdownItem onClick={() => this.setOS("Windows")}>
               Windows
             </DropdownItem>
@@ -159,14 +163,27 @@ class AppDownloads extends React.Component {
             <DropdownItem onClick={() => this.setOS("Linux")}>
               Linux
             </DropdownItem>
+            <DropdownSeperator>
+              <Heading style={{ color: "#646464" }}>Dark side</Heading>
+            </DropdownSeperator>
+            <DropdownItem onClick={() => this.setOS("Windows (Canary)")}>
+              Windows Canary
+            </DropdownItem>
+            <DropdownItem onClick={() => this.setOS("Mac (Canary)")}>
+              Mac Canary
+            </DropdownItem>
+            <DropdownItem onClick={() => this.setOS("Linux (Canary)")}>
+              Linux Canary
+            </DropdownItem>
           </Dropdown>
 
           <img
-            src={"../static/Dot-youtube.png"}
+            src={"../static/Dot-youtube-dark.png"}
             style={{
-              borderRadius: "10px",
-              width: "1000px",
-              marginTop: "40px"
+              borderRadius: "5px",
+              marginTop: "40px",
+              boxShadow: "0 0 20px 0px #0000008c",
+              width: "1100px"
             }}
           />
         </Section>

@@ -16,7 +16,9 @@ import {
   Title,
   Subtitle,
   Seperator,
-  HeroButton
+  HeroButton,
+  Paragraph,
+  CopyrightAttribution
 } from "../../pages/styles";
 
 export const Footer = ({ darkMode }: { darkMode?: any }) => {
@@ -49,7 +51,7 @@ export const Footer = ({ darkMode }: { darkMode?: any }) => {
           </NavigationSection>
           <NavigationSection>
             <Heading>Developers</Heading>
-            <a href={"https://github.com/dot-brower/desktop"}>GitHub</a>
+            <a href={"https://github.com/dot-brower"}>GitHub</a>
             <a href={"/api"}>API</a>
           </NavigationSection>
           <NavigationSection>
@@ -82,6 +84,9 @@ export const Footer = ({ darkMode }: { darkMode?: any }) => {
         </HeroButton>
         <Seperator darkMode={darkMode} />
       </div>
+      <CopyrightAttribution>
+        © {new Date().getFullYear()} Dot Browser. All rights reserved.
+      </CopyrightAttribution>
     </StyledFooter>
   );
 };

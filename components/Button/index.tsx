@@ -5,13 +5,15 @@ export const Button = ({
   iconRight,
   iconLeft,
   onClick,
-  page
+  page,
+  style
 }: {
   children?: any;
   iconRight?: any;
   iconLeft?: any;
   onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
   page?: any;
+  style?: any;
 }) => {
   return (
     <StyledButton
@@ -19,6 +21,7 @@ export const Button = ({
       iconRight={iconRight}
       onClick={onClick}
       page={page}
+      style={style}
     >
       {children}
     </StyledButton>
