@@ -21,9 +21,15 @@ import {
   CopyrightAttribution
 } from "../../pages/styles";
 
-export const Footer = ({ darkMode }: { darkMode?: any }) => {
+export const Footer = ({
+  darkMode,
+  style
+}: {
+  darkMode?: any;
+  style?: any;
+}) => {
   return (
-    <StyledFooter darkMode={darkMode}>
+    <StyledFooter darkMode={darkMode} style={style}>
       <FooterItems>
         <NavigationSection>
           <Logo

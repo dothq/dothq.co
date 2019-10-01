@@ -3,8 +3,6 @@ import { TextStandards } from "../../utils/standard";
 
 export const StyledFooter = styled.div`
   text-align: center;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   box-sizing: border-box;
 

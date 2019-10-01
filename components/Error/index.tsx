@@ -23,7 +23,9 @@ class ErrorPage extends React.Component {
     this.forceUpdate();
 
     window.addEventListener("keydown", e => {
-      window.location.href = "/";
+      if (e.ctrlKey == false && e.altKey == false && e.shiftKey == false) {
+        window.location.href = "/";
+      }
     });
   }
 
