@@ -57,7 +57,7 @@ export const Footer = ({
           </NavigationSection>
           <NavigationSection>
             <Heading>Developers</Heading>
-            <a href={"https://github.com/dot-brower"}>GitHub</a>
+            <a href={"https://github.com/dot-browser"}>GitHub</a>
             <a href={"/api"}>API</a>
           </NavigationSection>
           <NavigationSection>
