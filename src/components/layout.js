@@ -33,8 +33,7 @@ const Layout = ({ children }) => {
         {children}
       </Hero>
       <Footer>
-        © {new Date().getFullYear()}, Built with&nbsp;
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
+        © {new Date().getFullYear()}, Dot HQ. All rights reserved.
       </Footer>
     </>
   )

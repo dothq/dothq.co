@@ -1,18 +1,31 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Button = styled.div`
-    background-color: #0070F3;
+    ${({ shade }: { shade: 'blue' | 'white' }) => css`
+        background-color: ${shade == "blue" ? "#0070F3" : "#fff"};
+        color: ${shade == "blue" ? "#fff" : "#757575"};
+
+        ${shade == "white" ? `
+            box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+        ` : ''}
+
+        &:hover {
+            cursor: pointer;
+            background-color: ${shade == "blue" ? "#0060D1" : ""};
+
+            ${shade == "white" ? `
+                box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+            ` : `
+                box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            `}
+        }
+    `}
+
     border-radius: 4px;
     padding: 6px 18px;
     font-size: 16px;
-    color: white;
     letter-spacing: 0.3px;
-    transition: 0.2s background-color;
-
-    &:hover {
-        cursor: pointer;
-        background-color: #0060D1;
-    }
+    transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform;
 `;
 
 export const HeroButton = styled(Button)`

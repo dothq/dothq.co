@@ -23,7 +23,7 @@ const Header = ({ siteTitle }) => (
                 <TextButton style={{ marginLeft: '16px' }}>Blog</TextButton>
                 <TextButton style={{ marginLeft: '16px' }}>Features</TextButton>
                 <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '16px' }}>
-                    <Button>Download</Button>
+                    <Button shade={"blue"}>Download</Button>
                 </Link>
             </Flex>
         </Container>

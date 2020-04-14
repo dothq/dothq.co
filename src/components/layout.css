@@ -215,7 +215,7 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 img {
   max-width: 100%;
@@ -643,14 +643,4 @@ pre tt:after {
 
 .s-center {
   text-align: center;
-}
-
-.hero-top-sheet {
-  position: absolute;
-  width: 100%;
-  height: 650px;
-  top: 0;
-  background-color: #ffffff;
-  z-index: -1;
-  border-bottom: 1px solid #eaeaea;
 }
