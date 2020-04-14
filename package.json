@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "browser.dothq.co",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Dot Browser Website",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Dot HQ",
   "dependencies": {
     "@types/styled-components": "^5.0.1",
     "babel-plugin-styled-components": "^1.10.7",
