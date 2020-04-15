@@ -48,3 +48,14 @@ export const TextButton = styled.div`
         opacity: 0.7;
     }
 `;
+
+export const IconButton = styled(TextButton)`
+    display: flex;
+    height: 32px;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+`;

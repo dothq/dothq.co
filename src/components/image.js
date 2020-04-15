@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
-const Image = ({ fileName }) => {
+const Image = (props) => {
   const data = useStaticQuery(graphql`
     query {
       landingScreenshotLight: file(relativePath: { eq: "landing-screenshot-light.png" }) {
@@ -22,7 +22,7 @@ const Image = ({ fileName }) => {
     }
   `)
 
-  return <Img fluid={data[fileName].childImageSharp.fluid} />
+  return <Img fluid={data[props.fileName].childImageSharp.fluid} data-sal={props['data-sal']} data-sal-delay={props['data-sal-delay']} data-sal-duration={props['data-sal-duration']} data-sal-easing={props['data-sal-easing']} />
 }
 
 export default Image

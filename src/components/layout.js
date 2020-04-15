@@ -12,6 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./Header/"
 import Hero from "./Hero"
 import Footer from "./Footer"
+import AlphaNotice from "./AlphaNotice"
 import "./layout.css"
 import "./inter.css"
 
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      {window.location.host === "alpha.dothq.co" && <AlphaNotice />}
       <Header siteTitle={data.site.siteMetadata.title} />
       <Hero>
         {children}

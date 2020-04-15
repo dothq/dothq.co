@@ -64,7 +64,6 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
   font-weight: 800;
-  font-size: 80px;
 
   background-image: linear-gradient(45deg, #7e7e7e, black);
   -webkit-background-clip: text;
@@ -643,4 +642,28 @@ pre tt:after {
 
 .s-center {
   text-align: center;
+}
+
+@media screen and (min-width: 626px) {
+  .hero-title {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .hero-title {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 626px) {
+  .hero-p {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .hero-p {
+    font-size: 18px;
+  }
 }

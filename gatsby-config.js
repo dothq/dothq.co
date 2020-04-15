@@ -50,6 +50,21 @@ module.exports = {
           }
         }]
       }
+    },
+    {
+      resolve: `gatsby-plugin-scroll-reveal`,
+      options: {
+          threshold: 0.2,
+          once: true,
+          disable: false,
+          
+          selector: '[data-sal]',
+          animateClassName: 'sal-animate',
+          disabledClassName: 'sal-disabled',
+          rootMargin: '0% 50%',
+          enterEventName: 'sal:in',
+          exitEventName: 'sal:out',
+      }
     }
   ],
 }
