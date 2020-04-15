@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {window.location.host === "alpha.dothq.co" && <AlphaNotice />}
+      <AlphaNotice />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Hero>
         {children}
