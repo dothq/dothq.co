@@ -5,7 +5,6 @@ import PropTypes from "prop-types"
 const Hero = ({ children }) => (
     <StyledHero className={"s-center"}>
         {children}
-        <span>:heart:</span>
     </StyledHero>
 )
 
