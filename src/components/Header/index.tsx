@@ -22,7 +22,10 @@ const Header = ({ siteTitle }) => (
             </Flex>
             <Flex style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <IconButton><FeatherIcon icon="moon" size={18} /></IconButton>
-                <IconButton><FeatherIcon icon="github" size={18} /></IconButton>
+
+                <Link to={"https://dothq.co/1A"}>
+                    <IconButton><FeatherIcon icon="github" size={18} /></IconButton>
+                </Link>
                 <TextButton style={{ marginLeft: '16px' }}>Blog</TextButton>
                 <TextButton style={{ marginLeft: '16px' }}>Features</TextButton>
                 <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '16px' }}>
