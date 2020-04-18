@@ -78,7 +78,7 @@ const IDPage = () => {
                         <InputIconContainer>
                             <FeatherIcon icon={"lock"} size={16} />
                         </InputIconContainer>
-                        <Input placeholder="Password" type={passwordType} ref={passwordRef} onInput={onPasswordInput} />
+                        <Input placeholder="Password" type={passwordType} ref={passwordRef} onInput={onPasswordInput} style={{ width: '189px' }} />
                         {passwordLength !== 0 && <InputIconContainer>
                             <FeatherIcon icon={passwordType !== "password" ? "eye" : "eye-off"} size={16} onClick={() => onPasswordShowClick()} style={{ cursor: 'pointer' }} />
                         </InputIconContainer>}
