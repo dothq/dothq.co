@@ -679,3 +679,11 @@ pre tt:after {
 .id-emoji:hover {
   transform: scale(1.1);
 }
+
+input[type="password"] {
+  letter-spacing: 2px;
+}
+
+input[type="password"]::placeholder {
+  letter-spacing: normal;
+}

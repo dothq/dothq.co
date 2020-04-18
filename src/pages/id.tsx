@@ -5,7 +5,7 @@ import SEO from "../components/seo"
 import { Input, InputContainer, InputIconContainer, Buttons, Form } from "../components/style"
 
 import FeatherIcon from 'feather-icons-react'
-import { HeroButton } from "../components/Button"
+import { HeroButton, TextButton } from "../components/Button"
 import Emoji from "react-emoji-render"
 import { getRandomEmoji } from "../helpers/emoji"
 
@@ -28,6 +28,11 @@ const emojiOptions: Options = {
 const IDPage = () => {
     const [emoji, setEmoji] = React.useState("👋")
 
+    const passwordRef = React.createRef<HTMLInputElement>();
+
+    const [passwordLength, setPasswordLength] = React.useState(0);
+    const [passwordType, setPasswordType] = React.useState("password");
+
     const onEmojiClick = () => {
         setEmoji(getRandomEmoji())
     }
@@ -38,6 +43,18 @@ const IDPage = () => {
 
     const onEmojiMouseLeave = () => {
         setEmoji("👋")
+    }
+
+    const onPasswordInput = () => {
+        setPasswordLength(passwordRef.current.value.length)
+    }
+
+    const onPasswordShowClick = () => {
+        if(passwordType == "password") {
+            setPasswordType("text")
+        } else {
+            setPasswordType("password")
+        }
     }
 
     return (
@@ -61,15 +78,23 @@ const IDPage = () => {
                         <InputIconContainer>
                             <FeatherIcon icon={"lock"} size={16} />
                         </InputIconContainer>
-                        <Input placeholder="Password" type="password" />
+                        <Input placeholder="Password" type={passwordType} ref={passwordRef} onInput={onPasswordInput} />
+                        {passwordLength !== 0 && <InputIconContainer>
+                            <FeatherIcon icon={passwordType !== "password" ? "eye" : "eye-off"} size={16} onClick={() => onPasswordShowClick()} style={{ cursor: 'pointer' }} />
+                        </InputIconContainer>}
                     </InputContainer>
                 </Form>
         
-                <Buttons style={{ marginTop: '16px' }}>
-                    <HeroButton shade={"gray"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center' }}>
-                        Continue
+                <Buttons style={{ margin: '28px 0' }}>
+                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }}>
+                        Log in
+                    </HeroButton>
+
+                    <HeroButton shade={"white"} style={{ height: '42px', width: '118px', justifyContent: 'center', border: '1px solid #ececec' }}>
+                        Sign up
                     </HeroButton>
                 </Buttons>
+
             </div>
         </Layout>
     )
