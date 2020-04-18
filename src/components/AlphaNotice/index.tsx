@@ -5,7 +5,7 @@ const AlphaNotice = () => (
     style={{
         height: '62px', 
         backgroundColor: 'rgb(255, 255, 255)', 
-        fontFamily: 'Inter', 
+        fontFamily: 'Inter, system-ui', 
         color: 'black', 
         borderBottom: '1px solid #fbfbfb', 
         fontSize: '16px', 

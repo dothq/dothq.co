@@ -16,7 +16,7 @@ import AlphaNotice from "./AlphaNotice"
 import "./layout.css"
 import "./inter.css"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, center }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -43,6 +43,7 @@ const Layout = ({ children }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  center: PropTypes.bool
 }
 
 export default Layout

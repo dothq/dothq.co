@@ -26,7 +26,7 @@ function SEO({ description, lang, meta, title, isHome }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s ${!isHome ? `| ${site.siteMetadata.title}` : ''}`}
+      titleTemplate={`%s ${!isHome ? `- ${site.siteMetadata.title}` : ''}`}
       meta={[
         {
           name: `description`,

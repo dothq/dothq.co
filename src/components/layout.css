@@ -41,6 +41,7 @@ template {
 }
 a {
   background-color: transparent;
+  text-decoration: none;
   -webkit-text-decoration-skip: objects;
 }
 a:active,
@@ -666,4 +667,15 @@ pre tt:after {
   .hero-p {
     font-size: 18px;
   }
+}
+
+.id-emoji {
+  width: 64px !important;
+  height: 64px !important;
+  -webkit-user-drag: none;
+  transition: 0.2s transform;
+}
+
+.id-emoji:hover {
+  transform: scale(1.1);
 }

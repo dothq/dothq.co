@@ -14,6 +14,7 @@ import * as blockAds from '../images/features/block_ads.svg'
 import * as familiarDesign from '../images/features/familiar_design.svg'
 import * as syncData from '../images/features/sync_data.svg'
 import * as openSource from '../images/features/open_source.svg'
+import { getOS } from "../helpers/os"
 
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
@@ -26,7 +27,7 @@ const IndexPage = () => (
       
       <Buttons style={{ marginBottom: '34px' }} data-sal="slide-up" data-sal-duration="500" data-sal-delay="600" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)">
         <Link to={"/download"} style={{ textDecoration: 'none' }}>
-          <HeroButton shade={"blue"}>Download for macOS</HeroButton>
+          <HeroButton shade={"blue"}>Download for {getOS()}</HeroButton>
         </Link>
         <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
           <HeroButton shade={"white"}>Learn more</HeroButton>

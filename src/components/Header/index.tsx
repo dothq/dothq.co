@@ -23,11 +23,18 @@ const Header = ({ siteTitle }) => (
             <Flex style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <IconButton><FeatherIcon icon="moon" size={18} /></IconButton>
 
-                <Link to={"https://dothq.co/1A"}>
+                <a href={"https://dothq.co/1A"}>
                     <IconButton><FeatherIcon icon="github" size={18} /></IconButton>
+                </a>
+
+                <Link to={"/blog"}>
+                    <TextButton style={{ marginLeft: '16px' }}>Blog</TextButton>
                 </Link>
-                <TextButton style={{ marginLeft: '16px' }}>Blog</TextButton>
-                <TextButton style={{ marginLeft: '16px' }}>Features</TextButton>
+
+                <Link to={"/id"}>
+                    <TextButton style={{ marginLeft: '16px' }}>Login</TextButton>
+                </Link>
+
                 <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '16px' }}>
                     <Button shade={"blue"}>Download</Button>
                 </Link>
