@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Input, InputContainer, InputIconContainer, Buttons, Form } from "../components/style"
+import { Input, InputContainer, InputIconContainer, Buttons, Form, Process, ProcessChild } from "../components/style"
 
 import FeatherIcon from 'feather-icons-react'
 import { HeroButton, TextButton } from "../components/Button"
@@ -11,6 +11,7 @@ import { getRandomEmoji } from "../helpers/emoji"
 import { Link } from "gatsby"
 import { generateEmojiConfig } from "../tools/emoji"
 import { loginWithCredentials } from "../helpers/login"
+import { Snackbar } from "../components/Snackbar"
 
 const IDPage = () => {
     const [emoji, setEmoji] = React.useState("👋")
@@ -20,6 +21,9 @@ const IDPage = () => {
 
     const [passwordLength, setPasswordLength] = React.useState(0);
     const [passwordType, setPasswordType] = React.useState("password");
+
+    const [snackbarVisible, setSnackbarVisibility] = React.useState(false);
+    const [snackbarContent, setSnackbarContent] = React.useState("");
 
     const onEmojiClick = () => {
         setEmoji(getRandomEmoji())
@@ -45,7 +49,7 @@ const IDPage = () => {
         }
     }
 
-    const onLoginClick = () => {
+    const onLoginClick = async () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
@@ -54,9 +58,18 @@ const IDPage = () => {
 
         if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) == false) return;
 
-        const resp = loginWithCredentials({ email, password })
+        const resp = await loginWithCredentials({ email, password })
 
         console.log(resp)
+
+        if(resp.ok == false) {
+            setSnackbarContent(resp.error ? resp.error : resp.status)
+            setSnackbarVisibility(true)
+
+            setTimeout(() => {
+                setSnackbarVisibility(false)
+            }, 2000);
+        }
     }
 
     return (
@@ -97,9 +110,19 @@ const IDPage = () => {
                     </HeroButton>
                 </Buttons>
 
+                <Process>
+                    <ProcessChild />
+                    <ProcessChild />
+                    <ProcessChild />
+                </Process>
+
                 <Link to={"/reset-password"}>
                     <TextButton isBasic>Forgot your password?</TextButton>
                 </Link>
+
+                <Snackbar visible={snackbarVisible}>
+                    {snackbarContent}
+                </Snackbar>
 
             </div>
         </Layout>

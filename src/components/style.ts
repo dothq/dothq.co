@@ -101,3 +101,38 @@ export const Input = styled.input`
     border-radius: 4px;
     width: inherit;
 `;
+
+export const Process = styled.div`
+    display: flex;
+`;
+
+export const ProcessChild = styled.div`
+    width: 8px;
+    height: 8px;
+    background-color: lightgray;
+    border-radius: 10px;
+
+    animation: 1s blink infinite;
+    transition: 0.5s background-color;
+
+    &:first-of-type {
+        animation-delay: 0.25s;
+    }
+
+    &:nth-of-type(2) {
+        animation-delay: 0.5s
+    }
+
+    &:last-of-type {
+        animation-delay: 0.75s
+    }
+
+    @keyframes blink {
+        0% {
+            background-color: #d6d6d6;
+        }
+        100% {
+            background-color: #b9b9b9;
+        }
+    }
+`;
