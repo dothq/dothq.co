@@ -110,11 +110,11 @@ const IDPage = () => {
                     </HeroButton>
                 </Buttons>
 
-                <Process>
+                {/* <Process>
                     <ProcessChild />
                     <ProcessChild />
                     <ProcessChild />
-                </Process>
+                </Process> */}
 
                 <Link to={"/reset-password"}>
                     <TextButton isBasic>Forgot your password?</TextButton>
