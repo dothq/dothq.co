@@ -89,7 +89,8 @@ export const InputIconContainer = styled.div`
 `;
 
 export const Input = styled.input`
-    height: 42px;
+    height: 41px;
+    margin-top: 1px;
     font-family: 'Inter', system-ui;
     outline: none;
     border: none;
