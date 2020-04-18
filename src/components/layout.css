@@ -676,6 +676,12 @@ pre tt:after {
   transition: 0.2s transform;
 }
 
+.emoji {
+  width: 64px !important;
+  height: 64px !important;
+  -webkit-user-drag: none;
+}
+
 .id-emoji:hover {
   transform: scale(1.1);
 }

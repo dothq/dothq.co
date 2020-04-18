@@ -50,7 +50,7 @@ export const TextButton = styled.div`
 
     ${({ isBasic }: { isBasic?: boolean }) => css`
         ${isBasic ? `
-            border-bottom: 1px solid white;
+            border-bottom: 0.2px solid white;
             display: inline-block;
             padding: 0;
             color: rgb(0, 112, 243);

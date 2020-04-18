@@ -8,26 +8,14 @@ import FeatherIcon from 'feather-icons-react'
 import { HeroButton, TextButton } from "../components/Button"
 import Emoji from "react-emoji-render"
 import { getRandomEmoji } from "../helpers/emoji"
-
-interface Options {
-    protocol?: 'http' | 'https';
-    baseUrl?: string;
-    size?: string;
-    ext?: 'svg' | 'png';
-    className?: string;
-  }
-
-const emojiOptions: Options = {
-    protocol: "https",
-    baseUrl: "//cdn.jsdelivr.net/npm/twemoji@11.0.1/2/svg/",
-    ext: 'svg',
-    size: '',
-    className: 'id-emoji'
-}
+import { Link } from "gatsby"
+import { generateEmojiConfig } from "../tools/emoji"
+import { loginWithCredentials } from "../helpers/login"
 
 const IDPage = () => {
     const [emoji, setEmoji] = React.useState("👋")
 
+    const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
 
     const [passwordLength, setPasswordLength] = React.useState(0);
@@ -57,12 +45,26 @@ const IDPage = () => {
         }
     }
 
+    const onLoginClick = () => {
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+
+        if(password.length == 0) return;
+        if(email.length == 0) return;
+
+        if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) == false) return;
+
+        const resp = loginWithCredentials({ email, password })
+
+        console.log(resp)
+    }
+
     return (
         <Layout center={true}>
             <SEO title="Login" />
             <div style={{ paddingTop: '12vh' }}>
                 <a onClick={() => onEmojiClick()} onMouseEnter={onEmojiMouseEnter} onMouseLeave={onEmojiMouseLeave}>
-                    <Emoji text={emoji} options={emojiOptions} />
+                    <Emoji text={emoji} options={generateEmojiConfig({ className: 'id-emoji' })} />
                 </a>
                 <h1 style={{ fontSize: '3rem' }}>Log in to your Dot ID</h1>
         
@@ -71,7 +73,7 @@ const IDPage = () => {
                         <InputIconContainer>
                             <FeatherIcon icon={"mail"} size={16} />
                         </InputIconContainer>
-                        <Input placeholder="me@domain.tld" type="email" />
+                        <Input placeholder="me@domain.tld" type="email" ref={emailRef} />
                     </InputContainer>
         
                     <InputContainer style={{ width: '275px', marginTop: '10px' }}>
@@ -86,7 +88,7 @@ const IDPage = () => {
                 </Form>
         
                 <Buttons style={{ margin: '28px 0' }}>
-                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }}>
+                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onLoginClick}>
                         Log in
                     </HeroButton>
 
@@ -94,6 +96,10 @@ const IDPage = () => {
                         Sign up
                     </HeroButton>
                 </Buttons>
+
+                <Link to={"/reset-password"}>
+                    <TextButton isBasic>Forgot your password?</TextButton>
+                </Link>
 
             </div>
         </Layout>
