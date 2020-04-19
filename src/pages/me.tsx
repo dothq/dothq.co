@@ -4,12 +4,12 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken } from "../helpers/login"
+import { getUserToken, isBrowser } from "../helpers/login"
 import { getMe } from "../helpers/me"
 
 const MePage = () => {
 
-    window.addEventListener('load', (event) => {
+    isBrowser() && window.addEventListener('load', (event) => {
         const isLoggedIn = getUserToken()
 
         if(!isLoggedIn) navigate('/id')

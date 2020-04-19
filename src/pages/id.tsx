@@ -10,7 +10,7 @@ import Emoji from "react-emoji-render"
 import { getRandomEmoji } from "../helpers/emoji"
 import { Link, navigate } from "gatsby"
 import { generateEmojiConfig } from "../tools/emoji"
-import { loginWithCredentials, setToken } from "../helpers/login"
+import { loginWithCredentials, setToken, isBrowser } from "../helpers/login"
 
 const IDPage = () => {
     const [emoji, setEmoji] = React.useState("👋")
@@ -85,7 +85,7 @@ const IDPage = () => {
         }
     }
 
-    window.addEventListener('keypress', (event) => {
+    isBrowser() && window.addEventListener('keypress', (event) => {
         if(event.which == 13) {
             onLoginClick()
         }
