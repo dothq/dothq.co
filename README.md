@@ -1,9 +1,4 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p>
-  <h3 align="center">Deprecation notice</h2>
-  The NextJS version of Dot Browser (browser.dothq.co) will be kept online until the Gatsby version is deployed. Gatsby is quite new to us, and expect some bugs. Some links which previously worked in the NextJS version may not work in the Gatsby version. If you discover any broken links, please <a href="/issues/new">report them to us here</a>.
-</p>
-
 <p align="center">
   <a href="https://dothq.co/browser">
     <img alt="Browser" src="https://cdn.dothq.co/assets/dot.svg" width="60" />
