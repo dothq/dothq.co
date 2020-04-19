@@ -29,16 +29,14 @@ export const FeatureDisplay = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     padding-bottom: 48px;
+
+    --spacing: 21.5px;
 `;
 
 export const Feature = styled.div`
     text-align: left;
     max-width: 248px;
-    margin-right: 57px;
-
-    &:last-of-type {
-        margin-right: 0 !important;
-    }
+    margin: var(--spacing);
 `;
 
 export const Heading = styled.div`
@@ -90,7 +88,7 @@ export const InputIconContainer = styled.div`
 
 export const Input = styled.input`
     height: 41px;
-    margin-top: 1px;
+    margin-top: 0.1px;
     font-family: 'Inter', system-ui;
     outline: none;
     border: none;

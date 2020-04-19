@@ -8,10 +8,9 @@ import FeatherIcon from 'feather-icons-react'
 import { HeroButton, TextButton } from "../components/Button"
 import Emoji from "react-emoji-render"
 import { getRandomEmoji } from "../helpers/emoji"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { generateEmojiConfig } from "../tools/emoji"
-import { loginWithCredentials } from "../helpers/login"
-import { Snackbar } from "../components/Snackbar"
+import { loginWithCredentials, setToken } from "../helpers/login"
 
 const IDPage = () => {
     const [emoji, setEmoji] = React.useState("👋")
@@ -22,8 +21,10 @@ const IDPage = () => {
     const [passwordLength, setPasswordLength] = React.useState(0);
     const [passwordType, setPasswordType] = React.useState("password");
 
-    const [snackbarVisible, setSnackbarVisibility] = React.useState(false);
-    const [snackbarContent, setSnackbarContent] = React.useState("");
+    const [errorVisible, setErrorVisibility] = React.useState(false);
+    const [errorContent, setErrorContent] = React.useState("");
+
+    const [isDisabled, setDisabled] = React.useState(false);
 
     const onEmojiClick = () => {
         setEmoji(getRandomEmoji())
@@ -50,27 +51,45 @@ const IDPage = () => {
     }
 
     const onLoginClick = async () => {
+        if(!emailRef.current) return;
+        if(!passwordRef.current) return;
+
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
+
+        if(isDisabled) return;
 
         if(password.length == 0) return;
         if(email.length == 0) return;
 
         if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) == false) return;
 
+        setDisabled(true)
+
         const resp = await loginWithCredentials({ email, password })
 
         console.log(resp)
 
         if(resp.ok == false) {
-            setSnackbarContent(resp.error ? resp.error : resp.status)
-            setSnackbarVisibility(true)
+            setDisabled(false)
 
-            setTimeout(() => {
-                setSnackbarVisibility(false)
-            }, 2000);
+            setErrorContent(resp.error ? resp.error : resp.status)
+            setErrorVisibility(true)
+        } else {
+            setErrorContent("")
+            setErrorVisibility(false)
+
+            setToken(resp.access_token)
+
+            navigate('/me')
         }
     }
+
+    window.addEventListener('keypress', (event) => {
+        if(event.which == 13) {
+            onLoginClick()
+        }
+    })
 
     return (
         <Layout center={true}>
@@ -80,8 +99,9 @@ const IDPage = () => {
                     <Emoji text={emoji} options={generateEmojiConfig({ className: 'id-emoji' })} />
                 </a>
                 <h1 style={{ fontSize: '3rem' }}>Log in to your Dot ID</h1>
+                {errorVisible && <p className={"error-text"}>{errorContent}</p>}
         
-                <Form>
+                <Form className={isDisabled ? 'disabled' : ''}>
                     <InputContainer style={{ width: '275px', marginTop: '28px' }}>
                         <InputIconContainer>
                             <FeatherIcon icon={"mail"} size={16} />
@@ -119,10 +139,6 @@ const IDPage = () => {
                 <Link to={"/reset-password"}>
                     <TextButton isBasic>Forgot your password?</TextButton>
                 </Link>
-
-                <Snackbar visible={snackbarVisible}>
-                    {snackbarContent}
-                </Snackbar>
 
             </div>
         </Layout>

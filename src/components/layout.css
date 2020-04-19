@@ -693,3 +693,17 @@ input[type="password"] {
 input[type="password"]::placeholder {
   letter-spacing: normal;
 }
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: 0.2s opacity;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+.error-text {
+  margin: 0 auto;
+  font-size: 15px;
+  color: #ff3434;
+}
