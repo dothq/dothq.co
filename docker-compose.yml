@@ -5,4 +5,4 @@ services:
     build: .
     restart: always
     ports:
-      - 3001:9000
+      - 3001:3001
