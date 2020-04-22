@@ -29,7 +29,6 @@ const Layout = ({ children, center }) => {
 
   return (
     <>
-      <AlphaNotice />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Hero>
         {children}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const loginWithCredentials = async ({ email, password }) => {
-    const res = await fetch('https://cors-anywhere.herokuapp.com/https://api.dothq.co/id.login', { body: JSON.stringify({ email, password }), method: 'POST', headers: { "Content-Type": "application/json" } });
+    const res = await fetch('https://dothq.co/api/id.login', { body: JSON.stringify({ email, password }), method: 'POST', headers: { "Content-Type": "application/json" } });
 
     return res.json();
 }
