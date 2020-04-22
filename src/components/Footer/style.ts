@@ -47,7 +47,7 @@ export const ListItem = styled.div`
     font-size: 14px;
     display: flex;
 
-    color: ${props => props.theme.colors.tertiary + "50"};
+    color: ${props => props.theme.colors.tertiary + "80"};
 
     margin-bottom: 2px;
 `;
