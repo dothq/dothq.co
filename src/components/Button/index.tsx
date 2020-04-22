@@ -2,19 +2,22 @@ import styled, { css } from "styled-components";
 
 export const Button = styled.div`
     ${({ shade }: { shade: 'blue' | 'white' | 'gray' | 'black' }) => css`
-        background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? "#fff" : shade == "black" ? "black" : "#303030"};
+        background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? props => props.theme.colors.secondary : shade == "black" ? "black" : "#303030"};
         color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#C9C9C9" : "#757575"};
 
         ${shade == "white" ? `
             box-shadow: 0 5px 10px rgba(0,0,0,0.12);
         ` : ''}
 
+        border: 1px solid ${props => props.theme.ui.border};
+
         &:hover {
             cursor: pointer;
-            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : ""};
+            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : "#131313"};
 
             ${shade == "white" ? `
                 box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+                ${props => props.theme.isDark ? `background-color: darkgray` : ''}
             ` : `
                 box-shadow: 0 5px 10px rgba(0,0,0,0.05);
             `}
@@ -25,7 +28,7 @@ export const Button = styled.div`
     padding: 6px 18px;
     font-size: 16px;
     letter-spacing: 0.3px;
-    transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform;
+    transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform, 0.2s border;
 `;
 
 export const HeroButton = styled(Button)`
@@ -39,7 +42,7 @@ export const TextButton = styled.div`
     background-color: transparent;
     padding: 0px 12px;
     font-size: 16px;
-    color: black;
+    color: ${props => props.theme.ui.color};
     letter-spacing: 0.3px;
     transition: 0.2s background-color, 0.2s opacity;
 
@@ -50,7 +53,7 @@ export const TextButton = styled.div`
 
     ${({ isBasic }: { isBasic?: boolean }) => css`
         ${isBasic ? `
-            border-bottom: 0.2px solid white;
+            border-bottom: 0.2px solid ${props => props.theme.colors.tertiary};
             display: inline-block;
             padding: 0;
             color: rgb(0, 112, 243);

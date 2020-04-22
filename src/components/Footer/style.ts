@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledFooter = styled.div`
     height: 540px;
-    background-color: white;
+    background-color: ${props => props.theme.ui.homeBackground};
 `;
 
 export const Container = styled.div`
@@ -21,22 +21,25 @@ export const LogoText = styled.div`
     text-align: center;
     margin-top: 12px;
 
-    color: #000000;
+    color: ${props => props.theme.colors.tertiary};
 `;
 
 export const List = styled.div`
-
+    margin-left: 190px;
+    display: flex;
 `;
 
 export const ListGroup = styled.div`
-
+    margin-right: 76px;
 `;
 
 export const ListTitle = styled.div`
     font-size: 16px;
     display: flex;
 
-    color: #000000;
+    color: ${props => props.theme.colors.tertiary};
+
+    margin-bottom: 5px;
 `;
 
 export const ListItem = styled.div`
@@ -44,5 +47,16 @@ export const ListItem = styled.div`
     font-size: 14px;
     display: flex;
 
-    color: #454545;
+    color: ${props => props.theme.colors.tertiary + "50"};
+
+    margin-bottom: 2px;
+`;
+
+export const Copyright = styled.div`
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 360px;
+    display: flex;
+    position: absolute;
+    color: ${props => props.theme.colors.tertiary + "90"};
 `;

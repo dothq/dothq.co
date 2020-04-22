@@ -125,7 +125,7 @@ const IDPage = () => {
                         Log in
                     </HeroButton>
 
-                    <HeroButton shade={"white"} style={{ height: '42px', width: '118px', justifyContent: 'center', border: '1px solid #ececec' }}>
+                    <HeroButton shade={"white"} style={{ height: '42px', width: '118px', justifyContent: 'center' }}>
                         Sign up
                     </HeroButton>
                 </Buttons>

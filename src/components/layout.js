@@ -9,12 +9,18 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { createGlobalStyle } from 'styled-components'
+
 import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
 import Footer from "./Footer"
 import "./layout.css"
 import "./inter.css"
+
+import { BackgroundInject } from './style'
+
+const GS = createGlobalStyle`${BackgroundInject}`;
 
 const Layout = ({ children, center }) => {
   const data = useStaticQuery(graphql`
@@ -29,14 +35,13 @@ const Layout = ({ children, center }) => {
 
   return (
     <>
+      <GS />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Hero>
         {children}
       </Hero>
       <Ending />
-      <Footer>
-        © {new Date().getFullYear()}, Dot HQ. All rights reserved.
-      </Footer>
+      <Footer />
     </>
   )
 }

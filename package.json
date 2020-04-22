@@ -19,6 +19,7 @@
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-remark-emojis": "^0.4.2",
     "gatsby-source-filesystem": "^2.1.56",
+    "gatsby-styled-components-dark-mode": "^1.1.1",
     "gatsby-transformer-remark": "^2.7.1",
     "gatsby-transformer-sharp": "^2.3.19",
     "prop-types": "^15.7.2",

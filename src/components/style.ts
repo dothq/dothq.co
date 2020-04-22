@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 
-import * as emojis from '../images/apple_emojis.png'
-
 export const Buttons = styled.div`
     display: flex;
     justify-content: center;
@@ -12,9 +10,27 @@ export const HeroSheet = styled.div`
     width: 100%;
     height: 650px;
     top: 0;
-    background-color: #ffffff;
+    background-color: ${props => props.theme.ui.background};
     z-index: -1;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid ${props => props.theme.ui.border};
+    transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s;
+`;
+
+export const BackgroundInject = css`
+    body {
+        background-color: ${props => props.theme.ui.background};
+        transition: background 0.2s ease-out 0s;
+    }
+
+    h1 {
+        color: ${props => props.theme.colors.tertiary};
+        transition: color 0.2s ease-out 0s;  
+    }
+
+    p {
+        color: ${props => props.theme.colors.tertiary + "db"};
+        transition: color 0.2s ease-out 0s;  
+    }
 `;
 
 export const HeroSheetStyle = css`
@@ -30,7 +46,8 @@ export const HeroSheetStyle = css`
     }
 
     body {
-        background-color: #f9f9f9;
+        background-color: ${props => props.theme.ui.homeBackground};
+        transition: background 0.2s ease-out 0s;
     }
     
     * [dot-slideup="true"] {
@@ -63,8 +80,8 @@ export const Feature = styled.div`
 export const Heading = styled.div`
     font-style: normal;
     font-weight: bold;
-    font-size: 19px;
-    color: #1D1D1D;
+    font-size: 19px; 
+    color: ${props => props.theme.colors.tertiary + "cc"};
     margin-bottom: 4px;
 `;
 
@@ -72,7 +89,7 @@ export const Description = styled.div`
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    color: #626262;
+    color: ${props => props.theme.colors.tertiary + "a6"};
 `;
 
 export const FeatureImage = styled.img`
@@ -86,7 +103,7 @@ export const Form = styled.div`
 `;
 
 export const InputContainer = styled.div`
-    border: 1px solid #eaeaea;
+    border: 1px solid ${props => props.theme.ui.border};
     display: inline-flex;
     border-radius: 4px;
     transition: 0.1s border;
@@ -105,6 +122,7 @@ export const InputIconContainer = styled.div`
     align-items: center;
     justify-content: center;
     min-width: 42px;
+    color: ${props => props.theme.colors.tertiary};
 `;
 
 export const Input = styled.input`
@@ -119,6 +137,12 @@ export const Input = styled.input`
     flex-direction: column;
     border-radius: 4px;
     width: inherit;
+    background-color: transparent;
+    color: ${props => props.theme.colors.tertiary};
+
+    &::placeholder {
+        color: ${props => props.theme.colors.tertiary + "87"};
+    }
 `;
 
 export const Process = styled.div`
@@ -154,4 +178,10 @@ export const ProcessChild = styled.div`
             background-color: #b9b9b9;
         }
     }
+`;
+
+export const Title = styled.h1`
+    background-image: ${props => props.theme.ui.titleGradient};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 `;

@@ -9,24 +9,27 @@ import { Link } from 'gatsby';
 import * as macos from '../../images/os/macos.png'
 import * as windows from '../../images/os/windows.png'
 import * as linux from '../../images/os/linux.png'
+import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
 const OSLink = ({ os }) => {
+    const themeContext = React.useContext(ThemeManagerContext)
+
     if(os == "windows") { 
         return (
             <Link to={"/download?os=windows"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={windows} />
+                <img src={windows} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
             </Link>
         )
     } else if(os == "macos") {
         return (
             <Link to={"/download?os=macos"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={macos} />
+                <img src={macos} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
             </Link>
         )
     } else {
         return (
             <Link to={"/download?os=linux"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={linux} />
+                <img src={linux} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
             </Link>
         )
     }

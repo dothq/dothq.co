@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 import * as landingScreenshotLight from '../../images/landing-screenshot-light.png'
+import * as landingScreenshotDark from '../../images/landing-screenshot-dark.png'
 
 export const StyledEnding = styled.div`
     height: 380px;
-    background-color: white;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
+    background-color: ${props => props.theme.ui.background};
+    border-top: 1px solid ${props => props.theme.ui.border};
+    border-bottom: 1px solid ${props => props.theme.ui.border}
 `;
 
 export const ContainerParent = styled.div`
@@ -43,7 +44,7 @@ export const Heading = styled.div`
     font-size: 26px;
     text-transform: uppercase;
 
-    color: #4D4D4D;
+    color: ${props => props.theme.colors.tertiary + "80"};
     margin-bottom: 18px;
 `;
 
@@ -52,7 +53,7 @@ export const Title = styled.div`
     font-style: normal;
     font-weight: 800;
     font-size: 37px;
-    color: #000000;
+    color: ${props => props.theme.colors.tertiary};
 `;
 
 export const Or = styled.div`
@@ -65,7 +66,7 @@ export const Or = styled.div`
         display: flex;
         align-items: center;
         text-align: center;
-        color: #000000;
+        color: ${props => props.theme.colors.tertiary};
         vertical-align: middle;
         display: flex;
         align-self: center;
@@ -75,7 +76,7 @@ export const Or = styled.div`
 `;
 
 export const FadingOutScreenshot = styled.div`
-    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 98.92%), url(${landingScreenshotLight});
+    background: linear-gradient(90deg, ${props => props.theme.colors.secondary} 0%, ${props => props.theme.colors.secondary + "80"} 98.92%), url(${props => props.theme.isDark ? landingScreenshotDark : landingScreenshotLight});
     height: 378px;
     background-size: cover;
 

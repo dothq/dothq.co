@@ -24,7 +24,7 @@ export const Flex = styled.div`
 export const Logo = styled.div`
     height: 36px;
     width: 36px;
-    background: linear-gradient(135.94deg, #000000 0%, #2B2B2B 84.74%);
+    background: ${props => props.theme.ui.logoGradient};
     border-radius: 28px;
 
     ${({ size }: { size?: number }) => css`
