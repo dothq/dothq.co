@@ -4,6 +4,12 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby";
 import { Logo } from "../Header/style";
 
+export const Item = ({ href, children }) => (
+    <Link to={href}>
+        <ListItem>{children}</ListItem>
+    </Link>
+)
+
 const Footer = ({ children }) => (
     <StyledFooter>
         <Container>
@@ -15,37 +21,37 @@ const Footer = ({ children }) => (
             <List>
                 <ListGroup>
                     <ListTitle>Explore</ListTitle>
-                    <ListItem>Home</ListItem>
-                    <ListItem>Features</ListItem>
-                    <ListItem>Download</ListItem>
-                    <ListItem>Careers</ListItem>
+                    <Item href={"/"}>Home</Item>
+                    <Item href={"/id"}>ID</Item>
+                    <Item href={"/download"}>Download</Item>
+                    <Item href={"/careers"}>Careers</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Learn</ListTitle>
-                    <ListItem>Blog</ListItem>
-                    <ListItem>Changelog</ListItem>
-                    <ListItem>Support</ListItem>
+                    <Item href={"/blog"}>Blog</Item>
+                    <Item href={"/changelog"}>Changelog</Item>
+                    <Item href={"/support"}>Support</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Resources</ListTitle>
-                    <ListItem>Brand</ListItem>
-                    <ListItem>Press Kit</ListItem>
-                    <ListItem>Guides</ListItem>
-                    <ListItem>Notion</ListItem>
+                    <Item href={"/brand"}>Brand</Item>
+                    <Item href={"/brand#kit"}>Press Kit</Item>
+                    <Item href={"/guides"}>Guides</Item>
+                    <Item href={"/design"}>Design</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Social</ListTitle>
-                    <ListItem>Twitter</ListItem>
-                    <ListItem>Discord</ListItem>
+                    <Item href={"/5A"}>Twitter</Item>
+                    <Item href={"/8J"}>Discord</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Legal</ListTitle>
-                    <ListItem>Terms</ListItem>
-                    <ListItem>Privacy</ListItem>
+                    <Item href={"/terms"}>Terms</Item>
+                    <Item href={"/privacy"}>Privacy</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>More from HQ</ListTitle>
-                    <ListItem>Drop</ListItem>
+                    <Item href={"/products/drop"}>Drop</Item>
                 </ListGroup>
             </List>
         </Container>

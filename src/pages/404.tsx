@@ -13,7 +13,7 @@ import { generateEmojiConfig } from "../tools/emoji"
 
 const NotFoundPage = () => {
     return (
-        <Layout center={true}>
+        <Layout>
             <SEO title="Page Not Found" />
             <div style={{ padding: '11.8vh' }}>
                 <Emoji text={"🙄"} options={generateEmojiConfig({ className: 'emoji' })} />

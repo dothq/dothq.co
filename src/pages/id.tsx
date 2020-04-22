@@ -92,7 +92,7 @@ const IDPage = () => {
     })
 
     return (
-        <Layout center={true}>
+        <Layout>
             <SEO title="Login" />
             <div style={{ padding: '12vh' }}>
                 <a onClick={() => onEmojiClick()} onMouseEnter={onEmojiMouseEnter} onMouseLeave={onEmojiMouseLeave}>

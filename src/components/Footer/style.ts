@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledFooter = styled.div`
     height: 540px;
     background-color: ${props => props.theme.ui.homeBackground};
+    border-top: 1px solid ${props => props.theme.ui.border}
 `;
 
 export const Container = styled.div`
@@ -50,6 +51,10 @@ export const ListItem = styled.div`
     color: ${props => props.theme.colors.tertiary + "80"};
 
     margin-bottom: 2px;
+
+    &:hover {
+        opacity: 0.7;
+    }
 `;
 
 export const Copyright = styled.div`

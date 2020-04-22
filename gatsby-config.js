@@ -73,5 +73,12 @@ module.exports = {
         dark: require(`${__dirname}/src/theme.js`).darkTheme,
       },
     },
+    {
+      resolve: `gatsby-source-ghost`,
+      options: {
+        apiUrl: `https://dothq.co`,
+        contentApiKey: `572831aa3e4116076c3ca53593`,
+      },
+    },
   ],
 }

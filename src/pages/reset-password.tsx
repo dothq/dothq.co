@@ -13,7 +13,7 @@ import { generateEmojiConfig } from "../tools/emoji"
 
 const RSPage = () => {
     return (
-        <Layout center={true}>
+        <Layout>
             <SEO title="Reset Password" />
             <div style={{ padding: '11.8vh' }}>
                 <Emoji text={"🔒"} options={generateEmojiConfig({ className: 'emoji' })} />

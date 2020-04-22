@@ -701,3 +701,12 @@ input[type="password"]::placeholder {
   font-size: 15px;
   color: #ff3434;
 }
+
+.blog-hero {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  max-width: 1164px;
+}

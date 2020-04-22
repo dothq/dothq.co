@@ -22,7 +22,7 @@ import { BackgroundInject } from './style'
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
-const Layout = ({ children, center }) => {
+const Layout = ({ children, noEnding, noHero }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -37,10 +37,11 @@ const Layout = ({ children, center }) => {
     <>
       <GS />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <Hero>
+      {!noHero && <Hero>
         {children}
-      </Hero>
-      <Ending />
+      </Hero>}
+      {noHero && <>{children}</>}
+      {!noEnding && <Ending />}
       <Footer />
     </>
   )
@@ -48,7 +49,8 @@ const Layout = ({ children, center }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  center: PropTypes.bool
+  noEnding: PropTypes.bool,
+  noHero: PropTypes.bool
 }
 
 export default Layout

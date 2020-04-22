@@ -23,7 +23,7 @@ const MePage = () => {
     }, [])
 
     return (
-        <Layout center={true}>
+        <Layout>
             <SEO title={user.username ? user.username : 'User'} />
             <div style={{ padding: '12vh' }}>
                 <img src="https://cdn.dothq.co/assets/unknown.png" width="64" />

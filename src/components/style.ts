@@ -103,15 +103,15 @@ export const Form = styled.div`
 `;
 
 export const InputContainer = styled.div`
-    border: 1px solid ${props => props.theme.ui.border};
+    --input-border: ${props => props.theme.ui.border};
+    border: 1px solid var(--input-border);
     display: inline-flex;
     border-radius: 4px;
     transition: 0.1s border;
 
     &:focus-within, &:focus {
-        border: 1px solid #8c8c8c;
+        --input-border: #8c8c8c !important;
     }
-    
 `;
 
 export const InputIconContainer = styled.div`
@@ -184,4 +184,87 @@ export const Title = styled.h1`
     background-image: ${props => props.theme.ui.titleGradient};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+`;
+
+export const InputHotkey = styled.div`
+    font-size: 10px;
+    margin-right: 8px;
+    padding: 3px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--input-border);
+    transition: 0.1s border;
+`;
+
+export const PostMetadata = styled.div`
+    height: 154px;
+    border-top: 1px solid ${props => props.theme.ui.border};
+    padding-top: 32px;
+    transition: 0.2s border;
+
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 18px;
+        color: ${props => props.theme.colors.tertiary + "50"};
+    }
+`;
+
+export const PostContainer = styled.article``;
+
+export const PostContent = styled.section`
+    color: ${props => props.theme.colors.tertiary};
+    max-width: 1164px;
+    margin: 0 auto;
+    text-align: center;
+
+    a {
+        color: ${props => props.theme.colors.primary};
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    img {
+        max-width: 700px;
+    }
+
+    figcaption {
+        max-width: 650px;
+        opacity: 0.5;
+        font-size: 14px;
+        margin: 0 auto;
+    }
+
+    ul {
+        list-style-position: inside;
+    }
+`;
+
+export const PostImage = styled.picture`
+    height: 500px;
+    width: -webkit-fill-available;
+    display: block;
+    border-top: 1px solid ${props => props.theme.ui.border};
+    border-bottom: 1px solid ${props => props.theme.ui.border};
+    margin-bottom: 2.5rem;
+    transition: 0.2s border;
+
+    ${({ image }: { image: any }) => css`
+        background-image: url(${image});
+        background-size: cover;
+        background-position: center;
+    `}
 `;

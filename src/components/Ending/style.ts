@@ -7,7 +7,6 @@ export const StyledEnding = styled.div`
     height: 380px;
     background-color: ${props => props.theme.ui.background};
     border-top: 1px solid ${props => props.theme.ui.border};
-    border-bottom: 1px solid ${props => props.theme.ui.border}
 `;
 
 export const ContainerParent = styled.div`
