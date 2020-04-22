@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header/"
 import Hero from "./Hero"
+import Ending from "./Ending"
 import Footer from "./Footer"
 import "./layout.css"
 import "./inter.css"
@@ -32,6 +33,7 @@ const Layout = ({ children, center }) => {
       <Hero>
         {children}
       </Hero>
+      <Ending />
       <Footer>
         © {new Date().getFullYear()}, Dot HQ. All rights reserved.
       </Footer>

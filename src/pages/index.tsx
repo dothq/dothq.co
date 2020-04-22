@@ -22,44 +22,48 @@ const IndexPage = () => (
   <>
     <Layout>
       <SEO title="Dot Browser, the privacy-centric web browser" isHome />
-      <h1 className="hero-title" data-sal="slide-up" data-sal-delay="200" data-sal-duration="500" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)">Take back your privacy.</h1>
-      <p className="hero-p" data-sal="slide-up" data-sal-delay="400" data-sal-duration="500" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)"><strong>Dot Browser</strong> is a <strong>privacy-conscious</strong> web browser that protects you from being <strong>tracked</strong> and <strong>monitored</strong>.</p>
+      <h1 className="hero-title" dot-slideup={"true"} style={{ animationDelay: '0.2s' }}>Take back your privacy.</h1>
+      <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}><strong>Dot Browser</strong> is a <strong>privacy-conscious</strong> web browser that protects you from being <strong>tracked</strong> and <strong>monitored</strong>.</p>
       
-      <Buttons style={{ marginBottom: '34px' }} data-sal="slide-up" data-sal-duration="500" data-sal-delay="600" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)">
-        <Link to={"/download"} style={{ textDecoration: 'none' }}>
-          <HeroButton shade={"blue"}>Download for {getOS()}</HeroButton>
-        </Link>
-        <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
-          <HeroButton shade={"white"}>Learn more</HeroButton>
-        </Link>
-      </Buttons>
-
-      <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
-        <img src={landingScreenshotLight} data-sal="slide-up" data-sal-duration="500" data-sal-delay="1000" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)" data-sal-threshold={0.1} />
+      <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
+        <Buttons style={{ marginBottom: '34px' }}>
+          <Link to={"/download"} style={{ textDecoration: 'none' }}>
+            <HeroButton shade={"blue"}>Download for {getOS()}</HeroButton>
+          </Link>
+          <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
+            <HeroButton shade={"white"}>Learn more</HeroButton>
+          </Link>
+        </Buttons>
       </div>
 
-      <FeatureDisplay data-sal="slide-up" data-sal-duration="500" data-sal-delay="100" data-sal-easing="cubic-bezier(0.87, 0, 0.13, 1)">
-        <Feature>
-          <FeatureImage src={blockAds} />
-          <Heading>Block ads with ease</Heading>
-          <Description>Dot automatically blocks advertisments and trackers out of the box.</Description>
-        </Feature>
-        <Feature>
-          <FeatureImage src={familiarDesign} />
-          <Heading>Familiar design</Heading>
-          <Description>You won’t need to re-invent the wheel to understand the layout.</Description>
-        </Feature>
-        <Feature>
-          <FeatureImage src={syncData} />
-          <Heading>Back-up your data</Heading>
-          <Description>Use your Dot ID to sync your browsing data to the cloud.</Description>
-        </Feature>
-        <Feature>
-          <FeatureImage src={openSource} />
-          <Heading>Everything open-source</Heading>
-          <Description>Transparency is our heart. You can read every line of code that goes into our browser.</Description>
-        </Feature>
-      </FeatureDisplay>
+      <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
+        <img src={landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
+      </div>
+
+      <div dot-slideup="true" style={{ animationDelay: '1.8s' }}>
+        <FeatureDisplay>
+          <Feature>
+            <FeatureImage src={blockAds} />
+            <Heading>Block ads with ease</Heading>
+            <Description>Dot automatically blocks advertisments and trackers out of the box.</Description>
+          </Feature>
+          <Feature>
+            <FeatureImage src={familiarDesign} />
+            <Heading>Familiar design</Heading>
+            <Description>You won’t need to re-invent the wheel to understand the layout.</Description>
+          </Feature>
+          <Feature>
+            <FeatureImage src={syncData} />
+            <Heading>Back-up your data</Heading>
+            <Description>Use your Dot ID to sync your browsing data to the cloud.</Description>
+          </Feature>
+          <Feature>
+            <FeatureImage src={openSource} />
+            <Heading>Everything open-source</Heading>
+            <Description>Transparency is our heart. You can read every line of code that goes into our browser.</Description>
+          </Feature>
+        </FeatureDisplay>
+      </div>
 
     </Layout>
     <HeroSheet>

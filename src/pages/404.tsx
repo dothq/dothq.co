@@ -15,7 +15,7 @@ const NotFoundPage = () => {
     return (
         <Layout center={true}>
             <SEO title="Page Not Found" />
-            <div style={{ paddingTop: '11.8vh' }}>
+            <div style={{ padding: '11.8vh' }}>
                 <Emoji text={"🙄"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '4rem' }}>404</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginTop: '-18px' }}>We couldn't find that page.</p>

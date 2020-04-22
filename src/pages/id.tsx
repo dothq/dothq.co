@@ -94,7 +94,7 @@ const IDPage = () => {
     return (
         <Layout center={true}>
             <SEO title="Login" />
-            <div style={{ paddingTop: '12vh' }}>
+            <div style={{ padding: '12vh' }}>
                 <a onClick={() => onEmojiClick()} onMouseEnter={onEmojiMouseEnter} onMouseLeave={onEmojiMouseLeave}>
                     <Emoji text={emoji} options={generateEmojiConfig({ className: 'id-emoji' })} />
                 </a>

@@ -15,7 +15,7 @@ const RSPage = () => {
     return (
         <Layout center={true}>
             <SEO title="Reset Password" />
-            <div style={{ paddingTop: '11.8vh' }}>
+            <div style={{ padding: '11.8vh' }}>
                 <Emoji text={"🔒"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '3rem' }}>Reset Password</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginBottom: '5px' }}>You'll need to pop your email in below and we'll send you a link to reset your password.</p>

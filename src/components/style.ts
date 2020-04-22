@@ -18,8 +18,29 @@ export const HeroSheet = styled.div`
 `;
 
 export const HeroSheetStyle = css`
+    @keyframes slideup {
+        0% {
+            transform: translateY(30%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+
     body {
         background-color: #f9f9f9;
+    }
+    
+    * [dot-slideup="true"] {
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+        animation-name: slideup;
+        animation-fill-mode: forwards;
+        opacity: 0;
+        transform: translateY(20%);
+        transition-property: opacity,transform;
     }
 `;
 

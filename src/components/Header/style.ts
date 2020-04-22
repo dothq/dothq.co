@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledHeader = styled.div`
     margin-bottom: 2.5rem;
@@ -26,4 +26,9 @@ export const Logo = styled.div`
     width: 36px;
     background: linear-gradient(135.94deg, #000000 0%, #2B2B2B 84.74%);
     border-radius: 28px;
+
+    ${({ size }: { size?: number }) => css`
+        height: ${size}px;
+        width: ${size}px;
+    `};
 `;

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
 export const Button = styled.div`
-    ${({ shade }: { shade: 'blue' | 'white' | 'gray' }) => css`
-        background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? "#fff" : "#303030"};
-        color: ${shade == "blue" || shade == "gray" ? "#fff" : "#757575"};
+    ${({ shade }: { shade: 'blue' | 'white' | 'gray' | 'black' }) => css`
+        background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? "#fff" : shade == "black" ? "black" : "#303030"};
+        color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#C9C9C9" : "#757575"};
 
         ${shade == "white" ? `
             box-shadow: 0 5px 10px rgba(0,0,0,0.12);
@@ -11,7 +11,7 @@ export const Button = styled.div`
 
         &:hover {
             cursor: pointer;
-            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : ""};
+            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : ""};
 
             ${shade == "white" ? `
                 box-shadow: 0 5px 10px rgba(0,0,0,0.22);
