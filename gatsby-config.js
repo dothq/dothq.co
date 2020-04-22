@@ -25,8 +25,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `dotbrowser-site`,
-        short_name: `dotbrowser`,
+        name: `Dot Browser`,
+        short_name: `Dot`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#ffffff`,
