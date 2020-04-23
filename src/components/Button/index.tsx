@@ -13,7 +13,7 @@ export const Button = styled.div`
 
         &:hover {
             cursor: pointer;
-            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : "#131313"};
+            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : props => props.theme.isDark ? '#131313' : ''};
 
             ${shade == "white" ? `
                 box-shadow: 0 5px 10px rgba(0,0,0,0.22);

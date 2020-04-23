@@ -76,7 +76,7 @@ module.exports = {
     {
       resolve: `gatsby-source-ghost`,
       options: {
-        apiUrl: `https://dothq.co`,
+        apiUrl: `https://ghost.dothq.co`,
         contentApiKey: `572831aa3e4116076c3ca53593`,
       },
     },

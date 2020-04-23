@@ -710,3 +710,7 @@ input[type="password"]::placeholder {
   margin-bottom: 3rem;
   max-width: 1164px;
 }
+
+twitter-widget {
+  margin: 0 auto;
+}

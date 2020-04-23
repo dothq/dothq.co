@@ -31,6 +31,10 @@ export const BackgroundInject = css`
         color: ${props => props.theme.colors.tertiary + "db"};
         transition: color 0.2s ease-out 0s;  
     }
+
+    .EmbeddedTweet {
+        background: ${props => props.theme.ui.background} !important;
+    }
 `;
 
 export const HeroSheetStyle = css`
@@ -196,10 +200,11 @@ export const InputHotkey = styled.div`
 `;
 
 export const PostMetadata = styled.div`
-    height: 154px;
     border-top: 1px solid ${props => props.theme.ui.border};
-    padding-top: 32px;
+    border-bottom: 1px solid ${props => props.theme.ui.border};
+    -webkit-transition: 0.2s border;
     transition: 0.2s border;
+    padding: 28px;
 
     h1 {
         text-align: center;
@@ -208,8 +213,9 @@ export const PostMetadata = styled.div`
     }
 
     p {
-        font-size: 18px;
+        font-size: 16px;
         color: ${props => props.theme.colors.tertiary + "50"};
+        margin: 0 auto;
     }
 `;
 
@@ -223,10 +229,13 @@ export const PostContent = styled.section`
 
     a {
         color: ${props => props.theme.colors.primary};
+        transition: 0.1s box-shadow ease;
+        border-bottom: 1px solid ${props => props.theme.ui.background};
     }
 
     a:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        box-shadow: 0 1px #0070f3;
     }
 
     h1 {
@@ -238,7 +247,8 @@ export const PostContent = styled.section`
     }
 
     img {
-        max-width: 700px;
+        max-width: 90%;
+        height: auto;
     }
 
     figcaption {
@@ -251,15 +261,23 @@ export const PostContent = styled.section`
     ul {
         list-style-position: inside;
     }
+
+    tt, code {
+        background-color: ${props => props.theme.isDark ? `#131313` : `#efefef`};
+        padding: 0.2em 4px;
+    }
+
+    code:before, code:after, tt:before, tt:after {
+        display: none;
+    }
 `;
 
 export const PostImage = styled.picture`
     height: 500px;
     width: -webkit-fill-available;
     display: block;
-    border-top: 1px solid ${props => props.theme.ui.border};
     border-bottom: 1px solid ${props => props.theme.ui.border};
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     transition: 0.2s border;
 
     ${({ image }: { image: any }) => css`

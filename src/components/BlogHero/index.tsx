@@ -16,9 +16,9 @@ export const BlogHero = () => {
     return (
         <div className="blog-hero">
             <Link to={"/blog"}>
-                <h1 style={{ fontSize: '1.5rem', margin: 0 }}>Blog</h1>
+                <h1 style={{ fontSize: '1.5rem', margin: 0, width: 0, display: 'flex' }}>Blog</h1>
             </Link>
-            <InputContainer style={{ width: '275px', marginLeft: '-59.64px' }}>
+            <InputContainer style={{ width: '275px' }}>
                 <InputIconContainer>
                     <FeatherIcon icon={"search"} size={16} />
                 </InputIconContainer>

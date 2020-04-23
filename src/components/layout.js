@@ -33,6 +33,12 @@ const Layout = ({ children, noEnding, noHero }) => {
     }
   `)
 
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    if(document.getElementsByClassName("twitter-tweet") && document.getElementsByClassName("twitter-tweet")[0]) document.getElementsByClassName("twitter-tweet")[0].appendChild(script);
+  }, []);
+
   return (
     <>
       <GS />
