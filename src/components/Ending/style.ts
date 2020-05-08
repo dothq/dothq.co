@@ -14,6 +14,7 @@ export const ContainerParent = styled.div`
     max-width: 1164px;
     height: 100%;
     display: flex;
+    justify-content: center;
 `;
 
 export const Container = styled.div`
