@@ -41,7 +41,7 @@ const Ending = () => (
             <Container style={{ width: '514px', display: 'inline-block' }}>
                 <Heading>Protect your privacy.</Heading>
                 <Title>Download Dot Browser</Title>
-                <Buttons style={{ marginTop: '72px', justifyContent: 'end' }}>
+                <Buttons style={{ marginTop: '72px', justifyContent: 'flex-start' }}>
                     <Link to={"/download"} style={{ textDecoration: 'none' }}>
                         <HeroButton shade={"black"}>Download for {getOS()}</HeroButton>
                     </Link>
