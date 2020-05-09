@@ -286,3 +286,16 @@ export const PostImage = styled.picture`
         background-position: center;
     `}
 `;
+
+export const BlogMount = styled.div`
+    display: flex;
+    border-top: 1px solid ${props => props.theme.ui.border};
+`;
+
+export const BlogPosts = styled.div`
+    width: 100%;
+    max-width: 1164px;
+    margin: 0 auto;
+`;
+
+export const BlogSidebar = styled.div``;

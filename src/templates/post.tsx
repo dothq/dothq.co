@@ -7,13 +7,8 @@ import { BlogHero } from '../components/BlogHero'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { PostContainer, PostMetadata, PostImage, PostContent } from '../components/style'
+import { Time } from '../components/BlogCard'
 
-/**
-* Single post view (/:slug)
-*
-* This file renders a single post and loads all the content.
-*
-*/
 const Post = ({ data, location }) => {
     const post = data.ghostPost
 
@@ -25,7 +20,7 @@ const Post = ({ data, location }) => {
           <PostContainer>
             <PostMetadata style={{ marginBottom: post.feature_image ? '' : '2rem' }}>
               <h1>{post.title}</h1>
-              <p>{new Date(post.published_at).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              <p>{new Date(post.published_at).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} (<Time date={post.published_at} />)</p>
             </PostMetadata>
             {post.feature_image ? (
               <PostImage image={post.feature_image} />

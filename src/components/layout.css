@@ -714,3 +714,8 @@ input[type="password"]::placeholder {
 twitter-widget {
   margin: 0 auto;
 }
+
+.post-feed {
+  max-width: 1164px;
+  margin: 0 auto;
+}

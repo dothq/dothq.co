@@ -4,15 +4,12 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { BlogHero } from '../components/BlogHero'
+import { BlogCard } from '../components/BlogCard'
+import { BlogPosts, BlogMount, BlogSidebar } from '../components/style'
+import { generateEmojiConfig } from '../tools/emoji'
+import Emoji from 'react-emoji-render'
+import { TextButton } from '../components/Button'
 
-/**
-* Main index page (home page)
-*
-* Loads all posts from Ghost and uses pagination to navigate through them.
-* The number of posts that should appear per page can be setup
-* in /utils/siteConfig.js under `postsPerPage`.
-*
-*/
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
 
@@ -20,13 +17,22 @@ const Index = ({ data, location, pageContext }) => {
         <Layout noEnding noHero>
             <SEO title={"Blog"} />
             <BlogHero />
-            <div className="container">
-                <section className="post-feed">
-                    {posts.map(({ node }) => (
-                        <Link to={`/blog/${node.slug}`}><div key={node.id}>{node.title}</div></Link>
+            <BlogMount>
+                <BlogPosts>
+                    {posts.sort((nodeA, nodeB) => {
+                      return nodeB.node.published_at - nodeA.node.published_at
+                    }).map(({ node }) => (
+                        <BlogCard post={node} key={node.id} />
                     ))}
-                </section>
-            </div>
+                    <div style={{ textAlign: "center", maxWidth: "700px", padding: "80px 0", fontWeight: 700, fontSize: "24px", display: "grid" }}>
+                      <Emoji text={"👻"} options={generateEmojiConfig({ className: 'emoji' })} />
+                      <br />It's pretty spooky down here.
+                      <p style={{ fontSize: '16px' }}>Why don't you head back <Link to={"/blog#"}><TextButton isBasic>to the top?</TextButton></Link></p>
+                    </div>
+                </BlogPosts>
+                <BlogSidebar>
+                </BlogSidebar>
+            </BlogMount>
         </Layout>
     )
 }
