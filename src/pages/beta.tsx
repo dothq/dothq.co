@@ -23,8 +23,8 @@ const BetaPage = () => {
 		product: "Dot Browser",
 		releasesAt: 1589108400000,
 		released: ((1589108400000 - new Date().getTime()) / 1000) < 1,
-		download: "https://dothq.co/api/api.beta?folder=3.0.0-alpha&file=Install%20Dot%20Browser-0.0.1-alpha.exe",
-		supports: "Windows, macOS, Linux (tbc)"
+		download: `https://dothq.co/api/api.beta?folder=3.0.0-alpha&file=Install%20Dot%20Browser%200.0.1-alpha.${getOS() == "Windows" ? "exe" : getOS() == "macOS" ? "dmg" : "deb"}`,
+		supports: "Windows, macOS, Linux"
 	},
 	{
 		id: 1,
@@ -72,7 +72,7 @@ const BetaPage = () => {
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.product}</td>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.releasesAt !== 0 ? <Time date={build.releasesAt} /> : 'Not confirmed'}</td>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.supports}</td>
-		<td>{getOS() !== "Linux" ? <HeroButton onClick={() => download(build.id)} shade={"blue"} style={{ width: 'max-content', height: '42px', opacity: build.released ? 1 : "0.5", userSelect: build.released ? "all" : "none", pointerEvents: build.released ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton> : 'There aren\'t currently any builds for Linux'}</td>
+		<td><HeroButton onClick={() => download(build.id)} shade={"blue"} style={{ width: 'max-content', height: '42px', opacity: build.released ? 1 : "0.5", userSelect: build.released ? "all" : "none", pointerEvents: build.released ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton></td>
 			</tr>
 		))}
 	  </table>
