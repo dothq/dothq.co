@@ -11,11 +11,11 @@ import { getOS } from "../helpers/os";
 import { isBrowser } from "../helpers/login";
 import Emoji from "react-emoji-render";
 import { generateEmojiConfig } from "../tools/emoji";
-
-//1589108400000
-const launchDate = -1;
+import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 				   
 const BetaPage = () => {
+  const themeContext = React.useContext(ThemeManagerContext)
+
   const builds = [
 	{
 		id: 0,
@@ -56,22 +56,22 @@ const BetaPage = () => {
 	  <Emoji text={"📦"} options={generateEmojiConfig({ className: 'emoji' })} />
       <h1 style={{ fontSize: '80px' }}>Beta Builds</h1>
       <p>Available builds for download</p>
-      <table>
+      <table style={{ color: themeContext.isDark ? "white" : "" }}>
 		<tr>
-			<th></th>
-			<th>Version</th>
-			<th>Product</th>
-			<th>Build release</th>
-			<th>Supports</th>
-			<th>Download</th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}></th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : "" }}>Version</th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Product</th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Build release</th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Supports</th>
+			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Download</th>
 		</tr>
 		{builds.map(build => (
 			<tr key={build.id}>
-				<td>{build.product == "Dot Browser" ? ( <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto' }} src={"https://i.imgur.com/MWQI80g.png"} width="48" /> ) : ''}</td>
-				<td>{build.version}</td>
-				<td>{build.product}</td>
-				<td>{build.releasesAt !== 0 ? <Time date={build.releasesAt} /> : 'Not confirmed'}</td>
-				<td>{build.supports}</td>
+				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.product == "Dot Browser" ? ( <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto' }} src={"https://i.imgur.com/MWQI80g.png"} width="48" /> ) : ''}</td>
+				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.version}</td>
+				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.product}</td>
+				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.releasesAt !== 0 ? <Time date={build.releasesAt} /> : 'Not confirmed'}</td>
+				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.supports}</td>
 		<td>{getOS() !== "Linux" ? <HeroButton onClick={() => download(build.id)} shade={"blue"} style={{ width: 'max-content', height: '42px', opacity: build.released ? 1 : "0.5", userSelect: build.released ? "all" : "none", pointerEvents: build.released ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton> : 'There aren\'t currently any builds for Linux'}</td>
 			</tr>
 		))}
