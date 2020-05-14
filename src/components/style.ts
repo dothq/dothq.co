@@ -35,6 +35,14 @@ export const BackgroundInject = css`
     .EmbeddedTweet {
         background: ${props => props.theme.ui.background} !important;
     }
+
+    :root {
+        --border: ${props => props.theme.ui.border};
+    }
+
+    *::selection {
+        background-color: ${props => props.theme.isDark ? "#2b2b2b" : "#deeffd"};
+    }
 `;
 
 export const HeroSheetStyle = css`
@@ -299,3 +307,35 @@ export const BlogPosts = styled.div`
 `;
 
 export const BlogSidebar = styled.div``;
+
+export const Avatar = styled.div`
+    position: relative;
+
+    @keyframes fadein {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    ${({ src, width, noFade }: { src: any; width?: number; noFade?: boolean }) => css`
+        width: ${width || 118}px;
+        height: ${width || 118}px;
+        border-radius: ${width || 118}px;
+        ${!noFade ? `animation: 0.2s fadein forwards;opacity: 0;` : "opacity: 1;"}
+
+        &:before {
+            background-image: url(${src});
+            background-size: cover;
+            background-position: center;
+            content: "";
+            position: absolute;
+            width: ${width || 118}px;
+            height: ${width || 118}px;
+            border-radius: ${width || 118}px;
+            z-index: ${!noFade ? -1 : ''};
+        }
+    `}
+`;

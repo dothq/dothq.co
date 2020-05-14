@@ -18,7 +18,14 @@ import Footer from "./Footer"
 import "./layout.css"
 import "./inter.css"
 
+import { SkeletonTheme } from 'react-loading-skeleton';
+
+import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
+
 import { BackgroundInject } from './style'
+import { useGlobalState } from '../context'
+import { getMe } from "../helpers/me"
+import { getUserToken } from "../helpers/login"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -32,6 +39,8 @@ const Layout = ({ children, noEnding, noHero }) => {
       }
     }
   `)
+				  
+  const themeContext = React.useContext(ThemeManagerContext)
 
   React.useEffect(() => {
     const script = document.createElement("script");
@@ -39,8 +48,18 @@ const Layout = ({ children, noEnding, noHero }) => {
     if(document.getElementsByClassName("twitter-tweet") && document.getElementsByClassName("twitter-tweet")[0]) document.getElementsByClassName("twitter-tweet")[0].appendChild(script);
   }, []);
 
+  const [user, setUser] = useGlobalState('user');
+
+  React.useEffect(() => {
+    if(!getUserToken()) return;
+    if(user !== undefined) return;
+    getMe().then(me => {
+      if(me.ok === true) setUser(me)
+    })
+  }, [user, setUser]);
+
   return (
-    <>
+    <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
       <Header siteTitle={data.site.siteMetadata.title} />
       {!noHero && <Hero>
@@ -49,7 +68,7 @@ const Layout = ({ children, noEnding, noHero }) => {
       {noHero && <>{children}</>}
       {!noEnding && <Ending />}
       <Footer />
-    </>
+    </SkeletonTheme>
   )
 }
 

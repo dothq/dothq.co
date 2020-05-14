@@ -22,7 +22,7 @@ export const BlogHero = () => {
                 <InputIconContainer>
                     <FeatherIcon icon={"search"} size={16} />
                 </InputIconContainer>
-                <Input placeholder="Search for a post" type="text" ref={searchRef} />
+                <Input placeholder="Search for a post" type="text" ref={searchRef} style={{ width: '198px' }} />
                 <InputIconContainer>
                     <InputHotkey>/</InputHotkey>
                 </InputIconContainer>

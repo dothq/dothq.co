@@ -12,7 +12,11 @@ import { Link, navigate } from "gatsby"
 import { generateEmojiConfig } from "../tools/emoji"
 import { loginWithCredentials, setToken, isBrowser } from "../helpers/login"
 
-const IDPage = () => {
+import { parse } from 'search-params' 
+
+import { useGlobalState } from '../context'
+
+const IDPage = ({ location }) => {
     const [emoji, setEmoji] = React.useState("👋")
 
     const emailRef = React.createRef<HTMLInputElement>();
@@ -79,9 +83,10 @@ const IDPage = () => {
             setErrorContent("")
             setErrorVisibility(false)
 
-            setToken(resp.access_token)
+            const search = parse(location.search)
 
-            navigate('/me')
+            window.location.href = typeof(search.to) == "string" ? search.to : "/me"
+            setToken(resp.access_token)
         }
     }
 
@@ -89,6 +94,12 @@ const IDPage = () => {
         if(event.which == 13) {
             onLoginClick()
         }
+    })
+
+    const [user] = useGlobalState('user');
+
+    React.useEffect(() => {
+        if(user && !isDisabled) navigate('/me')
     })
 
     return (

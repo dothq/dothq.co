@@ -711,11 +711,30 @@ input[type="password"]::placeholder {
   max-width: 1164px;
 }
 
+.small-hero {
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+}
+
+.small-hero .hero-container {
+  margin: 0 auto;
+  max-width: 1164px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 twitter-widget {
   margin: 0 auto;
 }
 
 .post-feed {
   max-width: 1164px;
+  margin: 0 auto;
+}
+
+.avatar {
+  width: 118px;
+  border-radius: 118px;
   margin: 0 auto;
 }

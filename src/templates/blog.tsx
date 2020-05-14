@@ -24,11 +24,11 @@ const Index = ({ data, location, pageContext }) => {
                     }).map(({ node }) => (
                         <BlogCard post={node} key={node.id} />
                     ))}
-                    <div style={{ textAlign: "center", maxWidth: "700px", padding: "80px 0", fontWeight: 700, fontSize: "24px", display: "grid" }}>
+                    <p style={{ textAlign: "center", maxWidth: "700px", padding: "80px 0", fontWeight: 700, fontSize: "24px", display: "grid", margin: 0 }}>
                       <Emoji text={"👻"} options={generateEmojiConfig({ className: 'emoji' })} />
                       <br />It's pretty spooky down here.
                       <p style={{ fontSize: '16px' }}>Why don't you head back <Link to={"/blog#"}><TextButton isBasic>to the top?</TextButton></Link></p>
-                    </div>
+                    </p>
                 </BlogPosts>
                 <BlogSidebar>
                 </BlogSidebar>

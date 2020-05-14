@@ -24,7 +24,7 @@ const DownloadPage = ({ location }) => {
   }) 
 
   return (
-    <Layout>
+    <Layout noEnding>
       <SEO title="Download" />
       <Emoji text={"👏"} options={generateEmojiConfig({ className: 'emoji' })} />
       <h1 style={{ fontSize: '80px' }}>Downloads</h1>

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Button = styled.div`
     ${({ shade }: { shade: 'blue' | 'white' | 'gray' | 'black' }) => css`
         background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? props => props.theme.colors.secondary : shade == "black" ? "black" : "#303030"};
-        color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#C9C9C9" : "#757575"};
+        color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#EDEDED" : "#757575"};
 
         ${shade == "white" ? `
             box-shadow: 0 5px 10px rgba(0,0,0,0.12);
