@@ -34,7 +34,7 @@ const MePage = () => {
             <div className="small-hero" style={{ borderBottom: '1px solid var(--border)' }}>
                 <div className="hero-container">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        {user && user.id ? <Avatar src={`https://cdn.dothq.co/avatars/${user.id}.png`} /> : <Skeleton width={118} height={118} circle={true} />}
+                        {user && user.avatar ? <Avatar src={user.avatar} /> : <Skeleton width={118} height={118} circle={true} />}
                         <div style={{ marginLeft: '38px' }}>
                             <h1 style={{ fontSize: '32px', marginBottom: '0' }}>{user && user.username || <Skeleton width={Math.floor(Math.random()*(300-100+1)+100)} />}</h1>
                             <Heading style={{ textTransform: 'uppercase', fontSize: '14px', color: 'gray', margin: 0 }}>{user && user.dateCreated ? "Account created" : <Skeleton width={Math.floor(Math.random()*(300-100+1)+100)} />}</Heading>

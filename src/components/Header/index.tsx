@@ -52,7 +52,7 @@ const Header = ({ siteTitle }) => {
 
                     {user && 
                         <Link to={"/me"} style={{ marginLeft: '20px' }}>
-                            {user && user.id ? <Avatar width={32} noFade src={`https://cdn.dothq.co/avatars/${user.id}.png`} /> : <Skeleton width={118} height={118} circle={true} />}
+                            {user && user.avatar ? <Avatar width={32} noFade src={user.avatar} /> : <Skeleton width={118} height={118} circle={true} />}
                         </Link>
                     }
                 </Flex>
