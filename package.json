@@ -57,7 +57,8 @@
     "start": "npm run develop",
     "serve": "cross-env ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby serve -H 0.0.0.0 -p 3001",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "run": "npm run build && npm run serve"
   },
   "repository": {
     "type": "git",
