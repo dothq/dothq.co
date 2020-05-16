@@ -27,14 +27,14 @@ const BetaPage = () => {
 		supports: "Windows, macOS, Linux"
 	},
 	{
-		id: 1,
+		id: 0,
 		version: "3.0.1-alpha",
 		product: "Dot Browser",
-		releasesAt: 0,
-		released: false,
-		download: "",
+		releasesAt: 1589664000000,
+		released: ((1589664000000 - new Date().getTime()) / 1000) < 1,
+		download: `https://dothq.co/api/api.beta?folder=3.0.1-alpha&file=Install%20Dot%20Browser%203.0.1-alpha.${getOS() == "Windows" ? "exe" : getOS() == "macOS" ? "dmg" : "deb"}`,
 		supports: "Windows, macOS, Linux"
-	}
+	},
   ]
 
   const download = (id) => {
