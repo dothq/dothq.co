@@ -4,7 +4,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken } from "../../helpers/login"
+import { getUserToken, isBrowser } from "../../helpers/login"
 import { HeroButton, IconButton } from '../../components/Button'
 import FeatherIcon from 'feather-icons-react'
 
@@ -14,11 +14,13 @@ import { Form, InputContainer, InputIconContainer, Input, Buttons, DateTimePicke
 const BDCreatePage = () => {
     const [user, setUser] = useGlobalState('user');
 
-    const token = getUserToken()
-    if(!token) navigate("/id?to=builds/create")
-    if(!user) navigate("/id?to=builds/create")
-
-    if(user && !user.hasOwnProperty("isEmployee")) navigate("/403?reason=This%20page%20is%20for%20employees%20only.")
+    if(isBrowser()) {
+        const token = getUserToken()
+        if(!token) navigate("/id?to=builds/create")
+        if(!user) navigate("/id?to=builds/create")
+    
+        if(user && !user.hasOwnProperty("isEmployee")) navigate("/403?reason=This%20page%20is%20for%20employees%20only.")
+    }
 
     const onBackClick = () => {
         navigate('/builds')
