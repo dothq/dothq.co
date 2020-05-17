@@ -1,11 +1,11 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
-  <a href="https://dothq.co/browser">
+  <a href="https://dothq.co">
     <img alt="Browser" src="https://cdn.dothq.co/assets/dot.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Dot Browser <i>(browser.dothq.co)</i>
+  Dot Browser <i>(dothq.co)</i>
 </h1>
 
 Welcome to the frontend side of the Dot Browser website! Our pages are in `pages/`, the assets are at `src/images`, and fonts are at `src/fonts`.
