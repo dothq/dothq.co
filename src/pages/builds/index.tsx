@@ -22,7 +22,7 @@ const BDPage = () => {
         if(!token) navigate("/id?to=builds")
         if(!user) navigate("/id?to=builds")
 
-        if(user && !user.hasOwnProperty("isEmployee")) navigate("/403?reason=This%20page%20is%20for%20employees%20only.")
+        if(user && user.hasOwnProperty("isEmployee") && !user.isEmployee) navigate("/403?reason=This%20page%20is%20for%20employees%20only.")
     })
 
     const onBuildClick = () => {
