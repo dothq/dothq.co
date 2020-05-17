@@ -27,9 +27,13 @@ export const BackgroundInject = css`
         transition: color 0.2s ease-out 0s;  
     }
 
-    p {
+    p, label, input[type="datetime-local"] {
         color: ${props => props.theme.colors.tertiary + "db"};
         transition: color 0.2s ease-out 0s;  
+    }
+
+    ::-webkit-calendar-picker-indicator, input[type="checkbox"] {
+        filter: ${props => props.theme.isDark ? 'invert(1)' : ''};
     }
 
     .EmbeddedTweet {
@@ -338,4 +342,40 @@ export const Avatar = styled.div`
             z-index: ${!noFade ? -1 : ''};
         }
     `}
+`;
+
+export const DatePicker = styled.input.attrs({
+    type: 'date'
+})`
+    height: 41px;
+    margin-top: 0.1px;
+    font-family: 'Inter',system-ui;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    position: relative;
+    display: flex;
+    border-radius: 4px;
+    width: inherit;
+    background-color: transparent;
+    color: #000000;
+    padding-right: 8px;
+`;
+
+export const DateTimePicker = styled.input.attrs({
+    type: 'datetime-local'
+})`
+    height: 41px;
+    margin-top: 0.1px;
+    font-family: 'Inter',system-ui;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    position: relative;
+    display: flex;
+    border-radius: 4px;
+    width: inherit;
+    background-color: transparent;
+    color: #000000;
+    padding-right: 8px;
 `;

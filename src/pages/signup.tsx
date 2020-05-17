@@ -10,17 +10,18 @@ import Emoji from "react-emoji-render"
 import { getRandomEmoji } from "../helpers/emoji"
 import { Link, navigate } from "gatsby"
 import { generateEmojiConfig } from "../tools/emoji"
-import { loginWithCredentials, setToken, isBrowser } from "../helpers/login"
+import { loginWithCredentials, setToken, isBrowser, registerWithCredentials } from "../helpers/login"
 
 import { parse } from 'search-params' 
 
 import { useGlobalState } from '../context'
 
-const IDPage = ({ location }) => {
+const SignupPage = ({ location }) => {
     const [emoji, setEmoji] = React.useState("👋")
 
     const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
+    const nameRef = React.createRef<HTMLInputElement>();
 
     const [passwordLength, setPasswordLength] = React.useState(0);
     const [passwordType, setPasswordType] = React.useState("password");
@@ -54,23 +55,25 @@ const IDPage = ({ location }) => {
         }
     }
 
-    const onLoginClick = async () => {
+    const onSignupClick = async () => {
         if(!emailRef.current) return;
         if(!passwordRef.current) return;
 
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
+        const username = nameRef.current.value;
 
         if(isDisabled) return;
 
         if(password.length == 0) return;
         if(email.length == 0) return;
+        if(username.length == 0) return;
 
         if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) == false) return;
 
         setDisabled(true)
 
-        const resp = await loginWithCredentials({ email, password })
+        let resp = await registerWithCredentials({ username, email, password })
 
         console.log(resp)
 
@@ -85,25 +88,23 @@ const IDPage = ({ location }) => {
 
             const search = parse(location.search)
 
-            window.location.href = typeof(search.to) == "string" ? search.to : "/me"
+            resp = await loginWithCredentials({ email, password })
             setToken(resp.access_token)
+
+            window.location.href = typeof(search.to) == "string" ? search.to : "/me"
         }
     }
-
-    const onSignupClick = () => {
-        navigate(`/signup?prefill_email=${emailRef.current.value}`)
-    }
-
-    isBrowser() && window.addEventListener('keypress', (event) => {
-        if(event.which == 13) {
-            onLoginClick()
-        }
-    })
 
     const [user] = useGlobalState('user');
 
     React.useEffect(() => {
         const search = parse(location.search)
+
+        if(search.prefill_email) {
+            emailRef.current.value = typeof(search.prefill_email) == "string" ? search.prefill_email : ""
+            passwordRef.current.focus()
+            isBrowser() && window.history.replaceState({}, document.title, location.pathname);
+        }
 
         if(user && !isDisabled) navigate(typeof(search.to) == "string" ? search.to : "/me")
     })
@@ -115,10 +116,17 @@ const IDPage = ({ location }) => {
                 <a onClick={() => onEmojiClick()} onMouseEnter={onEmojiMouseEnter} onMouseLeave={onEmojiMouseLeave}>
                     <Emoji text={emoji} options={generateEmojiConfig({ className: 'id-emoji' })} />
                 </a>
-                <h1 style={{ fontSize: '3rem' }}>Log in to your Dot ID</h1>
+                <h1 style={{ fontSize: '3rem' }}>Welcome to Dot</h1>
                 {errorVisible && <p className={"error-text"}>{errorContent}</p>}
         
                 <Form className={isDisabled ? 'disabled' : ''}>
+                    <InputContainer style={{ width: '275px', marginTop: '28px' }}>
+                        <InputIconContainer>
+                            <FeatherIcon icon={"user"} size={16} />
+                        </InputIconContainer>
+                        <Input placeholder="Name" type="name" ref={nameRef} />
+                    </InputContainer>
+
                     <InputContainer style={{ width: '275px', marginTop: '28px' }}>
                         <InputIconContainer>
                             <FeatherIcon icon={"mail"} size={16} />
@@ -130,7 +138,7 @@ const IDPage = ({ location }) => {
                         <InputIconContainer>
                             <FeatherIcon icon={"lock"} size={16} />
                         </InputIconContainer>
-                        <Input placeholder="Password" type={passwordType} ref={passwordRef} onInput={onPasswordInput} style={{ width: '189px' }} />
+                        <Input placeholder="Password" type={passwordType} ref={passwordRef} onInput={onPasswordInput} style={{ width: '189px' }} autoComplete={"off"} />
                         {passwordLength !== 0 && <InputIconContainer onClick={() => onPasswordShowClick()} style={{ cursor: 'pointer' }}>
                             <FeatherIcon icon={passwordType !== "password" ? "eye" : "eye-off"} size={16} />
                         </InputIconContainer>}
@@ -138,23 +146,13 @@ const IDPage = ({ location }) => {
                 </Form>
         
                 <Buttons style={{ margin: '28px 0' }}>
-                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onLoginClick}>
-                        Log in
-                    </HeroButton>
-
-                    <HeroButton shade={"white"} style={{ height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
+                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
                         Sign up
                     </HeroButton>
                 </Buttons>
 
-                {/* <Process>
-                    <ProcessChild />
-                    <ProcessChild />
-                    <ProcessChild />
-                </Process> */}
-
-                <Link to={"/reset-password"}>
-                    <TextButton isBasic>Forgot your password?</TextButton>
+                <Link to={"/id"}>
+                    <TextButton isBasic>Go back</TextButton>
                 </Link>
 
             </div>
@@ -162,4 +160,4 @@ const IDPage = ({ location }) => {
     )
 }
 
-export default IDPage
+export default SignupPage

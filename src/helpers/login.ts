@@ -6,6 +6,12 @@ export const loginWithCredentials = async ({ email, password }) => {
     return res.json();
 }
 
+export const registerWithCredentials = async ({ username, email, password }) => {
+  const res = await fetch('https://dothq.co/api/id.create', { body: JSON.stringify({ username, email, password }), method: 'POST', headers: { "Content-Type": "application/json" } });
+
+  return res.json();
+}
+
 export const isBrowser = () => typeof window !== "undefined"
 
 export const getUserToken = () =>
