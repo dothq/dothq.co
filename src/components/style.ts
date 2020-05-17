@@ -42,10 +42,19 @@ export const BackgroundInject = css`
 
     :root {
         --border: ${props => props.theme.ui.border};
+        --homebg: ${props => props.theme.ui.homeBackground};
     }
 
     *::selection {
         background-color: ${props => props.theme.isDark ? "#2b2b2b" : "#deeffd"};
+    }
+
+    .small-hero {
+        ${props => props.theme.isDark ? `
+            margin-top: -110px;
+            padding-top: calc(2.5rem + 64px);
+            background-color: var(--homebg);
+        ` : ''}
     }
 `;
 
@@ -378,4 +387,29 @@ export const DateTimePicker = styled.input.attrs({
     background-color: transparent;
     color: #000000;
     padding-right: 8px;
+`;
+
+export const Spinner = styled.div`
+    margin: auto;
+    font-size: 10px;
+    color: transparent;
+    height: 14px;
+    width: 14px;
+    border: 1px solid white;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin;
+    animation-duration: .6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    box-sizing: border-box;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(1turn);
+        }
+    }
 `;

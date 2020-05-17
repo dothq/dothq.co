@@ -26,6 +26,7 @@ import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 import { getUserToken } from "../helpers/login"
+import axios from 'axios';
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -49,14 +50,19 @@ const Layout = ({ children, noEnding, noHero }) => {
   }, []);
 
   const [user, setUser] = useGlobalState('user');
+  const [builds, setBuilds] = useGlobalState('builds');
 
   React.useEffect(() => {
     if(!getUserToken()) return;
     if(user !== undefined) return;
+    if(builds !== undefined) return;
     getMe().then(me => {
       if(me.ok === true) setUser(me)
     })
-  }, [user, setUser]);
+
+    axios.get('https://dothq.co/api/builds.all')
+      .then(res => res.data.results && setBuilds(res.data.results))
+  }, [user, setUser, builds, setBuilds]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
