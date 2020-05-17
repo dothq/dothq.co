@@ -27,7 +27,7 @@ const BetaPage = () => {
 		supports: "Windows, macOS, Linux"
 	},
 	{
-		id: 0,
+		id: 1,
 		version: "3.0.1-alpha",
 		product: "Dot Browser",
 		releasesAt: 1589664000000,
