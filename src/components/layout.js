@@ -53,7 +53,6 @@ const Layout = ({ children, noEnding, noHero }) => {
   const [builds, setBuilds] = useGlobalState('builds');
 
   React.useEffect(() => {
-    if(!getUserToken()) return;
     if(user !== undefined) return;
     if(builds !== undefined) return;
     getMe().then(me => {
