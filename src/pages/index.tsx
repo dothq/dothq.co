@@ -32,8 +32,8 @@ const IndexPage = () => {
         
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
           <Buttons style={{ marginBottom: '34px' }}>
-            <Link to={"/download"} style={{ textDecoration: 'none' }}>
-              <HeroButton shade={"blue"}>Download for {getOS()}</HeroButton>
+            <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
+              <HeroButton shade={"blue"} disabled={getOS() == "iOS" || getOS() == "Android"}>Download for {getOS()}</HeroButton>
             </Link>
             <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
               <HeroButton shade={"white"}>Learn more</HeroButton>

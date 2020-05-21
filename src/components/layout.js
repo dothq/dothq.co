@@ -25,7 +25,6 @@ import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
-import { getUserToken } from "../helpers/login"
 import axios from 'axios';
 
 const GS = createGlobalStyle`${BackgroundInject}`;

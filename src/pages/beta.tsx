@@ -50,7 +50,7 @@ const BetaPage = () => {
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.productName}</td>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.unlocksAt !== 0 ? <Time date={build.unlocksAt} /> : 'Not confirmed'}</td>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.supportedOs.join(", ")}</td>
-		<td><HeroButton onClick={() => download(build.id)} shade={"blue"} style={{ width: 'max-content', height: '42px', opacity: build.downloadUrl !== "" ? 1 : "0.5", userSelect: build.downloadUrl !== "" ? "all" : "none", pointerEvents: build.downloadUrl !== "" ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton></td>
+		<td><HeroButton onClick={() => download(build.id)} disabled={getOS() == "iOS" || getOS() == "Android"} shade={"blue"} style={{ width: 'max-content', height: '42px', opacity: build.downloadUrl !== "" ? 1 : "0.5", userSelect: build.downloadUrl !== "" ? "all" : "none", pointerEvents: build.downloadUrl !== "" ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton></td>
 			</tr>
 		))}
 		{builds == undefined && Array.from(Array(Math.floor(Math.random() * 5))).map(i => (

@@ -13,6 +13,7 @@ export const Container = styled.div`
     height: 64px;
     display: flex;
     align-items: center;
+    padding: 15px;
 `;
 
 export const Flex = styled.div`

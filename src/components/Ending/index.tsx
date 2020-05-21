@@ -42,8 +42,8 @@ const Ending = () => (
                 <Heading>Protect your privacy.</Heading>
                 <Title>Download Dot Browser</Title>
                 <Buttons style={{ marginTop: '72px', justifyContent: 'flex-start' }}>
-                    <Link to={"/download"} style={{ textDecoration: 'none' }}>
-                        <HeroButton shade={"black"}>Download for {getOS()}</HeroButton>
+                    <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
+                        <HeroButton shade={"black"} disabled={getOS() == "iOS" || getOS() == "Android"}>Download for {getOS()}</HeroButton>
                     </Link>
                     <Or />
                     {getOS() == "Windows" || getOS() == "macOS" ? <OSLink os={"linux"} /> : ''}

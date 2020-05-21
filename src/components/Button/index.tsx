@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Button = styled.div`
-    ${({ shade }: { shade: 'blue' | 'white' | 'gray' | 'black' | 'red' }) => css`
+    ${({ shade, disabled }: { shade: 'blue' | 'white' | 'gray' | 'black' | 'red'; disabled?: boolean }) => css`
         background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? props => props.theme.colors.secondary : shade == "black" ? "black" : shade == "red" ? "#ff5d5d" : "#303030"};
         color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#EDEDED" : shade == "red" ? "#fff" : "#757575"};
 
@@ -22,6 +22,9 @@ export const Button = styled.div`
                 box-shadow: 0 5px 10px rgba(0,0,0,0.05);
             `}
         }
+
+        pointer-events: ${disabled ? 'none' : 'all'};
+        opacity: ${disabled ? 0.5 : 1};
     `}
 
     border-radius: 4px;
