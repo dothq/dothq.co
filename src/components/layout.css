@@ -738,3 +738,7 @@ twitter-widget {
   border-radius: 118px;
   margin: 0 auto;
 }
+
+b {
+  font-weight: 600;
+}

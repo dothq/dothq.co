@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import link from '../images/link.svg'
+
 export const Buttons = styled.div`
     display: flex;
     justify-content: center;
@@ -412,4 +414,33 @@ export const Spinner = styled.div`
             transform: rotate(1turn);
         }
     }
+`;
+
+export const PolicySectionTitle = styled.h3`
+    text-align: left;
+    margin: 0;
+
+    b {
+        position: relative;
+        display: flex;
+    }
+
+    b:hover figure {
+        opacity: 0.8;
+    }
+`;
+
+export const PolicySectionCite = styled.figure.attrs(props => {
+    id: props.id
+})`
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    transition: 0.3s opacity;
+    mask-image: url(${link});
+    mask-size: 20px;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-color: black;
+    margin-left: 6px;
 `;

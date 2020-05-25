@@ -1,0 +1,8 @@
+.legal-content a {
+    color: #0070F3;
+}
+
+.legal-content a:hover {
+    color: #0070F3;
+    text-decoration: underline;
+}
