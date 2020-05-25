@@ -45,7 +45,7 @@ const IndexPage = () => {
           <img src={themeContext.isDark ? landingScreenshotDark : landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
         </div>
 
-        <div dot-slideup="true" style={{ animationDelay: '1.8s' }}>
+        <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>
           <FeatureDisplay>
             <Feature>
               <FeatureImage src={blockAds} />
