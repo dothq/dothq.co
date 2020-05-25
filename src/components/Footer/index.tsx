@@ -50,7 +50,7 @@ const Footer = ({ children }) => (
                     <Item href={"/privacy"}>Privacy</Item>
                 </ListGroup>
                 <ListGroup>
-                    <ListTitle>More from HQ</ListTitle>
+                    <ListTitle>More from Dot HQ</ListTitle>
                     <Item href={"/products/drop"}>Drop</Item>
                 </ListGroup>
             </List>
