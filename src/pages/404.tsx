@@ -18,7 +18,7 @@ const NotFoundPage = () => {
             <div style={{ padding: '11.8vh' }}>
                 <Emoji text={"🙄"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '4rem' }}>404</h1>
-                <p style={{ fontSize: '16px', width: '400px', marginTop: '-18px' }}>That page does not exist or it's not done yet.</p>
+                <p style={{ fontSize: '16px', width: '400px', marginTop: '-18px' }}>We couldn't find that page.</p>
 
                 <Link to={"/"}>
                     <TextButton isBasic>Go home</TextButton>
