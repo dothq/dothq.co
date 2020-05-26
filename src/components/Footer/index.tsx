@@ -39,7 +39,7 @@ const Footer = ({ children }) => (
                 <ListGroup>
                     <ListTitle>Social</ListTitle>
                     <Item href={"https://twitter.com/DotBrowser"}>Twitter</Item>
-                    <Item href={"https://discord.gg/jAwQ3ev"}>Discord</Item>
+                    <Item href={"https://invite.gg/dot"}>Discord</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Legal</ListTitle>
