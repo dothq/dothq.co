@@ -29,20 +29,17 @@ const Footer = ({ children }) => (
                 <ListGroup>
                     <ListTitle>Learn</ListTitle>
                     <Item href={"/blog"}>Blog</Item>
-                    <Item href={"/changelog"}>Changelog</Item>
                     <Item href={"/support"}>Support</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Resources</ListTitle>
                     <Item href={"/brand"}>Brand</Item>
                     <Item href={"/brand#kit"}>Press Kit</Item>
-                    <Item href={"/guides"}>Guides</Item>
-                    <Item href={"/design"}>Design</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Social</ListTitle>
-                    <Item href={"/5A"}>Twitter</Item>
-                    <Item href={"/8J"}>Discord</Item>
+                    <Item href={"https://twitter.com/DotBrowser"}>Twitter</Item>
+                    <Item href={"https://discord.gg/jAwQ3ev"}>Discord</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Legal</ListTitle>
@@ -50,10 +47,6 @@ const Footer = ({ children }) => (
                     <Item href={"/legal/privacy"}>Privacy</Item>
                     <Item href={"/legal/cookies"}>Cookies</Item>
                     <Item href={"/legal/legal/gdpr"}>GDPR</Item>
-                </ListGroup>
-                <ListGroup>
-                    <ListTitle>More from HQ</ListTitle>
-                    <Item href={"/products/drop"}>Drop</Item>
                 </ListGroup>
             </List>
         </Container>

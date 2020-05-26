@@ -14,7 +14,7 @@ import Skeleton from "react-loading-skeleton"
 const onLogoContextMenu = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    navigate("/design")
+    navigate("/download")
 }
 
 const Header = ({ siteTitle }) => {
