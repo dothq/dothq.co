@@ -48,6 +48,10 @@ const Footer = ({ children }) => (
                     <Item href={"/legal/cookies"}>Cookies</Item>
                     <Item href={"/legal/legal/gdpr"}>GDPR</Item>
                 </ListGroup>
+                <ListGroup>
+                    <ListTitle>More from HQ</ListTitle>
+                    <Item href={"/products/drop"}>Drop</Item>
+                </ListGroup>
             </List>
         </Container>
     </StyledFooter>
