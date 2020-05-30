@@ -4,10 +4,16 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby";
 import { Logo } from "../Header/style";
 
-export const Item = ({ href, children }) => (
+export const Item = ({ href, children }: {href?: string, children: any}) => (
     <Link to={href}>
         <ListItem>{children}</ListItem>
     </Link>
+)
+
+export const ExternalItem = ({ href, children }: {href: string, children: any }) => (
+    <a href={href}>
+        <ListItem>{children}</ListItem>
+    </a>
 )
 
 const Footer = ({ children }) => (
@@ -38,8 +44,8 @@ const Footer = ({ children }) => (
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Social</ListTitle>
-                    <Item href={"https://twitter.com/DotBrowser"}>Twitter</Item>
-                    <Item href={"https://invite.gg/dot"}>Discord</Item>
+                    <ExternalItem href={"https://twitter.com/DotBrowser"}>Twitter</ExternalItem>
+                    <ExternalItem href={"https://invite.gg/dot"}>Discord</ExternalItem>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Legal</ListTitle>
