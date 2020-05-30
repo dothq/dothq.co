@@ -10,6 +10,7 @@ const TermsPage = () => {
             <div>
                 Work in progress
             </div>
+            <br />
         </Layout>
     )
 }
