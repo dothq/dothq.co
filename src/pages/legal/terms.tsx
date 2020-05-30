@@ -9,8 +9,8 @@ const TermsPage = () => {
             <SEO title="" />
             <div>
                 Work in progress
+                <br />
             </div>
-            <br />
         </Layout>
     )
 }
