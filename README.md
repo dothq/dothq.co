@@ -20,7 +20,7 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
 
     ```shell
     # cloning our repo...
-    git clone https://github.com/dothq/browser.dothq.co
+    git clone https://git.dothq.co/dothq.co.git
     ```
 
 1.  **Install dependencies**
@@ -28,7 +28,7 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     We recommend using [Yarn](https://yarnpkg.com/) instead of [npm](https://npm.im), as npm causes issues with Gatsby.
 
     ```shell
-    cd browser.dothq.co
+    cd dothq.co
     yarn
     ```
 
@@ -45,7 +45,7 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     You should see a message in the terminal like this:
 
     ```shell
-    You can now view gatsby-starter-default in the browser.
+    You can now view dothq.co in the browser.
     ⠀
       http://localhost:8000/
     ⠀

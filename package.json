@@ -1,7 +1,7 @@
 {
-  "name": "browser.dothq.co",
+  "name": "dothq.co",
   "private": true,
-  "description": "Dot Browser Website",
+  "description": "Dot HQ Website",
   "version": "0.1.0",
   "author": "Dot HQ",
   "dependencies": {
@@ -63,9 +63,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/dothq/dothq.co"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/dothq/dothq.co/issues"
   }
 }
