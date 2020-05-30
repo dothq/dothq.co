@@ -10,6 +10,7 @@ const GDPRPage = () => {
             <div>
                 Work in progress
             </div>
+            <br />
         </Layout>
     )
 }
