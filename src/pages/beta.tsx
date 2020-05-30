@@ -43,7 +43,7 @@ const BetaPage = () => {
 			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Supports</th>
 			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Download</th>
 		</tr>
-		{builds !== undefined && builds.map(build => (
+		{builds !== undefined && builds.sort((a, b) => new Date(b.unlocksAt) - new Date(a.unlocksAt)).map(build => (
 			<tr key={build.id}>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.productName == "Dot Browser" ? ( <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto' }} src={"https://cdn.dothq.co/assets/dotbrowser-logo.png"} width="48" /> ) : <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto', borderRadius: '100%' }} src={"https://cdn.dothq.co/assets/defaultAvatar.png"} width="48" />}</td>
 				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.version}</td>
