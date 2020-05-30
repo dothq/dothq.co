@@ -9,8 +9,8 @@ const GDPRPage = () => {
             <SEO title="" />
             <div>
                 Work in progress
+                <br />
             </div>
-            <br />
         </Layout>
     )
 }
