@@ -52,7 +52,7 @@ const Footer = ({ children }) => (
                     <Item href={"/legal/terms"}>Terms</Item>
                     <Item href={"/legal/privacy"}>Privacy</Item>
                     <Item href={"/legal/cookies"}>Cookies</Item>
-                    <Item href={"/legal/legal/gdpr"}>GDPR</Item>
+                    <Item href={"/legal/gdpr"}>GDPR</Item>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>More from HQ</ListTitle>
