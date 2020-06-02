@@ -11,6 +11,12 @@ export const Container = styled.div`
     padding-top: 78px;
     margin: 0px auto;
     max-width: 1164px;
+    @media screen and (max-width: 800px) {
+        & {
+           flex-direction: column;
+           margin-left: 78px;
+        }
+    }
 `;
 
 export const LogoText = styled.div`
@@ -28,6 +34,12 @@ export const LogoText = styled.div`
 export const List = styled.div`
     margin-left: 190px;
     display: flex;
+    @media screen and (max-width: 800px) {
+        & {
+           flex-direction: column;
+           flex-wrap: wrap;
+        }
+    }
 `;
 
 export const ListGroup = styled.div`
@@ -41,6 +53,11 @@ export const ListTitle = styled.div`
     color: ${props => props.theme.colors.tertiary};
 
     margin-bottom: 5px;
+    @media screen and (max-width: 800px) {
+        & {
+           margin-top: 10px;
+        }
+    }
 `;
 
 export const ListItem = styled.div`
@@ -62,6 +79,15 @@ export const Copyright = styled.div`
     font-size: 14px;
     margin-top: 360px;
     display: flex;
+    
     position: absolute;
     color: ${props => props.theme.colors.tertiary + "90"};
+
+    @media screen and (max-width: 800px) {
+        & {
+           margin-top: 0;
+           bottom: 0;
+           position: relative;
+        }
+    }
 `;
