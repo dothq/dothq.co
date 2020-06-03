@@ -54,6 +54,12 @@ export const TextButton = styled.div`
         opacity: 0.7;
     }
 
+    @media screen and (max-width: 800px) {
+        & {
+           padding: 0px 10px;
+        }
+    }
+
     ${({ isBasic }: { isBasic?: boolean }) => css`
         ${isBasic ? `
             border-bottom: 0.2px solid ${props => props.theme.colors.tertiary};
