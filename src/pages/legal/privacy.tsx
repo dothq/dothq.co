@@ -103,7 +103,7 @@ const PrivacyPage = () => {
                         <br /><br />
                         We <b>do not use</b> tracking technologies on our Site or Dot Services.
                         <br /><br />
-                        When you visit our Site, a service called Cloudflare (which we utilise to stop DDOS attacks and dangerous actions against our Site, will place a cookie to determine your trust-factor on the Cloudflare network. Cloudflare powers millions of sites and you can <Link to={"https://support.cloudflare.com/hc/en-us/articles/200170156-What-does-the-Cloudflare-cfduid-cookie-do-"}>learn more about their trust-factor cookie here</Link>.
+                        When you visit our Site, a service called Cloudflare (which we utilise to stop DDOS attacks and dangerous actions against our Site, will place a cookie to determine your trust-factor on the Cloudflare network. Cloudflare powers millions of sites and you can <a href={"https://support.cloudflare.com/hc/en-us/articles/200170156-What-does-the-Cloudflare-cfduid-cookie-do-"}>learn more about their trust-factor cookie here</a>.
                     </p>
                     <br /><br />
                     <PolicySectionTitle id="how-long-do-we-keep-your-information"><b>5. How long do we keep your information?</b></PolicySectionTitle><br />
