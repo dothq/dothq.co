@@ -18,18 +18,20 @@ import Footer from "./Footer"
 import "./layout.css"
 import "./inter.css"
 
+import { Link } from 'gatsby';
+
 import { SkeletonTheme } from 'react-loading-skeleton';
 
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
-import { BackgroundInject } from './style'
+import { BackgroundInject, BlackLivesMatter, BLMBtn } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 import axios from 'axios';
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
-const Layout = ({ children, noEnding, noHero }) => {
+const Layout = ({ children, noEnding, noHero, isHome }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -52,6 +54,10 @@ const Layout = ({ children, noEnding, noHero }) => {
   const [builds, setBuilds] = useGlobalState('builds');
 
   React.useEffect(() => {
+    if(themeContext.isDark === false) {
+      themeContext.toggleDark()
+    }
+
     if(user !== undefined) return;
     if(builds !== undefined) return;
     getMe().then(me => {
@@ -60,11 +66,14 @@ const Layout = ({ children, noEnding, noHero }) => {
 
     axios.get('https://dothq.co/api/builds.all')
       .then(res => res.data.results && setBuilds(res.data.results))
-  }, [user, setUser, builds, setBuilds]);
+  }, [user, setUser, builds, setBuilds, themeContext]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
+      {!isHome && <BlackLivesMatter>
+          Black Lives Matter. Donate to the <BLMBtn href={"https://www.gofundme.com/f/georgefloyd"}>George Floyd Memorial Fund</BLMBtn> or <Link to={"/"}><BLMBtn>-> Read our statement</BLMBtn></Link>
+      </BlackLivesMatter>}
       <Header siteTitle={data.site.siteMetadata.title} />
       {!noHero && <Hero>
         {children}
@@ -79,7 +88,8 @@ const Layout = ({ children, noEnding, noHero }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   noEnding: PropTypes.bool,
-  noHero: PropTypes.bool
+  noHero: PropTypes.bool,
+  isHome: PropTypes.bool
 }
 
 export default Layout

@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => {
                     </Link>
                 </Flex>
                 <Flex style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <IconButton onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton>
+                    {/* <IconButton onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton> */}
 
                     <a href={"https://github.com/dothq"}>
                         <IconButton><FeatherIcon icon="github" size={18} /></IconButton>

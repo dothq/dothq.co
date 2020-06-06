@@ -676,6 +676,12 @@ pre tt:after {
   -webkit-user-drag: none;
 }
 
+.blm-emoji {
+  width: 22px !important;
+  height: 22px !important;
+  -webkit-user-drag: none;
+}
+
 .id-emoji:hover {
   transform: scale(1.1);
 }

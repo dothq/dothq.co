@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-import { Button, HeroButton } from "../components/Button"
+import { Button, HeroButton, TextButton } from "../components/Button"
 import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title } from "../components/style"
 import { createGlobalStyle } from "styled-components"
 
@@ -17,6 +17,8 @@ import * as syncData from '../images/features/sync_data.svg'
 import * as openSource from '../images/features/open_source.svg'
 import { getOS } from "../helpers/os"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import Emoji from "react-emoji-render"
+import { generateEmojiConfig } from "../tools/emoji"
 
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
@@ -25,50 +27,16 @@ const IndexPage = () => {
 
   return (
     <>
-      <Layout>
+      <Layout noEnding isHome>
         <SEO title="Dot Browser, the privacy-centric web browser" isHome />
-        <div dot-slideup="true" style={{ animationDelay: '0.2s' }}><Title className="hero-title">Take back your privacy.</Title></div>
-        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}><strong>Dot Browser</strong> is a <strong>privacy-conscious</strong> web browser that protects you from being <strong>tracked</strong> and <strong>monitored</strong>.</p>
-        
-        <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
-          <Buttons style={{ marginBottom: '34px' }}>
-            <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-              <HeroButton shade={"blue"} disabled={getOS() == "iOS" || getOS() == "Android"}>Download for {getOS()}</HeroButton>
-            </Link>
-            <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
-              <HeroButton shade={"white"}>Learn more</HeroButton>
-            </Link>
-          </Buttons>
-        </div>
+        <div dot-slideup="true" style={{ animationDelay: '0.2s' }}><Title className="hero-title">Black. Lives. Matter.</Title></div>
+        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}>The <strong>Dot HQ Community</strong> believe that Black Lives Matter. We will not stand in silence while people are being mistreated.</p>
 
-        <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
-          <img src={themeContext.isDark ? landingScreenshotDark : landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
-        </div>
-
-        <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>
-          <FeatureDisplay>
-            <Feature>
-              <FeatureImage src={blockAds} />
-              <Heading>Block ads with ease</Heading>
-              <Description>Dot automatically blocks advertisments and trackers out of the box.</Description>
-            </Feature>
-            <Feature>
-              <FeatureImage src={familiarDesign} />
-              <Heading>Familiar design</Heading>
-              <Description>You won’t need to re-invent the wheel to understand the layout.</Description>
-            </Feature>
-            <Feature>
-              <FeatureImage src={syncData} />
-              <Heading>Back-up your data</Heading>
-              <Description>Use your Dot ID to sync your browsing data to the cloud.</Description>
-            </Feature>
-            <Feature>
-              <FeatureImage src={openSource} />
-              <Heading>Everything open-source</Heading>
-              <Description>Transparency is our heart. You can read every line of code that goes into our browser.</Description>
-            </Feature>
-          </FeatureDisplay>
-        </div>
+        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.6s' }}>
+          Please consider donating to <a href={"https://blacklivesmatter.com/"}><TextButton style={{ fontSize: '24px' }} isBasic>Black Lives matter</TextButton></a> and or the <a href={"https://www.gofundme.com/f/georgefloyd"}><TextButton style={{ fontSize: '24px' }} isBasic>George Floyd Memorial Fund</TextButton></a>.
+          <br /><br />
+          Love, The Dot Team <Emoji text={"❤️"} options={generateEmojiConfig({ className: 'blm-emoji' })} />
+        </p>
 
       </Layout>
       <HeroSheet>

@@ -444,3 +444,24 @@ export const PolicySectionCite = styled.figure.attrs(props => {
     background-color: black;
     margin-left: 6px;
 `;
+
+export const BlackLivesMatter = styled.div`
+    height: 42px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    color: darkgray;
+    font-size: 15.5px;
+`;
+
+export const BLMBtn = styled.a`
+    margin: 0 5px;
+    color: white;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;
