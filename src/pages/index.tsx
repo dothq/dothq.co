@@ -33,7 +33,7 @@ const IndexPage = () => {
         <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}>The <strong>Dot HQ Community</strong> believe that Black Lives Matter. We will not stand in silence while people are being mistreated.</p>
 
         <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.6s' }}>
-          Please consider donating to <a href={"https://blacklivesmatter.com/"}><TextButton style={{ fontSize: '24px' }} isBasic>Black Lives matter</TextButton></a> and or the <a href={"https://www.gofundme.com/f/georgefloyd"}><TextButton style={{ fontSize: '24px' }} isBasic>George Floyd Memorial Fund</TextButton></a>.
+          Please consider donating to <a href={"https://blacklivesmatter.com/"}><TextButton style={{ fontSize: '24px' }} isBasic>Black Lives Matter</TextButton></a> and or the <a href={"https://www.gofundme.com/f/georgefloyd"}><TextButton style={{ fontSize: '24px' }} isBasic>George Floyd Memorial Fund</TextButton></a>.
           <br /><br />
           Love, The Dot Team <Emoji text={"❤️"} options={generateEmojiConfig({ className: 'blm-emoji' })} />
         </p>
