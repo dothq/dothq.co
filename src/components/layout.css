@@ -676,6 +676,14 @@ pre tt:after {
   -webkit-user-drag: none;
 }
 
+.emoji-center {
+  width: 64px !important;
+  height: 64px !important;
+  -webkit-user-drag: none;
+  margin: 0 auto !important;
+  display: flex;
+}
+
 .blm-emoji {
   width: 22px !important;
   height: 22px !important;
