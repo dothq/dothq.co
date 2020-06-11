@@ -19,6 +19,10 @@ import axios from 'axios';
 
 const OnboardingPage = ({ location }) => {
     const [user, setUser] = React.useState(null);
+    const [githubUser, setGithubUser] = React.useState(null);
+
+    const [ghLoading, setGHLoading] = React.useState(false);
+    const [ghErrorMessage, setGHErrorMessage] = React.useState(null);
 
     const [onboardingVisible, setOnboardingVisible] = React.useState(-1);
     const [currentStep, setCurrentStep] = React.useState(0);
@@ -27,7 +31,7 @@ const OnboardingPage = ({ location }) => {
 
     const [sobtnLoading, setsobtnLoading] = React.useState(false);
 
-    const maxStep = 2;
+    const maxStep = 3;
 
     const emailRef = React.createRef<HTMLInputElement>();
 
@@ -49,7 +53,7 @@ const OnboardingPage = ({ location }) => {
     })
 
     const onMigrateClick = () => {
-        if(isBrowser()) window.location.href = "/organization/migrate"
+        setCurrentStep(2)
     }
 
     const onVerifyEmailClick = () => {
@@ -73,6 +77,55 @@ const OnboardingPage = ({ location }) => {
                 setsobtnLoading(false)
                 setEmailIncorrect(true)
             })
+    }
+
+    let isSameBefore = false;
+
+    const onGitHubBlur = (e) => {       
+        isSameBefore = false 
+        console.log(isSameBefore)
+        const value = e.target.value;
+
+        if(value.length == 0) {
+            setGHErrorMessage(null)
+            return setGithubUser(null)
+        }
+
+        if(githubUser && value.toLowerCase() == githubUser.login.toLowerCase()) {
+            
+            isSameBefore = true;
+            return console.log(isSameBefore)
+        };
+
+        if(isSameBefore) {
+            if(githubUser && githubUser.type !== "User") return;
+        }
+
+        setGHErrorMessage(null)
+        setGHLoading(true)
+        setGithubUser(null)
+
+        axios.get(`https://api.github.com/users/${value}`)
+            .then(res => {
+                if(res.data.login) {
+                    if(res.data.type !== "User") {
+                        setGHErrorMessage(`@${res.data.login} is a reserved username`)
+                        setGithubUser(res.data)
+                        return setGHLoading(false)
+                    }
+                    setGithubUser(res.data)
+                    setGHLoading(false)
+                } else {
+                    setGithubUser(null)
+                    setGHLoading(false)
+                }
+            }).catch(err => {
+                setGithubUser(null)
+                setGHLoading(false)
+                console.log(err.response.data.message)
+                setGHErrorMessage(err.response.data.message)
+            })
+
     }
 
     return (
@@ -121,14 +174,32 @@ const OnboardingPage = ({ location }) => {
                                 <InputIconContainer style={{ minWidth: '76px', opacity: 0.5, fontSize: '14px' }}>
                                     <span>github.com/</span>
                                 </InputIconContainer>
-                                <Input placeholder="" type="text" ref={emailRef} />
+                                <Input placeholder="" type="text" onBlur={onGitHubBlur} />
                             </InputContainer>
 
+                            {!ghErrorMessage && githubUser && <a target={"_blank"} href={`https://github.com/${githubUser.login}`} style={{ display: 'flex', marginTop: '16px', flexDirection: 'column' }}>
+                                <Avatar width={32} src={githubUser.avatar_url} style={{ margin: '0 auto', marginBottom: '8px' }} />
+                                <div>
+                                    <p style={{ fontSize: '14px', margin: 0 }}>{githubUser.name}</p>
+                                    <p style={{ fontSize: '12px', margin: 0, opacity: 0.7, width: '300px', lineHeight: '19px' }}>{githubUser.bio}</p>
+                                </div>
+                            </a>}
+
+                            {ghErrorMessage && <div style={{ display: 'flex', marginTop: '16px', flexDirection: 'column' }}><p style={{ fontSize: '14px', margin: 0 }}>{ghErrorMessage}</p></div>}
+                            {ghLoading && <div style={{ display: 'flex', margin: '28px 0', flexDirection: 'column' }}><Spinner /></div>}
+
                             <Buttons style={{ margin: '28px 0', display: 'flex', justifyContent: 'center' }}>
-                                <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onMigrateClick}>
+                                <HeroButton shade={"blue"} style={{ pointerEvents: githubUser ? 'all' : 'none', opacity: githubUser ? 1 : 0.5, boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onMigrateClick}>
                                     Become an employee at Dot HQ
                                 </HeroButton>
                             </Buttons> 
+                        </div>
+                    </>}
+
+                    {currentStep == 2 && <>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                            <h1 style={{ fontSize: '24px', marginBottom: '0', textAlign: 'center', marginTop: '12px' }}>One moment</h1>
+                            <p style={{ fontSize: '16px' }}>We're sending you to the login page.</p>
                         </div>
                     </>}
                 </div>
