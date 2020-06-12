@@ -41,6 +41,7 @@ const OnboardingPage = ({ location }) => {
         if(!search.code) return setOnboardingVisible(0)
 
         if(user !== null) return;
+        if(onboardingVisible !== -1) return;
         axios.get(`https://dothq.co/api/organization.codes/${search.code}`)
             .then(res => {
                 if(res.data.ok && res.data.ok == true) {
@@ -49,6 +50,8 @@ const OnboardingPage = ({ location }) => {
                 } else {
                     setOnboardingVisible(0)
                 }
+            }).catch(_ => {
+                setOnboardingVisible(0)
             })
     })
 
