@@ -12,10 +12,14 @@ export const HeroSheet = styled.div`
     width: 100%;
     height: 650px;
     top: 0;
+    background-image: radial-gradient(${props => props.theme.isDark ? props.theme.ui.border : "#dcdcdc"} 1px,transparent 0),radial-gradient(${props => props.theme.isDark ? props.theme.ui.border : "#dcdcdc"} 1px,transparent 0);
+    background-position: 0 0,25px 25px;
+    background-attachment: fixed;
+    background-size: 50px 50px;
     background-color: ${props => props.theme.ui.background};
     z-index: -1;
     border-bottom: 1px solid ${props => props.theme.ui.border};
-    transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s;
+    transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s, background-image 0.2s ease-out 0s;
 `;
 
 export const BackgroundInject = css`
@@ -447,14 +451,20 @@ export const PolicySectionCite = styled.figure.attrs(props => {
 
 export const BlackLivesMatter = styled.div`
     height: 42px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid ${props => props.theme.ui.border};
     text-align: center;
     display: flex;
     align-content: center;
     align-items: center;
     justify-content: center;
-    color: darkgray;
+    color: ${props => props.theme.colors.tertiary};
     font-size: 15.5px;
+    background-color: ${props => props.theme.ui.background};
+    transition: all 0.2s ease-out 0s;
+
+    a {
+        color: ${props => props.theme.colors.tertiary}90;
+    }
 `;
 
 export const BLMBtn = styled.a`

@@ -4,6 +4,18 @@ export const StyledHeader = styled.div`
     margin-bottom: 2.5rem;
     height: 64px;
     width: 100%;
+
+    ${({ isFixed }: { isFixed: boolean }) => css`
+        top: ${isFixed ? 0 : ''};
+
+        ${isFixed ? `
+            position: fixed;
+            z-index: 9999;
+            background-color: #00000075;
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid #333333;
+        ` : ''}
+    `};
 `
 
 export const Container = styled.div`

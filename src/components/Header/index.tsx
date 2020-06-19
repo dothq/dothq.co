@@ -17,12 +17,12 @@ const onLogoContextMenu = (e) => {
     navigate("/download")
 }
 
-const Header = ({ siteTitle }) => {
+const Header = ({ siteTitle, isFixed, headerRef }) => {
     const themeContext = React.useContext(ThemeManagerContext)
     const [user] = useGlobalState('user');
 
     return (
-        <StyledHeader>
+        <StyledHeader isFixed={isFixed} ref={headerRef}>
             <Container>
                 <Flex>
                     <Link to={"/"}>
@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => {
                     </Link>
                 </Flex>
                 <Flex style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    {/* <IconButton onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton> */}
+                    <IconButton onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton>
 
                     <a href={"https://github.com/dothq"}>
                         <IconButton><FeatherIcon icon="github" size={18} /></IconButton>
@@ -63,6 +63,8 @@ const Header = ({ siteTitle }) => {
 
 Header.propTypes = {
     siteTitle: PropTypes.string,
+    isFixed: PropTypes.bool,
+    headerRef: PropTypes.any
   }
   
 Header.defaultProps = {

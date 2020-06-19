@@ -54,10 +54,6 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
   const [builds, setBuilds] = useGlobalState('builds');
 
   React.useEffect(() => {
-    if(themeContext.isDark === false) {
-      themeContext.toggleDark()
-    }
-
     if(user !== undefined) return;
     if(builds !== undefined) return;
     getMe().then(me => {
@@ -72,9 +68,9 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
       {!isHome && <BlackLivesMatter>
-          Black Lives Matter. Donate to the <BLMBtn href={"https://www.gofundme.com/f/georgefloyd"}>George Floyd Memorial Fund</BLMBtn> or <Link to={"/"}><BLMBtn>-> Read our statement</BLMBtn></Link>
+          Black Lives Matter. Donate to the <BLMBtn href={"https://www.gofundme.com/f/georgefloyd"}>George Floyd Memorial Fund</BLMBtn> or <Link to={"/blm"}><BLMBtn>-> Read our statement</BLMBtn></Link>
       </BlackLivesMatter>}
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} isFixed={false} />
       {!noHero && <Hero>
         {children}
       </Hero>}

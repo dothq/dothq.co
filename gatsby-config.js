@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Dot Browser`,
-    description: `Every 39 seconds, a hacker steals sensitive information online. Take back your privacy with Dot Browser, an aesthetically-pleasing web-browser with a built-in adblocker and privacy-tools to keep you safe online.`,
+    description: `Take back your privacy with Dot HQ's Dot Browser, the privacy-conscious web browser that protects you from being tracked and monitored online.`,
     author: `Dot HQ`,
   },
   plugins: [
