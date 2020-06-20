@@ -122,7 +122,7 @@ const BDCreatePage = () => {
             unlocksAt: new Date(unlock).toISOString()
         }
         
-        axios.post('https://dothq.co/api/builds.create', body, { method: 'POST', headers: { authorization: "Bearer " + getUserToken() } })
+        axios.post('https://dothq.co/api/builds/create', body, { method: 'POST', headers: { authorization: "Bearer " + getUserToken() } })
             .then(res => {
                 setLoading(false)
                 if(res.data && res.data.ok && res.data.ok == true && res.data.id) {
