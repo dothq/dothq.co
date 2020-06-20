@@ -42,7 +42,7 @@ const OnboardingPage = ({ location }) => {
 
         if(user !== null) return;
         if(onboardingVisible !== -1) return;
-        axios.get(`https://dothq.co/api/organization.codes/${search.code}`)
+        axios.get(`https://dothq.co/api/organization/codes/${search.code}`)
             .then(res => {
                 if(res.data.ok && res.data.ok == true) {
                     setOnboardingVisible(1)
@@ -70,7 +70,7 @@ const OnboardingPage = ({ location }) => {
 
         setsobtnLoading(true)
 
-        axios.post(`https://dothq.co/api/organization.verify`, body)
+        axios.post(`https://dothq.co/api/organization/verify`, body)
             .then(res => {
                 if(res.data.ok == true) {
                     setCurrentStep(1)

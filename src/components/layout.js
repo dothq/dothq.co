@@ -60,7 +60,7 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
       if(me.ok === true) setUser(me)
     })
 
-    axios.get('https://dothq.co/api/builds.all')
+    axios.get('https://dothq.co/api/builds/all')
       .then(res => res.data.results && setBuilds(res.data.results))
   }, [user, setUser, builds, setBuilds, themeContext]);
 
