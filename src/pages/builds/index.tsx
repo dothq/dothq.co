@@ -45,7 +45,7 @@ const BDPage = () => {
             id
         }
 
-        axios.delete('https://dothq.co/api/builds.delete/' + id, { headers: { authorization: "Bearer " + getUserToken() } })
+        axios.delete('https://dothq.co/api/builds/delete/' + id, { headers: { authorization: "Bearer " + getUserToken() } })
             .then(res => {
                 if(res.data && res.data.ok && res.data.ok == true) {
                     axios.get('https://dothq.co/api/builds.all')
@@ -61,7 +61,7 @@ const BDPage = () => {
     const onRefreshClick = () => {
         setLoading(true)
 
-        axios.get('https://dothq.co/api/builds.all')
+        axios.get('https://dothq.co/api/builds/all')
             .then(res => {
                 res.data.results && setBuilds(res.data.results)
                 setLoading(false)
