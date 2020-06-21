@@ -41,6 +41,7 @@
     "search-params": "^3.0.0",
     "sharp": "^0.25.2",
     "styled-components": "^5.0.1",
+    "swr": "^0.2.3",
     "timeago-react": "^3.0.0"
   },
   "devDependencies": {

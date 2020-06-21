@@ -475,3 +475,173 @@ export const BLMBtn = styled.a`
         text-decoration: underline;
     }
 `;
+
+export const HelpHeroSheet = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 395px;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(${props => props.theme.isDark ? '#7c7c7c' : '#adadad'} 1px,transparent 0),radial-gradient(${props => props.theme.isDark ? '#7c7c7c' : '#adadad'} 1px,transparent 0);
+    background-position: 0 0,25px 25px;
+    background-attachment: fixed;
+    background-size: 50px 50px;
+    background-color: ${props => props.theme.isDark ? '#2a2a2a' : '#f0f0f0'};
+    z-index: -1;
+    border-bottom: 1px solid ${props => props.theme.ui.border};
+    transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s, background-image 0.2s ease-out 0s;
+
+    &::after {
+        content: "";
+        height: 395px;
+        width: 100%;
+        display: flex;
+        background-image: linear-gradient(180deg, ${props => props.theme.isDark ? '#00000000' : '#ffffff00'} 0%, ${props => props.theme.isDark ? '#000000' : '#ffffff'} 100%);
+    }
+`;
+
+export const HelpHeroSheetStyle = css`
+
+`;
+
+export const HelpHero = styled.div`
+    max-width: 728px;
+    margin: 0 auto;
+`;
+
+export const HelpSubtitle = styled.div`
+    font-weight: 600;
+    font-size: 20px;
+    color: ${props => props.theme.colors.tertiary}db;
+`;
+
+export const HelpTitle = styled.div`
+    font-weight: 600;
+    font-size: 28px;
+    color: ${props => props.theme.colors.tertiary};
+`;
+
+export const HelpIcon = styled.div`
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+
+    ${({ src, size }: { src: any; size: number; }) => css`
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: ${size}px;
+        display: flex;
+ 
+        &:before {
+            background-image: url(${src});
+            background-size: ${size/1.9999999999999999}px;
+            background-repeat: no-repeat;
+            background-position: center;
+            content: "";
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+        }
+    `}
+`;
+
+export const HelpContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const HelpAlert = styled.a`
+    width: 250px;
+    height: 24px;
+    background-color: ${props => props.theme.colors.tertiary};
+
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+
+    color: ${props => props.theme.colors.secondary};
+
+    border-radius: 100px;
+
+    text-decoration: none;
+`;
+
+export const HelpSearch = styled.div`
+    width: 100%;
+    height: 50px;
+    background-color: ${props => props.theme.isDark ? 'black' : props => props.theme.colors.secondary};
+    box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,.132), 0 1.2px 3.6px 0 rgba(0,0,0,.108);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-right: 14px;
+    border: 1px solid ${props => props.theme.isDark ? props => props.theme.ui.border : 'transparent'};
+
+    svg {
+        color: ${props => props.theme.colors.tertiary + "87"};
+    }
+`;
+
+export const SearchInput = styled.input`
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    padding-left: 18px;
+    background-color: transparent;
+    border-radius: 8px;
+    color: ${props => props.theme.colors.tertiary};
+
+    &::placeholder {
+        color: ${props => props.theme.colors.tertiary + "87"};
+    }
+`;
+
+export const HelpExtras = styled.div`
+    max-width: 674px;
+    margin-top: 42px;
+    height: 100%;
+    margin: 0 auto;
+    text-align: left;
+`;
+
+export const FlexGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 38px;
+    grid-row-gap: 38px;
+    padding-bottom: 42px;
+    --spacing: 21.5px;
+`;
+
+export const ExtraItem = styled.a`
+    width: 140px;
+    height: 125px;
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132), 0 0.6px 1.8px 0 rgba(0,0,0,.108);
+    background-color: ${props => props.theme.isDark ? 'black' : props => props.theme.colors.secondary};
+    border: 1px solid ${props => props.theme.isDark ? props => props.theme.ui.border : 'transparent'};
+    border-radius: 6px;
+    color: ${props => props.theme.colors.tertiary};
+    padding: 22px 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    place-content: space-between;
+    text-decoration: none;
+    transition: 0.2s box-shadow, 0.2s transform;
+
+    &:hover {
+        box-shadow: 0 2.5999999999999996px 20px 0 rgba(0,0,0,.17), 0 1.7999999999999998px 20px 0 rgba(0,0,0,.14);
+        transform: scale(1.01)
+    }
+`;
+
+export const ExtraItemText = styled.div`
+    font-weight: 500;
+    font-size: 15px;
+    color: ${props => props.theme.colors.tertiary}90;
+    line-height: 18px;
+`;
