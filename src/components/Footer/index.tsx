@@ -35,7 +35,7 @@ const Footer = ({ children }) => (
                 <ListGroup>
                     <ListTitle>Learn</ListTitle>
                     <Item href={"/blog"}>Blog</Item>
-                    <Item href={"/support"}>Support</Item>
+                    <Item href={"/help"}>Support</Item>
                     <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
                 </ListGroup>
                 <ListGroup>
