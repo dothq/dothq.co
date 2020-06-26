@@ -18,15 +18,14 @@ import Footer from "./Footer"
 import "./layout.css"
 import "./inter.css"
 
-import { Link } from 'gatsby';
-
 import { SkeletonTheme } from 'react-loading-skeleton';
 
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
-import { BackgroundInject, BlackLivesMatter, BLMBtn } from './style'
+import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
+
 import axios from 'axios';
 
 const GS = createGlobalStyle`${BackgroundInject}`;
@@ -53,23 +52,28 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
   const [user, setUser] = useGlobalState('user');
   const [builds, setBuilds] = useGlobalState('builds');
 
+  const [alfUser, setAlfUser] = useGlobalState('afUser');
+  const [alfBuilds, setAlfBuilds] = useGlobalState('afBuilds');
+
   React.useEffect(() => {
-    if(user !== undefined) return;
-    if(builds !== undefined) return;
+    if(typeof(alfUser) == "boolean") return;
+    if(typeof(alfBuilds) == "boolean") return;
+
+    setAlfUser(true)
+
     getMe().then(me => {
-      if(me.ok === true) setUser(me)
+      setUser(me)
     })
+
+    setAlfBuilds(true)
 
     axios.get('https://dothq.co/api/builds/all')
       .then(res => res.data.results && setBuilds(res.data.results))
-  }, [user, setUser, builds, setBuilds, themeContext]);
+  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
-      {!isHome && <BlackLivesMatter>
-          Black Lives Matter. Donate to the <BLMBtn href={"https://www.gofundme.com/f/georgefloyd"}>George Floyd Memorial Fund</BLMBtn> or <Link to={"/blm"}><BLMBtn>-> Read our statement</BLMBtn></Link>
-      </BlackLivesMatter>}
       <Header siteTitle={data.site.siteMetadata.title} isFixed={false} />
       {!noHero && <Hero>
         {children}

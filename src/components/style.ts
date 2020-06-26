@@ -449,33 +449,6 @@ export const PolicySectionCite = styled.figure.attrs(props => {
     margin-left: 6px;
 `;
 
-export const BlackLivesMatter = styled.div`
-    height: 42px;
-    border-bottom: 1px solid ${props => props.theme.ui.border};
-    text-align: center;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    color: ${props => props.theme.colors.tertiary};
-    font-size: 15.5px;
-    background-color: ${props => props.theme.ui.background};
-    transition: all 0.2s ease-out 0s;
-
-    a {
-        color: ${props => props.theme.colors.tertiary}90;
-    }
-`;
-
-export const BLMBtn = styled.a`
-    margin: 0 5px;
-    color: white;
-
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
 export const HelpHeroSheet = styled.div`
     position: absolute;
     width: 100%;
@@ -615,7 +588,7 @@ export const FlexGrid = styled.div`
     --spacing: 21.5px;
 `;
 
-export const ExtraItem = styled.a`
+export const ExtraItem = styled.div`
     width: 140px;
     height: 125px;
     box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132), 0 0.6px 1.8px 0 rgba(0,0,0,.108);

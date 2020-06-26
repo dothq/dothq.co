@@ -1,15 +1,15 @@
 import React from "react"
 
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../../../components/layout"
+import SEO from "../../../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken, isBrowser } from "../../helpers/login"
-import { HeroButton, IconButton } from '../../components/Button'
+import { getUserToken, isBrowser } from "../../../helpers/login"
+import { HeroButton, IconButton } from '../../../components/Button'
 import FeatherIcon from 'feather-icons-react'
 
-import { useGlobalState } from '../../context'
-import { Form, InputContainer, InputIconContainer, Input, Buttons, DateTimePicker, Spinner } from "../../components/style"
+import { useGlobalState } from '../../../context'
+import { Form, InputContainer, InputIconContainer, Input, Buttons, DateTimePicker, Spinner } from "../../../components/style"
 import axios from "axios"
 
 const semanticVersioningRegex = /^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/;
@@ -127,7 +127,7 @@ const BDCreatePage = () => {
                 setLoading(false)
                 if(res.data && res.data.ok && res.data.ok == true && res.data.id) {
                     setBuilds(undefined)
-                    window.location.href = "/builds"
+                    window.location.href = "/admin/builds"
                 } else {
                     setErrorVisibility(true)
                     setErrorContent(res.data.status)
@@ -149,7 +149,7 @@ const BDCreatePage = () => {
     }
 
     const onBackClick = () => {
-        navigate('/builds')
+        navigate('/admin/builds')
     }
     
     return (

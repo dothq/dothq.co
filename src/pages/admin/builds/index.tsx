@@ -1,24 +1,24 @@
 import React from "react"
 
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../../../components/layout"
+import SEO from "../../../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken, isBrowser } from "../../helpers/login"
+import { getUserToken, isBrowser } from "../../../helpers/login"
 
-import { getOS } from "../../helpers/os";
+import { getOS } from "../../../helpers/os";
 
 import Skeleton from 'react-loading-skeleton';
-import { HeroButton, IconButton, TextButton } from '../../components/Button'
-import { Time } from "../../components/BlogCard"
+import { HeroButton, IconButton, TextButton } from '../../../components/Button'
+import { Time } from "../../../components/BlogCard"
 import FeatherIcon from 'feather-icons-react';
 
 import axios from 'axios';
 
-import { useGlobalState } from '../../context'
+import { useGlobalState } from '../../../context'
 
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';			   
-import { Spinner } from "../../components/style"
+import { Spinner } from "../../../components/style"
 
 const BDPage = () => {
     const themeContext = React.useContext(ThemeManagerContext)
@@ -37,7 +37,7 @@ const BDPage = () => {
     })
 
     const onBuildClick = () => {
-        navigate('/builds/create')
+        navigate('/admin/builds/create')
     }
 
     const onDeleteClick = (id) => {
@@ -106,7 +106,7 @@ const BDPage = () => {
                     ))}
                 </table>
 
-                {user && user.isEmployee && <Link to={"/beta"}>
+                {user && user.isEmployee && <Link to={"/builds"}>
                     <TextButton isBasic>View builds</TextButton>
                 </Link>}
             </div>

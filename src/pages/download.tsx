@@ -29,9 +29,9 @@ const DownloadPage = ({ location }) => {
       <Emoji text={"👏"} options={generateEmojiConfig({ className: 'emoji' })} />
       <h1 style={{ fontSize: '80px' }}>Downloads</h1>
       <p>
-          We don't have any stable builds of Dot Browser for {os} yet, however we have released some beta builds you can download over at 
-          <Link to={"/beta"}>
-            <TextButton isBasic style={{ fontSize: '24px', marginLeft: '6px' }}>our beta page</TextButton>
+          We don't have any stable builds of Dot Browser for {os} yet, however we have released some non-stable builds you can download over at 
+          <Link to={"/builds"}>
+            <TextButton isBasic style={{ fontSize: '24px', marginLeft: '6px' }}>our builds page</TextButton>
           </Link>.
       </p>
     </Layout>

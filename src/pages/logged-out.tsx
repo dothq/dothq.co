@@ -17,6 +17,8 @@ const LOPage = () => {
     const [user] = useGlobalState('user');
 
     React.useEffect(() => {
+        window.scrollTo(0, 0)
+
         if(user) navigate('/')
     })
 
