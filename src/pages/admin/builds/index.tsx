@@ -30,8 +30,8 @@ const BDPage = () => {
 
     React.useEffect(() => {
         const token = getUserToken()
-        if(!token) navigate("/id?to=builds")
-        if(!user) navigate("/id?to=builds")
+        if(!token) navigate("/id?to=admin/builds")
+        if(!user) navigate("/id?to=admin/builds")
 
         if(user && user.hasOwnProperty("isEmployee") && !user.isEmployee) navigate("/403?reason=This%20page%20is%20for%20employees%20only.")
     })
