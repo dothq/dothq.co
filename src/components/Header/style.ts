@@ -37,7 +37,7 @@ export const Flex = styled.div`
 export const Logo = styled.div`
     height: 36px;
     width: 36px;
-    background: ${props => props.theme.ui.logoGradient};
+    background: ${props => props.theme.colors.tertiary};
     border-radius: 28px;
 
     ${({ size }: { size?: number }) => css`

@@ -27,8 +27,8 @@ export const Button = styled.div`
         opacity: ${disabled ? 0.5 : 1};
     `}
 
-    border-radius: 4px;
-    padding: 6px 18px;
+    border-radius: 100px;
+    padding: 6px 26px;
     font-size: 16px;
     letter-spacing: 0.3px;
     transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform, 0.2s border;

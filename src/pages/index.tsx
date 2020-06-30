@@ -18,6 +18,8 @@ import * as openSource from '../images/features/open_source.svg'
 import { getOS } from "../helpers/os"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
+import FeatherIcon from 'feather-icons-react';
+
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
 const IndexPage = () => {
@@ -33,7 +35,10 @@ const IndexPage = () => {
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
           <Buttons style={{ marginBottom: '34px' }}>
             <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-              <HeroButton shade={"blue"} disabled={getOS() == "iOS" || getOS() == "Android"}>Download for {getOS()}</HeroButton>
+              <HeroButton shade={"blue"} disabled={getOS() == "iOS" || getOS() == "Android"}>
+                <FeatherIcon icon={"download"} size={20} style={{ marginRight: '8px' }} />
+                Download for {getOS()}
+              </HeroButton>
             </Link>
             <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
               <HeroButton shade={"white"}>Learn more</HeroButton>

@@ -62,6 +62,7 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
     setAlfUser(true)
 
     getMe().then(me => {
+      if(me.ok === false) return setUser(undefined)
       setUser(me)
     })
 

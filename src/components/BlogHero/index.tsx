@@ -24,7 +24,7 @@ export const BlogHero = () => {
                 </InputIconContainer>
                 <Input placeholder="Search for a post" type="text" ref={searchRef} style={{ width: '198px' }} />
                 <InputIconContainer>
-                    <InputHotkey>/</InputHotkey>
+                    <InputHotkey style={{ marginRight: '-14px' }}>/</InputHotkey>
                 </InputIconContainer>
             </InputContainer>
             <div></div>
