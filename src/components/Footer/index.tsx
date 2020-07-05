@@ -48,7 +48,7 @@ const Footer = ({ children }) => (
                     <ExternalItem href={"https://twitter.com/DotBrowser"}>Twitter</ExternalItem>
                     <ExternalItem href={"https://invite.gg/dot"}>Discord</ExternalItem>
                     <ExternalItem href={"https://reddit.com/r/dothq"}>Reddit</ExternalItem>
-                    <ExternalItem href={"https://github.com/GitHub"}>GitHub</ExternalItem>
+                    <ExternalItem href={"https://github.com/dothq"}>GitHub</ExternalItem>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Legal</ListTitle>
