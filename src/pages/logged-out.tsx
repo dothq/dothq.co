@@ -25,7 +25,7 @@ const LOPage = () => {
     return (
         <Layout>
             <SEO title="Logged out" />
-            <div style={{ padding: '11.8vh' }}>
+            <div style={{ paddingTop: 'calc(100vh / 24)', marginBottom: '3.5rem' }}>
                 <Emoji text={"💥"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '3rem' }}>Poof!</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginBottom: '5px' }}>You've been logged out of your account.</p>

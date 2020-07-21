@@ -49,6 +49,7 @@ export const ListGroup = styled.div`
 export const ListTitle = styled.div`
     font-size: 16px;
     display: flex;
+    font-weight: 600;
 
     color: ${props => props.theme.colors.tertiary};
 

@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import { StyledHeader, Container, Logo, Flex } from "./style"
+import { StyledHeader, Container, Logo, Flex, NavItem } from "./style"
 import { Button, TextButton, IconButton } from "../Button"
 import { navigate } from "gatsby"
 import FeatherIcon from 'feather-icons-react'
@@ -26,29 +26,25 @@ const Header = ({ siteTitle, isFixed, headerRef }) => {
             <Container>
                 <Flex>
                     <Link to={"/"}>
-                        <Logo onContextMenu={onLogoContextMenu} />
+                        <Logo className={"nav-logo"} onContextMenu={onLogoContextMenu} />
                     </Link>
                 </Flex>
-                <Flex style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <IconButton onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton>
-
-                    <a href={"https://github.com/dothq"}>
-                        <IconButton><FeatherIcon icon="github" size={18} /></IconButton>
+                <Flex style={{ justifyContent: 'center', flex: 1 }}>
+                    <a style={{ height: '100%' }}>
+                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Products</NavItem>
                     </a>
-
-                    <Link to={"/blog"}>
-                        <TextButton style={{ margin: '5px' }}>Blog</TextButton>
-                    </Link>
-
-                    {!user && 
-                        <Link to={"/id"}>
-                            <TextButton style={{ margin: '5px' }}>Login</TextButton>
-                        </Link>
-                    }
-
-                    <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '16px' }}>
-                        <Button shade={"blue"}>Download</Button>
-                    </Link>
+                    <a style={{ marginLeft: '32px', height: '100%' }}> 
+                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Company</NavItem> 
+                    </a>
+                    <a style={{ marginLeft: '32px', height: '100%' }}>
+                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Community</NavItem> 
+                    </a>
+                    <a href={"https://status.dothq.co"} target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
+                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Status</NavItem> 
+                    </a>
+                </Flex>
+                <Flex style={{ justifyContent: 'flex-end' }}>
+                    <IconButton className={"nav-icon-item"} onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton>
 
                     {user && 
                         <Link to={"/me"} style={{ marginLeft: '20px' }}>

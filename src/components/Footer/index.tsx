@@ -20,8 +20,7 @@ const Footer = ({ children }) => (
     <StyledFooter>
         <Container>
             <Link to={"/"}>
-                <Logo size={52} />
-                <LogoText>by Dot HQ.</LogoText>
+                <Logo className={"foot-logo"} size={52} />
             </Link>
             <Copyright>© {new Date().getFullYear()}, Dot HQ. All rights reserved.</Copyright>
             <List>

@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
+import { TextButton } from '../Button';
 
 export const StyledHeader = styled.div`
-    margin-bottom: 2.5rem;
+    margin-bottom: 84px;
     height: 64px;
     width: 100%;
 
@@ -20,7 +21,7 @@ export const StyledHeader = styled.div`
 
 export const Container = styled.div`
     margin: 0px auto;
-    max-width: 1164px;
+    max-width: 1300px;
     color: black;
     height: 64px;
     display: flex;
@@ -37,7 +38,7 @@ export const Flex = styled.div`
 export const Logo = styled.div`
     height: 36px;
     width: 36px;
-    background: ${props => props.theme.colors.tertiary};
+    background: ${props => props.theme.colors.secondary};
     border-radius: 28px;
 
     ${({ size }: { size?: number }) => css`
@@ -45,3 +46,10 @@ export const Logo = styled.div`
         width: ${size}px;
     `};
 `;
+
+export const NavItem = styled(TextButton)`
+    padding: 0px 4px;
+    font-size: 15px;
+    color: ${props => props.theme.colors.secondary};
+    font-weight: 600;
+`

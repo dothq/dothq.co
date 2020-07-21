@@ -29,7 +29,7 @@ const WelcomePage = () => {
     return (
         <Layout noEnding>
             <SEO title="Welcome to Dot Browser" />
-            <div style={{ padding: '11.8vh' }}>
+            <div style={{ paddingTop: 'calc(100vh / 24)', marginBottom: '3.5rem' }}>
                 <Emoji text={"⚪"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '3rem', ...welcomeStyle }}>{welcomeText}</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginTop: '-18px' }}>Welcome to Dot Browser, the browser that protects you from being tracked and monitored.</p>

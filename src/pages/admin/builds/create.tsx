@@ -211,7 +211,7 @@ const BDCreatePage = () => {
                     </Form>
             
                     <Buttons style={{ margin: '28px 0', display: 'flex', justifyContent: 'left' }}>
-                        <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onCreateClick}>
+                        <HeroButton shade={"black"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onCreateClick}>
                             {!loading ? 'Create' : <Spinner />}
                         </HeroButton>
                     </Buttons> 

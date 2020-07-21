@@ -1,41 +1,51 @@
 import styled, { css } from "styled-components";
 
 export const Button = styled.div`
-    ${({ shade, disabled }: { shade: 'blue' | 'white' | 'gray' | 'black' | 'red'; disabled?: boolean }) => css`
-        background-color: ${shade == "blue" ? "#0070F3" : shade == "white" ? props => props.theme.colors.secondary : shade == "black" ? "black" : shade == "red" ? "#ff5d5d" : "#303030"};
-        color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#EDEDED" : shade == "red" ? "#fff" : "#757575"};
+    ${({ shade, disabled, hasArrow, hasBorder, isHome }: { shade: 'blue' | 'white' | 'gray' | 'black' | 'red'; disabled?: boolean; hasArrow?: boolean; hasBorder?: boolean; isHome?: boolean }) => css`
+        background-color: ${shade == "blue" ? "rgba(255, 255, 255, 0.25)" : shade == "white" ? "transparent" : shade == "black" ? "black" : shade == "red" ? "#ff5d5d" : "#303030"};
+        color: ${shade == "blue" || shade == "gray" ? "#fff" : shade == "black" ? "#EDEDED" : shade == "red" ? "#fff" : isHome ? "white" : props => props.theme.colors.tertiary};
 
-        ${shade == "white" ? `
-            box-shadow: 0 5px 10px rgba(0,0,0,0.12);
-        ` : ''}
-
-        border: 1px solid ${props => props.theme.ui.border};
+        border: ${hasBorder ? `1px solid ${shade == "blue" ? "rgba(255, 255, 255, 0.25)" : shade == "white" ? "black" : shade == "black" ? "black" : shade == "red" ? "#ff5d5d" : "#303030"}` : ''};
 
         &:hover {
             cursor: pointer;
-            background-color: ${shade == "blue" ? "#0060D1" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : props => props.theme.isDark ? '#131313' : ''};
-
-            ${shade == "white" ? `
-                box-shadow: 0 5px 10px rgba(0,0,0,0.22);
-                ${props => props.theme.isDark ? `background-color: darkgray` : ''}
-            ` : `
-                box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-            `}
+            background-color: ${shade == "blue" ? "rgba(255, 255, 255, 0.4)" : shade == "gray" ? "#000000" : shade == "black" ? "#131313" : isHome ? "transparent" : props => props.theme.colors.tertiary};
+            color: ${shade == "white" ? "white" : ""};
+            opacity: ${shade == "white" ? isHome ? 0.6 : 1 : 1};
         }
+
+        padding: 9px 20px;
+
+        ${hasArrow ? `
+            position: relative;
+            padding-right: 35px;
+
+            --a-start: 50px;
+
+            svg {
+                transition: 150ms cubic-bezier(0.215,0.61,0.355,1) margin-left;
+                position: absolute;
+                margin-left: calc(100% - var(--a-start));
+            }
+
+            &:hover > svg {
+                position: absolute;
+                margin-left: calc(100% - calc(var(--a-start) - 2px));
+            }
+        ` : ""}
 
         pointer-events: ${disabled ? 'none' : 'all'};
         opacity: ${disabled ? 0.5 : 1};
     `}
 
     border-radius: 100px;
-    padding: 6px 26px;
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform, 0.2s border;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform, 0.2s border, 0.2s opacity;
 `;
 
 export const HeroButton = styled(Button)`
-    height: 50px;
+    height: 36px;
     display: flex;
     vertical-align: middle;
     align-items: center;
@@ -45,7 +55,7 @@ export const TextButton = styled.div`
     background-color: transparent;
     padding: 0px 12px;
     font-size: 16px;
-    color: ${props => props.theme.ui.color};
+    color: ${props => props.theme.colors.secondary};
     letter-spacing: 0.3px;
     transition: 0.2s background-color, 0.2s opacity;
 
@@ -56,7 +66,7 @@ export const TextButton = styled.div`
 
     @media screen and (max-width: 800px) {
         & {
-           padding: 0px 10px;
+        padding: 0px 10px;
         }
     }
 

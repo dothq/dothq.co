@@ -111,7 +111,7 @@ const IDPage = ({ location }) => {
     return (
         <Layout>
             <SEO title="Login" />
-            <div style={{ padding: '12vh' }}>
+            <div style={{ paddingTop: 'calc(100vh / 24)', marginBottom: '3.5rem' }}>
                 <a onClick={() => onEmojiClick()} onMouseEnter={onEmojiMouseEnter} onMouseLeave={onEmojiMouseLeave}>
                     <Emoji text={emoji} options={generateEmojiConfig({ className: 'id-emoji' })} />
                 </a>
@@ -138,11 +138,11 @@ const IDPage = ({ location }) => {
                 </Form>
         
                 <Buttons style={{ margin: '28px 0' }}>
-                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onLoginClick}>
+                    <HeroButton shade={"black"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center', marginRight: '28px' }} onClick={onLoginClick}>
                         Log in
                     </HeroButton>
 
-                    <HeroButton shade={"white"} style={{ height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
+                    <HeroButton shade={"white"} hasBorder style={{ height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
                         Sign up
                     </HeroButton>
                 </Buttons>

@@ -15,7 +15,7 @@ const RSPage = () => {
     return (
         <Layout>
             <SEO title="Reset Password" />
-            <div style={{ padding: '11.8vh' }}>
+            <div style={{ paddingTop: 'calc(100vh / 24)', marginBottom: '3.5rem' }}>
                 <Emoji text={"🔒"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '3rem' }}>Reset Password</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginBottom: '5px' }}>You'll need to pop your email in below and we'll send you a link to reset your password.</p>
@@ -30,7 +30,7 @@ const RSPage = () => {
                 </Form>
         
                 <Buttons style={{ margin: '28px 0' }}>
-                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '140px', justifyContent: 'center' }}>
+                    <HeroButton shade={"black"} style={{ boxShadow: 'none', height: '42px', width: '140px', justifyContent: 'center' }}>
                         Send email
                     </HeroButton>
                 </Buttons>

@@ -78,7 +78,7 @@ const BDPage = () => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'end' }}>
                         <HeroButton shade={"black"} style={{ height: '42px' }} onClick={() => onRefreshClick()}>{isLoading ? <Spinner style={{ borderWidth: '2px' }} /> : <FeatherIcon icon="rotate-cw" size={18} color="#fff" />}</HeroButton>
-                        <HeroButton shade={"blue"} style={{ height: '42px' }} onClick={() => onBuildClick()}>Create build</HeroButton>
+                        <HeroButton shade={"black"} style={{ height: '42px' }} onClick={() => onBuildClick()}>Create build</HeroButton>
                     </div>
                 </div>
             </div>

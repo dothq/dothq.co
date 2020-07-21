@@ -158,7 +158,7 @@ const OnboardingPage = ({ location }) => {
                             </InputContainer>
 
                             <Buttons style={{ margin: '28px 0', display: 'flex', justifyContent: 'center' }}>
-                                <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onVerifyEmailClick}>
+                                <HeroButton shade={"black"} style={{ boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onVerifyEmailClick}>
                                     {sobtnLoading ? <Spinner /> : 'Continue'}
                                 </HeroButton>
                             </Buttons> 
@@ -192,7 +192,7 @@ const OnboardingPage = ({ location }) => {
                             {ghLoading && <div style={{ display: 'flex', margin: '28px 0', flexDirection: 'column' }}><Spinner /></div>}
 
                             <Buttons style={{ margin: '28px 0', display: 'flex', justifyContent: 'center' }}>
-                                <HeroButton shade={"blue"} style={{ pointerEvents: githubUser ? 'all' : 'none', opacity: githubUser ? 1 : 0.5, boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onMigrateClick}>
+                                <HeroButton shade={"black"} style={{ pointerEvents: githubUser ? 'all' : 'none', opacity: githubUser ? 1 : 0.5, boxShadow: 'none', height: '42px', justifyContent: 'center' }} onClick={onMigrateClick}>
                                     Become an employee at Dot HQ
                                 </HeroButton>
                             </Buttons> 

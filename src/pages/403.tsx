@@ -19,7 +19,7 @@ const NotFoundPage = ({ location }) => {
     return (
         <Layout>
             <SEO title="Page Not Accessible" />
-            <div style={{ padding: '11.8vh' }}>
+            <div style={{ paddingTop: 'calc(100vh / 24)', marginBottom: '3.5rem' }}>
                 <Emoji text={"⛔"} options={generateEmojiConfig({ className: 'emoji' })} />
                 <h1 style={{ fontSize: '4rem' }}>403</h1>
                 <p style={{ fontSize: '16px', width: '400px', marginTop: '-18px' }}>We can't let you access this page.</p>

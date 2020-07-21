@@ -10,13 +10,9 @@ export const Buttons = styled.div`
 export const HeroSheet = styled.div`
     position: absolute;
     width: 100%;
-    height: 650px;
+    height: 100vh;
     top: 0;
-    background-image: radial-gradient(${props => props.theme.isDark ? props.theme.ui.border : "#dcdcdc"} 1px,transparent 0),radial-gradient(${props => props.theme.isDark ? props.theme.ui.border : "#dcdcdc"} 1px,transparent 0);
-    background-position: 0 0,25px 25px;
-    background-attachment: fixed;
-    background-size: 50px 50px;
-    background-color: ${props => props.theme.ui.background};
+    background-color: #4965FF;
     z-index: -1;
     border-bottom: 1px solid ${props => props.theme.ui.border};
     transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s, background-image 0.2s ease-out 0s;
@@ -62,6 +58,14 @@ export const BackgroundInject = css`
             background-color: var(--homebg);
         ` : ''}
     }
+
+    .nav-item, .nav-icon-item {
+        color: ${props => props.theme.colors.tertiary} !important;
+    }
+
+    .nav-logo, .foot-logo {
+        background-color: ${props => props.theme.colors.tertiary} !important;
+    }
 `;
 
 export const HeroSheetStyle = css`
@@ -89,6 +93,14 @@ export const HeroSheetStyle = css`
         opacity: 0;
         transform: translateY(20%);
         transition-property: opacity,transform;
+    }
+
+    .nav-item, p, .nav-icon-item {
+        color: white !important;
+    }
+
+    .nav-logo, .hero-title {
+        background-color: white !important;
     }
 `;
 
@@ -212,7 +224,7 @@ export const ProcessChild = styled.div`
 `;
 
 export const Title = styled.h1`
-    background-image: ${props => props.theme.ui.titleGradient};
+    background-color: ${props => props.theme.colors.secondary};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 `;

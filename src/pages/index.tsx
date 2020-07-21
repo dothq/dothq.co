@@ -30,24 +30,27 @@ const IndexPage = () => {
       <Layout>
         <SEO title="Dot Browser, the privacy-centric web browser" isHome />
         <div dot-slideup="true" style={{ animationDelay: '0.2s' }}><Title className="hero-title">Take back your privacy.</Title></div>
-        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}><strong>Dot Browser</strong> is a <strong>privacy-conscious</strong> web browser that protects you from being <strong>tracked</strong> and <strong>monitored</strong>.</p>
+        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}>Dot Browser is a privacy-conscious web browser with smarts built-in for protection against trackers and advertisments online.</p>
         
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
           <Buttons style={{ marginBottom: '34px' }}>
-            <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-              <HeroButton shade={"blue"} disabled={getOS() == "iOS" || getOS() == "Android"}>
-                <FeatherIcon icon={"download"} size={20} style={{ marginRight: '8px' }} />
-                Download for {getOS()}
+            <Link to={"/#features"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
+              <HeroButton shade={"blue"} hasArrow>
+                Learn More
+                <FeatherIcon icon={"chevron-right"} size={18} />
               </HeroButton>
             </Link>
-            <Link to={"#features"} style={{ textDecoration: 'none', marginLeft: '32px' }}>
-              <HeroButton shade={"white"}>Learn more</HeroButton>
+            <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '8px' }}>
+              <HeroButton shade={"white"} hasArrow isHome>
+                Download Dot Browser
+                <FeatherIcon icon={"chevron-right"} size={18} />
+              </HeroButton>
             </Link>
           </Buttons>
         </div>
 
         <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
-          <img src={themeContext.isDark ? landingScreenshotDark : landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
+          <img src={landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
         </div>
 
         <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>

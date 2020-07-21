@@ -11,6 +11,8 @@ import * as windows from '../../images/os/windows.png'
 import * as linux from '../../images/os/linux.png'
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
+import FeatherIcon from 'feather-icons-react';
+
 const OSLink = ({ os }) => {
     const themeContext = React.useContext(ThemeManagerContext)
 
@@ -43,7 +45,10 @@ const Ending = () => (
                 <Title>Download Dot Browser</Title>
                 <Buttons style={{ marginTop: '72px', justifyContent: 'flex-start' }}>
                     <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-                        <HeroButton shade={"black"} disabled={getOS() == "iOS" || getOS() == "Android"}>Download for {getOS()}</HeroButton>
+                        <HeroButton shade={"black"} disabled={getOS() == "iOS" || getOS() == "Android"} hasArrow style={{ '--a-start': '118px' }}>
+                            Download for {getOS()}
+                            <FeatherIcon icon={"chevron-right"} size={18}  />
+                        </HeroButton>
                     </Link>
                     <Or />
                     {getOS() == "Windows" || getOS() == "macOS" ? <OSLink os={"linux"} /> : ''}

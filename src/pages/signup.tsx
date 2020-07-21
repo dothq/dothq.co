@@ -146,7 +146,7 @@ const SignupPage = ({ location }) => {
                 </Form>
         
                 <Buttons style={{ margin: '28px 0' }}>
-                    <HeroButton shade={"blue"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
+                    <HeroButton shade={"black"} style={{ boxShadow: 'none', height: '42px', width: '118px', justifyContent: 'center' }} onClick={onSignupClick}>
                         Sign up
                     </HeroButton>
                 </Buttons>
