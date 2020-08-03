@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledEnding, ContainerParent, Container, Heading, Title, Or, FadingOutScreenshot } from "./style";
+import { StyledEnding, ContainerParent, Container, Title, Or, FadingOutScreenshot } from "./style";
 import { HeroButton } from '../Button';
 import { Buttons } from '../style';
 import { getOS } from '../../helpers/os';
@@ -11,53 +11,18 @@ import * as windows from '../../images/os/windows.png'
 import * as linux from '../../images/os/linux.png'
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
-import FeatherIcon from 'feather-icons-react';
-
-const OSLink = ({ os }) => {
-    const themeContext = React.useContext(ThemeManagerContext)
-
-    if(os == "windows") { 
-        return (
-            <Link to={"/download?os=windows"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={windows} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
-            </Link>
-        )
-    } else if(os == "macos") {
-        return (
-            <Link to={"/download?os=macos"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={macos} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
-            </Link>
-        )
-    } else {
-        return (
-            <Link to={"/download?os=linux"} style={{ textDecoration: 'none', width: '28px', height: '28px', marginTop: '10px', marginRight: '18px' }}>
-                <img src={linux} style={{ filter: themeContext.isDark ? 'invert(1)' : '' }} />
-            </Link>
-        )
-    }
-}
+import { ButtonV2 } from '../ButtonV2'
 
 const Ending = () => (
     <StyledEnding>
         <ContainerParent>
-            <Container style={{ width: '514px', display: 'inline-block' }}>
-                <Heading>Protect your privacy.</Heading>
-                <Title>Download Dot Browser</Title>
-                <Buttons style={{ marginTop: '72px', justifyContent: 'flex-start' }}>
-                    <Link to={"/download"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-                        <HeroButton shade={"black"} disabled={getOS() == "iOS" || getOS() == "Android"} hasArrow style={{ '--a-start': '118px' }}>
-                            Download for {getOS()}
-                            <FeatherIcon icon={"chevron-right"} size={18}  />
-                        </HeroButton>
+            <Container>
+                <Title>Ready for some privacy?</Title>
+                <Buttons style={{ marginTop: '60px', justifyContent: 'center' }}>
+                    <Link to={"/download"}>
+                        <ButtonV2 background={"white"} color={"black"} w={173}>Download</ButtonV2>
                     </Link>
-                    <Or />
-                    {getOS() == "Windows" || getOS() == "macOS" ? <OSLink os={"linux"} /> : ''}
-                    {getOS() == "Linux" || getOS() == "macOS" ? <OSLink os={"windows"} /> : ''}
-                    {getOS() == "Linux" || getOS() == "Windows" ? <OSLink os={"macos"} /> : ''}
                 </Buttons>
-            </Container>
-            <Container style={{ width: '650px', paddingTop: 0 }}>
-                <FadingOutScreenshot />
             </Container>
         </ContainerParent>
     </StyledEnding>

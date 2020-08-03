@@ -4,21 +4,22 @@ import * as landingScreenshotLight from '../../images/landing-screenshot-light.p
 import * as landingScreenshotDark from '../../images/landing-screenshot-dark.png'
 
 export const StyledEnding = styled.div`
-    height: 380px;
-    background-color: ${props => props.theme.ui.background};
-    border-top: 1px solid ${props => props.theme.ui.border};
+    height: 272px;
+    margin-bottom: 46px;
 `;
 
 export const ContainerParent = styled.div`
     margin: 0px auto;
-    max-width: 1164px;
+    max-width: 1300px;
     height: 100%;
     display: flex;
     justify-content: center;
+    background-color: #4965ff;
+    border-radius: 18px;
 `;
 
 export const Container = styled.div`
-    padding-top: 79px;
+    padding-top: 76px;
     text-align: left;
 
     @media only screen and (max-width: 1450px) {
@@ -38,22 +39,12 @@ export const Container = styled.div`
     }
 `;
 
-export const Heading = styled.div`
-    font-style: normal;
-    font-weight: bold;
-    font-size: 26px;
-    text-transform: uppercase;
-
-    color: ${props => props.theme.colors.tertiary + "80"};
-    margin-bottom: 18px;
-`;
-
 export const Title = styled.div`
     font-family: Inter;
     font-style: normal;
-    font-weight: 800;
-    font-size: 37px;
-    color: ${props => props.theme.colors.tertiary};
+    font-weight: 600;
+    font-size: 40px;
+    color: white;
 `;
 
 export const Or = styled.div`

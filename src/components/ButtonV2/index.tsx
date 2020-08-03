@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const ButtonV2 = styled.div`
     padding: 11px 32px;
     border-radius: 100px;
+    text-align: center;
 
     ${({ color, background, w, h }: { color?: string; background?: string; w?: number; h?: number }) => css`
         color: ${color || "white"};
