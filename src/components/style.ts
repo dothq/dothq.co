@@ -72,30 +72,38 @@ export const FeatureDisplay = styled.div`
 `;
 
 export const Feature = styled.div`
-    text-align: left;
-    max-width: 248px;
-    margin: var(--spacing);
+    display: flex;
+    width: 100%;
+    margin-bottom: 128px;
 `;
 
 export const Heading = styled.div`
+    font-family: Inter;
     font-style: normal;
-    font-weight: bold;
-    font-size: 19px; 
-    color: ${props => props.theme.colors.tertiary + "cc"};
-    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 41px;
+    display: flex;
+    align-items: center;
+    color: #000000;
 `;
 
 export const Description = styled.div`
+    font-family: Inter;
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    color: ${props => props.theme.colors.tertiary + "a6"};
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 134%;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.7);
+    width: 556px;
+    text-align: left;
+    margin-top: 18px;
 `;
 
 export const FeatureImage = styled.img`
     user-drag: none;
-    max-width: 248px;
-    margin-bottom: 18px;
 `;
 
 export const Form = styled.div`
@@ -587,4 +595,17 @@ export const ExtraItemText = styled.div`
     font-size: 15px;
     color: ${props => props.theme.colors.tertiary}90;
     line-height: 18px;
+`;
+
+export const FeatureIcon = styled.div`
+    ${({ src }: { src: any; }) => css`
+        background-color: #f2f6ff;
+        background-image: url(${src});
+        background-size: 44px;
+        width: 88px;
+        height: 88px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 88px;
+    `};
 `;

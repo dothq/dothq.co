@@ -5,15 +5,19 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import { Button, HeroButton } from "../components/Button"
-import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title } from "../components/style"
+import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon } from "../components/style"
 import { createGlobalStyle } from "styled-components"
 
 import landingShowcase from '../images/landing-showcase.svg'
 
-import * as blockAds from '../images/features/block_ads.svg'
-import * as familiarDesign from '../images/features/familiar_design.svg'
-import * as syncData from '../images/features/sync_data.svg'
-import * as openSource from '../images/features/open_source.svg'
+import * as shield from '../images/icons/shield.svg'
+import * as mail from '../images/icons/mail.svg'
+import * as sync from '../images/icons/sync.svg'
+
+import * as blockerFeature from '../images/features/blocker_feature.svg'
+import * as maskFeature from '../images/features/mask_feature.svg'
+import * as syncFeature from '../images/features/sync_feature.svg'
+
 import { getOS } from "../helpers/os"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
@@ -50,25 +54,53 @@ const IndexPage = () => {
         <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>
           <FeatureDisplay>
             <Feature>
-              <FeatureImage src={blockAds} />
-              <Heading>Block ads with ease</Heading>
-              <Description>Dot automatically blocks advertisments and trackers out of the box.</Description>
+              <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <FeatureIcon src={shield} />
+                <div style={{ marginTop: '58px' }}>
+                  <Heading>Block ads with ease</Heading>
+                  <Description>Dot Browser blocks all those pesky advertisments and trackers you come across while browsing the web.</Description>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <FeatureImage src={blockerFeature} style={{ width: '623px', height: '325px' }} />
+              </div>
+
             </Feature>
+
             <Feature>
-              <FeatureImage src={familiarDesign} />
-              <Heading>Familiar design</Heading>
-              <Description>You won’t need to re-invent the wheel to understand the layout.</Description>
+              <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <FeatureImage src={maskFeature} style={{ width: '623px', height: '325px' }} />
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <div>
+                  <FeatureIcon src={mail} style={{ marginLeft: 'auto' }} />
+                  <Heading style={{ marginTop: '58px', direction: 'rtl' }}>Say goodbye to spam</Heading>
+                  <Description style={{ textAlign: 'right' }}>Dot Browser offers to mask your email with a temporary email address when registering for services online.</Description>
+                </div>
+              </div>
+
+
             </Feature>
+
             <Feature>
-              <FeatureImage src={syncData} />
-              <Heading>Back-up your data</Heading>
-              <Description>Use your Dot ID to sync your browsing data to the cloud.</Description>
+              <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <FeatureIcon src={sync} />
+                <div style={{ marginTop: '58px' }}>
+                  <Heading>Pick up where you left off</Heading>
+                  <Description>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
+
+                  <ButtonV2 w={224} style={{ marginTop: '32px' }}>Learn more about this</ButtonV2>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <FeatureImage src={syncFeature} style={{ width: '623px', height: '325px' }} />
+              </div>
+
             </Feature>
-            <Feature>
-              <FeatureImage src={openSource} />
-              <Heading>Everything open-source</Heading>
-              <Description>Transparency is our heart. You can read every line of code that goes into our browser.</Description>
-            </Feature>
+
           </FeatureDisplay>
         </div>
 
