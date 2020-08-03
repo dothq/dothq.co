@@ -10,6 +10,7 @@ import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import { useGlobalState } from "../../context"
 import { Avatar } from "../style"
 import Skeleton from "react-loading-skeleton"
+import { ButtonV2 } from "../ButtonV2"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -17,41 +18,42 @@ const onLogoContextMenu = (e) => {
     navigate("/download")
 }
 
-const Header = ({ siteTitle, isFixed, headerRef }) => {
+const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
     const themeContext = React.useContext(ThemeManagerContext)
     const [user] = useGlobalState('user');
 
     return (
-        <StyledHeader isFixed={isFixed} ref={headerRef}>
+        <StyledHeader isFixed={isFixed} ref={headerRef} isDark={isDark}>
             <Container>
-                <Flex>
+                <div className={"logotype"}>
                     <Link to={"/"}>
-                        <Logo className={"nav-logo"} onContextMenu={onLogoContextMenu} />
+                        <Logo isDark={isDark} onContextMenu={onLogoContextMenu} />
                     </Link>
-                </Flex>
-                <Flex style={{ justifyContent: 'center', flex: 1 }}>
+                </div>
+                <div className={"links"}>
                     <a style={{ height: '100%' }}>
-                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Products</NavItem>
+                        <NavItem isDark={isDark} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Products</NavItem>
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}> 
-                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Company</NavItem> 
+                        <NavItem isDark={isDark} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Company</NavItem> 
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}>
-                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Community</NavItem> 
+                        <NavItem isDark={isDark} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Community</NavItem> 
                     </a>
-                    <a href={"https://status.dothq.co"} target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
-                        <NavItem className={"nav-item"} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>Status</NavItem> 
+                    <a target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
+                        <NavItem isDark={isDark} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>About</NavItem> 
                     </a>
-                </Flex>
-                <Flex style={{ justifyContent: 'flex-end' }}>
-                    <IconButton className={"nav-icon-item"} onClick={() => themeContext.toggleDark()}><FeatherIcon icon={themeContext.isDark ? "sun" : "moon"} size={18} /></IconButton>
+                </div>
+                <div className={"nbtn"}>
+                    <ButtonV2>Sign in</ButtonV2>
+                    <ButtonV2 background={"transparent"} color={"black"} style={{ marginRight: '8px' }}>Register</ButtonV2>
 
                     {user && 
                         <Link to={"/me"} style={{ marginLeft: '20px' }}>
                             {user && user.avatar ? <Avatar width={32} noFade src={user.avatar} /> : <Skeleton width={32} height={32} circle={true} />}
                         </Link>
                     }
-                </Flex>
+                </div>
             </Container>
         </StyledHeader>
     )

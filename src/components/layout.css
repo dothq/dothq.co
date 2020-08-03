@@ -388,8 +388,9 @@ p {
   max-width: 605px;
   margin: 0 auto;
   margin-bottom: 36px;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 134%;
 }
 figure {
   margin-left: 0;
@@ -645,21 +646,17 @@ pre tt:after {
   }
 }
 
+
 @media screen and (max-width: 625px) {
   .hero-title {
     font-size: 30px;
   }
 }
 
-@media screen and (min-width: 626px) {
-  .hero-p {
-    font-size: 24px;
-  }
-}
-
 @media screen and (max-width: 625px) {
   .hero-p {
-    font-size: 18px;
+    font-size: 12px;
+    max-width: 350px;
   }
 }
 

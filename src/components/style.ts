@@ -2,107 +2,64 @@ import styled, { css } from "styled-components";
 
 import link from '../images/link.svg'
 
+export const BackgroundInject = css`
+    .links {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 16px;
+        line-height: 140%;
+        font-weight: 600;
+        justify-content: center;
+        display: flex;
+    }
+
+    @media screen and (max-width: 1040px) {
+        .links {
+          display: none;
+        }
+    }
+
+    @media screen and (max-width: 1280px) {
+        .logotype {
+            padding-left: 15px;
+        }
+
+        .nbtn {
+            padding-right: 15px;
+        }
+    }
+
+    .nbtn {
+        flex: 0 0 auto;
+        text-align: end;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        white-space: pre;
+        width: 36px;
+        flex-direction: row-reverse;
+    }
+
+    .logotype {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+`;
+
 export const Buttons = styled.div`
     display: flex;
     justify-content: center;
 `;
 
-export const HeroSheet = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    background-color: #4965FF;
-    z-index: -1;
-    border-bottom: 1px solid ${props => props.theme.ui.border};
-    transition: background 0.2s ease-out 0s, border 0.2s ease-out 0s, background-image 0.2s ease-out 0s;
-`;
-
-export const BackgroundInject = css`
-    body {
-        background-color: ${props => props.theme.ui.background};
-        transition: background 0.2s ease-out 0s;
-    }
-
-    h1 {
-        color: ${props => props.theme.colors.tertiary};
-        transition: color 0.2s ease-out 0s;  
-    }
-
-    p, label, input[type="datetime-local"] {
-        color: ${props => props.theme.colors.tertiary + "db"};
-        transition: color 0.2s ease-out 0s;  
-    }
-
-    ::-webkit-calendar-picker-indicator, input[type="checkbox"] {
-        filter: ${props => props.theme.isDark ? 'invert(1)' : ''};
-    }
-
-    .EmbeddedTweet {
-        background: ${props => props.theme.ui.background} !important;
-    }
-
-    :root {
-        --border: ${props => props.theme.ui.border};
-        --homebg: ${props => props.theme.ui.homeBackground};
-    }
-
-    *::selection {
-        background-color: ${props => props.theme.isDark ? "#2b2b2b" : "#deeffd"};
-    }
-
-    .small-hero {
-        ${props => props.theme.isDark ? `
-            margin-top: -110px;
-            padding-top: calc(2.5rem + 64px);
-            background-color: var(--homebg);
-        ` : ''}
-    }
-
-    .nav-item, .nav-icon-item {
-        color: ${props => props.theme.colors.tertiary} !important;
-    }
-
-    .nav-logo, .foot-logo {
-        background-color: ${props => props.theme.colors.tertiary} !important;
-    }
-`;
-
-export const HeroSheetStyle = css`
-    @keyframes slideup {
-        0% {
-            transform: translateY(30%);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0px);
-            opacity: 1;
-        }
-    }
-
-    body {
-        background-color: ${props => props.theme.ui.homeBackground};
-        transition: background 0.2s ease-out 0s;
-    }
-    
-    * [dot-slideup="true"] {
-        animation-duration: 1s;
-        animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
-        animation-name: slideup;
-        animation-fill-mode: forwards;
-        opacity: 0;
-        transform: translateY(20%);
-        transition-property: opacity,transform;
-    }
-
-    .nav-item, p, .nav-icon-item {
-        color: white !important;
-    }
-
-    .nav-logo, .hero-title {
-        background-color: white !important;
-    }
-`;
 
 export const FeatureDisplay = styled.div`
     display: flex;
@@ -224,9 +181,10 @@ export const ProcessChild = styled.div`
 `;
 
 export const Title = styled.h1`
-    background-color: ${props => props.theme.colors.secondary};
+    background-color: black;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: bold;
 `;
 
 export const InputHotkey = styled.div`

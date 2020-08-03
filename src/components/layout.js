@@ -30,7 +30,7 @@ import axios from 'axios';
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
-const Layout = ({ children, noEnding, noHero, isHome }) => {
+const Layout = ({ children, noEnding, noHero, isHome, darkNav }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -62,7 +62,7 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
     setAlfUser(true)
 
     getMe().then(me => {
-      if(me.ok === false) return setUser(undefined)
+      if(me && me.ok === false) return setUser(undefined)
       setUser(me)
     })
 
@@ -75,7 +75,7 @@ const Layout = ({ children, noEnding, noHero, isHome }) => {
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
-      <Header siteTitle={data.site.siteMetadata.title} isFixed={false} />
+      <Header siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={darkNav || true} />
       {!noHero && <Hero>
         {children}
       </Hero>}
@@ -90,7 +90,8 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   noEnding: PropTypes.bool,
   noHero: PropTypes.bool,
-  isHome: PropTypes.bool
+  isHome: PropTypes.bool,
+  darkNav: PropTypes.bool
 }
 
 export default Layout

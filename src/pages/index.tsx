@@ -8,8 +8,7 @@ import { Button, HeroButton } from "../components/Button"
 import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title } from "../components/style"
 import { createGlobalStyle } from "styled-components"
 
-import * as landingScreenshotLight from '../images/landing-screenshot-light.png'
-import * as landingScreenshotDark from '../images/landing-screenshot-dark.png'
+import landingShowcase from '../images/landing-showcase.svg'
 
 import * as blockAds from '../images/features/block_ads.svg'
 import * as familiarDesign from '../images/features/familiar_design.svg'
@@ -19,6 +18,7 @@ import { getOS } from "../helpers/os"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import FeatherIcon from 'feather-icons-react';
+import { ButtonV2 } from "../components/ButtonV2"
 
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
@@ -30,27 +30,21 @@ const IndexPage = () => {
       <Layout>
         <SEO title="Dot Browser, the privacy-centric web browser" isHome />
         <div dot-slideup="true" style={{ animationDelay: '0.2s' }}><Title className="hero-title">Take back your privacy.</Title></div>
-        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s' }}>Dot Browser is a privacy-conscious web browser with smarts built-in for protection against trackers and advertisments online.</p>
+        <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s', opacity: 0.7 }}>Dot Browser is a privacy-conscious web browser with smarts built-in for protection against trackers and advertisments online.</p>
         
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
           <Buttons style={{ marginBottom: '34px' }}>
             <Link to={"/#features"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
-              <HeroButton shade={"blue"} hasArrow>
-                Learn More
-                <FeatherIcon icon={"chevron-right"} size={18} />
-              </HeroButton>
+              <ButtonV2 background={"#f6f6f6"} color={"black"}>Learn More</ButtonV2>
             </Link>
-            <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '8px' }}>
-              <HeroButton shade={"white"} hasArrow isHome>
-                Download Dot Browser
-                <FeatherIcon icon={"chevron-right"} size={18} />
-              </HeroButton>
+            <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '12px' }}>
+              <ButtonV2>Download Dot Browser</ButtonV2>
             </Link>
           </Buttons>
         </div>
 
         <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
-          <img src={landingScreenshotLight} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
+          <img src={landingShowcase} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
         </div>
 
         <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>
@@ -79,9 +73,6 @@ const IndexPage = () => {
         </div>
 
       </Layout>
-      <HeroSheet>
-        <HSS />
-      </HeroSheet>
     </>
   )
 }
