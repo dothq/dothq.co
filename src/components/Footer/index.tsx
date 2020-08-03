@@ -1,8 +1,11 @@
 import React from "react";
-import { StyledFooter, Container, LogoText, List, ListTitle, ListGroup, ListItem, Copyright } from "./style";
+import { StyledFooter, Container, LogoText, List, ListTitle, ListGroup, ListItem, Copyright, Logo, Socials, SocialIcon } from "./style";
 import PropTypes from "prop-types"
 import { Link } from "gatsby";
-import { Logo } from "../Header/style";
+
+import twitter from '../../images/icons/twitter.svg'
+import discord from '../../images/icons/discord.svg'
+import youtube from '../../images/icons/youtube.svg'
 
 export const Item = ({ href, children }: {href?: string, children: any}) => (
     <Link to={href}>
@@ -19,46 +22,45 @@ export const ExternalItem = ({ href, children }: {href: string, children: any })
 const Footer = ({ children }) => (
     <StyledFooter>
         <Container>
-            <Link to={"/"}>
-                <Logo className={"foot-logo"} size={52} />
-            </Link>
-            <Copyright>© {new Date().getFullYear()}, Dot HQ. All rights reserved.</Copyright>
+            <div style={{ flex: 1 }}>
+                <Link to={"/"}>
+                    <Logo />
+                </Link>
+                <LogoText>We are Dot HQ, the privacy brand.</LogoText>
+
+                <Socials>
+                    <SocialIcon href={"https://twitter.com/DotBrowser"} target={"_blank"} src={twitter} />
+                    <SocialIcon href={"https://dothq.co/join"} target={"_blank"} src={discord} />
+                    <SocialIcon href={"https://www.youtube.com/channel/UCgmXI2ccMKSTPNCij4_6Ubw"} target={"_blank"} src={youtube} />
+                </Socials>
+            </div>
             <List>
                 <ListGroup>
-                    <ListTitle>Explore</ListTitle>
-                    <Item href={"/"}>Home</Item>
-                    <Item href={"/id"}>ID</Item>
-                    <Item href={"/download"}>Download</Item>
-                    <Item href={"/careers"}>Careers</Item>
+                    <ListTitle>Products</ListTitle>
+                    <Item href={"/download/dot"}>Dot Browser</Item>
+                    <Item href={"/download/mobile"}>Dot Browser for Mobile</Item>
+                    <Item href={"/id"}>Dot ID</Item>
                 </ListGroup>
                 <ListGroup>
-                    <ListTitle>Learn</ListTitle>
-                    <Item href={"/blog"}>Blog</Item>
-                    <Item href={"/help"}>Support</Item>
-                    <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
+                    <ListTitle>Company</ListTitle>
+                    <Item href={"/about"}>About Dot HQ</Item>
+                    <Item href={"/branding"}>Branding</Item>
+                    <Item href={"/kit"}>Press Kit</Item>
+                    <ExternalItem href={"https://github.com/dothq"}>Open Source</ExternalItem>
                 </ListGroup>
                 <ListGroup>
                     <ListTitle>Resources</ListTitle>
-                    <Item href={"/brand"}>Brand</Item>
-                    <Item href={"/brand#kit"}>Press Kit</Item>
+                    <Item href={"/support"}>Support</Item>
+                    <Item href={"/contact"}>Contact</Item>
+                    <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
+                    <Item href={"/blog"}>Blog</Item>
                 </ListGroup>
-                <ListGroup>
-                    <ListTitle>Social</ListTitle>
-                    <ExternalItem href={"https://twitter.com/DotBrowser"}>Twitter</ExternalItem>
-                    <ExternalItem href={"https://invite.gg/dot"}>Discord</ExternalItem>
-                    <ExternalItem href={"https://reddit.com/r/dothq"}>Reddit</ExternalItem>
-                    <ExternalItem href={"https://github.com/dothq"}>GitHub</ExternalItem>
-                </ListGroup>
-                <ListGroup>
+                <ListGroup style={{ marginRight: 0 }}>
                     <ListTitle>Legal</ListTitle>
                     <Item href={"/legal/terms"}>Terms</Item>
                     <Item href={"/legal/privacy"}>Privacy</Item>
                     <Item href={"/legal/cookies"}>Cookies</Item>
                     <Item href={"/legal/gdpr"}>GDPR</Item>
-                </ListGroup>
-                <ListGroup>
-                    <ListTitle>More from HQ</ListTitle>
-                    <Item href={"/products/drop"}>Drop</Item>
                 </ListGroup>
             </List>
         </Container>

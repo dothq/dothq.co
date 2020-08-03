@@ -21,22 +21,6 @@ export const ContainerParent = styled.div`
 export const Container = styled.div`
     padding-top: 76px;
     text-align: left;
-
-    @media only screen and (max-width: 1450px) {
-        text-align: center;
-
-        &:first-of-type {
-            width: -webkit-fill-available !important;
-
-            * {
-                justify-content: center !important;
-            }
-        }
-
-        &:last-of-type {
-            display: none;
-        }
-    }
 `;
 
 export const Title = styled.div`
@@ -70,8 +54,4 @@ export const FadingOutScreenshot = styled.div`
     background: linear-gradient(90deg, ${props => props.theme.colors.secondary} 0%, ${props => props.theme.colors.secondary + "80"} 98.92%), url(${props => props.theme.isDark ? landingScreenshotDark : landingScreenshotLight});
     height: 378px;
     background-size: cover;
-
-    @media only screen and (max-width: 1450px) {
-        display: none;
-    }
 `;
