@@ -29,7 +29,7 @@ module.exports = {
         short_name: `Dot`,
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#ffffff`,
+        theme_color: `#fafafa`,
         display: `minimal-ui`,
         icon: `src/images/icon.png`,
       },
