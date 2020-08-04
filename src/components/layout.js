@@ -27,6 +27,7 @@ import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 
 import axios from 'axios';
+import { injectOSIntoWindow } from "../tools/os"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -70,6 +71,9 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav }) => {
 
     axios.get('https://dothq.co/api/builds/all')
       .then(res => res.data.results && setBuilds(res.data.results))
+
+    injectOSIntoWindow();
+
   }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (

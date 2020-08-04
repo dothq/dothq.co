@@ -96,6 +96,8 @@ class DotBrowserPage extends React.Component {
     
                         <NavFixed />
                     </HeroCover>
+
+                    
     
                 </Layout>
             </>
