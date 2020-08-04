@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, createGlobalStyle } from "styled-components";
 
 import link from '../images/link.svg'
 
@@ -78,7 +78,7 @@ export const Feature = styled.div`
 `;
 
 export const Heading = styled.div`
-    font-family: Inter;
+    font-family: Inter, system-ui;
     font-style: normal;
     font-weight: 600;
     font-size: 34px;
@@ -89,7 +89,7 @@ export const Heading = styled.div`
 `;
 
 export const Description = styled.div`
-    font-family: Inter;
+    font-family: Inter, system-ui;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -616,3 +616,53 @@ export const FeatureIcon = styled.div`
         border-radius: 88px;
     `};
 `;
+
+export const HeroCover = styled.div`
+    ${({ h, background }: { h: number; background: any; }) => css`
+        height: ${h}px;
+        background: ${background};
+    `}; 
+`;
+
+export const HCC = styled.div`
+    ${({ w, background, top, bottom }: { w: number; background?: any; top?: number; bottom?: number }) => css`
+        max-width: ${w}px;
+        height: 100%;
+        background: ${background};
+        margin: 0 auto;
+        padding-top: calc(64px + ${top}px);
+        padding-bottom: ${bottom}px;
+    `};
+`;
+
+export const HeroTitle = styled.div`
+    font-size: 48px;
+    line-height: 48px;
+    font-weight: bold;
+
+    ${({ color }: { color?: any }) => css`
+        color: ${color};
+    `};
+`;
+
+export const HeroSubtitle = styled.div`
+    font-size: 20px;
+    line-height: 134%;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-top: 32px;
+
+    ${({ color }: { color?: any }) => css`
+        color: ${color};
+    `};
+`;
+
+const NFS = css`
+    .nav {
+        position: absolute;
+        top: 0;
+        margin-bottom: 0;
+    }
+`;
+
+export const NavFixed = createGlobalStyle`${NFS}`;

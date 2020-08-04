@@ -75,7 +75,7 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav }) => {
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
-      <Header siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={darkNav || true} />
+      <Header className={"nav"} siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={typeof(darkNav) == "undefined" ? true : darkNav} />
       {!noHero && <Hero>
         {children}
       </Hero>}

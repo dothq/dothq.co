@@ -23,7 +23,7 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
     const [user] = useGlobalState('user');
 
     return (
-        <StyledHeader isFixed={isFixed} ref={headerRef} isDark={isDark}>
+        <StyledHeader className={"nav"} isFixed={isFixed} ref={headerRef} isDark={isDark}>
             <Container>
                 <div className={"logotype"}>
                     <Link to={"/"}>
@@ -45,8 +45,10 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                     </a>
                 </div>
                 <div className={"nbtn"}>
-                    <ButtonV2>Sign in</ButtonV2>
-                    <ButtonV2 background={"transparent"} color={"black"} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                    {!user && <>
+                        <ButtonV2 background={!isDark ? 'white' : 'black'} color={!isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                        <ButtonV2 background={"transparent"} color={!isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                    </>}
 
                     {user && 
                         <Link to={"/me"} style={{ marginLeft: '20px' }}>

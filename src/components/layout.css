@@ -193,6 +193,7 @@ html {
 }
 * {
   box-sizing: inherit;
+  font-family: Inter, system-ui;
 }
 *:before {
   box-sizing: inherit;
