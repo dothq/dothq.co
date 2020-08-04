@@ -34,32 +34,32 @@ const BuildsPage = () => {
 	  <Emoji text={"📦"} options={generateEmojiConfig({ className: 'emoji' })} />
       <h1 style={{ fontSize: '80px' }}>Builds</h1>
       <p>Available builds for download</p>
-      <table style={{ color: themeContext.isDark ? "white" : "" }}>
+      <table>
 		<tr>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}></th>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : "" }}>Version</th>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Product</th>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Build release</th>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Supports</th>
-			<th style={{ borderColor: themeContext.isDark ? "#222" : ""}}>Download</th>
+			<th></th>
+			<th>Version</th>
+			<th>Product</th>
+			<th>Build release</th>
+			<th>Supports</th>
+			<th>Download</th>
 		</tr>
 		{builds !== undefined && builds.sort((a, b) => new Date(b.unlocksAt) - new Date(a.unlocksAt)).map(build => (
 			<tr key={build.id}>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.productName == "Dot Browser" ? ( <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto' }} src={"https://cdn.dothq.co/assets/dotbrowser-logo.png"} width="48" /> ) : <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto', borderRadius: '100%' }} src={"https://cdn.dothq.co/assets/defaultAvatar.png"} width="48" />}</td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.version}</td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.productName}</td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.unlocksAt !== 0 ? <Time date={build.unlocksAt} /> : 'Not confirmed'}</td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}>{build.supportedOs.join(", ")}</td>
+				<td>{build.productName == "Dot Browser" ? ( <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto' }} src={"https://cdn.dothq.co/assets/dotbrowser-logo.png"} width="48" /> ) : <img style={{ verticalAlign: 'middle', lineHeight: '48px', margin: '0 auto', borderRadius: '100%' }} src={"https://cdn.dothq.co/assets/defaultAvatar.png"} width="48" />}</td>
+				<td>{build.version}</td>
+				<td>{build.productName}</td>
+				<td>{build.unlocksAt !== 0 ? <Time date={build.unlocksAt} /> : 'Not confirmed'}</td>
+				<td>{build.supportedOs.join(", ")}</td>
 		<td><HeroButton onClick={() => download(build.id)} disabled={getOS() == "iOS" || getOS() == "Android"} shade={"black"} style={{ width: 'max-content', height: '42px', opacity: build.downloadUrl !== "" ? 1 : "0.5", userSelect: build.downloadUrl !== "" ? "all" : "none", pointerEvents: build.downloadUrl !== "" ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton></td>
 			</tr>
 		))}
 		{builds == undefined && Array.from(Array(Math.floor(Math.random() * 5))).map(i => (
 			<tr key={i}>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}><Skeleton width={48} height={48} circle={true} /></td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}><Skeleton /></td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}><Skeleton /></td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}><Skeleton /></td>
-				<td style={{ borderColor: themeContext.isDark ? "#222" : ""}}><Skeleton /></td>
+				<td ><Skeleton width={48} height={48} circle={true} /></td>
+				<td ><Skeleton /></td>
+				<td ><Skeleton /></td>
+				<td ><Skeleton /></td>
+				<td ><Skeleton /></td>
 				<td><Skeleton /></td>
 			</tr>
 		))}

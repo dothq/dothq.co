@@ -7,7 +7,7 @@ export const StyledFooter = styled.div`
 
 export const Container = styled.div`
     display: flex;
-    padding-top: 78px;
+    padding 58px 50px;
     margin: 0px auto;
     max-width: 1300px;
     @media screen and (max-width: 800px) {
@@ -115,4 +115,55 @@ export const SocialIcon = styled.a`
             opacity: 0.7;
         }
     `};
+`;
+
+export const Line = styled.div`
+    max-width: 1300px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: #0000001f;
+`;
+
+export const Subtitle = styled.div`
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    
+    display: flex;
+    align-items: center;
+`;
+
+export const SignupForm = styled.div`
+    display: flex;
+    border-radius: 38px;
+    transition: 0.2s box-shadow;
+    box-shadow: 0 0 0px 0px transparent;
+
+    &:focus-within {
+        box-shadow: 0 0 0px 3px #7a7a7a;
+    }
+`;
+
+export const SignupInput = styled.input`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: Inter, system-ui;
+    font-weight: 600;
+    font-size: 15px;
+
+    padding-left: 22px;
+    padding-right: 8px;
+
+    width: 392px;
+
+    border: 2px solid black;
+    border-radius: 28px 0 0 28px;
+
+    line-height: 34px;
+
+    &:placeholder {
+        opacity: 0.5;
+    }
 `;

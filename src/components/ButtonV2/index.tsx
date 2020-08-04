@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const ButtonV2 = styled.div`
+export const ButtonV2 = styled.a`
     padding: 11px 32px;
     border-radius: 100px;
     text-align: center;
