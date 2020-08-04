@@ -715,6 +715,18 @@ const NFS = css`
         position: absolute;
         top: 0;
         margin-bottom: 0;
+        z-index: 100;
+    }
+
+    @media screen and (max-width: 1280px) {
+        .db-download-container {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .eyeball-container {
+            display: none;
+        }
     }
 `;
 
