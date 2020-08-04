@@ -1,6 +1,7 @@
 import styled, { css, createGlobalStyle } from "styled-components";
 
 import link from '../images/link.svg'
+import jail_cell from '../images/jail-cell.svg'
 
 export const BackgroundInject = css`
     .links {
@@ -632,6 +633,7 @@ export const HCC = styled.div`
         margin: 0 auto;
         padding-top: calc(64px + ${top}px);
         padding-bottom: ${bottom}px;
+        position: relative;
     `};
 `;
 
@@ -657,6 +659,57 @@ export const HeroSubtitle = styled.div`
     `};
 `;
 
+export const Eyeballs = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 72px;
+
+    transition: 0.3s opacity 0.1s, 0.3s transform 0.1s;
+
+    ${({ visible }: { visible: boolean }) => css`
+        transform: scale(${visible ? 1 : 0.9});
+        opacity: ${visible ? 1 : 0.2};
+    `};
+`;
+
+export const Eyeball = styled.div`
+    width: 240px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+`;
+
+export const Iris = styled.div`
+    width: 48px;
+    height: 48px;
+    background-color: black;
+    border: 8px solid #cccccc;
+    border-radius: 48px;
+    position: absolute;
+    left: 50px;
+    top: 40px;
+`;
+
+export const Jail = styled.div`
+    width: 638px;
+    height: 288px;
+    background-image: url(${jail_cell});
+    position: absolute;
+    z-index: 1;
+    transform: translate(68px, -12px);
+    transition: 0.4s margin-top cubic-bezier(0.69, 0.01, 0, 1.05), 0.25s opacity;
+
+    ${({ visible }: { visible: boolean }) => css`
+        margin-top: ${visible ? '0px' : '-70px'};
+        opacity: ${visible ? 1 : 0};
+    `};
+`;
+
+export const IrisLeft = styled(Iris)``;
+export const IrisRight = styled(Iris)``;
+
 const NFS = css`
     .nav {
         position: absolute;
@@ -666,3 +719,12 @@ const NFS = css`
 `;
 
 export const NavFixed = createGlobalStyle`${NFS}`;
+
+export const JailTrigger = styled.div`
+    position: absolute;
+    width: 600px;
+    height: calc(100% - 78px);
+    top: 0;
+    left: -24px;
+    margin-top: 78px;
+`;
