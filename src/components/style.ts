@@ -102,8 +102,15 @@ export const Description = styled.div`
     margin-top: 18px;
 `;
 
-export const FeatureImage = styled.img`
+export const FeatureImage = styled.div`
     user-drag: none;
+    transition: 0.5s opacity;
+
+    ${({ src }: { src : any }) => css`
+        background-image: url(${src});
+        background-size: cover;
+        background-position: center;
+    `}
 `;
 
 export const Form = styled.div`

@@ -27,7 +27,23 @@ import { ButtonV2 } from "../components/ButtonV2"
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
 const IndexPage = () => {
-  const themeContext = React.useContext(ThemeManagerContext)
+  const blockerRef = React.createRef<HTMLDivElement>();
+  const maskRef = React.createRef<HTMLDivElement>();
+  const syncRef = React.createRef<HTMLDivElement>();
+
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > (blockerRef.current.offsetTop - (blockerRef.current.offsetTop / 3))) {
+      blockerRef.current.style.opacity = "1";
+    } else blockerRef.current.style.opacity = "0";
+
+    if(window.scrollY > (maskRef.current.offsetTop - (maskRef.current.offsetTop / 3))) {
+      maskRef.current.style.opacity = "1";
+    } else maskRef.current.style.opacity = "0";
+
+    if(window.scrollY > (syncRef.current.offsetTop - (syncRef.current.offsetTop / 3))) {
+      syncRef.current.style.opacity = "1";
+    } else syncRef.current.style.opacity = "0";
+  })
 
   return (
     <>
@@ -48,7 +64,7 @@ const IndexPage = () => {
         </div>
 
         <div style={{ maxWidth: `1920px`, marginBottom: `1.45rem`, margin: '0 auto' }}>
-          <img src={landingShowcase} dot-slideup={"true"} style={{ animationDelay: '1s' }} />
+          <img src={landingShowcase} dot-slideup={"true"} style={{ animationDelay: '1s', width: '100%', height: '100%' }} />
         </div>
 
         <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s' }}>
@@ -63,14 +79,14 @@ const IndexPage = () => {
               </div>
 
               <div style={{ display: 'flex' }}>
-                <FeatureImage src={blockerFeature} style={{ width: '623px', height: '325px' }} />
+                <FeatureImage ref={blockerRef} src={blockerFeature} style={{ width: '623px', height: '325px', opacity: 0 }} />
               </div>
 
             </Feature>
 
             <Feature>
               <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <FeatureImage src={maskFeature} style={{ width: '623px', height: '325px' }} />
+                <FeatureImage ref={maskRef} src={maskFeature} style={{ width: '623px', height: '325px', opacity: 0 }} />
               </div>
 
               <div style={{ display: 'flex' }}>
@@ -91,12 +107,12 @@ const IndexPage = () => {
                   <Heading>Pick up where you left off</Heading>
                   <Description>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
 
-                  <ButtonV2 w={224} style={{ marginTop: '32px' }}>Learn more about this</ButtonV2>
+                  <ButtonV2 w={224} style={{ marginTop: '32px', display: 'block' }}>Learn more about this</ButtonV2>
                 </div>
               </div>
 
               <div style={{ display: 'flex' }}>
-                <FeatureImage src={syncFeature} style={{ width: '623px', height: '325px' }} />
+                <FeatureImage ref={syncRef} src={syncFeature} style={{ width: '623px', height: '325px', opacity: 0, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} />
               </div>
 
             </Feature>
