@@ -633,7 +633,7 @@ pre tt:after {
 }
 
 *::selection {
-  background-color: #deeffd;
+  background-color: #d4d4d4;
 }
 
 .s-center {
