@@ -23,6 +23,7 @@ import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import FeatherIcon from 'feather-icons-react';
 import { ButtonV2 } from "../components/ButtonV2"
+import { isBrowser } from "../helpers/login"
 
 const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
@@ -31,7 +32,9 @@ const IndexPage = () => {
   const maskRef = React.createRef<HTMLDivElement>();
   const syncRef = React.createRef<HTMLDivElement>();
 
-  window.addEventListener('scroll', () => {
+  isBrowser() && window.addEventListener('scroll', () => {
+    if(!isBrowser()) return;
+
     if(window.scrollY > (blockerRef.current.offsetTop - (blockerRef.current.offsetTop / 3))) {
       blockerRef.current.style.opacity = "1";
     } else blockerRef.current.style.opacity = "0";
