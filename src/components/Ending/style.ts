@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-import * as landingScreenshotLight from '../../images/landing-screenshot-light.png'
-import * as landingScreenshotDark from '../../images/landing-screenshot-dark.png'
-
 export const StyledEnding = styled.div`
     height: 272px;
     margin-bottom: 46px;

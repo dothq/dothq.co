@@ -5,15 +5,13 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import { Button, HeroButton, TextButton } from "../components/Button"
-import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title } from "../components/style"
+import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title } from "../components/style"
 import { createGlobalStyle } from "styled-components"
 
 import { getOS } from "../helpers/os"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import Emoji from "react-emoji-render"
 import { generateEmojiConfig } from "../tools/emoji"
-
-const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
 const BLMPage = () => {
   const themeContext = React.useContext(ThemeManagerContext)

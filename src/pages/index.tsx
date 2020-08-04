@@ -5,10 +5,10 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import { Button, HeroButton } from "../components/Button"
-import { Buttons, HeroSheet, HeroSheetStyle, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon } from "../components/style"
+import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon } from "../components/style"
 import { createGlobalStyle } from "styled-components"
 
-import landingShowcase from '../images/landing-showcase.svg'
+import landingShowcase from '../images/landing-showcase.png'
 
 import * as shield from '../images/icons/shield.svg'
 import * as mail from '../images/icons/mail.svg'
@@ -24,8 +24,6 @@ import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import FeatherIcon from 'feather-icons-react';
 import { ButtonV2 } from "../components/ButtonV2"
 import { isBrowser } from "../helpers/login"
-
-const HSS = createGlobalStyle`${HeroSheetStyle}`;
 
 const IndexPage = () => {
   const blockerRef = React.createRef<HTMLDivElement>();
@@ -57,10 +55,10 @@ const IndexPage = () => {
         
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
           <Buttons style={{ marginBottom: '34px' }}>
-            <Link to={"/#features"} style={{ textDecoration: 'none', pointerEvents: getOS() == "iOS" || getOS() == "Android" ? "none" : "all" }}>
+            <Link to={"/#features"}>
               <ButtonV2 background={"#f6f6f6"} color={"black"}>Learn More</ButtonV2>
             </Link>
-            <Link to={"/download"} style={{ textDecoration: 'none', marginLeft: '12px' }}>
+            <Link to={"/download"} style={{ marginLeft: '12px' }}>
               <ButtonV2>Download Dot Browser</ButtonV2>
             </Link>
           </Buttons>

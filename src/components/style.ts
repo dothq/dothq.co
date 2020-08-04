@@ -54,6 +54,12 @@ export const BackgroundInject = css`
         -ms-flex-align: center;
         align-items: center;
     }
+
+    .fn-center {
+        max-width: 1330px;
+        height: 100%;
+        margin: 0 auto;
+    }
 `;
 
 export const Buttons = styled.div`
