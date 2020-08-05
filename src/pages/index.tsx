@@ -58,8 +58,8 @@ const IndexPage = () => {
             <Link to={"/#features"}>
               <ButtonV2 background={"#f6f6f6"} color={"black"}>Learn More</ButtonV2>
             </Link>
-            <Link to={"/download"} style={{ marginLeft: '12px' }}>
-              <ButtonV2>Download Dot Browser</ButtonV2>
+            <Link style={{ marginLeft: '12px' }}>
+              <ButtonV2>Download Coming Soon</ButtonV2>
             </Link>
           </Buttons>
         </div>
