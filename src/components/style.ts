@@ -30,6 +30,10 @@ export const BackgroundInject = css`
         .nbtn {
             padding-right: 15px;
         }
+
+        .ending {
+            margin: 0 15px;
+        }
     }
 
     .nbtn {

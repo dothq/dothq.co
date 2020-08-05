@@ -14,15 +14,15 @@ import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 import { ButtonV2 } from '../ButtonV2'
 
 const Ending = () => (
-    <StyledEnding>
+    <StyledEnding className={"ending"}>
         <ContainerParent>
             <Container>
                 <Title>Ready for some privacy?</Title>
-                <Buttons style={{ marginTop: '60px', justifyContent: 'center' }}>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <Link to={"/download"}>
                         <ButtonV2 background={"white"} color={"black"} w={173}>Download</ButtonV2>
                     </Link>
-                </Buttons>
+                </div>
             </Container>
         </ContainerParent>
     </StyledEnding>

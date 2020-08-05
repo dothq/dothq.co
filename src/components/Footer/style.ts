@@ -10,11 +10,10 @@ export const Container = styled.div`
     padding 58px 50px;
     margin: 0px auto;
     max-width: 1300px;
-    @media screen and (max-width: 800px) {
-        & {
-           flex-direction: column;
-           margin-left: 78px;
-        }
+    
+    @media screen and (max-width: 666px) {
+        padding-left: 42px;
+        flex-direction: column;
     }
 `;
 
@@ -31,18 +30,36 @@ export const LogoText = styled.div`
 
 export const List = styled.div`
     margin-left: 190px;
-    display: flex;
-    @media screen and (max-width: 1150px) {
-        & {
-           flex-direction: column;
-           flex-wrap: wrap;
-        }
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 40px;
+
+    @media screen and (max-width: 666px) {
+        grid-template-columns: repeat(2,1fr);
+        margin-top: 62px;
+        margin-left: 0;
     }
 `;
 
 export const ListGroup = styled.div`
-    margin-right: 80px;
-    grid-column: span 2;
+    grid-column: span 1;
+    height: 180px;
+    justify-self: flex-end;
+
+    @media screen and (max-width: 1330px) {
+        justify-self: auto;
+        grid-column: span 2;
+    }
+
+    @media screen and (max-width: 830px) {
+        justify-self: auto;
+        grid-column: span 2;
+    }
+
+    @media screen and (max-width: 666px) {
+        justify-self: auto;
+        grid-column: span 1;
+    }
 `;
 
 export const ListTitle = styled.div`
@@ -132,6 +149,12 @@ export const Subtitle = styled.div`
     
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: 666px) {
+        .register-sub {
+            text-align: center;
+        }
+    }
 `;
 
 export const SignupForm = styled.div`

@@ -37,7 +37,7 @@ const Footer = ({ children }) => {
     return (
         <StyledFooter>
             <Container>
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, width: '100%' }}>
                     <Link to={"/"}>
                         <Logo />
                     </Link>
@@ -82,7 +82,7 @@ const Footer = ({ children }) => {
             <Line />
             <Container>
                 <div style={{ display: 'flex', flex: 1 }}>
-                    <Subtitle>Register for a Dot ID, it's free.</Subtitle>
+                    <Subtitle className={"register-sub"}>Register for a Dot ID, it's free.</Subtitle>
                 </div>
                 <div style={{ display: 'flex' }}>
                     <SignupForm>

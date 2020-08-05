@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const StyledEnding = styled.div`
-    height: 272px;
     margin-bottom: 46px;
 `;
 
 export const ContainerParent = styled.div`
     margin: 0px auto;
     max-width: 1330px;
-    height: 100%;
     display: flex;
     justify-content: center;
     background-color: #4965ff;
@@ -16,7 +14,7 @@ export const ContainerParent = styled.div`
 `;
 
 export const Container = styled.div`
-    padding-top: 76px;
+    padding: 76px 0;
     text-align: left;
 `;
 
@@ -26,6 +24,14 @@ export const Title = styled.div`
     font-weight: 600;
     font-size: 40px;
     color: white;
+    line-height: 48px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 50px;
+
+    @media screen and (max-width: 625px) {
+        font-size: 25px;
+    }
 `;
 
 export const Or = styled.div`
