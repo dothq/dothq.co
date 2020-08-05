@@ -32,6 +32,7 @@ const IndexPage = () => {
 
   isBrowser() && window.addEventListener('scroll', () => {
     if(!isBrowser()) return;
+    if(!blockerRef.current || !maskRef.current || !syncRef.current) return;
 
     if(window.scrollY > (blockerRef.current.offsetTop - (blockerRef.current.offsetTop / 3))) {
       blockerRef.current.style.opacity = "1";

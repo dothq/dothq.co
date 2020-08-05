@@ -7,7 +7,7 @@ export const StyledEnding = styled.div`
 
 export const ContainerParent = styled.div`
     margin: 0px auto;
-    max-width: 1300px;
+    max-width: 1330px;
     height: 100%;
     display: flex;
     justify-content: center;

@@ -98,32 +98,26 @@ class DotBrowserPage extends React.Component {
                         <NavFixed />
                     </HeroCover>
 
-                    <div className={"fn-center"} style={{ display: 'flex', flexDirection: 'row' }}>
-                        <div style={{ display: 'flex' }}>
-                            <div>
-                                <FeatureIcon src={shield} />
-                                <div style={{ marginTop: '58px' }}>
-                                    <Heading>Block ads with ease</Heading>
-                                    <Description>Dot Browser blocks all those pesky advertisments and trackers you come across while browsing the web.</Description>
-                                </div>
+                    <div className={"fn-center"} style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px' }}>
+                        <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
+                            <div style={{ maxWidth: '299px', justifySelf: 'center' }}>
+                                <FeatureIcon src={shield} style={{ margin: '0 auto' }} />
+                                <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Block ads with ease</Heading>
+                                <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser blocks all those pesky advertisments and trackers you come across while browsing the web.</Description>
                             </div>
                         </div>
-                        <div style={{ display: 'flex' }}>
-                            <div>
-                                <FeatureIcon src={mail} />
-                                <div style={{ marginTop: '58px' }}>
-                                    <Heading>Say goodbye to spam</Heading>
-                                    <Description>Dot Browser offers to mask your email with a temporary email address when registering for services online.</Description>
-                                </div>
+                        <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
+                            <div style={{ maxWidth: '325px', justifySelf: 'center' }}>
+                                <FeatureIcon src={mail} style={{ margin: '0 auto' }} />
+                                <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Say goodbye to spam</Heading>
+                                <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser offers to mask your email with a temporary email address when registering for services online.</Description>
                             </div>
                         </div>
-                        <div style={{ display: 'flex' }}>
-                            <div>
-                                <FeatureIcon src={sync} />
-                                <div style={{ marginTop: '58px' }}>
-                                    <Heading>Pick up where you left off</Heading>
-                                    <Description>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
-                                </div>
+                        <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
+                            <div style={{ maxWidth: '377px', justifySelf: 'center' }}>
+                                <FeatureIcon src={sync} style={{ margin: '0 auto' }} />
+                                <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Pick up where you left off</Heading>
+                                <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
                             </div>
                         </div>
                     </div>
