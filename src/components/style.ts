@@ -50,6 +50,27 @@ export const BackgroundInject = css`
         }
     }
 
+    @media screen and (max-width: 626px) {
+        .landing-btns {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .landing-btns > a {
+            margin-left: 0 !important;
+        }
+
+        .landing-btns > a:first-of-type {
+            margin-bottom: 12px;
+        }
+
+        .mobile-btns {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+    }
+
     .nbtn {
         flex: 0 0 auto;
         text-align: end;
@@ -746,6 +767,10 @@ const NFS = css`
         .db-download-container {
             text-align: center;
             margin: 0 auto;
+        }
+
+        .db-download-buttons {
+            justify-content: center !important;
         }
 
         .eyeball-container {

@@ -24,5 +24,5 @@ export const getOS = () => {
     
     if(os == "") os = "🤷‍♀️ idk tbh"
 
-    return os;
+    return { os, isMobile: os == "Android" || os == "iOS" };
 }

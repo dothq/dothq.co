@@ -19,7 +19,7 @@ const IndexPage = () => {
         <p className="hero-p" dot-slideup={"true"} style={{ animationDelay: '0.4s', opacity: 0.7 }}>Dot Browser is a privacy-conscious web browser with smarts built-in for protection against trackers and advertisments online.</p>
         
         <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
-          <Buttons style={{ marginBottom: '34px' }}>
+          <Buttons style={{ marginBottom: '34px' }} className={"landing-btns"}>
             <Link to={"/#features"}>
               <ButtonV2 background={"#f6f6f6"} color={"black"}>Learn More</ButtonV2>
             </Link>

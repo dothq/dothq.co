@@ -25,7 +25,7 @@ const BuildsPage = () => {
 	  const build = builds.find(build => build.id == id);
 
 	  if(build.downloadUrl == "") return
-	  window.location.href = `${build.downloadUrl}.${getOS() == "Windows" ? "exe" : getOS() == "macOS" ? "dmg" : "deb"}`
+	  window.location.href = `${build.downloadUrl}.${getOS().os == "Windows" ? "exe" : getOS().os == "macOS" ? "dmg" : "deb"}`
   }
 
   return (
@@ -50,7 +50,7 @@ const BuildsPage = () => {
 				<td>{build.productName}</td>
 				<td>{build.unlocksAt !== 0 ? <Time date={build.unlocksAt} /> : 'Not confirmed'}</td>
 				<td>{build.supportedOs.join(", ")}</td>
-		<td><HeroButton onClick={() => download(build.id)} disabled={getOS() !== "Windows" || getOS() !== "macOS" || getOS() !== "Linux"} shade={"black"} style={{ width: 'max-content', height: '42px', opacity: build.downloadUrl !== "" ? 1 : "0.5", userSelect: build.downloadUrl !== "" ? "all" : "none", pointerEvents: build.downloadUrl !== "" ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS()}</HeroButton></td>
+		<td><HeroButton onClick={() => download(build.id)} disabled={getOS().os !== "Windows" || getOS().os !== "macOS" || getOS().os !== "Linux"} shade={"black"} style={{ width: 'max-content', height: '42px', opacity: build.downloadUrl !== "" ? 1 : "0.5", userSelect: build.downloadUrl !== "" ? "all" : "none", pointerEvents: build.downloadUrl !== "" ? "all": "none" }}><FeatherIcon icon="download" size={18} style={{ marginRight: '8px' }} /> Download for {getOS().os}</HeroButton></td>
 			</tr>
 		))}
 		{builds == undefined && Array.from(Array(Math.floor(Math.random() * 5))).map(i => (
