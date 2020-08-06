@@ -34,7 +34,7 @@ class DotBrowserPage extends React.Component {
     }
 
     componentDidMount() {
-        if(getOS().isMobile) navigate("/download/mobile");
+        if(getOS() && getOS().isMobile) navigate("/download/mobile");
 
         isBrowser() && window.addEventListener('mousemove', (e) => {
             if(!document.hasFocus()) return;
@@ -78,7 +78,7 @@ class DotBrowserPage extends React.Component {
                                 <HeroTitle color={"white"}>Browse securely without prying eyes</HeroTitle>
                                 <HeroSubtitle color={"white"}>Get Dot Browser to block annoying advertisments and trackers. It’s that simple.</HeroSubtitle>
                                 <Buttons className={"db-download-buttons"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'end' }}>
-                                    <ButtonV2 background={"white"} color={"black"}>Download for {getOS().os}</ButtonV2>
+                                    <ButtonV2 background={"white"} color={"black"}>Download for {getOS() && getOS().os}</ButtonV2>
                                     <Link to={"/download/mobile"}>
                                         <ButtonV2 background={"transparent"} color={"white"}>Try our mobile version</ButtonV2>
                                     </Link>
