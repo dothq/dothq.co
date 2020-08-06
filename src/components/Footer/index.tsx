@@ -79,9 +79,9 @@ const Footer = ({ children }) => {
                     </ListGroup>
                 </List>
             </Container>
-            <Line />
-            <Container>
-                <div style={{ display: 'flex', flex: 1 }}>
+            <Line className={"sign-up-line"} />
+            <Container className={"sign-up-container"}>
+                <div className={"sign-up-title"} style={{ display: 'flex', flex: 1 }}>
                     <Subtitle className={"register-sub"}>Register for a Dot ID, it's free.</Subtitle>
                 </div>
                 <div style={{ display: 'flex' }}>

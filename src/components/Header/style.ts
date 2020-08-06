@@ -44,7 +44,7 @@ export const Flex = styled.div`
 export const Logo = styled.div`
     height: 36px;
     width: 36px;
-    border-radius: 28px;
+    border-radius: 36px;
 
     justify-content: center;
     display: -webkit-box;

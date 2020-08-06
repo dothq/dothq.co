@@ -16,6 +16,20 @@ export const BackgroundInject = css`
         display: flex;
     }
 
+    @media screen and (max-width: 1500px) {
+        #features {
+            display: none;
+        }
+
+        #features-s {
+            display: flex !important;
+        }
+
+        .sign-up-container, .sign-up-line {
+            display: none;
+        }
+    }
+
     @media screen and (max-width: 1040px) {
         .links {
           display: none;

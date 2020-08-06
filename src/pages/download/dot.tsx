@@ -98,7 +98,7 @@ class DotBrowserPage extends React.Component {
                         <NavFixed />
                     </HeroCover>
 
-                    <div className={"fn-center"} style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px' }}>
+                    <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px', marginBottom: '8px' }}>
                         <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
                             <div style={{ maxWidth: '299px', justifySelf: 'center' }}>
                                 <FeatureIcon src={shield} style={{ margin: '0 auto' }} />
