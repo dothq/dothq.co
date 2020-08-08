@@ -43,6 +43,7 @@ a {
   background-color: transparent;
   text-decoration: none;
   -webkit-text-decoration-skip: objects;
+  color: black;
 }
 a:active,
 a:hover {
