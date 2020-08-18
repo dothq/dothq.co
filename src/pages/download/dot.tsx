@@ -77,7 +77,7 @@ class DotBrowserPage extends React.Component {
                             <div className={"db-download-container"} style={{ display: 'flex', width: '550px', flexDirection: 'column', zIndex: 999 }}>
                                 <HeroTitle color={"white"}>Browse securely without prying eyes</HeroTitle>
                                 <HeroSubtitle color={"white"}>Get Dot Browser to block annoying advertisments and trackers. It’s that simple.</HeroSubtitle>
-                                <Buttons className={"db-download-buttons"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'end' }}>
+                                <Buttons className={"db-download-buttons"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'flex-start' }}>
                                     <ButtonV2 background={"white"} color={"black"}>Download for {getOS() && getOS().os}</ButtonV2>
                                     <Link to={"/download/mobile"}>
                                         <ButtonV2 background={"transparent"} color={"white"}>Try our mobile version</ButtonV2>
