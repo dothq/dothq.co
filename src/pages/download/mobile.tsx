@@ -38,7 +38,7 @@ class DotBrowserMobilePage extends React.Component {
                             <div className={"db-download-container"} style={{ display: 'flex', width: '670px', flexDirection: 'column', zIndex: 999, paddingTop: '86px', paddingBottom: '0px' }}>
                                 <HeroTitle color={"white"}>Browse the web on the go with privacy</HeroTitle>
                                 <HeroSubtitle color={"white"}>It’s the same Dot Browser experience, with all your favourite privacy features, just pocket-sized.</HeroSubtitle>
-                                <Buttons className={"mobile-btns"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'end' }}>
+                                <Buttons className={"mobile-btns"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'flex-start' }}>
                                     <ButtonV2 background={"white"} color={"black"} style={{ minHeight: '40px', height: '40px' }}>Download for iOS</ButtonV2>
                                     <ButtonV2 background={"transparent"} color={"white"}>Download for Android</ButtonV2>
                                 </Buttons>
