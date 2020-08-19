@@ -42,7 +42,7 @@ const SigninPage = ({ location }) => {
                                     <label>Remember my session</label>
                                 </Checkbox>
 
-                                <AuthLink style={{ display: 'flex' }}>Forgot your password?</AuthLink>
+                                <AuthLink style={{ display: 'flex', fontSize: '15px' }}>Forgot your password?</AuthLink>
                             </div>
 
                             <div style={{ marginTop: '45px', display: 'flex', flexDirection: 'column' }}>
