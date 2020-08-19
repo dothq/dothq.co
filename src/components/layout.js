@@ -27,12 +27,11 @@ import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 
 import axios from 'axios';
-import { Banner } from "./Banner"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
 
-const Layout = ({ children, noEnding, noHero, isHome, darkNav }) => {
+const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -78,19 +77,13 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav }) => {
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
-      <Banner>
-        <span>
-          All Dot Browser versions based on Electron will become deprecated soon,
-        </span>
-        <a href={"/blog/saying-goodbye-to-the-electron-version-of-dot-browser"} style={{ marginLeft: '4px' }}>learn more</a>.
-      </Banner>
-      <Header className={"nav"} siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={typeof(darkNav) == "undefined" ? true : darkNav} />
+      {!blank && <Header className={"nav"} siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={typeof(darkNav) == "undefined" ? true : darkNav} />}
       {!noHero && <Hero>
         {children}
       </Hero>}
       {noHero && <>{children}</>}
       {!noEnding && <Ending />}
-      <Footer />
+      {!blank && <Footer />}
     </SkeletonTheme>
   )
 }
@@ -100,7 +93,8 @@ Layout.propTypes = {
   noEnding: PropTypes.bool,
   noHero: PropTypes.bool,
   isHome: PropTypes.bool,
-  darkNav: PropTypes.bool
+  darkNav: PropTypes.bool,
+  blank: PropTypes.bool
 }
 
 export default Layout

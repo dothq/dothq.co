@@ -3,6 +3,9 @@ import styled, { css, createGlobalStyle } from "styled-components";
 import link from '../images/link.svg'
 import jail_cell from '../images/jail-cell.svg'
 
+import authSide from '../images/login-side.png'
+import check from '../images/check.svg'
+
 export const BackgroundInject = css`
     .links {
         -webkit-box-flex: 1;
@@ -788,4 +791,166 @@ export const JailTrigger = styled.div`
     top: 0;
     left: -24px;
     margin-top: 78px;
+`;
+
+export const AuthSide = styled.div`
+    height: 100vh;
+    width: 100%;
+    background-image: url(${authSide});
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-color: #F4F6FF;
+    background-position-x: center;
+`;
+
+export const AuthLogo = styled.div`
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 1000px;
+`;
+
+export const AuthTitle = styled.div`
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    color: #242424;
+    margin-top: 100px;
+`;
+
+export const AuthDesc = styled.div`
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 135.3%;
+    color: #727272;
+    max-width: 358px;
+    margin-top: 22px;
+
+    a {
+        transition: 0.1s opacity;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+`;
+
+export const AuthLink = styled.div`
+    display: contents;
+    color: #4965FF !important;
+    cursor: pointer;
+
+    transition: 0.1s opacity;
+
+    &:hover {
+        opacity: 0.5;
+    }
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+`;
+
+export const AuthField = styled.div`
+    display: flex;
+
+    border: 2px solid #D2D2D2;
+    border-radius: 8px;
+    height: 58px;
+
+    max-width: 525px;
+
+    transition: 0.3s border;
+    position: relative;
+
+    --pad: 19px;
+
+    &:hover {
+        border-color: #AAAAAA;
+    }
+
+    &:focus-within {
+        border-color: #4965FF;
+
+        span {
+            --pad: 8px !important;
+        }
+    }
+
+    input:not(:placeholder-shown) ~ span {
+        --pad: 8px !important;
+    }
+`;
+
+export const AuthPlaceholder = styled.span`
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 135.3%;
+    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
+    position: absolute;
+    padding: var(--pad) 20px;
+    transition: 0.15s padding;
+    pointer-events: none;
+    user-select: none;
+`;
+
+export const AuthInput = styled.input`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 135.3%;
+    color: #000000;
+    opacity: 0.9;
+    padding: 10px 20px;
+    padding-top: 10px;
+    width: 100%;
+    height: 100%;
+    padding-top: 28px;
+`;
+
+export const Checkbox = styled.div`
+    display: flex;
+
+    label {
+        margin-left: 14px;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 135.3%;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+`;
+
+export const CheckboxField = styled.input`
+    width: 22px;
+    height: 22px;
+
+    outline: none;
+    border: 2px solid #D2D2D2;
+
+    transition: 0.15s all;
+
+    appearance: none;
+    -moz-appearance: none;
+
+    border-radius: 4px;
+
+    &:hover {
+        border-color: #AAAAAA;
+    }
+
+    &:checked {
+        border-color: transparent;
+        background-color: #4965FF;
+        background-image: url(${check});
+    }
 `;
