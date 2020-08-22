@@ -1,0 +1,11 @@
+API_LISTENING_ON: Started API on port {{port}}.
+
+LOG_CTX_INFO: Info
+LOG_CTX_WARNING: Warning
+LOG_CTX_ERROR: Error
+LOG_CTX_SUCCESS: Success
+LOG_CTX_DEBUG: Debug
+
+FAILED_LOADING_ROUTE: Failed to register route `{{routeName}}` because it was missing a `route` property.
+FAILED_LOADING_ROUTE_METHOD: Failed to register route `{{routeName}}` because it was missing methods in an `accepts` array.
+FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because it was missing a handler.

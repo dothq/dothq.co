@@ -1,0 +1,8 @@
+version: "3.4"
+
+services:
+  main:
+    build: .
+    restart: always
+    ports:
+      - 4000:4000
