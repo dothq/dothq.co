@@ -6,6 +6,7 @@ import { ROUTES_DIRECTORY, LOCALE_DEFAULT } from "../config";
 import { Controller, api } from "..";
 
 import { log } from "../tools/log";
+import { goForAWalk } from "../tools/walker";
 
 export class RouteManager {
     public api: Controller;
@@ -17,8 +18,8 @@ export class RouteManager {
     }
 
     private init() {
-        const routes = readdirSync(ROUTES_DIRECTORY);
-
+        const routes = goForAWalk(ROUTES_DIRECTORY);
+        
         routes.forEach((routeLocation: string) => {
             const route = require(resolve(ROUTES_DIRECTORY, routeLocation)).default;
 
