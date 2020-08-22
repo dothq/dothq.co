@@ -1,7 +1,7 @@
 {
   "name": "dothq.co",
   "private": true,
-  "description": "Dot HQ Website",
+  "description": "Dot HQ Web Stack",
   "version": "0.1.0",
   "author": "Dot HQ",
   "dependencies": {
@@ -45,22 +45,26 @@
     "timeago-react": "^3.0.0"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "gatsby-plugin-typescript": "^2.3.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "typescript": "^4.0.2"
   },
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
   "scripts": {
+    "dev": "concurrently \"echo Launching in development mode...\" \"npm run develop\" \"npm run start-api\"",
     "build": "gatsby build",
     "develop": "cross-env ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
+    "start-api": "ts-node -T api",
     "serve": "cross-env ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby serve -H 0.0.0.0 -p 3001",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "run": "npm run build && npm run serve"
+    "run": "concurrently \"npm run build && npm run serve\" \"npm run start-api\""
   },
   "repository": {
     "type": "git",
