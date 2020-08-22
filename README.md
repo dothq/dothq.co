@@ -5,14 +5,14 @@
   </a>
 </p>
 <h1 align="center">
-  Dot Browser <i>(dothq.co)</i>
+  Dot HQ <i>(dothq.co)</i>
 </h1>
 
-Welcome to the frontend side of the Dot Browser website! Our pages are in `pages/`, the assets are at `src/images`, and fonts are at `src/fonts`.
+Welcome to the Dot HQ Web Stack. Our web pages are in `pages/`, the assets are at `src/images`, fonts are at `src/fonts` and the API is at `api`.
 
 _Have an idea for our website? You can drop a suggestion in our [Discord server](https://invite.gg/dot) or [create an issue in this repo](/issues/new)._
 
-## 🚀 Running locally
+## 🚀 Running web locally
 
 1.  **Clone the repo**
 
@@ -31,7 +31,7 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     cd dothq.co
     yarn
     ```
-
+   
 1.  **Run the development server**
 
     Once all the dependencies have installed without errors, run the following commands in your terminal.
@@ -58,6 +58,7 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     ```
 
     The site is now running and you can visit in your browser of choice *(hopefully [Dot Browser](https://github.com/dothq/browser))* at `localhost:8000/`. If the port is different in the above message, you can substitute `:8000` for what it says above.
+ 
 
 ## 🎓 Learning Gatsby
 
