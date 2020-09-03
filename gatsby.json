@@ -1,0 +1,137 @@
+{
+  "redirects": [],
+  "pages": [
+    {
+      "path": "/offline-plugin-app-shell-fallback/"
+    },
+    {
+      "path": "/blog/better-transparency-from-dothq/"
+    },
+    {
+      "path": "/blog/how-were-saving-ram-in-dot-browser/"
+    },
+    {
+      "path": "/blog/saying-goodbye-to-the-electron-version-of-dot-browser/"
+    },
+    {
+      "path": "/blog"
+    },
+    {
+      "path": "/403/"
+    },
+    {
+      "path": "/404/"
+    },
+    {
+      "path": "/beta/"
+    },
+    {
+      "path": "/blm/"
+    },
+    {
+      "path": "/brand/"
+    },
+    {
+      "path": "/builds/"
+    },
+    {
+      "path": "/careers/"
+    },
+    {
+      "path": "/id/"
+    },
+    {
+      "path": "/"
+    },
+    {
+      "path": "/logged-out/"
+    },
+    {
+      "path": "/me/"
+    },
+    {
+      "path": "/reset-password/"
+    },
+    {
+      "path": "/signup/"
+    },
+    {
+      "path": "/support/"
+    },
+    {
+      "path": "/welcome/"
+    },
+    {
+      "path": "/download/dot/"
+    },
+    {
+      "path": "/download/"
+    },
+    {
+      "path": "/download/mobile/"
+    },
+    {
+      "path": "/help/browser/"
+    },
+    {
+      "path": "/help/dothq/"
+    },
+    {
+      "path": "/help/drop/"
+    },
+    {
+      "path": "/help/id/"
+    },
+    {
+      "path": "/help/"
+    },
+    {
+      "path": "/help/search/"
+    },
+    {
+      "path": "/legal/cookies/"
+    },
+    {
+      "path": "/legal/gdpr/"
+    },
+    {
+      "path": "/legal/history/"
+    },
+    {
+      "path": "/legal/privacy/"
+    },
+    {
+      "path": "/legal/terms/"
+    },
+    {
+      "path": "/organization/migrate/"
+    },
+    {
+      "path": "/organization/onboarding/"
+    },
+    {
+      "path": "/products/drop/"
+    },
+    {
+      "path": "/sign-in/"
+    },
+    {
+      "path": "/sign-up/"
+    },
+    {
+      "path": "/sso/github-onboard/"
+    },
+    {
+      "path": "/sso/github/"
+    },
+    {
+      "path": "/admin/builds/create/"
+    },
+    {
+      "path": "/admin/builds/"
+    },
+    {
+      "path": "/404.html"
+    }
+  ]
+}

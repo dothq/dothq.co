@@ -6,11 +6,15 @@ import { API_PORT } from './config';
 import { log } from './tools/log';
 import { RouteManager } from './managers/router';
 
+import { WebController } from './controllers/web';
+
 export class Controller extends Server {
     private _ready: boolean = false;
-
+    
     public locales: LocaleManager;
     public router: RouteManager;
+
+    private web: WebController;
 
     constructor() {
         super();
@@ -19,6 +23,7 @@ export class Controller extends Server {
 
         this.locales.on("ready", () => {
             this.router = new RouteManager(this);
+            this.web = new WebController(this.app);
             this._ready = true;
         })
     }

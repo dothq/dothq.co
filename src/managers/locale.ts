@@ -8,7 +8,6 @@ import { readYaml } from '../tools/reader';
 import { log } from '../tools/log';
 
 import { Controller } from '..';
-import { black } from 'chalk';
 
 export class LocaleManager extends EventEmitter {
     public ['en-US'] = {};

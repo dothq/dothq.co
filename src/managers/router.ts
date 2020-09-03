@@ -28,7 +28,7 @@ export class RouteManager {
             if(!route.handlers) return log("error", this.api.locales.applyContext("en-US", "failedLoadingRouteHandler", routeLocation.split(".")[0]))
 
             for (const method of route.accepts) {
-                api.app[method.toLowerCase()](route.route, (req, res) => { 
+                api.app[method.toLowerCase()]("/api" + route.route, (req, res) => { 
                     const lang = req.query.lang ? api.locales.languageExists(req.query.lang) ? req.query.lang : "" : LOCALE_DEFAULT
                     const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
 

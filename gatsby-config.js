@@ -80,5 +80,11 @@ module.exports = {
         contentApiKey: `7efea324bbf57adf3768570f3d`,
       },
     },
+    {
+      resolve: 'gatsby-plugin-express',
+      options: {
+        output: 'gatsby.json',
+      }
+    }
   ],
 }
