@@ -4,12 +4,12 @@ export default {
     route: '/',
     accepts: ['ALL'],
     handlers: {
-        ALL: (req: Request, res: Response, locale: string, silent: boolean) => {
-            if(silent) return res.end();
+        ALL: (req: Request, res: Response) => {
+            if(res.silent) return res.end();
             
             res.json({
                 ok: true,
-                locale
+                locale: res.lang
             })
         }
     }

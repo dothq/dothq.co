@@ -19,7 +19,7 @@ export const ButtonV2 = styled.button`
         transition: 0.3s opacity;
 
         &:hover {
-            opacity: 0.7;
+            opacity: 0.3;
             cursor: pointer;
         }
     `};

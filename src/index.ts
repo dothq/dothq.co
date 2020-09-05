@@ -1,10 +1,11 @@
 import { Server } from './server';
 
 import { LocaleManager } from './managers/locale';
+import { RouteManager } from './managers/router';
+import { ErrorManager } from './managers/error';
 
 import { API_PORT } from './config';
 import { log } from './tools/log';
-import { RouteManager } from './managers/router';
 
 import { WebController } from './controllers/web';
 
@@ -13,6 +14,7 @@ export class Controller extends Server {
     
     public locales: LocaleManager;
     public router: RouteManager;
+    public errors: ErrorManager;
 
     private web: WebController;
 
@@ -23,6 +25,7 @@ export class Controller extends Server {
 
         this.locales.on("ready", () => {
             this.router = new RouteManager(this);
+            this.errors = new ErrorManager(this.app);
             this.web = new WebController(this.app);
             this._ready = true;
         })

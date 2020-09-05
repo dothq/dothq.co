@@ -61,7 +61,7 @@ export const TextButton = styled.div`
 
     &:hover {
         cursor: pointer;
-        opacity: 0.7;
+        opacity: 0.5;
     }
 
     @media screen and (max-width: 800px) {

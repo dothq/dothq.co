@@ -1,23 +1,23 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
 
-import Layout from "../../components/layout"
-import Image from "../../components/image"
-import SEO from "../../components/seo"
-import { Button, HeroButton } from "../../components/Button"
-import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon, NavFixed, HeroCover, HCC, HeroTitle, HeroSubtitle, Eyeballs, Eyeball, IrisLeft, IrisRight, Jail, JailTrigger } from "../../components/style"
+import Layout from "../../../components/layout"
+import Image from "../../../components/image"
+import SEO from "../../../components/seo"
+import { Button, HeroButton } from "../../../components/Button"
+import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon, NavFixed, HeroCover, HCC, HeroTitle, HeroSubtitle, Eyeballs, Eyeball, IrisLeft, IrisRight, Jail, JailTrigger } from "../../../components/style"
 import { createGlobalStyle } from "styled-components"
 
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import FeatherIcon from 'feather-icons-react';
-import { ButtonV2 } from "../../components/ButtonV2"
-import { isBrowser } from "../../helpers/login"
-import { getOS } from "../../helpers/os"
+import { ButtonV2 } from "../../../components/ButtonV2"
+import { isBrowser } from "../../../helpers/login"
+import { getOS } from "../../../helpers/os"
 
-import * as shield from '../../images/icons/shield.svg'
-import * as mail from '../../images/icons/mail.svg'
-import * as sync from '../../images/icons/sync.svg'
+import * as shield from '../../../images/icons/shield.svg'
+import * as mail from '../../../images/icons/mail.svg'
+import * as sync from '../../../images/icons/sync.svg'
 
 class DotBrowserPage extends React.Component {
     public leftEyeRef = React.createRef<HTMLDivElement>();
@@ -34,7 +34,7 @@ class DotBrowserPage extends React.Component {
     }
 
     componentDidMount() {
-        if(getOS() && getOS().isMobile) navigate("/download/mobile");
+        if(getOS() && getOS().isMobile) navigate("/browser/download/mobile");
 
         isBrowser() && window.addEventListener('mousemove', (e) => {
             if(!document.hasFocus()) return;
@@ -79,7 +79,7 @@ class DotBrowserPage extends React.Component {
                                 <HeroSubtitle color={"white"}>Get Dot Browser to block annoying advertisments and trackers. It’s that simple.</HeroSubtitle>
                                 <Buttons className={"db-download-buttons"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'flex-start' }}>
                                     <ButtonV2 background={"white"} color={"black"}>Download for {getOS() && getOS().os}</ButtonV2>
-                                    <Link to={"/download/mobile"}>
+                                    <Link to={"/browser/download/mobile"}>
                                         <ButtonV2 background={"transparent"} color={"white"}>Try our mobile version</ButtonV2>
                                     </Link>
                                 </Buttons>

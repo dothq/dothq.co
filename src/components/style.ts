@@ -954,3 +954,16 @@ export const CheckboxField = styled.input`
         background-image: url(${check});
     }
 `;
+
+export const HeaderItemBox = styled.div`
+	background-color: white;
+	padding: 21px;
+	height: 320px;
+	width: 450px;
+	border-radius: 8px;
+    box-shadow: 0 25.6px 57.6px 0 rgba(0,0,0,.22),0 4.8px 14.4px 0 rgba(0,0,0,.18);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 9999;
+`;

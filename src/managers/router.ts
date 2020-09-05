@@ -33,7 +33,12 @@ export class RouteManager {
                     const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
 
                     if(lang == "") return res.json({ ok: false, error: `No locale found for language \`${req.query.lang}\`.` })
-                    else route.handlers[method](req, res, lang, silent); 
+                    else {
+                        res.lang = lang;
+                        res.silent = silent;
+                        res.api = api;
+                        route.handlers[method](req, res); 
+                    }
                 })
             }
         })

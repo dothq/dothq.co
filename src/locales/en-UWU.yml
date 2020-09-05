@@ -1,8 +1,8 @@
-API_LISTENING_ON: Started API on port {{port}}.
+API_LISTENING_ON: Wistening own powt {{port}}.
 
 LOG_CTX_INFO: Info
-LOG_CTX_WARNING: Warning
-LOG_CTX_ERROR: Error
+LOG_CTX_WARNING: Wawning
+LOG_CTX_ERROR: Ewwow
 LOG_CTX_SUCCESS: Success
 LOG_CTX_DEBUG: Debug
 
@@ -10,4 +10,4 @@ FAILED_LOADING_ROUTE: Failed to register route `{{routeName}}` because it was mi
 FAILED_LOADING_ROUTE_METHOD: Failed to register route `{{routeName}}` because it was missing methods in an `accepts` array.
 FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because it was missing a handler.
 
-ERROR_1000: Success
+ERROR_1000: Wooks wike thiws wowked

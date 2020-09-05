@@ -52,8 +52,8 @@ const Footer = ({ children }) => {
                 <List>
                     <ListGroup>
                         <ListTitle>Products</ListTitle>
-                        <Item href={"/download/dot"}>Dot Browser</Item>
-                        <Item href={"/download/mobile"}>Dot Browser for Mobile</Item>
+                        <Item href={"/browser/download"}>Dot Browser</Item>
+                        <Item href={"/browser/download/mobile"}>Dot Browser for Mobile</Item>
                         <Item href={"/id"}>Dot ID</Item>
                     </ListGroup>
                     <ListGroup>

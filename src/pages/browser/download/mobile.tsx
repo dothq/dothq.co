@@ -1,25 +1,25 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
 
-import Layout from "../../components/layout"
-import Image from "../../components/image"
-import SEO from "../../components/seo"
-import { Button, HeroButton } from "../../components/Button"
-import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon, NavFixed, HeroCover, HCC, HeroTitle, HeroSubtitle, Eyeballs, Eyeball, IrisLeft, IrisRight, Jail, JailTrigger } from "../../components/style"
+import Layout from "../../../components/layout"
+import Image from "../../../components/image"
+import SEO from "../../../components/seo"
+import { Button, HeroButton } from "../../../components/Button"
+import { Buttons, FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon, NavFixed, HeroCover, HCC, HeroTitle, HeroSubtitle, Eyeballs, Eyeball, IrisLeft, IrisRight, Jail, JailTrigger } from "../../../components/style"
 import { createGlobalStyle } from "styled-components"
 
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import FeatherIcon from 'feather-icons-react';
-import { ButtonV2 } from "../../components/ButtonV2"
-import { isBrowser } from "../../helpers/login"
-import { getOS } from "../../helpers/os"
+import { ButtonV2 } from "../../../components/ButtonV2"
+import { isBrowser } from "../../../helpers/login"
+import { getOS } from "../../../helpers/os"
 
-import * as shield from '../../images/icons/shield.svg'
-import * as mail from '../../images/icons/mail.svg'
-import * as sync from '../../images/icons/sync.svg'
+import * as shield from '../../../images/icons/shield.svg'
+import * as mail from '../../../images/icons/mail.svg'
+import * as sync from '../../../images/icons/sync.svg'
 
-import * as mobileScreenshot from '../../images/mobile-screenshot.svg'
+import * as mobileScreenshot from '../../../images/mobile-screenshot.svg'
 
 class DotBrowserMobilePage extends React.Component {
     public props;
