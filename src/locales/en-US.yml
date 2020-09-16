@@ -1,4 +1,5 @@
 API_LISTENING_ON: Started API on port {{port}}.
+API_LOGS_DEVELOPMENT: Request logs will only appear in development for debugging purposes, they are disabled in production.
 
 LOG_CTX_INFO: Info
 LOG_CTX_WARNING: Warning
@@ -11,3 +12,5 @@ FAILED_LOADING_ROUTE_METHOD: Failed to register route `{{routeName}}` because it
 FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because it was missing a handler.
 
 ERROR_1000: Success
+ERROR_404: This route or resource cannot be found.
+ERROR_4050: This route does not accept {{badMethod}}, try using {{correctMethods}} instead.

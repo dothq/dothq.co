@@ -6,11 +6,11 @@ import { LOG_CTX_COLOURS } from "../config"
 
 const genColouredCtx = (ctx: string) => {
     const locale = {
-        info: 'logCtxInfo',
-        warning: 'logCtxWarning',
-        error: 'logCtxError',
-        success: 'logCtxSuccess',
-        debug: 'logCtxDebug'
+        info: 'log_ctx_info',
+        warning: 'log_ctx_warning',
+        error: 'log_ctx_error',
+        success: 'log_ctx_success',
+        debug: 'log_ctx_debug'
     }
 
     return chalk.bold[LOG_CTX_COLOURS[ctx]](api.locales['en-US'][locale[ctx]])

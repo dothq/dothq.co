@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Req, Res } from "../../../types";
 
 export default {
     route: '/',
     accepts: ['ALL'],
     handlers: {
-        ALL: (req: Request, res: Response) => {
+        ALL: (req: Req, res: Res) => {
             if(res.silent) return res.end();
             
             res.json({

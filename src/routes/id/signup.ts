@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Req, Res } from "../../../types";
 
 export default {
     route: '/id/sign-up',
     accepts: ['POST'],
     handlers: {
-        POST: (req: Request, res: Response) => {
+        POST: (req: Req, res: Res) => {
             if(res.silent) return res.end();
             
             console.log(req.body)

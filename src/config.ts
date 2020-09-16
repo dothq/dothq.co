@@ -7,6 +7,8 @@ export const LOCALE_DIRECTORY = resolve(__dirname, "locales");
 
 export const ROUTES_DIRECTORY = resolve(__dirname, "routes");
 
+export const GITHUB_REPOSITORY_URL = "https://github.com/dothq/dothq.co"
+
 export const LOG_CTX_COLOURS = {
     info: 'blue',
     warning: 'yellow',

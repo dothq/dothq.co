@@ -4,10 +4,11 @@ import { LocaleManager } from './managers/locale';
 import { RouteManager } from './managers/router';
 import { ErrorManager } from './managers/error';
 
-import { API_PORT } from './config';
+import { API_PORT, LOCALE_DEFAULT } from './config';
 import { log } from './tools/log';
 
 import { WebController } from './controllers/web';
+import { Req, Res } from '../types';
 
 export class Controller extends Server {
     private _ready: boolean = false;
@@ -24,6 +25,8 @@ export class Controller extends Server {
         this.locales = new LocaleManager(this);
 
         this.locales.on("ready", () => {
+
+
             this.router = new RouteManager(this);
             this.errors = new ErrorManager(this.app);
             this.web = new WebController(this.app);
@@ -41,7 +44,7 @@ export class Controller extends Server {
         await this.ready();
 
         this._listen(port).then((e) => {
-            log("info", this.locales.applyContext("en-US", "apiListeningOn", port))
+            log("info", this.locales.applyContext("en-US", "api_listening_on", port))
         });
     }
 }

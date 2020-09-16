@@ -7,9 +7,11 @@ import { Controller, api } from "..";
 
 import { log } from "../tools/log";
 import { goForAWalk } from "../tools/walker";
+import { Route } from "../../types";
 
 export class RouteManager {
     public api: Controller;
+    public routes: Route[] = [];
 
     constructor(api: Controller) {
         this.api = api;
@@ -21,24 +23,21 @@ export class RouteManager {
         const routes = goForAWalk(ROUTES_DIRECTORY);
         
         routes.forEach((routeLocation: string) => {
-            const route = require(resolve(ROUTES_DIRECTORY, routeLocation)).default;
+            const route: Route = require(resolve(ROUTES_DIRECTORY, routeLocation)).default;
 
-            if(!route.route) return log("error", this.api.locales.applyContext("en-US", "failedLoadingRoute", routeLocation.split(".")[0]))
-            if(!route.accepts || route.accepts.length == 0) return log("error", this.api.locales.applyContext("en-US", "failedLoadingRouteMethod", routeLocation.split(".")[0]))
-            if(!route.handlers) return log("error", this.api.locales.applyContext("en-US", "failedLoadingRouteHandler", routeLocation.split(".")[0]))
+            if(!route.route) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route", routeLocation.split(".")[0]))
+            if(!route.accepts || route.accepts.length == 0) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_method", routeLocation.split(".")[0]))
+            if(!route.handlers) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", routeLocation.split(".")[0]))
+
+            route.locationOnPath = routeLocation.split(ROUTES_DIRECTORY)[1];
+
+            this.routes.push(route);
 
             for (const method of route.accepts) {
-                api.app[method.toLowerCase()]("/api" + route.route, (req, res) => { 
-                    const lang = req.query.lang ? api.locales.languageExists(req.query.lang) ? req.query.lang : "" : LOCALE_DEFAULT
-                    const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
+                if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
-                    if(lang == "") return res.json({ ok: false, error: `No locale found for language \`${req.query.lang}\`.` })
-                    else {
-                        res.lang = lang;
-                        res.silent = silent;
-                        res.api = api;
-                        route.handlers[method](req, res); 
-                    }
+                api.app[method.toLowerCase()]("/api" + route.route, (req, res) => { 
+                    route.handlers[method](req, res);
                 })
             }
         })

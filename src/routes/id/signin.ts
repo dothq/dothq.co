@@ -1,15 +1,31 @@
-import { Request, Response } from "express";
+import { Req, Res } from "../../../types";
 
 import { api } from "../..";
 
 export default {
     route: '/id/sign-in',
-    accepts: ['POST'],
+    accepts: ['POST', 'GET', 'PATCH'],
     handlers: {
-        POST: (req: Request, res: Response) => {
+        POST: (req: Req, res: Res) => {
             if(res.silent) return res.end();
             
-            api.errors.stop(1000, res)
+            console.log(res.lang)
+
+            api.errors.stop(404, res)
+        },
+        GET: (req: Req, res: Res) => {
+            if(res.silent) return res.end();
+            
+            console.log(res.lang)
+
+            api.errors.stop(404, res)
+        },
+        PATCH: (req: Req, res: Res) => {
+            if(res.silent) return res.end();
+            
+            console.log(res.lang)
+
+            api.errors.stop(404, res)
         }
     }
 }

@@ -1,7 +1,16 @@
-export const errors = {
-    1000: {
-        ok: true,
-        i18n_id: "error1000",
-        more_info: "https://docs.dothq.co/errors/1000"
+const httpErrors = {
+    404: {
+        ok: false,
+        i18n_id: "error_404"
     }
 }
+
+const specialErrors = {
+    4050: {
+        ok: false,
+        i18n_id: "error_4050",
+        code: 404
+    }
+}
+
+export const errors = { ...httpErrors, ...specialErrors };

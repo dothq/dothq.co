@@ -5,6 +5,8 @@ import * as proxy from 'express-http-proxy';
 import { resolve } from 'path';
 
 import { log } from '../tools/log';
+import { api } from '..';
+import { LOCALE_DEFAULT } from '../config';
 
 export class WebController {
     public app;
@@ -23,6 +25,7 @@ export class WebController {
             }));
         } else {
             log("info", "Running in development mode.")
+            log("warning", api.locales.applyContext("en-US", "api_logs_development"))
 
             app.use((req, res, next) => {
                 console.log(`${req.method} ${req.path} => ${res.statusCode}`)

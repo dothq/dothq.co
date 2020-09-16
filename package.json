@@ -6,6 +6,7 @@
   "author": "Dot HQ",
   "dependencies": {
     "@types/styled-components": "^5.0.1",
+    "apollo-server": "^2.17.0",
     "babel-plugin-styled-components": "^1.10.7",
     "cross-env": "^7.0.2",
     "express-http-proxy": "^1.6.2",
@@ -29,6 +30,7 @@
     "gatsby-styled-components-dark-mode": "^1.1.1",
     "gatsby-transformer-remark": "^2.7.1",
     "gatsby-transformer-sharp": "^2.3.19",
+    "graphql": "^15.3.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "random-emoji": "^1.0.2",

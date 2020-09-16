@@ -2,12 +2,13 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 import { EventEmitter } from 'events';
 
-import { LOCALE_DIRECTORY } from "../config";
+import { LOCALE_DIRECTORY, LOCALE_DEFAULT } from "../config";
 
 import { readYaml } from '../tools/reader';
 import { log } from '../tools/log';
 
 import { Controller } from '..';
+import { Req, Res } from '../../types';
 
 export class LocaleManager extends EventEmitter {
     public ['en-US'] = {};
@@ -40,6 +41,7 @@ export class LocaleManager extends EventEmitter {
 
         if(leftVars !== rightVars) return log("error", `Failed to load special string \`${key}\` in the \`${family}\` language family.`)
 
+        if(this[family] == undefined || this[family][key] == undefined) throw new Error(`Could not find i18n value by ID \`${key}\` inside the \`${family}\` locale family. Please report this to an administator.`)
         let data = this[family][key];
 
         let occurrence = 0;
@@ -63,14 +65,30 @@ export class LocaleManager extends EventEmitter {
     } 
 
     private injectLocaleIntoManager(parent: string, key: string, value: string) {
-        key = key.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (o) => o.toUpperCase()).replace(/_/g, "")
+        key = key.toLowerCase()
 
         this[parent][key] = value;
+    }
+
+    private loadLocaleMiddleware(api: Controller) {
+        api.app.use((req: Req, res: Res, next) => {
+            const lang = req.query.lang ? api.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT
+            const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
+
+            if(lang == "") return res.json(silent ? {} : { ok: false, error: `No locale file found for language \`${req.query.lang}\`.` })
+            else {
+                res.lang = (lang as string);
+                res.silent = silent;
+                res.api = api;
+                next();
+            }
+        })
     }
 
     constructor(api: Controller) {
         super();
 
-        this.load()
+        this.load();
+        this.loadLocaleMiddleware(api);
     }
 }
