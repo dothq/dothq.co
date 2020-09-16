@@ -1,6 +1,6 @@
 import { api } from ".."
 
-import * as chalk from "chalk"
+import chalk from "chalk"
 
 import { LOG_CTX_COLOURS } from "../config"
 

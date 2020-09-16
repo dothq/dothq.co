@@ -1,4 +1,4 @@
-import { Req, Res } from "../../../types";
+import { Req, Res } from "../../types";
 
 export default {
     route: '/',

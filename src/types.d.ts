@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { Req, Res } from '../types';
 
 export type Server = express.Application & {
     _listen: any;
