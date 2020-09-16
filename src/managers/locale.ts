@@ -2,13 +2,14 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 import { EventEmitter } from 'events';
 
-import { LOCALE_DIRECTORY, LOCALE_DEFAULT } from "../config";
+import { LOCALE_DIRECTORY, LOCALE_DEFAULT, GITHUB_REPOSITORY_URL } from "../config";
 
 import { readYaml } from '../tools/reader';
 import { log } from '../tools/log';
 
 import { Controller } from '..';
-import { Req, Res } from '../../types';
+
+import { Req, Res, Route } from '../../types';
 
 export class LocaleManager extends EventEmitter {
     public ['en-US'] = {};
@@ -79,6 +80,8 @@ export class LocaleManager extends EventEmitter {
 
     private loadLocaleMiddleware(api: Controller) {
         api.app.use((req: Req, res: Res, next) => {
+            const route = api.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
+
             const lang = req.query.lang ? api.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT
             const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
 
@@ -89,6 +92,8 @@ export class LocaleManager extends EventEmitter {
                 res.api = api;
 
                 res.header("X-Locale", res.lang);
+                res.header("X-Powered-By", "Dot")
+                route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
 
                 next();
             }

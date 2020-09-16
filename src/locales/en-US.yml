@@ -1,5 +1,6 @@
 API_LISTENING_ON: Started API on port {{port}}.
 API_LOGS_DEVELOPMENT: Request logs will only appear in development for debugging purposes, they are disabled in production.
+API_DB_CONNECTED: Connected to MongoDB Database
 
 LOG_CTX_INFO: Info
 LOG_CTX_WARNING: Warning

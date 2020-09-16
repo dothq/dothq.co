@@ -32,7 +32,6 @@ export class ErrorManager {
             const route = api.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
 
             route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
-            res.header("X-Powered-By", "Dot")
 
             res.status(404);
 

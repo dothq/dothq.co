@@ -1,6 +1,8 @@
 import { resolve } from "path";
+import * as credentials from '../credentials.json';
 
 export const API_PORT = 4000;
+export const API_DATABASE_URI = `mongodb+srv://${credentials.DB_USERNAME}:${credentials.DB_PASSWORD}@enderdev.lvjah.mongodb.net/dothq?retryWrites=true&w=majority`
 
 export const LOCALE_DEFAULT = "en-US";
 export const LOCALE_DIRECTORY = resolve(__dirname, "locales");
