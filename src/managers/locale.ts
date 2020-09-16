@@ -35,25 +35,32 @@ export class LocaleManager extends EventEmitter {
         }, 500);
     }
 
-    public applyContext(family: string, key: string, ...ctx: any[]) {
+    public applyContext(family: string, key: string, ...ctx: any[]): { data: string, error: any } {
         const leftVars = key.split("{{").length;
         const rightVars = key.split("}}").length;
 
         if(leftVars !== rightVars) return log("error", `Failed to load special string \`${key}\` in the \`${family}\` language family.`)
 
-        if(this[family] == undefined || this[family][key] == undefined) throw new Error(`Could not find i18n value by ID \`${key}\` inside the \`${family}\` locale family. Please report this to an administator.`)
-        let data = this[family][key];
+        let data = "";
+        let error = undefined;
+
+        if(this[family] == undefined || this[family][key] == undefined) {
+            data = this["en-US"][key]
+            error = `Could not find i18n value by ID \`${key}\` inside the \`${family}\` locale family. Please report this to an administator.`
+        } else {
+            data = this[family][key]
+        }
 
         let occurrence = 0;
 
-        if(!data) return "";
+        if(!data) return { data: "", error };
 
         data = data.replace(/{{\w+}}/g, (o) => {
             ++occurrence;
             return ctx[occurrence-1]
         })
 
-        return data;
+        return { data, error };
     }
 
     public languageExists(language: string) {
@@ -80,6 +87,9 @@ export class LocaleManager extends EventEmitter {
                 res.lang = (lang as string);
                 res.silent = silent;
                 res.api = api;
+
+                res.header("X-Locale", res.lang);
+
                 next();
             }
         })

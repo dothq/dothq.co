@@ -11,6 +11,6 @@ FAILED_LOADING_ROUTE: Failed to register route `{{routeName}}` because it was mi
 FAILED_LOADING_ROUTE_METHOD: Failed to register route `{{routeName}}` because it was missing methods in an `accepts` array.
 FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because it was missing a handler.
 
-ERROR_1000: Success
+ERROR_200: Success
 ERROR_404: This route or resource cannot be found.
 ERROR_4050: This route does not accept {{badMethod}}, try using {{correctMethods}} instead.

@@ -25,7 +25,7 @@ export class WebController {
             }));
         } else {
             log("info", "Running in development mode.")
-            log("warning", api.locales.applyContext("en-US", "api_logs_development"))
+            log("warning", api.locales.applyContext("en-US", "api_logs_development").data)
 
             app.use((req, res, next) => {
                 console.log(`${req.method} ${req.path} => ${res.statusCode}`)

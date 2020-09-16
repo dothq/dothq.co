@@ -10,4 +10,4 @@ FAILED_LOADING_ROUTE: Aye! Failed to register ye ol' route `{{routeName}}` becau
 FAILED_LOADING_ROUTE_METHOD: Aye! Failed to register ye ol' route `{{routeName}}` because it was missing methods in an `accepts` array.
 FAILED_LOADING_ROUTE_HANDLER: Aye! Failed to register ye ol' route `{{routeName}}` because it was missing a handler.
 
-ERROR_1000: All is ship shape
+ERROR_200: All is ship shape

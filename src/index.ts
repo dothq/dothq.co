@@ -44,7 +44,7 @@ export class Controller extends Server {
         await this.ready();
 
         this._listen(port).then((e) => {
-            log("info", this.locales.applyContext("en-US", "api_listening_on", port))
+            log("info", this.locales.applyContext("en-US", "api_listening_on", port).data)
         });
     }
 }

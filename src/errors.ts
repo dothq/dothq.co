@@ -1,4 +1,8 @@
 const httpErrors = {
+    200: {
+        ok: true,
+        i18n_id: "error_200"
+    },
     404: {
         ok: false,
         i18n_id: "error_404"

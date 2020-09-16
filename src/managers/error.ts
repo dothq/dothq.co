@@ -14,7 +14,11 @@ export class ErrorManager {
 
         const error = { ...errors[code], ...extraFields };
 
-        error.message = api.locales.applyContext(lang, error.i18n_id, ...ctx || [])
+        const msg: any = api.locales.applyContext(lang, error.i18n_id, ...ctx || []);
+
+        if(msg.error) error.fellback_to_default_locale = true;
+
+        error.message = msg.data;
         error.code = error.code ? error.code : code;
         delete error.i18n_id
 
@@ -35,7 +39,7 @@ export class ErrorManager {
             if(res.statusCode == 404) {
                 if(route && !route.accepts.includes(req.method)) {
                     const accepts = route.accepts.map((accept, index) => {
-                        if(index == route.accepts.length-1) return "or " + accept;
+                        if(index == route.accepts.length-1 && route.accepts.length <= 1) return "or " + accept;
                         return accept;
                     }).join(", ");
 
