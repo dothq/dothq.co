@@ -83,12 +83,10 @@ export class LocaleManager extends EventEmitter {
             const route = api.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
 
             const lang = req.query.lang ? api.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT
-            const silent = req.query.silent ? req.query.silent == "true" ? true : false : false;
 
-            if(lang == "") return res.json(silent ? {} : { ok: false, error: `No locale file found for language \`${req.query.lang}\`.` })
+            if(lang == "") return res.json({ ok: false, error: `No locale file found for language \`${req.query.lang}\`.` })
             else {
                 res.lang = (lang as string);
-                res.silent = silent;
                 res.api = api;
 
                 res.header("X-Locale", res.lang);

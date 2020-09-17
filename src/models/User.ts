@@ -1,28 +1,52 @@
-import * as mongoose from "mongoose";
+import { Sequelize, Model, DataTypes } from "sequelize";
 
+import * as credentials from '../../credentials.json';
 import { log } from "../tools/log";
-
 import { api } from "..";
-import { API_DATABASE_URI } from "../config";
+import { makeId } from "../tools/id";
 
-mongoose.connect(API_DATABASE_URI, (err: any) => {
-  if (err) {
-    log("error", err.message)
-  } else {
-    log("success", api.locales.applyContext("en-US", "api_db_connected"))
-  }
-});
+const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false })
 
-export interface IUser extends mongoose.Document {
+sequelize
+  .authenticate()
+  .then(() => {
+    log("info", api.locales["en-US"]["api_db_connected"])
+  })
+  .catch((err) => {
+    throw new Error(err);
+  });
+
+export interface User extends Model {
+  id: string;
   username: string;
   email: string;
   password: string;
+  permissions: string[];
 }
 
-export const UserSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true }
+export default sequelize.define<User>("User", {
+  id: {
+    primaryKey: true,
+    type: DataTypes.STRING,
+    defaultValue: () => {
+      return makeId();
+    }
+  },
+  username: {
+    type: DataTypes.STRING,
+  },
+  email: {
+    type: DataTypes.STRING,
+  },
+  password: {
+    type: DataTypes.STRING,
+  },
+  permissions: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    defaultValue: () => {
+      return ["read.self.account", "write.self.account"]
+    }
+  }
 });
 
-const User = mongoose.model<IUser>("User", UserSchema);
-export default User;
+sequelize.sync()

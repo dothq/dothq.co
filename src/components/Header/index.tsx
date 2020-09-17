@@ -127,8 +127,12 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                 </div>
                 <div className={"nbtn"}>
                     {!user && <>
-                        <ButtonV2 background={!isDark ? 'white' : 'black'} color={!isDark ? 'black' : 'white'}>Sign in</ButtonV2>
-                        <ButtonV2 background={"transparent"} color={!isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                        <Link to={"/sign-in"}>
+                            <ButtonV2 background={!isDark ? 'white' : 'black'} color={!isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                        </Link>
+                        <Link to={"/sign-up"}>
+                            <ButtonV2 background={"transparent"} color={!isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                        </Link>
                     </>}
 
                     {user && 

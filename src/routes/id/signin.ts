@@ -7,8 +7,6 @@ export default {
     accepts: ['POST'],
     handlers: {
         POST: (req: Req, res: Res) => {
-            if(res.silent) return res.end();
-            
             api.errors.stop(200, res)
         }
     }

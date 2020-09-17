@@ -8,6 +8,7 @@ import { Controller, api } from "..";
 import { log } from "../tools/log";
 import { goForAWalk } from "../tools/walker";
 import { Route } from "../../types";
+import { verifyCaptcha } from "../tools/captcha";
 
 export class RouteManager {
     public api: Controller;
@@ -36,7 +37,16 @@ export class RouteManager {
             for (const method of route.accepts) {
                 if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
-                api.app[method.toLowerCase()]("/api" + route.route, (req, res) => { 
+                api.app[method.toLowerCase()]("/api" + route.route, async (req, res) => { 
+                    if(route.flags) {
+                        if(route.flags.requireChallenge) {
+                            if(!req.body.challenge_token) return api.errors.stop(4011, res);
+
+                            const isValid = await verifyCaptcha(req.body.challenge_token);
+                            if(!isValid) return api.errors.stop(4010, res);
+                        }
+                    }
+
                     route.handlers[method](req, res);
                 })
             }
