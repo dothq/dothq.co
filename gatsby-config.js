@@ -4,6 +4,10 @@ module.exports = {
     description: `Take back your privacy with Dot HQ's Dot Browser, the privacy-conscious web browser that protects you from being tracked and monitored online.`,
     author: `Dot HQ`,
   },
+  proxy: {
+    prefix: "/api",
+    url: "http://localhost:4000",
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -85,6 +89,12 @@ module.exports = {
       options: {
         output: 'gatsby.json',
       }
-    }
-  ],
+    },
+    {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        allowList: ["NODE_ENV"]
+      },
+    },
+  ]
 }

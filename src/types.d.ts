@@ -34,3 +34,9 @@ export interface Route {
         UNSUBSCRIBE?: (req: Req, res: Res) => void
     }
 }
+
+export interface ErrorJSON {
+    ok: boolean;
+    message: string;
+    code: number;
+}

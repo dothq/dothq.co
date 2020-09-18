@@ -1,20 +1,8 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 
-import * as credentials from '../../credentials.json';
-import { log } from "../tools/log";
-import { api } from "..";
+import { sequelize } from "../";
+
 import { makeId } from "../tools/id";
-
-const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false })
-
-sequelize
-  .authenticate()
-  .then(() => {
-    log("info", api.locales["en-US"]["api_db_connected"])
-  })
-  .catch((err) => {
-    throw new Error(err);
-  });
 
 export interface User extends Model {
   id: string;

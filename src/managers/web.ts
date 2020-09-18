@@ -8,7 +8,7 @@ import { log } from '../tools/log';
 import { api } from '..';
 import { LOCALE_DEFAULT } from '../config';
 
-export class WebController {
+export class WebManager {
     public app;
 
     constructor(app) {

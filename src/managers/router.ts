@@ -1,7 +1,7 @@
-import { readdirSync } from "fs";
+import * as cors from 'cors';
 import { resolve } from "path";
 
-import { ROUTES_DIRECTORY, LOCALE_DEFAULT } from "../config";
+import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS } from "../config";
 
 import { Controller, api } from "..";
 
@@ -37,7 +37,7 @@ export class RouteManager {
             for (const method of route.accepts) {
                 if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
-                api.app[method.toLowerCase()]("/api" + route.route, async (req, res) => { 
+                api.app[method.toLowerCase()]("/api" + route.route, cors({ origin: API_CORS_ORIGINS }), async (req, res) => { 
                     if(route.flags) {
                         if(route.flags.requireChallenge) {
                             if(!req.body.challenge_token) return api.errors.stop(4011, res);
