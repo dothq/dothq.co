@@ -11,6 +11,7 @@
     "apollo-server": "^2.17.0",
     "babel-plugin-styled-components": "^1.10.7",
     "body-parser": "^1.19.0",
+    "check-password-strength": "^1.0.13",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "express-http-proxy": "^1.6.2",
