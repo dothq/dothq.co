@@ -1,26 +1,40 @@
-import styled, { css } from "styled-components";
+import React from 'react';
 
-export const ButtonV2 = styled.button`
-    padding: 11px 32px;
-    text-align: center;
-    display: block;
-    border: 0;
-    outline: 0;
-    
-    ${({ color, background, w, h, br, fs }: { color?: string; background?: string; w?: number; h?: number; br?: number; fs?: number }) => css`
-        color: ${color || "white"};
-        background: ${background || "black"};
-        width: ${w || "null"}px;
-        height: ${`${h}px` || "auto"};
-        border-radius: ${br || 100}px;
-        font-weight: 600;
-        font-size: ${fs || 15}px;
-        line-height: 18px;
-        transition: 0.3s opacity;
+import { StyledButtonV2 } from './style';
 
-        &:hover {
-            opacity: 0.7;
-            cursor: pointer;
-        }
-    `};
-`;
+import { Thinker } from '../Thinker';
+
+interface Props {
+    loading?: boolean;
+    children: any;
+    color?: string; 
+    background?: string; 
+    w?: number; 
+    h?: number; 
+    br?: number; 
+    fs?: number;
+    onClick?: any;
+    style?: any;
+    disabled?: boolean;
+}
+
+export const ButtonV2 = ({ 
+    loading, 
+    children, 
+    color, 
+    background, 
+    w, 
+    h, 
+    br, 
+    fs,
+    onClick,
+    style,
+    disabled
+}: Props) => {
+    return (
+        <StyledButtonV2 color={color} background={background} w={w} h={h} br={br} fs={fs} onClick={onClick} style={style} disabled={disabled}>
+            {!loading && children}
+            {loading && <Thinker color={color || "white"} center />}
+        </StyledButtonV2>
+    )
+}

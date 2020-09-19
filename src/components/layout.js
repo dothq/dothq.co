@@ -32,7 +32,6 @@ import { Banner } from "./Banner"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
-
 const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -59,6 +58,11 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const [alfBuilds, setAlfBuilds] = useGlobalState('afBuilds');
 
   React.useEffect(() => {
+    if(process.env.NODE_ENV !== "development") {
+      console.log("%cBeware!", "font: 2em sans-serif; color: yellow; background-color: red;");
+      console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or “hack” someone’s account, it is a scam and will give them access to your account.", "font: 1.5em sans-serif; color: grey;");
+    }
+
     if(typeof(alfUser) == "boolean") return;
     if(typeof(alfBuilds) == "boolean") return;
 

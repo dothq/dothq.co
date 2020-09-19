@@ -859,23 +859,25 @@ export const AuthLink = styled.div`
 export const AuthField = styled.div`
     display: flex;
 
-    border: 2px solid #D2D2D2;
+    --shadow: inset 0px 0px 0px 2px #D2D2D2;
+
+    box-shadow: var(--shadow);
     border-radius: 8px;
     height: 58px;
 
     max-width: 525px;
 
-    transition: 0.3s border;
+    transition: 0.3s box-shadow;
     position: relative;
 
     --pad: 19px;
 
     &:hover {
-        border-color: #AAAAAA;
+        --shadow: inset 0px 0px 0px 2px #AAAAAA;
     }
 
     &:focus-within {
-        border-color: #4965FF;
+        --shadow: inset 0px 0px 0px 2px #4965FF;
 
         span {
             --pad: 8px !important;
@@ -885,6 +887,12 @@ export const AuthField = styled.div`
     input:not(:placeholder-shown) ~ span {
         --pad: 8px !important;
     }
+
+    ${({ passwordStrength }: { passwordStrength?: number }) => css`
+        ${typeof(passwordStrength) == "number" ? `box-shadow: inset 0px 0px 0px 2px ${passwordStrength == 0 ? "red" : passwordStrength == 1 ? "orange" : passwordStrength == 2 ? "green" : "NULL"} !important;` : ""};
+    `};
+
+    // , inset 0px 0px 0px 2px #D2D2D2
 `;
 
 export const AuthPlaceholder = styled.span`
@@ -914,6 +922,7 @@ export const AuthInput = styled.input`
     width: 100%;
     height: 100%;
     padding-top: 28px;
+    border-radius: 6px;
 `;
 
 export const Checkbox = styled.div`
