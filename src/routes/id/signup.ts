@@ -10,6 +10,7 @@ export default {
     flags: { 
         requireChallenge: true
     },
+    requiredBodyFields: ["email", "password"],
     handlers: {
         POST: async (req: Req, res: Res) => {
             const userExists = await User.findOne({ where: { email: req.body.email } }).then(exists => { return !!exists })

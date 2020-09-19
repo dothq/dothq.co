@@ -38,6 +38,18 @@ export class RouteManager {
                 if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
                 api.app[method.toLowerCase()]("/api" + route.route, cors({ origin: API_CORS_ORIGINS }), async (req, res) => { 
+                    if(route.requiredBodyFields) {
+                        const body = route.requiredBodyFields;
+
+                        let missingItems = [];
+
+                        body.forEach(item => {
+                            if(!req.body[item]) missingItems.push(item)
+                        })
+
+                        if(missingItems.length !== 0) return api.errors.stop(4005, res, [missingItems.join(", ")])
+                    }
+                    
                     if(route.flags) {
                         if(route.flags.requireChallenge) {
                             if(!req.body.challenge_token) return api.errors.stop(4011, res);
