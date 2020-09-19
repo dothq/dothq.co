@@ -889,7 +889,9 @@ export const AuthField = styled.div`
     }
 
     ${({ passwordStrength }: { passwordStrength?: number }) => css`
-        ${typeof(passwordStrength) == "number" ? `box-shadow: inset 0px 0px 0px 2px ${passwordStrength == 0 ? "red" : passwordStrength == 1 ? "orange" : passwordStrength == 2 ? "green" : "NULL"} !important;` : ""};
+        &:focus-within {
+            ${typeof(passwordStrength) == "number" ? `box-shadow: inset 0px 0px 0px 2px ${passwordStrength == 0 ? "red" : passwordStrength == 1 ? "orange" : passwordStrength == 2 ? "green" : "NULL"} !important;` : ""};
+        }
     `};
 
     // , inset 0px 0px 0px 2px #D2D2D2

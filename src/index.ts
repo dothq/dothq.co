@@ -9,13 +9,15 @@ import { LocaleManager } from './managers/locale';
 import { RouteManager } from './managers/router';
 import { ErrorManager } from './managers/error';
 
-import { API_PORT, API_CORS_ORIGINS } from './config';
+import { API_PORT } from './config';
 
 import { log } from './tools/log';
 
 import { WebManager } from './managers/web';
 
 import * as credentials from '../credentials.json';
+
+import { Req, Res } from "../types";
 
 export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false })
 
@@ -44,6 +46,12 @@ export class Controller extends Server {
 
         this.locales.on("ready", () => {
             this.app.use(bodyParser.json())
+
+            this.app.use((err: any, req: Req, res: Res, next) => {
+                if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
+                    this.errors.stop(4012, res);
+                } else next();
+            });
 
             this.router = new RouteManager(this);
             this.errors = new ErrorManager(this.app);

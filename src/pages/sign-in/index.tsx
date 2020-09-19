@@ -13,26 +13,41 @@ import { ErrorJSON } from "../../types"
 
 import { parse } from "search-params";
 import { Thinker } from "../../components/Thinker"
+import { validEmail, validPassword } from "../../tools/validation"
+import { isBrowser } from "../../helpers/login"
 
 const SigninPage = ({ location }) => {
     const params = parse(location.search)
 
     const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
+    const usernameRef = React.createRef<HTMLInputElement>();
     const rememberMeRef = React.createRef<HTMLInputElement>();
 
     const [done, sd] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [disabled, setDisabled] = React.useState(false);
 
-    const [pst, setPST] = React.useState(null);
-    const [passwordStrength, setPasswordStrength] = React.useState(-1);
+    React.useEffect(() => sd(true))
 
     const user = new UserController();
 
-    React.useEffect(() => {
-        sd(true)
+    const renderButtonDisabled = () => {
+        if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
 
-        if(!params.next) navigate(location.pathname + "?next=/me");
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+
+        const emailValid = validEmail(email);
+        const passwordValid = password.length == 0 ? false : validPassword(password);
+
+        if(email.length == 0 || password.length == 0 || !emailValid || !passwordValid) return setDisabled(true);
+        else return setDisabled(false);
+    }
+
+    React.useEffect(() => {
+        renderButtonDisabled();
+        isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
     })
 
     const onSignInClick = () => {
@@ -60,27 +75,10 @@ const SigninPage = ({ location }) => {
         });
     }
 
-    const onPasswordKeyUp = () => {
-        if(!passwordRef || !passwordRef.current) return;
-
-        const password = passwordRef.current.value;
-
-        clearTimeout(pst);
-
-        var timeout = setTimeout(() => {
-            user.getPasswordStrength(password).then((r: any) => {
-                if(r.ok && r.data.result) {
-                    const { strength } = r.data.result;
-    
-                    setPasswordStrength(strength);
-                } else setPasswordStrength(-1);
-            }).catch(e => {
-                console.error(e);
-                setPasswordStrength(-1);
-            });
-        }, 200);
-
-        setPST(timeout);
+    const onGitHubSignInClick = () => {
+        setTimeout(() => {
+            navigate("/sso/github");
+        }, 1000);
     }
     
     return (
@@ -101,8 +99,8 @@ const SigninPage = ({ location }) => {
                                 <AuthPlaceholder>Email Address</AuthPlaceholder>
                             </AuthField>
 
-                            <AuthField style={{ marginTop: '18px', width: '525px' }} passwordStrength={passwordStrength}>
-                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} onKeyUp={() => onPasswordKeyUp()} />
+                            <AuthField style={{ marginTop: '18px', width: '525px' }}>
+                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} />
                                 <AuthPlaceholder>Password</AuthPlaceholder>
                             </AuthField>
 
@@ -112,7 +110,9 @@ const SigninPage = ({ location }) => {
                                     <label>Remember my session</label>
                                 </Checkbox>
 
-                                <AuthLink style={{ display: 'flex', fontSize: '15px' }}>Forgot your password?</AuthLink>
+                                <Link to={"/sign-in/forgot-password"}>
+                                    <AuthLink style={{ display: 'flex', fontSize: '15px' }}>Forgot your password?</AuthLink>
+                                </Link>
                             </div>
 
                             <div style={{ marginTop: '45px', display: 'flex', flexDirection: 'column' }}>
@@ -124,17 +124,16 @@ const SigninPage = ({ location }) => {
                                     fs={18} 
                                     onClick={() => onSignInClick()}
                                     loading={loading}
+                                    disabled={disabled}
                                 >
                                     Sign in
                                 </ButtonV2>
 
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
-                                <Link to={"/sso/github"}>
-                                    <ButtonV2 w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} style={{ border: '2px solid #D2D2D2' }} loadOnClick>
-                                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign in with GitHub</div>
-                                    </ButtonV2>
-                                </Link>
+                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignInClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} style={{ border: '2px solid #D2D2D2' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign in with GitHub</div>
+                                </ButtonV2>
                             </div>
                         </div>
                     </div>

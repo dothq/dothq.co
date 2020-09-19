@@ -16,7 +16,7 @@ export interface Route {
     flags?: {
         requireChallenge?: boolean
     },
-    requiredBodyFields: string[],
+    requiredBodyFields: string[] | [{ key: string, type: string }],
     locationOnPath?: string,
     handlers: {
         [key in string]: (req: Req, res: Res) => void

@@ -1,12 +1,13 @@
 import APIController from ".";
 
+import * as checkPasswordStrength from "check-password-strength";
+
 export default class UserController {
     public api: APIController = new APIController();
 
     public actions = {
         getUserSelf: "/id/user/me",
         getUser: "/id/user/:id",
-        getPasswordStrength: "/id/password-strength",
         createUser: "/id/sign-up",
         createLoginSession: "/id/sign-in"
     }
@@ -32,8 +33,12 @@ export default class UserController {
     }
 
     getPasswordStrength(password: string) {
-        const { getPasswordStrength } = this.actions;
+        return new Promise((resolve) => {
+            if(password.length == 0) return resolve(-1);
 
-        return this.api.post(getPasswordStrength, { password })
+            const { id } = checkPasswordStrength(password);
+
+            return resolve(id);
+        })
     }
 }

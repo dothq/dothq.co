@@ -42,12 +42,22 @@ export class RouteManager {
                         const body = route.requiredBodyFields;
 
                         let missingItems = [];
+                        var invalidTypeItems = [];
+                        let bodyType = "string";
 
-                        body.forEach(item => {
-                            if(!req.body[item]) missingItems.push(item)
+                        body.forEach((item: string | any) => {
+                            const key = typeof(item) == "string" ? item : item.key;
+                            bodyType = typeof(item);
+
+                            if(!req.body[key]) missingItems.push(key)
                         })
 
-                        if(missingItems.length !== 0) return api.errors.stop(4005, res, [missingItems.join(", ")])
+                        const types = (body as any).map(b => {
+                            if(bodyType == "string") return { name: b, expects: "string" }
+                            return { name: b.key, expects: b.type } 
+                        })
+
+                        if(missingItems.length !== 0) return api.errors.stop(4005, res, [missingItems.join(", ")], { types })
                     }
                     
                     if(route.flags) {
