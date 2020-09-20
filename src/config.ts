@@ -1,12 +1,19 @@
 import { resolve } from "path";
 import * as credentials from '../credentials.json';
 
+import { Algorithms } from "./types";
+
 export const API_PORT = 4000;
 export const API_DATABASE_URI = `mongodb+srv://${credentials.DB_USERNAME}:${credentials.DB_PASSWORD}@enderdev.lvjah.mongodb.net/dothq?retryWrites=true&w=majority`
 
 export const API_PROD_URL = "https://dothq.co/api";
 export const API_DEV_URL = `http://localhost:${API_PORT}/api`;
 export const API_CORS_ORIGINS = ["https://dothq.co", "http://localhost:8000"]
+
+export const AUTH_SECRET_KEY = resolve(process.cwd(), "private.key");
+export const AUTH_KEY_ISSUER = "DTHQ"; // Issuer should be 4 characters or less
+export const AUTH_ALGORITHM: Algorithms = "aes-256-cbc"; // WARNING: This will break all existing keys if you change this.
+export const AUTH_KEY_LENGTH = [16, 32];
 
 export const LOCALE_DEFAULT = "en-US";
 export const LOCALE_DIRECTORY = resolve(__dirname, "locales");

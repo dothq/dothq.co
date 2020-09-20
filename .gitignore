@@ -71,4 +71,7 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# NEVER REMOVE THIS FROM .GITIGNORE
+# YOU COULD POTENTIALLY BE EXPOSING SENSITIVE DATA
 credentials.json
+*.key
