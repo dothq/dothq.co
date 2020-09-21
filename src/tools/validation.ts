@@ -11,5 +11,5 @@ export const validUsername = (username: string) => {
 }
 
 export const validPassword = (password: string) => {
-    return checkPasswordStrength(password).id >= 1;
+    return checkPasswordStrength(password).id >= 2;
 }

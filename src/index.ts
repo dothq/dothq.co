@@ -1,25 +1,24 @@
 import { Sequelize } from "sequelize";
 
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
 
 import { Server } from './server';
 
 import { LocaleManager } from './managers/locale';
 import { RouteManager } from './managers/router';
 import { ErrorManager } from './managers/error';
-
-import { API_PORT } from './config';
-
-import { log } from './tools/log';
-
+import { TokenManager } from "./managers/token";
 import { WebManager } from './managers/web';
+
+import { Req, Res } from "../types";
+import { API_PORT } from './config';
+import { log } from './tools/log';
 
 import * as credentials from '../credentials.json';
 
-import { Req, Res } from "../types";
+export const sequelize = new Sequelize(credentials.POSTGRES_URI)
 
-export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false })
+sequelize.sync({ force: true })
 
 sequelize
   .authenticate()
@@ -36,6 +35,7 @@ export class Controller extends Server {
     public locales: LocaleManager;
     public router: RouteManager;
     public errors: ErrorManager;
+    public token: TokenManager;
 
     private web: WebManager;
 
@@ -43,6 +43,7 @@ export class Controller extends Server {
         super();
 
         this.locales = new LocaleManager(this);
+        this.token = new TokenManager();
 
         this.locales.on("ready", () => {
             this.app.use(bodyParser.json())

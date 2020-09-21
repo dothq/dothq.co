@@ -68,4 +68,8 @@ export class TokenManager {
 
         return this.disconnect(base64);
     }
+
+    public createUserToken({ data }: { data: { id: string, email: string, password: string } }) {
+        return this.create({ data, expires: "2d" })
+    }
 }
