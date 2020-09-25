@@ -16,7 +16,7 @@ import { log } from './tools/log';
 
 import * as credentials from '../credentials.json';
 
-export const sequelize = new Sequelize(credentials.POSTGRES_URI)
+export const sequelize = new Sequelize(credentials.POSTGRES_URI);
 
 sequelize.sync({ force: true })
 

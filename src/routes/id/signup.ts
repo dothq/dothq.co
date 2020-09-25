@@ -39,6 +39,8 @@ export default {
             let exitCode = 200;
             let sleepTime = 1250;
 
+            console.log(User)
+
             const userExists = await User.findOne({ where: { email: req.body.email } }).then(exists => { return !!exists })
 
             if(userExists) {
@@ -48,7 +50,7 @@ export default {
                 const user = await User.create(req.body);
 
                 const token = res.api.token.createUserToken({ data: { ...req.body, id: user.id } });
-                await user.update({ ...user, active_token: token });
+                await user.update({ ...user, activetoken: token });
             }
 
             await sleep(sleepTime);

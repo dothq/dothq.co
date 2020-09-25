@@ -1,8 +1,24 @@
-version: "3.4"
-
+version: "3.8"
+   
 services:
-  main:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=dothq
+      - POSTGRES_USER=postgres
+  web:
     build: .
-    restart: always
+    command: npm run serve
+    volumes:
+      - .:/code
     ports:
-      - 3001:3001
+      - "3001:3001"
+    depends_on:
+      - db
+  api:
+    build: .
+    command: npm run prod-api
+    ports:
+      - "3002:4000"
+    depends_on:
+      - db

@@ -10,7 +10,6 @@ export interface User extends Model {
   email: string;
   password: string;
   permissions: string[];
-  active_token?: string;
 }
 
 export default sequelize.define<User>("User", {
@@ -35,10 +34,6 @@ export default sequelize.define<User>("User", {
     defaultValue: () => {
       return ["read.self.account", "write.self.account"]
     }
-  },
-  active_token: {
-    type: DataTypes.STRING,
-    defaultValue: ""
   }
 });
 
