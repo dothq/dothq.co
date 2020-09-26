@@ -3,9 +3,14 @@ import * as Joi from 'joi';
 import { Req, Res } from "../../../types";
 
 import User from "../../models/User";
+
 import { api } from "../..";
 
 import { validPassword, validEmail } from '../../tools/validation';
+import { makeId } from '../../tools/id';
+import { encrypt, encryptWithSalt } from '../../tools/encrypt';
+
+import * as credentials from '../../../credentials.json';
 
 const sleep = (ms: number) => {
     return new Promise((resolve) => {
@@ -36,26 +41,27 @@ export default {
     }),
     handlers: {
         POST: async (req: Req, res: Res) => {
-            let exitCode = 200;
-            let sleepTime = 1250;
+            const userExists = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, credentials.EMAIL_SALT) } }).then(exists => { return !!exists })
 
-            console.log(User)
+            await sleep(userExists ? 500 : 1250);
 
-            const userExists = await User.findOne({ where: { email: req.body.email } }).then(exists => { return !!exists })
+            if(!userExists) {
+                const activeToken = res.api.token.createUserToken({ data: req.body });
+                const password = await encrypt(req.body.password);
+                const email = await encryptWithSalt(req.body.email, credentials.EMAIL_SALT);
 
-            if(userExists) {
-                exitCode = 4009;
-                sleepTime = 500;
-            } else {
-                const user = await User.create(req.body);
-
-                const token = res.api.token.createUserToken({ data: { ...req.body, id: user.id } });
-                await user.update({ ...user, activetoken: token });
+                req.body = { 
+                    ...req.body, 
+                    id: makeId(), 
+                    activeToken,
+                    email,
+                    password
+                }
+                
+                await User.create(req.body)
             }
 
-            await sleep(sleepTime);
-
-            api.errors.stop(exitCode, res);
+            api.errors.stop(userExists ? 4009 : 200, res);
         }
     }
 }

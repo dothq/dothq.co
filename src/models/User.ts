@@ -10,6 +10,7 @@ export interface User extends Model {
   email: string;
   password: string;
   permissions: string[];
+  activeToken: string;
 }
 
 export default sequelize.define<User>("User", {
@@ -29,6 +30,10 @@ export default sequelize.define<User>("User", {
   password: {
     type: DataTypes.STRING,
   },
+  activeToken: {
+    type: DataTypes.STRING(10000),
+    allowNull: true
+  },
   permissions: {
     type: DataTypes.ARRAY(DataTypes.STRING),
     defaultValue: () => {
@@ -37,4 +42,4 @@ export default sequelize.define<User>("User", {
   }
 });
 
-sequelize.sync()
+sequelize.sync({ alter: true });

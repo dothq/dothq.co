@@ -24,7 +24,6 @@ export default class APIController {
                     ok: res.status.toString().startsWith("2")
                 })
             }).catch(e => {
-                console.log(e)
                 reject(e)
             });
         })
