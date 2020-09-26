@@ -27,11 +27,6 @@ export class WebManager {
             log("info", "Running in development mode.")
             log("warning", api.locales.applyContext("en-US", "api_logs_development").data)
 
-            app.use((req, res, next) => {
-                console.log(`${req.method} ${req.path} => ${res.statusCode}`)
-                next();
-            })
-
             app.use('/', proxy('http://localhost:8000', {
                 filter: function (req, res) { 
                   return new Promise(function (resolve) {                     

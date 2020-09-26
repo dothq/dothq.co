@@ -26,6 +26,8 @@ export const EMAIL_REGEX = /(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+
 export const PASSWORD_REGEX = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#$%^&*]))|((?=.*[a-z])(?=.*[!@#$%^&*]))|((?=.*[0-9])(?=.*[!@#$%^&*])))(?=.{6,})/;
 export const USERNAME_REGEX = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/;
 
+export const ID_REDIRECT_AFTER_LOGIN = "/";
+
 export const LOG_CTX_COLOURS = {
     info: 'blue',
     warning: 'yellow',

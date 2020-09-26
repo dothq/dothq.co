@@ -75,8 +75,6 @@ const SignupPage = ({ location }) => {
 
         let resp = await registerWithCredentials({ username, email, password })
 
-        console.log(resp)
-
         if(resp.ok == false) {
             setDisabled(false)
 

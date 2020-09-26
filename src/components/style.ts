@@ -978,3 +978,26 @@ export const HeaderItemBox = styled.div`
     position: absolute;
     z-index: 9999;
 `;
+
+export const ButtonTicker = styled.div`
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: 100%;
+`;
+
+export const TickerItem = styled.span`
+    transition: 0.6s opacity;
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    ${({ visible, bg }: { visible: boolean; bg: string }) => css`
+        opacity: ${visible ? 1 : 0};
+        background-color: ${bg};
+    `};
+`;

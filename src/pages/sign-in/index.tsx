@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField } from "../../components/style"
+import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField, ButtonTicker, TickerItem } from "../../components/style"
 import { Link, navigate } from "gatsby"
 
 import { ButtonV2 } from '../../components/ButtonV2'
@@ -15,6 +15,7 @@ import { parse } from "search-params";
 import { Thinker } from "../../components/Thinker"
 import { validEmail, validPassword } from "../../tools/validation"
 import { isBrowser } from "../../helpers/login"
+import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
 
 const SigninPage = ({ location }) => {
     const params = parse(location.search)
@@ -24,13 +25,16 @@ const SigninPage = ({ location }) => {
     const usernameRef = React.createRef<HTMLInputElement>();
     const rememberMeRef = React.createRef<HTMLInputElement>();
 
+    const [isCaps, setCaps] = React.useState(false);
+
     const [done, sd] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
 
-    React.useEffect(() => sd(true))
+    const [error, setError] = React.useState("");
+    const [status, setStatus] = React.useState("idle");
 
-    const user = new UserController();
+    const user = UserController;
 
     const renderButtonDisabled = () => {
         if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
@@ -46,8 +50,36 @@ const SigninPage = ({ location }) => {
     }
 
     React.useEffect(() => {
+        sd(true)
+
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
+
+        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        if(location.state && location.state.email) {
+            if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
+
+            const emailValid = validEmail((location.state.email as string));
+
+            emailRef.current.value = emailValid ? (location.state.email as string) : "";
+        }
+        if(location.state && location.state.password) {
+            if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
+
+            const passwordValid = (location.state.password as string).length == 0 ? false : validPassword((location.state.password as string));
+
+            passwordRef.current.value = passwordValid ? (location.state.password as string) : "";
+        }
+
+        if(
+            location.state.email && 
+            location.state.password && 
+            validEmail((location.state.email as string)) && 
+            ((location.state.password as string).length == 0 ? false : validPassword((location.state.password as string)))
+        ) {
+            onSignInClick();
+            navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`)
+        }
     })
 
     const onSignInClick = () => {
@@ -71,7 +103,14 @@ const SigninPage = ({ location }) => {
                 navigate(params.next ? (next as string) : "/");
             }
         }).catch(e => {
-            console.error(e);
+            setLoading(false);
+
+            setError(e.response.data.message)
+            setStatus("error");
+
+            setTimeout(() => {
+                setStatus("idle");
+            }, 2000);
         });
     }
 
@@ -100,7 +139,10 @@ const SigninPage = ({ location }) => {
                             </AuthField>
 
                             <AuthField style={{ marginTop: '18px', width: '525px' }}>
-                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} />
+                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} style={{ paddingRight: 0 }} />
+                                <div style={{ margin: '18px 18px 18px 0' }}>
+                                    {isCaps && <img style={{ maxWidth: '24px', height: '24px' }} src={require("../../images/caps.svg")}></img>}
+                                </div>
                                 <AuthPlaceholder>Password</AuthPlaceholder>
                             </AuthField>
 
@@ -126,7 +168,10 @@ const SigninPage = ({ location }) => {
                                     loading={loading}
                                     disabled={disabled}
                                 >
-                                    Sign in
+                                    <ButtonTicker>
+                                        <TickerItem bg={"#4965FF"} visible={status == "idle"}>Sign in</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "error"}>{error}</TickerItem>
+                                    </ButtonTicker>
                                 </ButtonV2>
 
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>

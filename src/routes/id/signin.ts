@@ -6,6 +6,10 @@ import { api } from "../..";
 import User from "../../models/User";
 import { validPassword, validEmail } from '../../tools/validation';
 
+import { encryptWithSalt, compare } from '../../tools/encrypt';
+
+import * as credentials from '../../../credentials.json';
+
 const sleep = (ms: number) => {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
@@ -29,26 +33,13 @@ export default {
             // Add a delay to slow down brute force attacks on accounts
             await sleep(2000);
 
-            const user = await User.findOne({ where: { email: req.body.email } });
+            const user = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, credentials.EMAIL_SALT) } });
 
             if(!user) return api.errors.stop(4013, res);
 
-            // let token = user.active_token || "";
+            if(!await compare(req.body.password, user.password)) return api.errors.stop(4014, res);
 
-            // if(!user.active_token) {
-            //     console.log("Token does not exist, creating...")
-
-            //     token = res.api.token.createUserToken({ data: { ...req.body, id: user.id } });
-
-            //     console.log({ ...user, active_token: token })
-
-            //     await user.update({ ...user, active_token: token });
-
-            //     console.log("Created fresh token.")
-            // }
-
-            // if(user) api.errors.stop(200, res, [], { userId: user.id, token });
-            // else api.errors.stop(4013, res);
+            api.errors.stop(200, res, [], { result: { userId: user.id, token: user.activeToken } });
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }

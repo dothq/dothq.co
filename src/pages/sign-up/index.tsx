@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField } from "../../components/style"
+import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField, ButtonTicker, TickerItem } from "../../components/style"
 import { Logo } from "../../components/Header/style"
 import { Link, navigate } from "gatsby"
 
@@ -11,8 +11,15 @@ import { ButtonV2 } from '../../components/ButtonV2'
 import UserController from "../../controllers/User"
 import { isBrowser } from "../../helpers/login"
 import { validEmail, validPassword, validUsername } from "../../tools/validation"
+import { ErrorJSON } from "../../types"
+
+import { parse } from "search-params"
+import { TokenManager } from "../../managers/token"
+import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
 
 const SignupPage = ({ location }) => {
+    const params = parse(location.search)
+
     const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
     const usernameRef = React.createRef<HTMLInputElement>();
@@ -21,6 +28,9 @@ const SignupPage = ({ location }) => {
     const [done, sd] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
+    const [btnDisabled, setBTNDisabled] = React.useState(false);
+    const [error, setError] = React.useState("");
+    const [status, setStatus] = React.useState("idle");
 
     React.useEffect(() => sd(true))
 
@@ -28,7 +38,7 @@ const SignupPage = ({ location }) => {
     const [emailOK, setEmailOK] = React.useState(-1);
     const [usernameOK, setUsernameOK] = React.useState(-1);
 
-    const user = new UserController();
+    const user = UserController;
 
     const renderButtonDisabled = () => {
         if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current) return;
@@ -40,13 +50,15 @@ const SignupPage = ({ location }) => {
         const emailValid = validEmail(email);
         const passwordValid = password.length == 0 ? false : validPassword(password);
 
-        if(email.length == 0 || password.length == 0 || username.length == 0 || !emailValid || !passwordValid) return setDisabled(true);
-        else return setDisabled(false);
+        if(email.length == 0 || password.length == 0 || username.length == 0 || !emailValid || !passwordValid) return setBTNDisabled(true);
+        else return setBTNDisabled(false);
     }
 
     React.useEffect(() => {
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
+
+        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
     })
 
     const onPasswordKeyUp = () => {
@@ -74,14 +86,41 @@ const SignupPage = ({ location }) => {
     }
 
     const onSignUpClick = () => {
-        if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current) return;
-
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-
-        if(email.length == 0 || password.length == 0) return;
+        if(!emailRef || !passwordRef || !rememberMeRef || !usernameRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current || !usernameRef.current) return;
 
         setLoading(!loading);
+
+        const username = usernameRef.current.value;
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        const rememberMe = rememberMeRef.current.checked;
+
+        if(email.length == 0 || password.length == 0 || username.length == 0) return;
+
+        user.create({ email, password, username }).then((r: ErrorJSON) => {
+            setLoading(false);
+            setStatus("idle");
+
+            if(r.ok) {
+                if(rememberMe) console.log("Remembering you.")
+                else console.log("I'm a little forgetful, so I won't be remembering you.")
+
+                const token = encodeURIComponent(btoa(JSON.stringify({ email: btoa(email), password: btoa(password) })))
+
+                console.log(token)
+
+                navigate(`/sign-in?next=${params.next ? params.next : ID_REDIRECT_AFTER_LOGIN}`, { state: { email, password } })
+            }
+        }).catch(e => {
+            setLoading(false);
+
+            setError(e.response.data.message)
+            setStatus("error");
+            
+            setTimeout(() => {
+                setStatus("idle");
+            }, 2000);
+        });
     }
 
     const onGitHubSignUpClick = () => {
@@ -99,10 +138,10 @@ const SignupPage = ({ location }) => {
                         <div>
                             <AuthLogo />
                             <AuthTitle>One account for everything Dot.</AuthTitle>
-                            <AuthDesc>You can either create a Dot ID using your email address or using GitHub. <Link to={"/sign-in"}><AuthLink>Already have an ID?</AuthLink></Link></AuthDesc>
+                            <AuthDesc>You can either create a Dot ID using your email address or using GitHub. <br/><br/><Link to={"/sign-in"}><AuthLink>Already have an ID?</AuthLink></Link></AuthDesc>
                         </div>
 
-                        <div style={{ marginTop: '92px', opacity: loading ? 0.5 : 1, transition: "0.3s opacity", pointerEvents: loading ? "none" : "all" }}>
+                        <div style={{ marginTop: '92px', opacity: disabled ? 0.5 : loading ? 0.5 : 1, transition: "0.3s opacity", pointerEvents: disabled ? "none" : loading ? "none" : "all" }}>
                             <AuthField style={{ width: '525px' }} passwordStrength={usernameOK}>
                                 <AuthInput placeholder={" "} ref={usernameRef} onKeyUp={() => onUsernameKeyUp()} />
                                 <AuthPlaceholder>Username</AuthPlaceholder>
@@ -134,9 +173,12 @@ const SignupPage = ({ location }) => {
                                     fs={18} 
                                     onClick={() => onSignUpClick()}
                                     loading={loading}
-                                    disabled={disabled}
+                                    disabled={btnDisabled}
                                 >
-                                    Sign up with email
+                                    <ButtonTicker>
+                                        <TickerItem bg={"#4965FF"} visible={status == "idle"}>Sign up with email</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "error"}>{error}</TickerItem>
+                                    </ButtonTicker>
                                 </ButtonV2>
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 

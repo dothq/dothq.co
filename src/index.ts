@@ -16,9 +16,7 @@ import { log } from './tools/log';
 
 import * as credentials from '../credentials.json';
 
-export const sequelize = new Sequelize(credentials.POSTGRES_URI);
-
-sequelize.sync({ force: true })
+export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false });
 
 sequelize
   .authenticate()
@@ -79,3 +77,8 @@ export class Controller extends Server {
 export const api = new Controller();
 
 api.listen(API_PORT);
+
+process.on('unhandledRejection', (err: Error, p) => {
+    if(err.message == "Cannot set headers after they are sent to the client") return;
+    else console.error(err)
+});
