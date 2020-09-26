@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField } from "../../components/style"
+import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField, ButtonTicker, TickerItem } from "../../components/style"
 import { Link, navigate } from "gatsby"
 
 import { ButtonV2 } from '../../components/ButtonV2'
@@ -29,6 +29,9 @@ const SigninPage = ({ location }) => {
     const [done, sd] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
+
+    const [error, setError] = React.useState("");
+    const [showError, setSE] = React.useState(false);
 
     React.useEffect(() => sd(true))
 
@@ -73,7 +76,13 @@ const SigninPage = ({ location }) => {
                 navigate(params.next ? (next as string) : "/");
             }
         }).catch(e => {
-            console.error(e);
+            setError(e.response.data.message)
+            setSE(true);
+            setLoading(false);
+
+            setTimeout(() => {
+                setSE(false);
+            }, 2000);
         });
     }
 
@@ -131,7 +140,10 @@ const SigninPage = ({ location }) => {
                                     loading={loading}
                                     disabled={disabled}
                                 >
-                                    Sign in
+                                    <ButtonTicker>
+                                        <TickerItem bg={"#4965FF"} visible={!showError}>Sign in</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={showError}>{error}</TickerItem>
+                                    </ButtonTicker>
                                 </ButtonV2>
 
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>

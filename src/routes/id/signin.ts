@@ -6,7 +6,7 @@ import { api } from "../..";
 import User from "../../models/User";
 import { validPassword, validEmail } from '../../tools/validation';
 
-import { encryptWithSalt } from '../../tools/encrypt';
+import { encryptWithSalt, compare } from '../../tools/encrypt';
 
 import * as credentials from '../../../credentials.json';
 
@@ -37,8 +37,9 @@ export default {
 
             if(!user) return api.errors.stop(4013, res);
 
-            if(user) api.errors.stop(200, res, [], { result: { userId: user.id, token: user.activeToken } });
-            else api.errors.stop(4013, res);
+            if(!await compare(req.body.password, user.password)) return api.errors.stop(4014, res);
+
+            api.errors.stop(200, res, [], { result: { userId: user.id, token: user.activeToken } });
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }
