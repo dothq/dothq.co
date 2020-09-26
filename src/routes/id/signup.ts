@@ -22,7 +22,7 @@ export default {
     route: '/id/sign-up',
     accepts: ['POST'],
     flags: { 
-        requireChallenge: false /* TODO change requireChallenge back to true for /id/sign-up */
+        requireChallenge: process.env.NODE_ENV == "production" ? true : false
     },
     bodySchema: Joi.object({
         username: Joi.string()
@@ -57,7 +57,7 @@ export default {
                     email,
                     password
                 }
-                
+
                 await User.create(req.body)
             }
 
