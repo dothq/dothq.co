@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ production ]
+  pull_request:
+    branches: [ production ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1.4.3
+
+      - name: Deploy via SSH
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /home/enderdev
+            ls
+          host: ${{ secrets.AH }}
+          user: ${{ secrets.AL }}
+          key: ${{ secrets.AP }}
+          port: ${{ secrets.APRT }}
