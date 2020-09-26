@@ -15,6 +15,7 @@ import { parse } from "search-params";
 import { Thinker } from "../../components/Thinker"
 import { validEmail, validPassword } from "../../tools/validation"
 import { isBrowser } from "../../helpers/login"
+import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
 
 const SigninPage = ({ location }) => {
     const params = parse(location.search)
@@ -31,9 +32,7 @@ const SigninPage = ({ location }) => {
     const [disabled, setDisabled] = React.useState(false);
 
     const [error, setError] = React.useState("");
-    const [showError, setSE] = React.useState(false);
-
-    React.useEffect(() => sd(true))
+    const [status, setStatus] = React.useState("idle");
 
     const user = UserController;
 
@@ -51,8 +50,36 @@ const SigninPage = ({ location }) => {
     }
 
     React.useEffect(() => {
+        sd(true)
+
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
+
+        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        if(location.state && location.state.email) {
+            if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
+
+            const emailValid = validEmail((location.state.email as string));
+
+            emailRef.current.value = emailValid ? (location.state.email as string) : "";
+        }
+        if(location.state && location.state.password) {
+            if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
+
+            const passwordValid = (location.state.password as string).length == 0 ? false : validPassword((location.state.password as string));
+
+            passwordRef.current.value = passwordValid ? (location.state.password as string) : "";
+        }
+
+        if(
+            location.state.email && 
+            location.state.password && 
+            validEmail((location.state.email as string)) && 
+            ((location.state.password as string).length == 0 ? false : validPassword((location.state.password as string)))
+        ) {
+            onSignInClick();
+            navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`)
+        }
     })
 
     const onSignInClick = () => {
@@ -76,12 +103,13 @@ const SigninPage = ({ location }) => {
                 navigate(params.next ? (next as string) : "/");
             }
         }).catch(e => {
-            setError(e.response.data.message)
-            setSE(true);
             setLoading(false);
 
+            setError(e.response.data.message)
+            setStatus("error");
+
             setTimeout(() => {
-                setSE(false);
+                setStatus("idle");
             }, 2000);
         });
     }
@@ -141,8 +169,8 @@ const SigninPage = ({ location }) => {
                                     disabled={disabled}
                                 >
                                     <ButtonTicker>
-                                        <TickerItem bg={"#4965FF"} visible={!showError}>Sign in</TickerItem>
-                                        <TickerItem bg={"#4965FF"} visible={showError}>{error}</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "idle"}>Sign in</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "error"}>{error}</TickerItem>
                                     </ButtonTicker>
                                 </ButtonV2>
 

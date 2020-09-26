@@ -14,6 +14,8 @@ import { validEmail, validPassword, validUsername } from "../../tools/validation
 import { ErrorJSON } from "../../types"
 
 import { parse } from "search-params"
+import { TokenManager } from "../../managers/token"
+import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
 
 const SignupPage = ({ location }) => {
     const params = parse(location.search)
@@ -28,7 +30,7 @@ const SignupPage = ({ location }) => {
     const [disabled, setDisabled] = React.useState(false);
     const [btnDisabled, setBTNDisabled] = React.useState(false);
     const [error, setError] = React.useState("");
-    const [showError, setSE] = React.useState(false);
+    const [status, setStatus] = React.useState("idle");
 
     React.useEffect(() => sd(true))
 
@@ -55,6 +57,8 @@ const SignupPage = ({ location }) => {
     React.useEffect(() => {
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
+
+        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
     })
 
     const onPasswordKeyUp = () => {
@@ -95,26 +99,26 @@ const SignupPage = ({ location }) => {
 
         user.create({ email, password, username }).then((r: ErrorJSON) => {
             setLoading(false);
-            setError("")
-            setSE(false);
+            setStatus("idle");
 
             if(r.ok) {
                 if(rememberMe) console.log("Remembering you.")
                 else console.log("I'm a little forgetful, so I won't be remembering you.")
 
-                console.log(r)
+                const token = encodeURIComponent(btoa(JSON.stringify({ email: btoa(email), password: btoa(password) })))
 
-                const next = ((params.next as string).startsWith("/") && !(params.next as string).includes(".") ? params.next : "/" as string);
+                console.log(token)
 
-                navigate(params.next ? (next as string) : "/");
+                navigate(`/sign-in?next=${params.next ? params.next : ID_REDIRECT_AFTER_LOGIN}`, { state: { email, password } })
             }
         }).catch(e => {
-            setError(e.response.data.message)
-            setSE(true);
             setLoading(false);
 
+            setError(e.response.data.message)
+            setStatus("error");
+            
             setTimeout(() => {
-                setSE(false);
+                setStatus("idle");
             }, 2000);
         });
     }
@@ -172,8 +176,8 @@ const SignupPage = ({ location }) => {
                                     disabled={btnDisabled}
                                 >
                                     <ButtonTicker>
-                                        <TickerItem bg={"#4965FF"} visible={!showError}>Sign up with email</TickerItem>
-                                        <TickerItem bg={"#4965FF"} visible={showError}>{error}</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "idle"}>Sign up with email</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={status == "error"}>{error}</TickerItem>
                                     </ButtonTicker>
                                 </ButtonV2>
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
