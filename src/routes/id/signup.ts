@@ -20,7 +20,7 @@ const sleep = (ms: number) => {
 
 export default {
     route: '/id/sign-up',
-    accepts: ['POST'],
+    accepts: ['POST', 'OPTIONS'],
     flags: { 
         requireChallenge: process.env.NODE_ENV == "production" ? true : false
     },
@@ -61,7 +61,8 @@ export default {
                 await User.create(req.body)
             }
 
-            api.errors.stop(userExists ? 4009 : 200, res);
-        }
+            api.errors.stop(userExists ? 4009 : 200, res, [], userExists ? { fields: ["email"] } : {});
+        },
+        OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }
 }

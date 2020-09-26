@@ -24,13 +24,15 @@ const SigninPage = ({ location }) => {
     const usernameRef = React.createRef<HTMLInputElement>();
     const rememberMeRef = React.createRef<HTMLInputElement>();
 
+    const [isCaps, setCaps] = React.useState(false);
+
     const [done, sd] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
 
     React.useEffect(() => sd(true))
 
-    const user = new UserController();
+    const user = UserController;
 
     const renderButtonDisabled = () => {
         if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
@@ -100,7 +102,10 @@ const SigninPage = ({ location }) => {
                             </AuthField>
 
                             <AuthField style={{ marginTop: '18px', width: '525px' }}>
-                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} />
+                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} style={{ paddingRight: 0 }} />
+                                <div style={{ margin: '18px 18px 18px 0' }}>
+                                    {isCaps && <img style={{ maxWidth: '24px', height: '24px' }} src={require("../../images/caps.svg")}></img>}
+                                </div>
                                 <AuthPlaceholder>Password</AuthPlaceholder>
                             </AuthField>
 
