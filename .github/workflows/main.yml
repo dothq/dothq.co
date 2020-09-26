@@ -19,9 +19,7 @@ jobs:
       - name: Deploy via SSH
         uses: fifsky/ssh-action@master
         with:
-          command: |
-            cd /home/enderdev
-            ls
+          command: cd /home/enderdev && ls
           host: ${{ secrets.AH }}
           user: ${{ secrets.AL }}
           pass: ${{ secrets.AP }}
