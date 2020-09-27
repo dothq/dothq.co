@@ -6,3 +6,30 @@
     color: #0070F3;
     text-decoration: underline;
 }
+
+p {
+	max-width: inherit !important;
+	font-size: 15px !important;
+	text-align: left;
+    margin-bottom: 14px;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+li {
+	margin-bottom: calc(0.45rem / 2) !important;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 1.45rem !important;
+}
+
+blockquote {
+    border-left: 5px solid #00000042;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+blockquote > p {
+    margin-left: 1.45rem;
+}

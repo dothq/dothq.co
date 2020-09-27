@@ -55,6 +55,7 @@
     "react-helmet": "^5.2.1",
     "react-hooks-global-state": "^1.0.0",
     "react-loading-skeleton": "^2.0.1",
+    "react-markdown": "^4.3.1",
     "react-tracked": "^1.4.0",
     "search-params": "^3.0.0",
     "sequelize": "^6.3.5",
