@@ -70,7 +70,7 @@ class DotBrowserPage extends React.Component {
     render() {
         return (
             <>
-                <Layout darkNav={false} noHero>
+                <Layout darkNav={true} noHero>
                     <SEO title="Download Dot Browser" />
                     <HeroCover h={563} background={"black"} style={{ marginBottom: '80px' }}>
                         <HCC w={1330} top={86} bottom={96} style={{ display: 'flex', flexDirection: 'row' }}>

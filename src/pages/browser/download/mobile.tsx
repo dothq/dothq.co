@@ -31,7 +31,7 @@ class DotBrowserMobilePage extends React.Component {
     render() {
         return (
             <>
-                <Layout darkNav={false} noHero>
+                <Layout darkNav={true} noHero>
                     <SEO title="Download Dot Browser for Mobile" />
                     <HeroCover h={563} background={"black"} style={{ marginBottom: '80px', height: 'fit-content' }}>
                         <HCC w={1330} top={86} bottom={96} style={{ display: 'flex', flexDirection: 'row', paddingTop: '64px', paddingBottom: '96px' }}>

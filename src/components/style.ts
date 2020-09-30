@@ -756,12 +756,6 @@ export const IrisLeft = styled(Iris)``;
 export const IrisRight = styled(Iris)``;
 
 const NFS = css`
-    .nav {
-        position: absolute;
-        top: 0;
-        margin-bottom: 0;
-        z-index: 100;
-    }
 
     @media screen and (max-width: 1280px) {
         .db-download-container {

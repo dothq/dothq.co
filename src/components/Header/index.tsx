@@ -18,7 +18,7 @@ const onLogoContextMenu = (e) => {
     navigate("/download")
 }
 
-const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
+const Header = ({ children, isFixed, headerRef, isDark }) => {
     const [onTop, setOnTop] = React.useState(false);
 
     const boxRef = React.createRef<HTMLDivElement>();
@@ -94,16 +94,17 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
 
     return (
         <StyledHeader onTop={onTop} className={"nav"} ref={headerRef} isDark={isDark}>
+            {children}
             <Container>
                 <div className={"logotype"}>
                     <Link to={"/"}>
-                        <Logo isDark={isDark} onContextMenu={onLogoContextMenu} />
+                        <Logo isDark={!isDark} onContextMenu={onLogoContextMenu} />
                     </Link>
                 </div>
                 <div className={"links"} onMouseOver={onLinksHover}>
                     <a style={{ height: '100%' }}>
                         <NavItem 
-                            isDark={isDark} 
+                            isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
                             onMouseOver={(e) => onHeaderLinkHover(e)}
                             onMouseLeave={onHeaderLinkMouseOff}
@@ -111,7 +112,7 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}> 
                         <NavItem 
-                            isDark={isDark} 
+                            isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
                             onMouseOver={(e) => onHeaderLinkHover(e)}
                             onMouseLeave={onHeaderLinkMouseOff}
@@ -119,7 +120,7 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}>
                         <NavItem 
-                            isDark={isDark} 
+                            isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
                             onMouseOver={(e) => onHeaderLinkHover(e)}
                             onMouseLeave={onHeaderLinkMouseOff}
@@ -127,7 +128,7 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                     </a>
                     <a target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
                         <NavItem 
-                            isDark={isDark} 
+                            isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
                             onMouseOver={(e) => onHeaderLinkHover(e)}
                             onMouseLeave={onHeaderLinkMouseOff}
@@ -137,10 +138,10 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
                 <div className={"nbtn"}>
                     {!user && <>
                         <Link to={"/sign-in"}>
-                            <ButtonV2 background={!isDark ? 'white' : 'black'} color={!isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                            <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
                         </Link>
                         <Link to={"/sign-up"}>
-                            <ButtonV2 background={"transparent"} color={!isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                            <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
                         </Link>
                     </>}
 
@@ -159,7 +160,7 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
 }
 
 Header.propTypes = {
-    siteTitle: PropTypes.string,
+    children: PropTypes.node,
     isFixed: PropTypes.bool,
     headerRef: PropTypes.any
   }

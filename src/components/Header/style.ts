@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components';
 import { TextButton } from '../Button';
 
 export const StyledHeader = styled.div`
-    margin-bottom: 84px;
-    height: 64px;
     width: 100%;
     position: fixed;
     top: 0;
     z-index: 1000;
-    background-color: white;
     transition: 0.3s box-shadow;
 
-    ${({ onTop }: { onTop: boolean }) => css`
+    ${({ onTop, isDark }: { onTop: boolean; isDark: boolean }) => css`
+        background-color: ${!isDark ? "white" : "black"};
         box-shadow: ${onTop ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : ""};
     `};
 `
