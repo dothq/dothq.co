@@ -4,13 +4,13 @@ import React from "react"
 import { StyledHeader, Container, Logo, Flex, NavItem } from "./style"
 import { Button, TextButton, IconButton } from "../Button"
 import { navigate } from "gatsby"
-import FeatherIcon from '../../pages/browser/download/node_modules/feather-icons-react'
 
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import { useGlobalState } from "../../context"
 import { Avatar, HeaderItemBox } from "../style"
 import Skeleton from "react-loading-skeleton"
 import { ButtonV2 } from "../ButtonV2"
+import { isBrowser } from "../../helpers/login"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -19,6 +19,8 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
+    const [onTop, setOnTop] = React.useState(false);
+
     const boxRef = React.createRef<HTMLDivElement>();
 
     const themeContext = React.useContext(ThemeManagerContext)
@@ -83,8 +85,15 @@ const Header = ({ siteTitle, isFixed, headerRef, isDark }) => {
 
     }
 
+    React.useState(() => {
+        isBrowser() && window.addEventListener("scroll", () => {
+            if(window.scrollY >= 100) setOnTop(true)
+            else setOnTop(false)
+        })
+    })
+
     return (
-        <StyledHeader className={"nav"} isFixed={isFixed} ref={headerRef} isDark={isDark}>
+        <StyledHeader onTop={onTop} className={"nav"} ref={headerRef} isDark={isDark}>
             <Container>
                 <div className={"logotype"}>
                     <Link to={"/"}>

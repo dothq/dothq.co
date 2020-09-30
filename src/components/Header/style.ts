@@ -5,17 +5,14 @@ export const StyledHeader = styled.div`
     margin-bottom: 84px;
     height: 64px;
     width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    transition: 0.3s box-shadow;
 
-    ${({ isFixed }: { isFixed: boolean }) => css`
-        top: ${isFixed ? 0 : ''};
-
-        ${isFixed ? `
-            position: fixed;
-            z-index: 9999;
-            background-color: #00000075;
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid #333333;
-        ` : ''}
+    ${({ onTop }: { onTop: boolean }) => css`
+        box-shadow: ${onTop ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : ""};
     `};
 `
 

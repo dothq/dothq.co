@@ -26,8 +26,6 @@ import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 
-import axios from 'axios';
-
 import { Banner } from "./Banner"
 
 const GS = createGlobalStyle`${BackgroundInject}`;

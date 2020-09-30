@@ -39,7 +39,7 @@ export const BackgroundInject = css`
         }
     }
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1390px) {
         .logotype {
             padding-left: 15px;
         }
@@ -48,9 +48,6 @@ export const BackgroundInject = css`
             padding-right: 15px;
         }
 
-        .ending {
-            margin: 0 15px;
-        }
     }
 
     @media screen and (max-width: 626px) {

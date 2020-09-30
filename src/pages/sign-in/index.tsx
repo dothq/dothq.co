@@ -22,7 +22,6 @@ const SigninPage = ({ location }) => {
 
     const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
-    const usernameRef = React.createRef<HTMLInputElement>();
     const rememberMeRef = React.createRef<HTMLInputElement>();
 
     const [isCaps, setCaps] = React.useState(false);
