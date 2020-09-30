@@ -56,14 +56,14 @@ const SigninPage = ({ location }) => {
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
 
         if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
-        if(location.state && location.state.email) {
+        if(isBrowser() && history.state && location.state && location.state.email) {
             if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
 
             const emailValid = validEmail((location.state.email as string));
 
             emailRef.current.value = emailValid ? (location.state.email as string) : "";
         }
-        if(location.state && location.state.password) {
+        if(isBrowser() && history.state && location.state && location.state.password) {
             if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
 
             const passwordValid = (location.state.password as string).length == 0 ? false : validPassword((location.state.password as string));
@@ -72,6 +72,8 @@ const SigninPage = ({ location }) => {
         }
 
         if(
+            isBrowser() && 
+            history.state && 
             location.state.email && 
             location.state.password && 
             validEmail((location.state.email as string)) && 

@@ -75,8 +75,8 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
     setAlfBuilds(true)
 
-    axios.get('https://dothq.co/api/builds/all')
-      .then(res => res.data.results && setBuilds(res.data.results))
+    // axios.get('https://dothq.co/api/builds/all')
+    //   .then(res => res.data.results && setBuilds(res.data.results))
 
   }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 

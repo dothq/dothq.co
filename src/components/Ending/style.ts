@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledEnding = styled.div`
     margin-bottom: 46px;
+    padding: 0 38px;
 `;
 
 export const ContainerParent = styled.div`
