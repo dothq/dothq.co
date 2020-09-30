@@ -26,8 +26,6 @@ import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 
-import axios from 'axios';
-
 import { Banner } from "./Banner"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
@@ -75,22 +73,28 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
     setAlfBuilds(true)
 
-    axios.get('https://dothq.co/api/builds/all')
-      .then(res => res.data.results && setBuilds(res.data.results))
+    // axios.get('https://dothq.co/api/builds/all')
+    //   .then(res => res.data.results && setBuilds(res.data.results))
 
   }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
-      {process.env.NODE_ENV === "development" && (
-        <Banner>
-          <span>
-            You're running in development mode. Using <code>http://localhost:4000</code> as the API.
-          </span>
-        </Banner>
-      )}
-      {!blank && <Header className={"nav"} siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={typeof(darkNav) == "undefined" ? true : darkNav} />}
+      {!blank && <Header 
+        className={"nav"} 
+        siteTitle={data.site.siteMetadata.title} 
+        isFixed={false} 
+        isDark={typeof(darkNav) == "undefined" ? false : darkNav}
+      >
+        {process.env.NODE_ENV === "development" && (
+          <Banner>
+            <span>
+              You're running in development mode. Using <code>http://localhost:4000</code> as the API.
+            </span>
+          </Banner>
+        )}
+      </Header>}
       {!noHero && <Hero>
         {children}
       </Hero>}

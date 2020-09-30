@@ -3,4 +3,5 @@ import styled from "styled-components";
 export const StyledHero = styled.section`
     margin: 0px auto;
     max-width: 1300px;
+    margin-top: calc(64px + 84px);
 `;
