@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import { StyledHeader, Container, Logo, Flex, NavItem } from "./style"
+import { StyledHeader, Container, Logo, Flex, NavItem, MenuSlot, MenuLine } from "./style"
 import { Button, TextButton, IconButton } from "../Button"
 import { navigate } from "gatsby"
 
@@ -11,6 +11,8 @@ import { Avatar, HeaderItemBox } from "../style"
 import Skeleton from "react-loading-skeleton"
 import { ButtonV2 } from "../ButtonV2"
 import { isBrowser } from "../../helpers/login"
+import { ProductsMenu } from "./menus/Products"
+import { Line } from "../Footer/style"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -19,119 +21,76 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ children, isFixed, headerRef, isDark }) => {
+    const [hidden, setHidden] = React.useState(false);
     const [onTop, setOnTop] = React.useState(false);
-
-    const boxRef = React.createRef<HTMLDivElement>();
+    const [menuVisible, setMenuVisible] = React.useState(false);
 
     const themeContext = React.useContext(ThemeManagerContext)
     const [user] = useGlobalState('user');
 
-    let to;
-    let linkIsHovered = false;
-    let boxIsHovered = false;
-
-    const onHeaderLinkHover = (e) => {
-        if(!boxRef || !boxRef.current) return;
-        const headerLink = e.target;
-
-        const bounds = headerLink.getBoundingClientRect();
-
-        clearTimeout(to);
-
-        boxRef.current.style.transform = `translateX(${(bounds.left * 2) - (bounds.width * 2.425) - bounds.left}px)`
-        boxRef.current.style.transition = `0.4s transform, 0.3s opacity`
-        boxRef.current.style.opacity = "1";
-        boxRef.current.style.pointerEvents = "all";
-
-        linkIsHovered = true;
-    }
-
-    const onHeaderBoxHover = () => {
-        if(!boxRef || !boxRef.current) return;
-
-        boxIsHovered = true;
-
-        boxRef.current.style.opacity = "1";
-        boxRef.current.style.pointerEvents = "all";
-
-        linkIsHovered = true;
-    }
-
-    const onHeaderBoxMouseOff = () => {
-        if(!boxRef || !boxRef.current) return;
-
-        boxIsHovered = false;
-
-        boxRef.current.style.opacity = "0";
-        boxRef.current.style.pointerEvents = "none";
-    }
-
-    const onHeaderLinkMouseOff = () => {
-        if(!boxRef || !boxRef.current) return;
-
-        if(linkIsHovered) return boxRef.current.style.opacity = "0";
-
-        to = setTimeout(() => {
-            if(boxIsHovered) return;
-
-            boxRef.current.style.transition = ``
-            linkIsHovered = false;
-            boxIsHovered = false;
-            boxRef.current.style.pointerEvents = "none";
-        }, 500);
-    }
-
-    const onLinksHover = () => {
-
-    }
-
     React.useState(() => {
-        isBrowser() && window.addEventListener("scroll", () => {
+        isBrowser() && window.addEventListener("scroll", (e) => {
+            if(window.scrollY >= 500 && (window as any).oldScrollY < window.scrollY) setHidden(true);
+            else setHidden(false);
+            
+            (window as any).oldScrollY = window.scrollY;
+
             if(window.scrollY >= 100) setOnTop(true)
             else setOnTop(false)
         })
     })
 
+    const onMenuItemHover = () => {
+        setMenuVisible(!menuVisible);
+    }
+
+    const onMenuParentLeave = () => {
+        setMenuVisible(false);
+    }
+
     return (
-        <StyledHeader onTop={onTop} className={"nav"} ref={headerRef} isDark={isDark}>
+        <StyledHeader 
+            onTop={onTop} 
+            forceShadow={menuVisible} 
+            className={"nav"} 
+            ref={headerRef} 
+            isDark={isDark}
+            hide={hidden}
+        >
             {children}
-            <Container>
+            <Container className={"nav-cont"}>
                 <div className={"logotype"}>
                     <Link to={"/"}>
                         <Logo isDark={!isDark} onContextMenu={onLogoContextMenu} />
                     </Link>
                 </div>
-                <div className={"links"} onMouseOver={onLinksHover}>
+                <div className={"links"} onMouseLeave={onMenuParentLeave}>
                     <a style={{ height: '100%' }}>
                         <NavItem 
                             isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onMouseOver={(e) => onHeaderLinkHover(e)}
-                            onMouseLeave={onHeaderLinkMouseOff}
+                            onClick={onMenuItemHover}
                         >Products</NavItem>
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}> 
                         <NavItem 
                             isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onMouseOver={(e) => onHeaderLinkHover(e)}
-                            onMouseLeave={onHeaderLinkMouseOff}
+                            onClick={onMenuItemHover}
                         >Company</NavItem> 
                     </a>
                     <a style={{ marginLeft: '32px', height: '100%' }}>
                         <NavItem 
                             isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onMouseOver={(e) => onHeaderLinkHover(e)}
-                            onMouseLeave={onHeaderLinkMouseOff}
+                            onClick={onMenuItemHover}
                         >Community</NavItem> 
                     </a>
                     <a target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
                         <NavItem 
                             isDark={!isDark} 
                             style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onMouseOver={(e) => onHeaderLinkHover(e)}
-                            onMouseLeave={onHeaderLinkMouseOff}
+                            onClick={onMenuItemHover}
                         >About</NavItem> 
                     </a>
                 </div>
@@ -152,9 +111,10 @@ const Header = ({ children, isFixed, headerRef, isDark }) => {
                     }
                 </div>
             </Container>
-            <HeaderItemBox ref={boxRef} onMouseOver={onHeaderBoxHover} onMouseLeave={onHeaderBoxMouseOff}>
-
-            </HeaderItemBox>
+            <MenuLine visible={menuVisible} />
+            <MenuSlot visible={menuVisible}>
+                <ProductsMenu />
+            </MenuSlot>
         </StyledHeader>
     )
 }

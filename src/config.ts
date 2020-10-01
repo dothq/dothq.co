@@ -10,6 +10,7 @@ export const API_PROD_URL = "https://dothq.co/api";
 export const API_DEV_URL = `http://localhost:${API_PORT}/api`;
 export const API_CORS_ORIGINS = ["https://dothq.co", "http://localhost:8000"]
 
+export const AUTH_CREDENTIALS_PATH = resolve(process.cwd(), "credentials.yaml")
 export const AUTH_SECRET_KEY = resolve(process.cwd(), "private.key");
 export const AUTH_KEY_ISSUER = "DTHQ"; // Issuer should be 4 characters or less
 export const AUTH_ALGORITHM: Algorithms = "aes-256-cbc"; // WARNING: This will break all existing keys if you change this.

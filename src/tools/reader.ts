@@ -1,5 +1,5 @@
 import * as yaml from 'js-yaml';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
 export const readYaml = (location: string) => {
     let data = "";
@@ -12,4 +12,14 @@ export const readYaml = (location: string) => {
         console.error(e);
         return process.exit(0)
     }
+}
+
+export const makeYaml = (data: any) => {
+    return yaml.dump(data)
+}
+
+export const writeYaml = (data: any, location: string) => {
+    writeFileSync(location, data, 'utf-8')
+
+    return true;
 }

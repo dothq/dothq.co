@@ -86,6 +86,8 @@ const SigninPage = ({ location }) => {
     const onSignInClick = () => {
         if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current) return;
 
+        if(disabled) return;
+
         setLoading(true);
 
         const email = emailRef.current.value;

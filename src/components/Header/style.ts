@@ -6,11 +6,12 @@ export const StyledHeader = styled.div`
     position: fixed;
     top: 0;
     z-index: 1000;
-    transition: 0.3s box-shadow;
+    transition: 0.15s box-shadow, 0.3s transform ease-in-out;
 
-    ${({ onTop, isDark }: { onTop: boolean; isDark: boolean }) => css`
+    ${({ onTop, isDark, forceShadow, hide }: { onTop: boolean; isDark: boolean; forceShadow: boolean; hide: boolean }) => css`
+        transform: translateY(${hide ? "-150px" : "0px"});
         background-color: ${!isDark ? "white" : "black"};
-        box-shadow: ${onTop ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : ""};
+        box-shadow: ${forceShadow ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : onTop ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : ""};
     `};
 `
 
@@ -63,3 +64,25 @@ export const NavItem = styled(TextButton)`
         color: ${isDark ? 'black' : 'white'};
     `};
 `
+
+export const MenuSlot = styled.div`
+    transition: 0.3s transform, 0.25s height;
+    transition-timing-function: cubic-bezier(.46,.03,.52,.96);
+    overflow: hidden;
+
+    ${({ visible }: { visible: boolean }) => css`
+        height: ${visible ? "200px" : "0px"};
+    `};
+`;
+
+export const MenuLine = styled.div`
+    width: 100%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: #0000001f;
+    transition: 0.2s opacity 0.2s;
+
+    ${({ visible }: { visible: boolean }) => css`
+        opacity: ${visible ? 1 : 0};
+    `};
+`;
