@@ -673,13 +673,13 @@ export const HeroCover = styled.div`
 
 export const HCC = styled.div`
     ${({ w, background, top, bottom }: { w: number; background?: any; top?: number; bottom?: number }) => css`
-        max-width: ${w}px;
-        height: 100%;
-        background: ${background};
-        margin: 0 auto;
-        padding-top: calc(64px + ${top}px);
-        padding-bottom: ${bottom}px;
-        position: relative;
+        // max-width: ${w}px;
+        // height: 100%;
+        // background: ${background};
+        // margin: 0 auto;
+        // padding-top: calc(64px + ${top}px);
+        // padding-bottom: ${bottom}px;
+        // position: relative;
     `};
 `;
 

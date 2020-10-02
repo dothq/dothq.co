@@ -18,6 +18,7 @@ import { getOS } from "../../../helpers/os"
 import * as shield from '../../../images/icons/shield.svg'
 import * as mail from '../../../images/icons/mail.svg'
 import * as sync from '../../../images/icons/sync.svg'
+import { Content } from "../../../components/Hero/style"
 
 class DotBrowserPage extends React.Component {
     public leftEyeRef = React.createRef<HTMLDivElement>();
@@ -69,11 +70,11 @@ class DotBrowserPage extends React.Component {
 
     render() {
         return (
-            <>
-                <Layout darkNav={true} noHero>
-                    <SEO title="Download Dot Browser" />
-                    <HeroCover h={563} background={"black"} style={{ marginBottom: '80px' }}>
-                        <HCC w={1330} top={86} bottom={96} style={{ display: 'flex', flexDirection: 'row' }}>
+            <Layout darkNav={true}>
+                <SEO title="Download Dot Browser" />
+                <Content hasHero>
+                    <div className={"hero-container"} style={{ backgroundColor: "black", '--spacing': '110px'  }}>
+                        <div className={"hero-content"} style={{ flexDirection: "inherit" }}>
                             <div className={"db-download-container"} style={{ display: 'flex', width: '550px', flexDirection: 'column', zIndex: 999 }}>
                                 <HeroTitle color={"white"}>Browse securely without prying eyes</HeroTitle>
                                 <HeroSubtitle color={"white"}>Get Dot Browser to block annoying advertisments and trackers. It’s that simple.</HeroSubtitle>
@@ -96,11 +97,9 @@ class DotBrowserPage extends React.Component {
                                     </Eyeball>
                                 </Eyeballs>
                             </div>
-                        </HCC>
-    
-                        <NavFixed />
-                    </HeroCover>
-
+                        </div>
+                    </div>
+                        
                     <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px', marginBottom: '8px' }}>
                         <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
                             <div style={{ maxWidth: '299px', justifySelf: 'center' }}>
@@ -124,9 +123,9 @@ class DotBrowserPage extends React.Component {
                             </div>
                         </div>
                     </div>
-    
-                </Layout>
-            </>
+
+                </Content>
+            </Layout>
         )
     }
 }

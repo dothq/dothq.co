@@ -20,6 +20,7 @@ import * as mail from '../../../images/icons/mail.svg'
 import * as sync from '../../../images/icons/sync.svg'
 
 import * as mobileScreenshot from '../../../images/mobile-screenshot.svg'
+import { Content } from "../../../components/Hero/style"
 
 class DotBrowserMobilePage extends React.Component {
     public props;
@@ -30,12 +31,12 @@ class DotBrowserMobilePage extends React.Component {
 
     render() {
         return (
-            <>
-                <Layout darkNav={true} noHero>
-                    <SEO title="Download Dot Browser for Mobile" />
-                    <HeroCover h={563} background={"black"} style={{ marginBottom: '80px', height: 'fit-content' }}>
-                        <HCC w={1330} top={86} bottom={96} style={{ display: 'flex', flexDirection: 'row', paddingTop: '64px', paddingBottom: '96px' }}>
-                            <div className={"db-download-container"} style={{ display: 'flex', width: '670px', flexDirection: 'column', zIndex: 999, paddingTop: '86px', paddingBottom: '0px' }}>
+            <Layout darkNav={true}>
+                <SEO title="Download Dot Browser for Mobile" />
+                <Content hasHero>
+                    <div className={"hero-container"} style={{ '--spacing': '110px', backgroundColor: "black", boxShadow: "none", border: "none" }}>
+                        <div className={"hero-content"} style={{ flexDirection: "inherit" }}>
+                            <div className={"db-download-container"} style={{ display: 'flex', width: '550px', flexDirection: 'column', zIndex: 999 }}>
                                 <HeroTitle color={"white"}>Browse the web on the go with privacy</HeroTitle>
                                 <HeroSubtitle color={"white"}>It’s the same Dot Browser experience, with all your favourite privacy features, just pocket-sized.</HeroSubtitle>
                                 <Buttons className={"mobile-btns"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'flex-start' }}>
@@ -45,17 +46,14 @@ class DotBrowserMobilePage extends React.Component {
                             </div>
                             <div className={"eyeball-container"} style={{ flex: 1, height: '0px' }}>
                                 <img src={mobileScreenshot} style={{ 
-                                    width: '452px',
+                                    width: '422px',
                                     margin: '0 auto',
                                     display: 'flex',
-                                    marginTop: 'calc(100px - 64px)',
-                                    clipPath: 'inset(0 0 512px 0)'
+                                    borderRadius: '12px 12px 0 0'
                                 }} />
                             </div>
-                        </HCC>
-    
-                        <NavFixed />
-                    </HeroCover>
+                        </div>
+                    </div>
 
                     <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px', marginBottom: '8px' }}>
                         <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
@@ -80,9 +78,8 @@ class DotBrowserMobilePage extends React.Component {
                             </div>
                         </div>
                     </div>
-    
-                </Layout>
-            </>
+                </Content>
+            </Layout>
         )
     }
 }

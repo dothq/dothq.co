@@ -629,9 +629,8 @@ pre tt:after {
   }
 }
 
-*:focus {
-  outline: #0e0e0e auto 2px;
-  outline-offset: -2px;
+:focus {
+  outline: 2px solid #4965ff;
 }
 
 *::selection {
@@ -760,11 +759,11 @@ input[type="password"]::placeholder {
   font-weight: 500;
 }
 
-.hero-container > .hero-content a {
+.hero-container > .hero-content > p a {
   color: #0070F3;
 }
 
-.hero-container > .hero-content a:hover {
+.hero-container > .hero-content > p a:hover {
   color: #0070F3;
   text-decoration: underline;
 }
