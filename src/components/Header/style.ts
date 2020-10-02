@@ -11,7 +11,7 @@ export const StyledHeader = styled.div`
     ${({ onTop, isDark, forceShadow, hide }: { onTop: boolean; isDark: boolean; forceShadow: boolean; hide: boolean }) => css`
         transform: translateY(${hide ? "-150px" : "0px"});
         background-color: ${!isDark ? "white" : "black"};
-        box-shadow: ${forceShadow ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : onTop ? "0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c" : ""};
+        box-shadow: ${forceShadow || onTop ? "0 3.2px 7.2px 0 #0000000f,0 .6px 1.8px 0 #0000001c" : ""};
     `};
 `
 

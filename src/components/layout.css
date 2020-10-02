@@ -729,6 +729,46 @@ input[type="password"]::placeholder {
   padding-bottom: 2.5rem;
 }
 
+.hero-container > .hero-content {
+  color: #000;
+}
+
+.hero-container > .hero-content > h1 {
+  font-size: 32px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.hero-container > .hero-content > h6 {
+  text-transform: uppercase;
+  font-size: 14px;
+  color: gray;
+  margin: 0;
+  font-family: Inter, system-ui;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 41px;
+  text-align: center;
+}
+
+.hero-container > .hero-content > p {
+  font-size: 14px;
+  margin: 0;
+  max-width: 100%;
+  text-align: center;
+  color: #3a3a3a;
+  font-weight: 500;
+}
+
+.hero-container > .hero-content a {
+  color: #0070F3;
+}
+
+.hero-container > .hero-content a:hover {
+  color: #0070F3;
+  text-decoration: underline;
+}
+
 .small-hero .hero-container {
   margin: 0 auto;
   max-width: 1164px;
