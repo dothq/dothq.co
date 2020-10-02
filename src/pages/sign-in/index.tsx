@@ -130,7 +130,9 @@ const SigninPage = ({ location }) => {
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
                     <div style={{ transform: done ? 'translateX(0px)' : 'translateX(-25px)', opacity: done ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
-                            <AuthLogo />
+                            <Link to={"/"}>
+                                <AuthLogo />
+                            </Link>
                             <AuthTitle>Welcome back.</AuthTitle>
                             <AuthDesc>Sign in to your existing Dot ID. Don’t have a Dot ID yet? <Link to={"/sign-up"}><AuthLink>Create one here!</AuthLink></Link></AuthDesc>
                         </div>
