@@ -20,25 +20,11 @@ const onLogoContextMenu = (e) => {
     navigate("/download")
 }
 
-const Header = ({ children, isFixed, headerRef, isDark }) => {
-    const [hidden, setHidden] = React.useState(false);
-    const [onTop, setOnTop] = React.useState(false);
+const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
     const [menuVisible, setMenuVisible] = React.useState(false);
 
     const themeContext = React.useContext(ThemeManagerContext)
     const [user] = useGlobalState('user');
-
-    React.useState(() => {
-        isBrowser() && window.addEventListener("scroll", (e) => {
-            if(window.scrollY >= 500 && (window as any).oldScrollY < window.scrollY) setHidden(true);
-            else setHidden(false);
-            
-            (window as any).oldScrollY = window.scrollY;
-
-            if(window.scrollY >= 100) setOnTop(true)
-            else setOnTop(false)
-        })
-    })
 
     const onMenuItemHover = () => {
         setMenuVisible(!menuVisible);
@@ -122,11 +108,15 @@ const Header = ({ children, isFixed, headerRef, isDark }) => {
 Header.propTypes = {
     children: PropTypes.node,
     isFixed: PropTypes.bool,
-    headerRef: PropTypes.any
+    headerRef: PropTypes.any,
+    hidden: PropTypes.bool,
+    onTop: PropTypes.bool
   }
   
 Header.defaultProps = {
     siteTitle: ``,
+    hidden: false,
+    onTop: false
 }
 
 export default Header

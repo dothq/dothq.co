@@ -66,7 +66,7 @@ export const NavItem = styled(TextButton)`
 `
 
 export const MenuSlot = styled.div`
-    transition: 0.3s transform, 0.25s height;
+    transition: 0.3s transform, 0s height;
     transition-timing-function: cubic-bezier(.46,.03,.52,.96);
     overflow: hidden;
 
@@ -80,7 +80,7 @@ export const MenuLine = styled.div`
     height: 1px;
     margin: 0 auto;
     background-color: #0000001f;
-    transition: 0.2s opacity 0.2s;
+    transition: 0s opacity;
 
     ${({ visible }: { visible: boolean }) => css`
         opacity: ${visible ? 1 : 0};

@@ -136,7 +136,9 @@ const SignupPage = ({ location }) => {
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
                     <div style={{ transform: done ? 'translateX(0px)' : 'translateX(-25px)', opacity: done ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
-                            <AuthLogo />
+                            <Link to={"/"}>
+                                <AuthLogo />
+                            </Link>
                             <AuthTitle>One account for everything Dot.</AuthTitle>
                             <AuthDesc>You can either create a Dot ID using your email address or using GitHub. <br/><br/><Link to={"/sign-in"}><AuthLink>Already have an ID?</AuthLink></Link></AuthDesc>
                         </div>

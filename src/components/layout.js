@@ -27,6 +27,7 @@ import { useGlobalState } from '../context'
 import { getMe } from "../helpers/me"
 
 import { Banner } from "./Banner"
+import { isBrowser } from "../helpers/login"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -49,6 +50,11 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
     if(document.getElementsByClassName("twitter-tweet") && document.getElementsByClassName("twitter-tweet")[0]) document.getElementsByClassName("twitter-tweet")[0].appendChild(script);
   }, []);
 
+  let oldY = 0;
+
+  const [hidden, setHidden] = React.useState(false);
+  const [onTop, setOnTop] = React.useState(false);
+
   const [user, setUser] = useGlobalState('user');
   const [builds, setBuilds] = useGlobalState('builds');
 
@@ -56,6 +62,16 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const [alfBuilds, setAlfBuilds] = useGlobalState('afBuilds');
 
   React.useEffect(() => {
+    isBrowser() && window.addEventListener("scroll", (e) => {
+      if(window.scrollY >= 500 && oldY < window.scrollY) setHidden(true);
+      else setHidden(false);
+      
+      oldY = window.scrollY;
+  
+      if(window.scrollY >= 100) setOnTop(true)
+      else setOnTop(false)
+    })
+
     if(process.env.NODE_ENV !== "development") {
       console.log("%cBeware!", "font: 2em sans-serif; color: yellow; background-color: red;");
       console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or “hack” someone’s account, it is a scam and will give them access to your account.", "font: 1.5em sans-serif; color: grey;");
@@ -76,7 +92,7 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
     // axios.get('https://dothq.co/api/builds/all')
     //   .then(res => res.data.results && setBuilds(res.data.results))
 
-  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
+  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser, oldY]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
@@ -86,6 +102,8 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
         siteTitle={data.site.siteMetadata.title} 
         isFixed={false} 
         isDark={typeof(darkNav) == "undefined" ? false : darkNav}
+        hidden={hidden}
+        onTop={onTop}
       >
         {process.env.NODE_ENV === "development" && (
           <Banner>
