@@ -92,7 +92,7 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
     // axios.get('https://dothq.co/api/builds/all')
     //   .then(res => res.data.results && setBuilds(res.data.results))
 
-  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser, oldY]);
+  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>

@@ -373,6 +373,7 @@ export const Avatar = styled.div`
     ${({ src, width, noFade }: { src: any; width?: number; noFade?: boolean }) => css`
         width: ${width || 118}px;
         height: ${width || 118}px;
+        min-width: ${width || 118}px;
         border-radius: ${width || 118}px;
         ${!noFade ? `animation: 0.2s fadein forwards;opacity: 0;` : "opacity: 1;"}
 
