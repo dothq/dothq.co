@@ -1,16 +1,13 @@
+import { navigate } from "gatsby"
 import React from "react"
 
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-
 const CookiesPage = () => {
+    React.useEffect(() => {
+        navigate('/legal/privacy#do-we-use-cookies-and-other-tracking-technologies')
+    })
+  
     return (
-        <Layout>
-            <SEO title="" />
-            <div>
-                Work in progress
-            </div>
-        </Layout>
+      <></>
     )
 }
 

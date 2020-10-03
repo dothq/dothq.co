@@ -166,11 +166,14 @@ exports.createPages = async ({ graphql, actions }) => {
   const generateLegalContext = async policyName => {
     const base = "https://raw.githubusercontent.com/dothq/legal/master"
 
-    const policy = await getMarkdown(`${base}/${policyName}.md`)
+    let policy = await getMarkdown(`${base}/${policyName}.md`)
     const policyMeta = await getMarkdownMeta(`${policyName}.md`)
+
+    policy = policy.replace(/<\/br>/g, "  ")
 
     const names = {
       PRIVACY_POLICY: "Privacy Policy",
+      TERMS_OF_SERVICE: "Terms of Service"
     }
 
     return {
@@ -185,5 +188,11 @@ exports.createPages = async ({ graphql, actions }) => {
     path: `/legal/privacy`,
     component: require.resolve("./src/templates/legal.tsx"),
     context: { legal: await generateLegalContext("PRIVACY_POLICY") },
+  })
+
+  createPage({
+    path: `/legal/terms`,
+    component: require.resolve("./src/templates/legal.tsx"),
+    context: { legal: await generateLegalContext("TERMS_OF_SERVICE") },
   })
 }
