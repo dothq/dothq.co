@@ -1,7 +1,5 @@
 import { Sequelize } from "sequelize";
 
-import * as bodyParser from 'body-parser';
-
 import { Server } from './server';
 
 import { LocaleManager } from './managers/locale';
@@ -10,11 +8,12 @@ import { ErrorManager } from './managers/error';
 import { TokenManager } from "./managers/token";
 import { WebManager } from './managers/web';
 
-import { Req, Res } from "../types";
-import { API_PORT } from './config';
+import { Req, Res, Route } from "../types";
+import { API_PORT, GITHUB_REPOSITORY_URL, LOCALE_DEFAULT } from './config';
 import { log } from './tools/log';
 
 import * as credentials from '../credentials.json';
+import { runMiddleware } from "./middleware";
 
 export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false });
 
@@ -44,13 +43,7 @@ export class Controller extends Server {
         this.token = new TokenManager();
 
         this.locales.on("ready", () => {
-            this.app.use(bodyParser.json())
-
-            this.app.use((err: any, req: Req, res: Res, next) => {
-                if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
-                    this.errors.stop(4012, res);
-                } else next();
-            });
+            runMiddleware(this);
 
             this.router = new RouteManager(this);
             this.errors = new ErrorManager(this.app);

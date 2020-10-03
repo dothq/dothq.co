@@ -2,8 +2,6 @@ import { errors } from "../errors";
 import { log } from "../tools/log";
 
 import { api } from "..";
-import { LOCALE_DEFAULT, GITHUB_REPOSITORY_URL } from "../config";
-import { Route } from "../../types";
 
 export class ErrorManager {
     private app;
@@ -27,36 +25,6 @@ export class ErrorManager {
 
     constructor(app) {
         this.app = app;
-
-        this.app.use((req, res, next) => {
-            const route = api.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
-
-            route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
-
-            res.status(404);
-
-            if(res.statusCode == 404) {
-                if(route && !route.accepts.includes(req.method)) {
-                    const accepts = route.accepts.map((accept, index) => {
-                        if(index == route.accepts.length-1 && route.accepts.length <= 1) return "or " + accept;
-                        return accept;
-                    }).join(", ");
-
-                    return res.send(this.retrieveErrori18n({
-                        code: 4050, 
-                        lang: res.lang,
-                        ctx: [req.method, accepts]
-                    }));
-                }
-
-                return res.send(this.retrieveErrori18n({
-                    code: 404,
-                    lang: res.lang
-                }));
-            }
-
-            next();
-        })
     }
 
     stop(errorCode: number, res: any, ctx?: any, extraFields?: any) {

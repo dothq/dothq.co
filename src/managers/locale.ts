@@ -12,6 +12,7 @@ import { Controller } from '..';
 import { Req, Res, Route } from '../../types';
 
 export class LocaleManager extends EventEmitter {
+    private api: Controller;
     public ['en-US'] = {};
 
     public load() {
@@ -79,29 +80,13 @@ export class LocaleManager extends EventEmitter {
     }
 
     private loadLocaleMiddleware(api: Controller) {
-        api.app.use((req: Req, res: Res, next) => {
-            const route = api.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
 
-            if(process.env.NODE_ENV !== "production") console.log(`${req.method} ${req.path} (src/routes${route.locationOnPath}) => ${res.statusCode}`)
-
-            const lang = req.query.lang ? api.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT
-
-            if(lang == "") return res.json({ ok: false, error: `No locale file found for language \`${req.query.lang}\`.` })
-            else {
-                res.lang = (lang as string);
-                res.api = api;
-
-                res.header("X-Locale", res.lang);
-                res.header("X-Powered-By", "Dot")
-                route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
-
-                next();
-            }
-        })
     }
 
     constructor(api: Controller) {
         super();
+
+        this.api = api;
 
         this.load();
         this.loadLocaleMiddleware(api);

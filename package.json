@@ -2,7 +2,7 @@
   "name": "dothq.co",
   "private": true,
   "description": "Dot HQ Web Stack",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Dot HQ",
   "dependencies": {
     "@types/mongoose": "^5.7.36",
@@ -78,17 +78,19 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"echo Launching in development mode...\" \"npm run develop\" \"npm run start-api\"",
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "start-api": "nodemon --exec \"ts-node -T\" src/index -e ts,js,json,yml",
-    "prod-api": "cross-env NODE_ENV=production ts-node -T src/index",
-    "serve": "cross-env ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby serve -H 0.0.0.0 -p 3001",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "run": "concurrently \"npm run build && npm run serve\""
+    "build:web": "gatsby build",
+
+    "develop:web": "gatsby develop",
+    "develop:api": "cross-env NODE_ENV=development nodemon --exec \"ts-node -T\" src/index -e ts,js,json,yml",
+
+    "start:web": "yarn build:web && gatsby serve -H 0.0.0.0 -p 3001",
+    "start:api": "cross-env NODE_ENV=production ts-node -T src/index",
+
+    "prod:stack": "concurrently \"yarn start:web\" \"yarn start:api\"",
+
+    "run": "yarn prod:stack",
+
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "repository": {
     "type": "git",

@@ -11,9 +11,26 @@ import ReactMarkdown from 'react-markdown';
 import '../components/legal.css'
 import { Line } from "../components/Footer/style"
 import { Content } from "../components/Hero/style"
+import { isBrowser } from "../helpers/login"
 
-export default ({ pageContext: { legal } }) => (
-  <Layout noEnding>
+export default ({ pageContext: { legal } }) => {
+  React.useEffect(() => {
+    if(isBrowser() && window.scrollY == 0 && window.location.hash) {
+      const hash = window.location.hash.slice(1);
+
+      const el = document.querySelector(`[name="${hash}"]`);
+
+      if(el) {
+        el.scrollIntoView();
+        setTimeout(() => {
+          window.scrollTo({ top: window.scrollY - 150 })
+        }, 250);
+      }
+    }
+  })
+
+  return (
+    <Layout noEnding>
       <SEO title={legal.title} />
       <Content hasHero>
         <div className={"hero-container"}>
@@ -25,7 +42,7 @@ export default ({ pageContext: { legal } }) => (
         </div>
         <div className={"legal-content"}>
             <main>
-              <ReactMarkdown source={legal.content} escapeHtml={false} />
+              <ReactMarkdown source={legal.content.replace(/<br\/>/g, " ")} escapeHtml={false} />
 
               <Line />
 
@@ -41,5 +58,6 @@ export default ({ pageContext: { legal } }) => (
             </main>
         </div>
       </Content>
-  </Layout>
-)
+    </Layout>
+  )
+}

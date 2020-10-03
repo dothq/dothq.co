@@ -1,0 +1,60 @@
+import * as bodyParser from 'body-parser';
+
+import { Controller } from ".";
+
+import { Res, Req, Route } from "../types";
+import { LOCALE_DEFAULT, GITHUB_REPOSITORY_URL } from "./config";
+
+export const runMiddleware = (server: Controller) => {
+    server.app.use(bodyParser.json())
+
+    server.app.use((req: Req, res: Res, next) => {
+        const route = server.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);
+
+        const lang = req.query.lang ? server.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT
+
+        if(lang == "") return res.json({ ok: false, error: `No locale file found for language \`${req.query.lang}\`.` })
+        else {
+            res.lang = (lang as string);
+            res.api = server;
+
+            if(!route) {
+                res.status(404);
+
+                return res.send(server.errors.retrieveErrori18n({
+                    code: 404,
+                    lang: res.lang
+                }));
+            };
+
+            if(route && !route.accepts.includes(req.method)) {
+                res.status(404);
+
+                const accepts = route.accepts.map((accept, index) => {
+                    if(index == route.accepts.length-1 && route.accepts.length <= 1) return "or " + accept;
+                    return accept;
+                }).join(", ");
+
+                return res.send(server.errors.retrieveErrori18n({
+                    code: 4050, 
+                    lang: res.lang,
+                    ctx: [req.method, accepts]
+                }));
+            }
+
+            res.header("X-Locale", res.lang);
+            res.header("X-Powered-By", "Dot")
+            route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
+
+            if(process.env.NODE_ENV == "development") console.log(`${req.method}${route && !route.accepts.includes(req.method) ? "[X]" : ""} ${req.path} ${route ? `(src/routes${route.locationOnPath}) =>` : `=>`} ${res.statusCode}`)    
+
+            next();
+        }
+    })
+
+    server.app.use((err: any, req: Req, res: Res, next) => {
+        if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
+            server.errors.stop(4012, res);
+        } else next();
+    });
+}

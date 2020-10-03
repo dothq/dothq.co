@@ -44,31 +44,33 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [{
-          resolve: 'gatsby-remark-emojis',
-          options: {
-            active: true,
-            class: 'emoji-icon',
-            escapeCharacter : '',
-            size: 16,
-          }
-        }]
-      }
+        plugins: [
+          {
+            resolve: "gatsby-remark-emojis",
+            options: {
+              active: true,
+              class: "emoji-icon",
+              escapeCharacter: "",
+              size: 16,
+            },
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-scroll-reveal`,
       options: {
-          threshold: 0.1,
-          once: true,
-          disable: false,
-          
-          selector: '[data-sal]',
-          animateClassName: 'sal-animate',
-          disabledClassName: 'sal-disabled',
-          rootMargin: '0% 50%',
-          enterEventName: 'sal:in',
-          exitEventName: 'sal:out',
-      }
+        threshold: 0.1,
+        once: true,
+        disable: false,
+
+        selector: "[data-sal]",
+        animateClassName: "sal-animate",
+        disabledClassName: "sal-disabled",
+        rootMargin: "0% 50%",
+        enterEventName: "sal:in",
+        exitEventName: "sal:out",
+      },
     },
     {
       resolve: `gatsby-styled-components-dark-mode`,
@@ -85,16 +87,16 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-express',
+      resolve: "gatsby-plugin-express",
       options: {
-        output: 'gatsby.json',
-      }
+        output: "gatsby.json",
+      },
     },
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {
-        allowList: ["NODE_ENV"]
+        allowList: ["NODE_ENV"],
       },
     },
-  ]
+  ],
 }
