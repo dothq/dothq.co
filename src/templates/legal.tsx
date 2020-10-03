@@ -15,7 +15,7 @@ import { isBrowser } from "../helpers/login"
 
 export default ({ pageContext: { legal } }) => {
   React.useEffect(() => {
-    if(isBrowser() && window.location.hash) {
+    if(isBrowser() && window.scrollY == 0 && window.location.hash) {
       const hash = window.location.hash.slice(1);
 
       const el = document.querySelector(`[name="${hash}"]`);
