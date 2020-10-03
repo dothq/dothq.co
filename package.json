@@ -88,6 +88,8 @@
 
     "prod:stack": "concurrently \"yarn start:web\" \"yarn start:api\"",
 
+    "run": "yarn prod:stack",
+
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "repository": {
