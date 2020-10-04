@@ -60,6 +60,16 @@ const specialErrors = {
         i18n_id: "error_4014",
         code: 400
     },
+    4020: {
+        ok: false,
+        i18n_id: "error_4020",
+        code: 400
+    },
+    4021: {
+        ok: false,
+        i18n_id: "error_4021",
+        code: 400
+    },
     4050: {
         ok: false,
         i18n_id: "error_4050",

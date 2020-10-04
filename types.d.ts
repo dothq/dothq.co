@@ -5,7 +5,9 @@ import { User } from './src/models/User';
 declare module '*.png'
 declare module '*.svg'
 
-export interface Req extends express.Request {}
+export interface Req extends express.Request {
+    file: any;
+}
 export interface Res extends express.Response {
     api: Controller;
     lang: string;
@@ -19,6 +21,7 @@ export interface Route {
         requireChallenge?: boolean,
         requireAuthorization?: boolean
     },
+    middleware?: any[],
     bodySchema: any,
     locationOnPath?: string,
     handlers: {

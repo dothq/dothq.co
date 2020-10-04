@@ -29,19 +29,13 @@ export class TokenManager {
             tok = jwt.verify(token, this.key, {
                 algorithms: [AUTH_ALGORITHM]
             });
-
-            return tok;
         } catch (e) {
-            if (e instanceof jwt.JsonWebTokenError) {
-                return { error: 4003 }
-            } else if (e instanceof jwt.NotBeforeError) {
-                return { error: 4003 }
-            } else if (e instanceof jwt.TokenExpiredError) {
-                return { error: 4004 }
-            } else {
-                return { error: 4003 }
-            }
+            console.log(e)
+            if(e.message == "jwt expired") return { error: 4004 }
+            else return { error: 4003 } 
         }
+        
+        return tok;
     }
 
     public createUserToken(id: string) {

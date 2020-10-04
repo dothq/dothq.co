@@ -29,6 +29,11 @@ export const BEARER_TOKEN_REGEX = /Bearer [\w\d]{10,}/;
 
 export const ID_REDIRECT_AFTER_LOGIN = "/";
 
+export const ALLOWED_AVATAR_TYPES = [
+    "png",
+    "jpeg"
+]
+
 export const LOG_CTX_COLOURS = {
     info: 'blue',
     warning: 'yellow',

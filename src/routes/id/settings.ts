@@ -31,7 +31,7 @@ export default {
     }),
     handlers: {
         PUT: async (req: Req, res: Res) => {
-            if(!res.authorizedUser) return console.log("Unauthoriuzed");
+            if(!res.authorizedUser) return;
 
             const data: any = {
                 ...res.authorizedUser

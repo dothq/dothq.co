@@ -16,9 +16,12 @@ import { Thinker } from "../../components/Thinker"
 import { validEmail, validPassword } from "../../tools/validation"
 import { isBrowser } from "../../helpers/login"
 import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
+import { useGlobalState } from "../../context"
 
 const SigninPage = ({ location }) => {
     const params = parse(location.search)
+
+    const [userGlobal, setUser] = useGlobalState('user');
 
     const emailRef = React.createRef<HTMLInputElement>();
     const passwordRef = React.createRef<HTMLInputElement>();
@@ -94,12 +97,16 @@ const SigninPage = ({ location }) => {
         const password = passwordRef.current.value;
         const rememberMe = rememberMeRef.current.checked;
 
-        user.login({ email, password }).then((r: ErrorJSON) => {
+        user.login({ email, password }).then(async (r: ErrorJSON) => {
             setLoading(false);
 
             if(r.ok) {
-                if(rememberMe) console.log("Remembering you.")
-                else console.log("I'm a little forgetful, so I won't be remembering you.")
+                
+                const { data }: any = await user.getSelf((r as any).data.result.token);
+
+                data.ok && setUser(data.result);
+
+                if(rememberMe) localStorage.setItem("token", (r as any).data.result.token)
 
                 const next = ((params.next as string).startsWith("/") && !(params.next as string).includes(".") ? params.next : "/" as string);
 

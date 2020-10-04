@@ -1,5 +1,7 @@
 import * as Joi from 'joi';
 
+import NodeRSA from 'node-rsa';
+
 import { Req, Res } from "../../../types";
 
 import User from "../../models/User";

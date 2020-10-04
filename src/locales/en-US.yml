@@ -24,4 +24,6 @@ ERROR_4011: Please solve the human challenge.
 ERROR_4012: Bad request.
 ERROR_4013: User does not exist.
 ERROR_4014: Incorrect email or password.
+ERROR_4020: Failed to upload file.
+ERROR_4021: Invalid file format, expected {{correctMimes}}.
 ERROR_4050: This route does not accept {{badMethod}}, try using {{correctMethods}} instead.

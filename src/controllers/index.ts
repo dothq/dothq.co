@@ -29,11 +29,11 @@ export default class APIController {
         })
     }
 
-    post(route: string, body: any) {
+    post(route: string, body: any, token?: string) {
         return new Promise((resolve, reject) => {
             console.log(`Fullfilling POST request to`, this.apiHost + route)
 
-            axios.post(this.apiHost + route, body, { timeout: 4000 }).then(res => {
+            axios.post(this.apiHost + route, body, { timeout: 4000, headers: { "Authorization": token ? `Bearer ${token}` : `` } }).then(res => {
                 console.log(res)
 
                 resolve({

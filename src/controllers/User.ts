@@ -6,7 +6,7 @@ export default class UserController {
     static api: APIController = new APIController();
 
     static actions = {
-        getUserSelf: "/id/user/me",
+        getUserSelf: "/id/me",
         getUser: "/id/user/:id",
         createUser: "/id/sign-up",
         createLoginSession: "/id/sign-in"
@@ -16,6 +16,12 @@ export default class UserController {
         const { getUser } = this.actions;
 
         return this.api.get(getUser, [id])
+    }
+
+    static getSelf(token: string) {
+        const { getUserSelf } = this.actions;
+
+        return this.api.post(getUserSelf, { fields: ["username", "avatarId"] }, token)
     }
 
     static create({ email, password, username }: { email: string, password: string, username: string; }) {
