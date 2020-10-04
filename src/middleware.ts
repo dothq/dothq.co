@@ -1,4 +1,5 @@
 import * as bodyParser from 'body-parser';
+import * as helmet from 'helmet';
 
 import { Controller } from ".";
 
@@ -6,6 +7,7 @@ import { Res, Req, Route } from "../types";
 import { LOCALE_DEFAULT, GITHUB_REPOSITORY_URL } from "./config";
 
 export const runMiddleware = (server: Controller) => {
+    server.app.use(helmet())
     server.app.use(bodyParser.json())
 
     server.app.use((req: Req, res: Res, next) => {

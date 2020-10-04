@@ -40,6 +40,7 @@
     "gatsby-transformer-sharp": "^2.3.19",
     "graphql": "^15.3.0",
     "hcaptcha": "^0.0.2",
+    "helmet": "^4.1.1",
     "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
@@ -79,17 +80,12 @@
   "license": "MIT",
   "scripts": {
     "build:web": "gatsby build",
-
     "develop:web": "gatsby develop",
     "develop:api": "cross-env NODE_ENV=development nodemon --exec \"ts-node -T\" src/index -e ts,js,json,yml",
-
     "start:web": "yarn build:web && gatsby serve -H 0.0.0.0 -p 3001",
     "start:api": "cross-env NODE_ENV=production ts-node -T src/index",
-
     "prod:stack": "concurrently \"yarn start:web\" \"yarn start:api\"",
-
     "run": "yarn prod:stack",
-
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "repository": {
