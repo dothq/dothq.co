@@ -36,8 +36,11 @@ export default {
             const user = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, credentials.EMAIL_SALT) } });
 
             if(!user) return api.errors.stop(4013, res);
-
             if(!await compare(req.body.password, user.password)) return api.errors.stop(4014, res);
+
+            user.activeToken = api.token.createUserToken(user.id);
+
+            await user.save({ fields: ["activeToken"] });
 
             api.errors.stop(200, res, [], { result: { userId: user.id, token: user.activeToken } });
         },

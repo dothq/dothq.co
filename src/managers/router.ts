@@ -1,9 +1,9 @@
 import * as cors from 'cors';
 import { resolve } from "path";
 
-import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS } from "../config";
+import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS, BEARER_TOKEN_REGEX } from "../config";
 
-import { Controller, api } from "..";
+import { Controller, api, sequelize } from "..";
 
 import { log } from "../tools/log";
 import { goForAWalk } from "../tools/walker";
@@ -50,6 +50,27 @@ export class RouteManager {
 
                             const isValid = await verifyCaptcha(req.body.challenge_token);
                             if(!isValid) return api.errors.stop(4010, res);
+                        }
+
+                        if(route.flags.requireAuthorization) {
+                            if(!req.headers["authorization"] || !BEARER_TOKEN_REGEX.test(req.headers["authorization"])) return api.errors.stop(4004, res);
+                            else {
+                                const token = req.headers["authorization"].split("Bearer ")[1].replace(/ /g, "");
+
+                                const decrypted = await api.token.get(token)
+
+                                if(decrypted.error) return api.errors.stop(4004, res);
+                                
+                                if(decrypted.id) {
+                                    const User = require("../models/User").default;
+
+                                    const user = await User.findOne({ where: { id: decrypted.id } });
+               
+                                    console.log(user.activeToken, token)
+
+                                    if(!user || user.activeToken !== token) return api.errors.stop(4004, res);
+                                }
+                            }
                         }
                     }
 

@@ -14,7 +14,8 @@ export interface Route {
     route: string,
     accepts: string[],
     flags?: {
-        requireChallenge?: boolean
+        requireChallenge?: boolean,
+        requireAuthorization?: boolean
     },
     bodySchema: any,
     locationOnPath?: string,

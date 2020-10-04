@@ -14,6 +14,7 @@ FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because i
 
 ERROR_200: Success
 ERROR_404: This route or resource cannot be found.
+ERROR_4004: You are not authorized to do this.
 ERROR_4005: Could not find "{{missingBodyItem}}" in the body.
 ERROR_4006: Body item {{missingBodyItemMessage}}
 ERROR_4009: Email is already registered.

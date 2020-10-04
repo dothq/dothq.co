@@ -30,7 +30,7 @@ export default {
             .min(4)
             .max(38)
             .required(),
-
+    
         password: Joi.string()
             .custom((value, helpers) => { return validPassword(value) ? value : helpers.error("any.invalid") })
             .required(),
@@ -46,13 +46,14 @@ export default {
             await sleep(userExists ? 500 : 1250);
 
             if(!userExists) {
-                const activeToken = res.api.token.createUserToken({ data: req.body });
+                const id = makeId();
+                const activeToken = res.api.token.createUserToken(id);
                 const password = await encrypt(req.body.password);
                 const email = await encryptWithSalt(req.body.email, credentials.EMAIL_SALT);
 
                 req.body = { 
                     ...req.body, 
-                    id: makeId(), 
+                    id, 
                     activeToken,
                     email,
                     password

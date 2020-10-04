@@ -30,6 +30,6 @@ export class ErrorManager {
     stop(errorCode: number, res: any, ctx?: any, extraFields?: any) {
         const error = this.retrieveErrori18n({ code: errorCode, lang: res.lang, ctx, extraFields });
 
-        res.status(error.code).json(error)
+        res.status(error.code).json(error);
     }
 }
