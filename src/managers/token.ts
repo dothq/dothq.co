@@ -33,13 +33,13 @@ export class TokenManager {
             return tok;
         } catch (e) {
             if (e instanceof jwt.JsonWebTokenError) {
-                return { error: 4011 }
+                return { error: 4003 }
             } else if (e instanceof jwt.NotBeforeError) {
-                return { error: 4011 }
+                return { error: 4003 }
             } else if (e instanceof jwt.TokenExpiredError) {
-                return { error: 4011 }
+                return { error: 4004 }
             } else {
-                return { error: 4011 }
+                return { error: 4003 }
             }
         }
     }

@@ -10,6 +10,11 @@ const httpErrors = {
 }
 
 const specialErrors = {
+    4003: {
+        ok: false,
+        i18n_id: "error_4003",
+        code: 401
+    },
     4004: {
         ok: false,
         i18n_id: "error_4004",

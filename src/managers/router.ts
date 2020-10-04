@@ -59,16 +59,16 @@ export class RouteManager {
 
                                 const decrypted = await api.token.get(token)
 
-                                if(decrypted.error) return api.errors.stop(4004, res);
+                                if(decrypted.error) return api.errors.stop(decrypted.error, res);
                                 
                                 if(decrypted.id) {
                                     const User = require("../models/User").default;
 
                                     const user = await User.findOne({ where: { id: decrypted.id } });
-               
-                                    console.log(user.activeToken, token)
 
-                                    if(!user || user.activeToken !== token) return api.errors.stop(4004, res);
+                                    if(!user) return api.errors.stop(4004, res);
+                                    
+                                    res.authorizedUser = user.dataValues;
                                 }
                             }
                         }

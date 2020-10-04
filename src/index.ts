@@ -15,7 +15,7 @@ import { log } from './tools/log';
 import * as credentials from '../credentials.json';
 import { runMiddleware } from "./middleware";
 
-export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: true });
+export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false });
 
 sequelize
   .authenticate()
