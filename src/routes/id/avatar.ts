@@ -71,8 +71,6 @@ export default {
                 await user.save({ fields: ["avatarId"] });
             }).catch(err => {
                 api.errors.stop(4020, res);
-
-                console.log(err);
             })
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),

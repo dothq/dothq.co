@@ -30,7 +30,6 @@ export class TokenManager {
                 algorithms: [AUTH_ALGORITHM]
             });
         } catch (e) {
-            console.log(e)
             if(e.message == "jwt expired") return { error: 4004 }
             else return { error: 4003 } 
         }
