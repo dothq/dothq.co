@@ -92,7 +92,7 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
 
                     {user && 
                         <Link to={"/me"} style={{ marginLeft: '20px' }}>
-                            {user && user.avatar ? <Avatar width={32} noFade src={user.avatar} /> : <Skeleton width={32} height={32} circle={true} />}
+                            <Avatar width={32} noFade src={`https://cdn.dothq.co/avatars/${user.avatarId}.png`} />
                         </Link>
                     }
                 </div>

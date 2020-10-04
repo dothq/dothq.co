@@ -1,9 +1,9 @@
 import * as cors from 'cors';
 import { resolve } from "path";
 
-import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS } from "../config";
+import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS, BEARER_TOKEN_REGEX } from "../config";
 
-import { Controller, api } from "..";
+import { Controller, api, sequelize } from "..";
 
 import { log } from "../tools/log";
 import { goForAWalk } from "../tools/walker";
@@ -37,7 +37,11 @@ export class RouteManager {
             for (const method of route.accepts) {
                 if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
-                api.app[method.toLowerCase()]("/api" + route.route, cors({ origin: API_CORS_ORIGINS }), async (req, res) => { 
+                let middleware = [cors({ origin: API_CORS_ORIGINS })]
+
+                if(route.middleware) middleware = [...middleware, ...route.middleware];
+
+                api.app[method.toLowerCase()]("/api" + route.route, middleware, async (req, res) => { 
                     if(route.bodySchema) {
                         const validated = route.bodySchema.validate(req.body);
 
@@ -50,6 +54,27 @@ export class RouteManager {
 
                             const isValid = await verifyCaptcha(req.body.challenge_token);
                             if(!isValid) return api.errors.stop(4010, res);
+                        }
+
+                        if(route.flags.requireAuthorization) {
+                            if(!req.headers["authorization"] || !BEARER_TOKEN_REGEX.test(req.headers["authorization"])) return api.errors.stop(4003, res);
+                            else {
+                                const token = req.headers["authorization"].split("Bearer ")[1].replace(/ /g, "");
+
+                                const decrypted = await api.token.get(token)
+
+                                if(decrypted.error) return api.errors.stop(decrypted.error, res);
+                                
+                                if(decrypted.id) {
+                                    const User = require("../models/User").default;
+
+                                    const user = await User.findOne({ where: { id: decrypted.id } });
+
+                                    if(!user) return api.errors.stop(4003, res);
+                                    
+                                    res.authorizedUser = user.dataValues;
+                                }
+                            }
                         }
                     }
 

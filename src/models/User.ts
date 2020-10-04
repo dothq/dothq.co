@@ -11,6 +11,7 @@ export interface User extends Model {
   password: string;
   permissions: string[];
   activeToken: string;
+  avatarId: string;
 }
 
 export default sequelize.define<User>("User", {
@@ -32,6 +33,10 @@ export default sequelize.define<User>("User", {
   },
   activeToken: {
     type: DataTypes.STRING(10000),
+    allowNull: true
+  },
+  avatarId: {
+    type: DataTypes.STRING,
     allowNull: true
   },
   permissions: {

@@ -387,6 +387,7 @@ export const Avatar = styled.div`
             height: ${width || 118}px;
             border-radius: ${width || 118}px;
             z-index: ${!noFade ? -1 : ''};
+            left: 0;
         }
     `}
 `;

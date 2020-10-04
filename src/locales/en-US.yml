@@ -14,6 +14,8 @@ FAILED_LOADING_ROUTE_HANDLER: Failed to register route `{{routeName}}` because i
 
 ERROR_200: Success
 ERROR_404: This route or resource cannot be found.
+ERROR_4003: You are not authorized to do this.
+ERROR_4004: This token has expired.
 ERROR_4005: Could not find "{{missingBodyItem}}" in the body.
 ERROR_4006: Body item {{missingBodyItemMessage}}
 ERROR_4009: Email is already registered.
@@ -22,4 +24,6 @@ ERROR_4011: Please solve the human challenge.
 ERROR_4012: Bad request.
 ERROR_4013: User does not exist.
 ERROR_4014: Incorrect email or password.
+ERROR_4020: Failed to upload file.
+ERROR_4021: Invalid file format, expected {{correctMimes}}.
 ERROR_4050: This route does not accept {{badMethod}}, try using {{correctMethods}} instead.

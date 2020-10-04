@@ -14,7 +14,7 @@ export default {
 
             const token = tokenManager.create({ data: req.body, expires: "3m" })
 
-            api.errors.stop(200, res, [], { token, tokenData: tokenManager.get(token) })
+            api.errors.stop(200, res, [], { token, tokenData: tokenManager.get(token, res) })
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }
