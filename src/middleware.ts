@@ -56,6 +56,8 @@ export const runMiddleware = (server: Controller) => {
 
     server.app.use((err: any, req: Req, res: Res, next) => {
         if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
+            const lang = req.query.lang ? server.locales.languageExists((req.query.lang as string)) ? req.query.lang : "" : LOCALE_DEFAULT;
+            res.lang = (lang as string);
             server.errors.stop(4012, res);
         } else next();
     });
