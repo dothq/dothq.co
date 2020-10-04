@@ -53,7 +53,7 @@ export default {
                 }
             });
 
-            api.errors.stop(200, res, [], { changed: req.body })
+            api.errors.stop(200, res, [], { changed: Object.keys(queued).length === 0 ? {} : req.body })
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }
