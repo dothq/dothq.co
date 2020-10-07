@@ -922,6 +922,7 @@ export const AuthInput = styled.input`
 
 export const Checkbox = styled.div`
     display: flex;
+    user-select: none;
 
     label {
         margin-left: 14px;
@@ -931,6 +932,7 @@ export const Checkbox = styled.div`
         display: flex;
         align-items: center;
         color: #000000;
+        height: 22px;
     }
 `;
 

@@ -62,6 +62,7 @@ const Footer = ({ children }) => {
                         <Item href={"/branding"}>Branding</Item>
                         <Item href={"/kit"}>Press Kit</Item>
                         <ExternalItem href={"https://github.com/dothq"}>Open Source</ExternalItem>
+                        <Item href={"/acknowledgements"}>Credits</Item>
                     </ListGroup>
                     <ListGroup>
                         <ListTitle>Resources</ListTitle>
