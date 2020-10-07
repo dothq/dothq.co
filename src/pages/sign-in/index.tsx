@@ -57,7 +57,9 @@ const SigninPage = ({ location }) => {
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
 
-        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        if(isBrowser() && !params.next && window.history.replaceState) {
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        }
         if(isBrowser() && history.state && location.state && location.state.email) {
             if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
 
@@ -75,14 +77,16 @@ const SigninPage = ({ location }) => {
 
         if(
             isBrowser() && 
+            history &&
             history.state && 
+            window.history.replaceState &&
             location.state.email && 
             location.state.password && 
             validEmail((location.state.email as string)) && 
             ((location.state.password as string).length == 0 ? false : validPassword((location.state.password as string)))
         ) {
             onSignInClick();
-            navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`)
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
         }
     })
 
@@ -159,9 +163,9 @@ const SigninPage = ({ location }) => {
                             </AuthField>
 
                             <div style={{ display: 'flex', width: '525px', marginTop: '45px' }}>
-                                <Checkbox style={{ flex: '1' }}>
+                                <Checkbox style={{ flex: '1', alignItems: 'center' }}>
                                     <CheckboxField type={"checkbox"} ref={rememberMeRef} />
-                                    <label>Remember my session</label>
+                                    <label onClick={() => rememberMeRef.current.checked = !rememberMeRef.current.checked} style={{ height: '22px' }}>Remember my session</label>
                                 </Checkbox>
 
                                 <Link to={"/sign-in/forgot-password"}>

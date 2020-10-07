@@ -29,7 +29,7 @@ export const runMiddleware = (server: Controller) => {
                 }));
             };
 
-            if(route && !route.accepts.includes(req.method)) {
+            if(route && !route.accepts.includes(req.method) && route.accepts == ["ALL"]) {
                 res.status(404);
 
                 const accepts = route.accepts.map((accept, index) => {
@@ -48,7 +48,7 @@ export const runMiddleware = (server: Controller) => {
             res.header("X-Powered-By", "Dot")
             route && res.header("X-Route-Source", `${GITHUB_REPOSITORY_URL}/blob/master/src/routes${route.locationOnPath}`)
 
-            if(process.env.NODE_ENV == "development") console.log(`${req.method}${route && !route.accepts.includes(req.method) ? "[X]" : ""} ${req.path} ${route ? `(src/routes${route.locationOnPath}) =>` : `=>`} ${res.statusCode}`)    
+            if(process.env.NODE_ENV == "development") console.log(`${req.method} ${req.path} ${route ? `(src/routes${route.locationOnPath}) =>` : `=>`} ${res.statusCode}`)    
 
             next();
         }

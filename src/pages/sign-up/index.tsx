@@ -58,7 +58,9 @@ const SignupPage = ({ location }) => {
         renderButtonDisabled();
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
 
-        if(!params.next) navigate(location.pathname + `?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        if(isBrowser() && !params.next && window.history.replaceState) {
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
+        }
     })
 
     const onPasswordKeyUp = () => {
@@ -160,9 +162,9 @@ const SignupPage = ({ location }) => {
                             </AuthField>
 
                             <div style={{ display: 'flex', width: '525px', marginTop: '45px' }}>
-                                <Checkbox style={{ flex: '1' }}>
+                                <Checkbox style={{ flex: '1', alignItems: 'center' }}>
                                     <CheckboxField type={"checkbox"} ref={rememberMeRef} />
-                                    <label>Remember my session</label>
+                                    <label onClick={() => rememberMeRef.current.checked = !rememberMeRef.current.checked} style={{ height: '22px' }}>Remember my session</label>
                                 </Checkbox>
                             </div>
 
