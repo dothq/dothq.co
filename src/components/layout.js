@@ -11,6 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import { createGlobalStyle } from 'styled-components'
 
+import { useCookies } from 'react-cookie';
+
 import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
@@ -19,15 +21,16 @@ import "./layout.css"
 import "./inter.css"
 
 import { SkeletonTheme } from 'react-loading-skeleton';
+import { CookiesProvider } from 'react-cookie';
 
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
 import { BackgroundInject } from './style'
 import { useGlobalState } from '../context'
-import { getMe } from "../helpers/me"
 
 import { Banner } from "./Banner"
 import { isBrowser } from "../helpers/login"
+import UserController from "../controllers/User"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -55,7 +58,9 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const [hidden, setHidden] = React.useState(false);
   const [onTop, setOnTop] = React.useState(false);
 
-  const [user, setUser] = useGlobalState('user');
+  const user = UserController;
+
+  const [setUser] = useGlobalState('user');
   const [builds, setBuilds] = useGlobalState('builds');
 
   const [alfUser, setAlfUser] = useGlobalState('afUser');
@@ -82,44 +87,38 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
     setAlfUser(true)
 
-    getMe().then(me => {
-      if(me && me.ok === false) return setUser(undefined)
-      setUser(me)
-    })
-
     setAlfBuilds(true)
-
-    // axios.get('https://dothq.co/api/builds/all')
-    //   .then(res => res.data.results && setBuilds(res.data.results))
 
   }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (
-    <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
-      <GS />
-      {!blank && <Header 
-        className={"nav"} 
-        siteTitle={data.site.siteMetadata.title} 
-        isFixed={false} 
-        isDark={typeof(darkNav) == "undefined" ? false : darkNav}
-        hidden={hidden}
-        onTop={onTop}
-      >
-        {process.env.NODE_ENV === "development" && (
-          <Banner>
-            <span>
-              You're running in development mode. Using <code>http://localhost:4000</code> as the API.
-            </span>
-          </Banner>
-        )}
-      </Header>}
-      {!noHero && <Hero>
-        {children}
-      </Hero>}
-      {noHero && <>{children}</>}
-      {!noEnding && <Ending />}
-      {!blank && <Footer />}
-    </SkeletonTheme>
+    <CookiesProvider>
+      <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
+        <GS />
+        {!blank && <Header 
+          className={"nav"} 
+          siteTitle={data.site.siteMetadata.title} 
+          isFixed={false} 
+          isDark={typeof(darkNav) == "undefined" ? false : darkNav}
+          hidden={hidden}
+          onTop={onTop}
+        >
+          {process.env.NODE_ENV === "development" && (
+            <Banner>
+              <span>
+                You're running in development mode. Using <code>http://localhost:4000</code> as the API.
+              </span>
+            </Banner>
+          )}
+        </Header>}
+        {!noHero && <Hero>
+          {children}
+        </Hero>}
+        {noHero && <>{children}</>}
+        {!noEnding && <Ending />}
+        {!blank && <Footer />}
+      </SkeletonTheme>
+    </CookiesProvider>
   )
 }
 

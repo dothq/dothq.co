@@ -10,6 +10,6 @@ export const validUsername = (username: string) => {
     return username.length >= 4 && USERNAME_REGEX.test(username);
 }
 
-export const validPassword = (password: string) => {
-    return checkPasswordStrength(password).id >= 2;
+export const validPassword = (password: string, maxStrength?: number) => {
+    return checkPasswordStrength(password).id >= maxStrength ? maxStrength : 2;
 }

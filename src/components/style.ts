@@ -860,7 +860,7 @@ export const AuthField = styled.div`
 
     max-width: 525px;
 
-    transition: 0.3s box-shadow;
+    transition: 0.2s box-shadow;
     position: relative;
 
     --pad: 19px;
@@ -870,7 +870,7 @@ export const AuthField = styled.div`
     }
 
     &:focus-within {
-        --shadow: inset 0px 0px 0px 2px #4965FF;
+        --shadow: inset 0px 0px 0px 2px #4965FF, 0px 0px 0px 4px #4965FF80;
 
         span {
             --pad: 8px !important;
@@ -950,7 +950,7 @@ export const CheckboxField = styled.input`
 
     border-radius: 4px;
 
-    &:hover {
+    &:hover, &:focus {
         border-color: #AAAAAA;
     }
 
@@ -995,4 +995,59 @@ export const TickerItem = styled.span`
         opacity: ${visible ? 1 : 0};
         background-color: ${bg};
     `};
+`;
+
+export const IconsGrid = styled.div`
+	--auto-grid-min-size: 4rem;
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax(126px, 1fr) );
+	grid-gap: 1.5rem;
+	max-width: 900px;
+	margin: 0 auto;
+    width: 100vw;
+    
+    @media screen and (max-width: 1000px) {
+        padding: 0 55px;
+    }
+`;
+
+export const IconItem = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px;
+    transition: 0.15s box-shadow, 0.2s transform;
+    box-shadow: 0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c;
+    padding: 24px 0 24px 0;
+
+    &:hover {
+        box-shadow: 0 25.6px 57.6px 0 #00000038,0 4.8px 14.4px 0 #0000002e;
+        transform: scale(1.05);
+    }
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        margin-bottom: 1.45rem;
+    }
+
+    & > * > svg {
+        width: var(--di-icon-size, 32px);
+        height: var(--di-icon-size, 32px);
+        min-width: var(--di-icon-size, 32px);
+        min-height: var(--di-icon-size, 32px);
+        max-width: var(--di-icon-size, 32px);
+        max-height: var(--di-icon-size, 32px);
+
+        user-select: none;
+        user-drag: none;
+    }
+
+    & > span {
+        font-size: 12px;
+    }
 `;

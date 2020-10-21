@@ -25,6 +25,7 @@ export const Content = styled.div`
                 padding-bottom: var(--spacing, 64px);
                 width: 100%;
                 margin-bottom: 3.5rem;
+                background-color: white;
             }
 
             .hero-container > .hero-content {

@@ -5,6 +5,8 @@ import { StyledHeader, Container, Logo, Flex, NavItem, MenuSlot, MenuLine } from
 import { Button, TextButton, IconButton } from "../Button"
 import { navigate } from "gatsby"
 
+import { useCookies } from 'react-cookie';
+
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import { useGlobalState } from "../../context"
 import { Avatar, HeaderItemBox } from "../style"
@@ -13,6 +15,7 @@ import { ButtonV2 } from "../ButtonV2"
 import { isBrowser } from "../../helpers/login"
 import { ProductsMenu } from "./menus/Products"
 import { Line } from "../Footer/style"
+import UserController from "../../controllers/User"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -21,10 +24,26 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [menuVisible, setMenuVisible] = React.useState(false);
 
+    const user = UserController;
+
     const themeContext = React.useContext(ThemeManagerContext)
-    const [user] = useGlobalState('user');
+    const [userState, setUser] = useGlobalState('user');
+
+    user.getSelf(cookies.token).then(async (r: any) => {
+        if(r.ok) {
+            setUser(r.data.result);
+  
+            const d = new Date()
+            d.setDate(d.getDate() + 2)
+  
+            setCookie("token", cookies.token, { expires: d, sameSite: "strict", secure: true })
+        }
+    }).catch(e => {
+        removeCookie("token")
+    });
 
     const onMenuItemHover = () => {
         setMenuVisible(!menuVisible);
@@ -81,7 +100,7 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                     </a>
                 </div>
                 <div className={"nbtn"}>
-                    {!user && <>
+                    {!userState && <>
                         <Link to={"/sign-in"}>
                             <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
                         </Link>
@@ -90,9 +109,9 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                         </Link>
                     </>}
 
-                    {user && 
-                        <Link to={"/me"} style={{ marginLeft: '20px' }}>
-                            <Avatar width={32} noFade src={`https://cdn.dothq.co/avatars/${user.avatarId}.png`} />
+                    {userState && 
+                        <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
+                            <Avatar width={32} noFade src={`https://cdn.dothq.co/avatars/${userState.avatarId}.png`} />
                         </Link>
                     }
                 </div>

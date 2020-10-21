@@ -186,7 +186,7 @@ const SignupPage = ({ location }) => {
                                 </ButtonV2>
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
-                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignUpClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} style={{ border: '2px solid #D2D2D2' }}>
+                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignUpClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
                                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign up with GitHub</div>
                                 </ButtonV2>
                             </div>
