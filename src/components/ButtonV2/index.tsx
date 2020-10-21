@@ -17,6 +17,7 @@ interface Props {
     onClick?: any;
     style?: any;
     disabled?: boolean;
+    bc?: string;
 }
 
 export const ButtonV2 = ({ 
@@ -31,7 +32,8 @@ export const ButtonV2 = ({
     fs,
     onClick,
     style,
-    disabled
+    disabled,
+    bc
 }: Props) => {
     const [loc, setLoc] = React.useState(false);
 
@@ -42,7 +44,18 @@ export const ButtonV2 = ({
     }
 
     return (
-        <StyledButtonV2 color={color} background={background} w={w} h={h} br={br} fs={fs} onClick={loadOnClick ? newOnClick : onClick} style={style} disabled={disabled}>
+        <StyledButtonV2 
+            color={color} 
+            background={background} 
+            w={w} 
+            h={h} 
+            br={br}
+            s={fs} 
+            onClick={loadOnClick ? newOnClick : onClick} 
+            style={style} 
+            disabled={disabled} 
+            bc={bc}
+        >
             {(!loading && loc == false) && children}
             {(loading || loc == true) && <Thinker color={color || "white"} center />}
         </StyledButtonV2>

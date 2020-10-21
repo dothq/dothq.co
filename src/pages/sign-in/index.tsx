@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useCookies } from 'react-cookie';
+
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField, ButtonTicker, TickerItem } from "../../components/style"
@@ -19,7 +21,9 @@ import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
 import { useGlobalState } from "../../context"
 
 const SigninPage = ({ location }) => {
-    const params = parse(location.search)
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+
+    let params = parse(location.search)
 
     const [userGlobal, setUser] = useGlobalState('user');
 
@@ -45,7 +49,7 @@ const SigninPage = ({ location }) => {
         const password = passwordRef.current.value;
 
         const emailValid = validEmail(email);
-        const passwordValid = password.length == 0 ? false : validPassword(password);
+        const passwordValid = password.length >= 4;
 
         if(email.length == 0 || password.length == 0 || !emailValid || !passwordValid) return setDisabled(true);
         else return setDisabled(false);
@@ -105,15 +109,20 @@ const SigninPage = ({ location }) => {
             setLoading(false);
 
             if(r.ok) {
-                
-                const { data }: any = await user.getSelf((r as any).data.result.token);
+                const token = (r as any).data.result.token;
 
+                const { data }: any = await user.getSelf(token);
                 data.ok && setUser(data.result);
 
-                if(rememberMe) localStorage.setItem("token", (r as any).data.result.token)
+                const d = new Date()
+                
+                if(rememberMe) d.setDate(d.getDate() + 2)
+
+                setCookie("token", token, { expires: rememberMe ? d : null, sameSite: "strict", secure: true })
+
+                params = parse(location.search)
 
                 const next = ((params.next as string).startsWith("/") && !(params.next as string).includes(".") ? params.next : "/" as string);
-
                 navigate(params.next ? (next as string) : "/");
             }
         }).catch(e => {
@@ -192,7 +201,7 @@ const SigninPage = ({ location }) => {
 
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
-                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignInClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} style={{ border: '2px solid #D2D2D2' }}>
+                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignInClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
                                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign in with GitHub</div>
                                 </ButtonV2>
                             </div>

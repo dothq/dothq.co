@@ -55,7 +55,9 @@ const ForgotPasswordPage = ({ location }) => {
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
                     <div style={{ transform: done ? 'translateX(0px)' : 'translateX(-25px)', opacity: done ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
-                            <AuthLogo />
+                            <Link to={"/"}>
+                                <AuthLogo />
+                            </Link>
                             <AuthTitle>Reset your password</AuthTitle>
                             <AuthDesc>Enter your email address below and we'll send you a link to reset your password.</AuthDesc>
                         </div>

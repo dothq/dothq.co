@@ -2,6 +2,7 @@ const axios = require("axios")
 const path = require(`path`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 const { resolve } = require("path")
+const fs = require("fs")
 
 exports.onCreateNode = ({ node }) => {
   console.log(`Node created of type "${node.internal.type}"`)
@@ -194,5 +195,19 @@ exports.createPages = async ({ graphql, actions }) => {
     path: `/legal/terms`,
     component: require.resolve("./src/templates/legal.tsx"),
     context: { legal: await generateLegalContext("TERMS_OF_SERVICE") },
+  })
+
+  let icons = []
+
+  fs.readdirSync(resolve(process.cwd(), "src", "images", "doticons")).forEach(icon => {
+    const ic = fs.readFileSync(resolve(process.cwd(), "src", "images", "doticons", icon), "utf-8");
+
+    icons.push({ name: icon.split(".svg")[0], data: ic })
+  })
+
+  createPage({
+    path: `/design/icons`,
+    component: require.resolve("./src/templates/icons.tsx"),
+    context: { icons },
   })
 }
