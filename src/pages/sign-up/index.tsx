@@ -8,14 +8,13 @@ import { Link, navigate } from "gatsby"
 
 import { ButtonV2 } from '../../components/ButtonV2'
 
-import UserController from "../../controllers/User"
-import { isBrowser } from "../../helpers/login"
-import { validEmail, validPassword, validUsername } from "../../tools/validation"
+import UserController from "../../../lib/controllers/User"
+import { isBrowser } from "../../../lib/helpers/login"
+import { validEmail, validPassword, validUsername } from "../../../lib/tools/validation"
 import { ErrorJSON } from "../../types"
 
 import { parse } from "search-params"
-import { TokenManager } from "../../managers/token"
-import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
+import config from "../../../dot.config"
 
 const SignupPage = ({ location }) => {
     const params = parse(location.search)
@@ -59,7 +58,7 @@ const SignupPage = ({ location }) => {
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
 
         if(isBrowser() && !params.next && window.history.replaceState) {
-            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${config.auth.redirectAfterLogin}`);
         }
     })
 
@@ -111,7 +110,7 @@ const SignupPage = ({ location }) => {
 
                 console.log(token)
 
-                navigate(`/sign-in?next=${params.next ? params.next : ID_REDIRECT_AFTER_LOGIN}`, { state: { email, password } })
+                navigate(`/sign-in?next=${params.next ? params.next : config.auth.redirectAfterLogin}`, { state: { email, password } })
             }
         }).catch(e => {
             setLoading(false);
@@ -187,7 +186,7 @@ const SignupPage = ({ location }) => {
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
                                 <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignUpClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign up with GitHub</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../assets/images/github.svg")} />Sign up with GitHub</div>
                                 </ButtonV2>
                             </div>
                         </div>

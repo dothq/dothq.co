@@ -3,11 +3,11 @@ import * as Joi from 'joi';
 import { Req, Res } from "../../../types";
 
 import { api } from "../..";
-import User from "../../models/User";
-import { validEmail, validPassword } from '../../tools/validation';
-import { encrypt, encryptWithSalt } from '../../tools/encrypt';
+import User from "../../../lib/models/User";
+import { validEmail, validPassword } from '../../../lib/tools/validation';
+import { encrypt, encryptWithSalt } from '../../../lib/tools/encrypt';
 
-import * as credentials from '../../../credentials.json';
+import config from '../../../dot.config';
 
 export default {
     route: '/id/settings',
@@ -39,7 +39,7 @@ export default {
 
             if(req.body.username) data._username = req.body.username;
             if(req.body.password) data._password = await encrypt(req.body.password);
-            if(req.body.email) data._email = await encryptWithSalt(req.body.email, credentials.EMAIL_SALT);
+            if(req.body.email) data._email = await encryptWithSalt(req.body.email, config.credentials.email.key);
 
             const queued = {};
 

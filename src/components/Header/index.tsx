@@ -8,14 +8,14 @@ import { navigate } from "gatsby"
 import { useCookies } from 'react-cookie';
 
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
-import { useGlobalState } from "../../context"
+import { useGlobalState } from "../../../lib/context"
 import { Avatar, HeaderItemBox } from "../style"
 import Skeleton from "react-loading-skeleton"
 import { ButtonV2 } from "../ButtonV2"
-import { isBrowser } from "../../helpers/login"
+import { isBrowser } from "../../../lib/helpers/login"
 import { ProductsMenu } from "./menus/Products"
 import { Line } from "../Footer/style"
-import UserController from "../../controllers/User"
+import UserController from "../../../lib/controllers/User"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()

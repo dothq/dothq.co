@@ -26,11 +26,11 @@ import { CookiesProvider } from 'react-cookie';
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
 import { BackgroundInject } from './style'
-import { useGlobalState } from '../context'
+import { useGlobalState } from '../../lib/context'
 
 import { Banner } from "./Banner"
-import { isBrowser } from "../helpers/login"
-import UserController from "../controllers/User"
+import { isBrowser } from "../../lib/helpers/login"
+import UserController from "../../lib/controllers/User"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 

@@ -8,12 +8,12 @@ import { navigate } from 'gatsby';
 import { Content } from "../components/Hero/style"
 import { Heading, Description, FeatureIcon, Feature, FeatureDisplay, IconsGrid, IconItem, Checkbox, CheckboxField } from "../components/style"
 
-import identity from '../images/icons/identity.svg'
-import fonts from '../images/icons/fonts.svg'
-import colours from '../images/icons/colours.png'
-import kit from '../images/icons/kit.svg'
+import identity from '../assets/images/icons/identity.svg'
+import fonts from '../assets/images/icons/fonts.svg'
+import colours from '../assets/images/icons/colours.png'
+import kit from '../assets/images/icons/kit.svg'
 import { ButtonV2 } from "../components/ButtonV2"
-import { isBrowser } from "../helpers/login";
+import { isBrowser } from "../../lib/helpers/login";
 
 export default ({ pageContext: { icons } }) => {
     icons.sort((a: number, b: number) => (a.name > b.name)*2-1);

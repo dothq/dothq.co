@@ -9,16 +9,16 @@ import { Link, navigate } from "gatsby"
 
 import { ButtonV2 } from '../../components/ButtonV2'
 
-import UserController from "../../controllers/User"
+import UserController from "../../../lib/controllers/User"
 
 import { ErrorJSON } from "../../types"
 
 import { parse } from "search-params";
 import { Thinker } from "../../components/Thinker"
-import { validEmail, validPassword } from "../../tools/validation"
-import { isBrowser } from "../../helpers/login"
-import { ID_REDIRECT_AFTER_LOGIN } from "../../config"
-import { useGlobalState } from "../../context"
+import { validEmail, validPassword } from "../../../lib/tools/validation"
+import { isBrowser } from "../../../lib/helpers/login"
+import config from "../../../dot.config"
+import { useGlobalState } from "../../../lib/context"
 
 const SigninPage = ({ location }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -62,7 +62,7 @@ const SigninPage = ({ location }) => {
         isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
 
         if(isBrowser() && !params.next && window.history.replaceState) {
-            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${config.auth.redirectAfterLogin}`);
         }
         if(isBrowser() && history.state && location.state && location.state.email) {
             if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current) return;
@@ -90,7 +90,7 @@ const SigninPage = ({ location }) => {
             ((location.state.password as string).length == 0 ? false : validPassword((location.state.password as string)))
         ) {
             onSignInClick();
-            window.history.replaceState({}, null, `${window.location.pathname}?next=${ID_REDIRECT_AFTER_LOGIN}`);
+            window.history.replaceState({}, null, `${window.location.pathname}?next=${config.auth.redirectAfterLogin}`);
         }
     })
 
@@ -166,7 +166,7 @@ const SigninPage = ({ location }) => {
                             <AuthField style={{ marginTop: '18px', width: '525px' }}>
                                 <AuthInput placeholder={" "} type={"password"} ref={passwordRef} style={{ paddingRight: 0 }} />
                                 <div style={{ margin: '18px 18px 18px 0' }}>
-                                    {isCaps && <img style={{ maxWidth: '24px', height: '24px' }} src={require("../../images/caps.svg")}></img>}
+                                    {isCaps && <img style={{ maxWidth: '24px', height: '24px' }} src={require("../../assets/images/caps.svg")}></img>}
                                 </div>
                                 <AuthPlaceholder>Password</AuthPlaceholder>
                             </AuthField>
@@ -202,7 +202,7 @@ const SigninPage = ({ location }) => {
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
                                 <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignInClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../images/github.svg")} />Sign in with GitHub</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../assets/images/github.svg")} />Sign in with GitHub</div>
                                 </ButtonV2>
                             </div>
                         </div>

@@ -2,25 +2,23 @@ import { Sequelize } from "sequelize";
 
 import { Server } from './server';
 
-import { LocaleManager } from './managers/locale';
-import { RouteManager } from './managers/router';
-import { ErrorManager } from './managers/error';
-import { TokenManager } from "./managers/token";
-import { WebManager } from './managers/web';
+import { LocaleManager } from '../lib/managers/locale';
+import { RouteManager } from '../lib/managers/router';
+import { ErrorManager } from '../lib/managers/error';
+import { TokenManager } from "../lib/managers/token";
+import { WebManager } from '../lib/managers/web';
 
-import { Req, Res, Route } from "../types";
-import { API_PORT, GITHUB_REPOSITORY_URL, LOCALE_DEFAULT } from './config';
-import { log } from './tools/log';
+import config from '../dot.config';
+import { log } from '../lib/tools/log';
 
-import * as credentials from '../credentials.json';
 import { runMiddleware } from "./middleware";
 
-export const sequelize = new Sequelize(credentials.POSTGRES_URI, { logging: false });
+export const sequelize = new Sequelize(config.credentials.postgres.key, { logging: false });
 
 sequelize
   .authenticate()
   .then(() => {
-    log("info", api.locales["en-US"]["api_db_connected"])
+    log("info", api.locales[config.locale.default]["api_db_connected"])
   })
   .catch((err) => {
     throw new Error(err);
@@ -62,14 +60,14 @@ export class Controller extends Server {
         await this.ready();
 
         this._listen(port).then((e) => {
-            log("info", this.locales.applyContext("en-US", "api_listening_on", port).data)
+            log("info", this.locales.applyContext(config.locale.default, "api_listening_on", port).data)
         });
     }
 }
 
 export const api = new Controller();
 
-api.listen(API_PORT);
+api.listen(config.api.port);
 
 process.on('unhandledRejection', (err: Error, p) => {
     if(err.message == "Cannot set headers after they are sent to the client") return;

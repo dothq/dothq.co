@@ -1,15 +1,7 @@
 import React from 'react';
 
-import { StyledEnding, ContainerParent, Container, Title, Or, FadingOutScreenshot } from "./style";
-import { HeroButton } from '../Button';
-import { Buttons } from '../style';
-import { getOS } from '../../helpers/os';
+import { StyledEnding, ContainerParent, Container, Title } from "./style";
 import { Link } from 'gatsby';
-
-import * as macos from '../../images/os/macos.png'
-import * as windows from '../../images/os/windows.png'
-import * as linux from '../../images/os/linux.png'
-import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
 
 import { ButtonV2 } from '../ButtonV2'
 

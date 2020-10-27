@@ -3,12 +3,12 @@ import * as Joi from 'joi';
 import { Req, Res } from "../../../types";
 
 import { api } from "../..";
-import User from "../../models/User";
-import { validPassword, validEmail } from '../../tools/validation';
+import User from "../../../lib/models/User";
+import { validPassword, validEmail } from '../../../lib/tools/validation';
 
-import { encryptWithSalt, compare } from '../../tools/encrypt';
+import { encryptWithSalt, compare } from '../../../lib/tools/encrypt';
 
-import * as credentials from '../../../credentials.json';
+import config from '../../../dot.config';
 
 const sleep = (ms: number) => {
     return new Promise((resolve) => {
@@ -33,7 +33,7 @@ export default {
             // Add a delay to slow down brute force attacks on accounts
             await sleep(2000);
 
-            const user = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, credentials.EMAIL_SALT) } });
+            const user = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, config.credentials.email.key) } });
 
             if(!user) return api.errors.stop(4013, res);
             if(!await compare(req.body.password, user.password)) return api.errors.stop(4014, res);

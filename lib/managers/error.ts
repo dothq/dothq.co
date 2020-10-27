@@ -1,7 +1,7 @@
-import { errors } from "../errors";
+import { errors } from "../../src/errors";
 import { log } from "../tools/log";
 
-import { api } from "..";
+import { api } from "../../src";
 
 export class ErrorManager {
     private app;

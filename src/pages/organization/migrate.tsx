@@ -4,7 +4,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import { navigate, Link } from "gatsby"
 import Emoji from "react-emoji-render"
-import { generateEmojiConfig } from "../../tools/emoji"
+import { generateEmojiConfig } from "../../../lib/tools/emoji"
 import { TextButton } from "../../components/Button"
 
 const MigratePage = () => {

@@ -1,9 +1,9 @@
 import * as cors from 'cors';
 import { resolve } from "path";
 
-import { ROUTES_DIRECTORY, LOCALE_DEFAULT, API_CORS_ORIGINS, BEARER_TOKEN_REGEX } from "../config";
+import config from "../../dot.config";
 
-import { Controller, api, sequelize } from "..";
+import { Controller, api } from "../../src";
 
 import { log } from "../tools/log";
 import { goForAWalk } from "../tools/walker";
@@ -21,23 +21,23 @@ export class RouteManager {
     }
 
     private init() {
-        const routes = goForAWalk(ROUTES_DIRECTORY);
+        const routes = goForAWalk(config.api.routesData);
         
         routes.forEach((routeLocation: string) => {
-            const route: Route = require(resolve(ROUTES_DIRECTORY, routeLocation)).default;
+            const route: Route = require(resolve(config.api.routesData, routeLocation)).default;
 
             if(!route.route) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route", routeLocation.split(".")[0]))
             if(!route.accepts || route.accepts.length == 0) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_method", routeLocation.split(".")[0]))
             if(!route.handlers) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", routeLocation.split(".")[0]))
 
-            route.locationOnPath = routeLocation.split(ROUTES_DIRECTORY)[1];
+            route.locationOnPath = routeLocation.split(config.api.routesData)[1];
 
             this.routes.push(route);
 
             for (const method of route.accepts) {
                 if(!route.handlers[method]) return log("error", this.api.locales.applyContext("en-US", "failed_loading_route_handler", route.locationOnPath))
 
-                let middleware = [cors({ origin: API_CORS_ORIGINS })]
+                let middleware = [cors({ origin: config.api.origins })]
 
                 if(route.middleware) middleware = [...middleware, ...route.middleware];
 
@@ -57,7 +57,7 @@ export class RouteManager {
                         }
 
                         if(route.flags.requireAuthorization) {
-                            if(!req.headers["authorization"] || !BEARER_TOKEN_REGEX.test(req.headers["authorization"])) return api.errors.stop(4003, res);
+                            if(!req.headers["authorization"] || !config.regex.token.test(req.headers["authorization"])) return api.errors.stop(4003, res);
                             else {
                                 const token = req.headers["authorization"].split("Bearer ")[1].replace(/ /g, "");
 

@@ -3,9 +3,9 @@ import { StyledFooter, Container, LogoText, List, ListTitle, ListGroup, ListItem
 import PropTypes from "prop-types"
 import { Link, navigate } from "gatsby";
 
-import twitter from '../../images/icons/twitter.svg'
-import discord from '../../images/icons/discord.svg'
-import youtube from '../../images/icons/youtube.svg'
+import twitter from '../../assets/images/icons/twitter.svg'
+import discord from '../../assets/images/icons/discord.svg'
+import youtube from '../../assets/images/icons/youtube.svg'
 
 import { ButtonV2 } from '../ButtonV2'
 

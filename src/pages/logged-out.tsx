@@ -9,9 +9,9 @@ import { HeroButton, TextButton } from "../components/Button"
 import { Link, navigate } from "gatsby"
 
 import Emoji from "react-emoji-render"
-import { generateEmojiConfig } from "../tools/emoji"
+import { generateEmojiConfig } from "../../lib/tools/emoji"
 
-import { useGlobalState } from '../context'
+import { useGlobalState } from '../../lib/context'
 
 const LOPage = () => {
     const [user] = useGlobalState('user');

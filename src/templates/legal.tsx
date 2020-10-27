@@ -11,7 +11,7 @@ import ReactMarkdown from 'react-markdown';
 import '../components/legal.css'
 import { Line } from "../components/Footer/style"
 import { Content } from "../components/Hero/style"
-import { isBrowser } from "../helpers/login"
+import { isBrowser } from "../../lib/helpers/login"
 
 export default ({ pageContext: { legal } }) => {
   React.useEffect(() => {

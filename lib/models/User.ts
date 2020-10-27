@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 
-import { sequelize } from "../";
+import { sequelize } from "../../src";
 
 import { makeId } from "../tools/id";
 

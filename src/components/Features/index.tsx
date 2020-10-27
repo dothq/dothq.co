@@ -2,17 +2,17 @@ import React from 'react';
 
 import { FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon } from "../style"
 
-import * as shield from '../../images/icons/shield.svg'
-import * as mail from '../../images/icons/mail.svg'
-import * as sync from '../../images/icons/sync.svg'
+import * as shield from '../../assets/images/icons/shield.svg'
+import * as mail from '../../assets/images/icons/mail.svg'
+import * as sync from '../../assets/images/icons/sync.svg'
 
-import * as blockerFeature from '../../images/features/blocker_feature.svg'
-import * as maskFeature from '../../images/features/mask_feature.svg'
-import * as syncFeature from '../../images/features/sync_feature.svg'
+import * as blockerFeature from '../../assets/images/features/blocker_feature.svg'
+import * as maskFeature from '../../assets/images/features/mask_feature.svg'
+import * as syncFeature from '../../assets/images/features/sync_feature.svg'
 
 import { ButtonV2 } from '../ButtonV2';
 
-import { isBrowser } from "../../helpers/login"
+import { isBrowser } from "../../../lib/helpers/login"
 
 export const Features = () => {
     const blockerRef = React.createRef<HTMLDivElement>();

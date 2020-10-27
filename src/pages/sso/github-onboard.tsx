@@ -12,7 +12,7 @@ import axios from 'axios';
 import { parse } from 'search-params';
 
 import FeatherIcon from 'feather-icons-react';
-import { isBrowser } from "../../helpers/login"
+import { isBrowser } from "../../../lib/helpers/login"
 
 import { ghSSO } from './github';
 

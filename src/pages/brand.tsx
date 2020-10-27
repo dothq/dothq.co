@@ -1,15 +1,15 @@
 import React from "react"
-import image from '../images/icon.png';
+import image from '../assets/images/icon.png';
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { TextButton } from "../components/Button";
 import Emoji from "react-emoji-render";
-import { generateEmojiConfig } from "../tools/emoji";
-import { getOS } from "../helpers/os";
+import { generateEmojiConfig } from "../../lib/tools/emoji";
+import { getOS } from "../../lib/helpers/os";
 import { parse } from 'search-params' 
-import { isBrowser } from "../helpers/login"
+import { isBrowser } from "../../lib/helpers/login"
 
 const Brand = ({ location }) => {
 

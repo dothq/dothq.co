@@ -9,7 +9,7 @@ import { HeroButton, TextButton } from "../../components/Button"
 import { Link } from "gatsby"
 
 import Emoji from "react-emoji-render"
-import { generateEmojiConfig } from "../../tools/emoji"
+import { generateEmojiConfig } from "../../../lib/tools/emoji"
 
 import { parse } from 'search-params' 
 import { isBrowser } from "../../helpers/login"

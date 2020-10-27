@@ -1,24 +1,20 @@
 import * as jwt from 'jsonwebtoken';
 
-import { promisify } from 'util';
-
 import { readFileSync } from 'fs';
 
-import { AUTH_ALGORITHM, AUTH_SECRET_KEY, AUTH_USER_TOKEN_EXPIRE } from '../config';
-import { api } from '..';
-import { Res } from '../../types';
+import config from '../../dot.config';
 
 export class TokenManager {
     private key: string;
 
     constructor() {
-        this.key = readFileSync(AUTH_SECRET_KEY, "utf-8");
+        this.key = readFileSync(config.auth.key, "utf-8");
     }
 
     public create({ data, expires }: { data: any, expires: string | number | any }) {
         return jwt.sign(data, this.key, {
             expiresIn: expires,
-            algorithm: AUTH_ALGORITHM
+            algorithm: (config.auth.algorithm as any)
         });
     }
 
@@ -27,7 +23,7 @@ export class TokenManager {
 
         try {
             tok = jwt.verify(token, this.key, {
-                algorithms: [AUTH_ALGORITHM]
+                algorithms: [(config.auth.algorithm as any)]
             });
         } catch (e) {
             if(e.message == "jwt expired") return { error: 4004 }
@@ -38,6 +34,6 @@ export class TokenManager {
     }
 
     public createUserToken(id: string) {
-        return this.create({ data: { id }, expires: AUTH_USER_TOKEN_EXPIRE })
+        return this.create({ data: { id }, expires: config.auth.tokenExpires })
     }
 }

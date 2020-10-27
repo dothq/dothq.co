@@ -9,18 +9,16 @@ import * as multer from 'multer';
 
 import { Req, Res } from "../../../types";
 import { api } from "../..";
-import { makeId } from '../../tools/id';
+import { makeId } from '../../../lib/tools/id';
 
 import axios from 'axios';
 
-import User from '../../models/User';
-import { ALLOWED_AVATAR_TYPES } from "../../config";
-
-import * as credentials from '../../../credentials.json';
+import User from '../../../lib/models/User';
+import config from "../../../dot.config";
 
 const blob = new BlobServiceClient(
     `https://dothq.blob.core.windows.net`,
-    new StorageSharedKeyCredential("dothq", credentials.CDN_KEY)
+    new StorageSharedKeyCredential("dothq", config.credentials.cdn.key)
 );
 
 const containerClient = blob.getContainerClient("avatars");
@@ -43,7 +41,7 @@ export default {
         POST: async (req: Req, res: Res, next) => {
             if(!res.authorizedUser || !req.file) return;
 
-            if(!ALLOWED_AVATAR_TYPES.includes(req.file.mimetype.split("/")[1])) return api.errors.stop(4021, res, [ALLOWED_AVATAR_TYPES]);
+            if(!config.general.allowedAvatarMimes.includes(req.file.mimetype.split("/")[1])) return api.errors.stop(4021, res, [config.general.allowedAvatarMimes]);
 
             const blobId = makeId(8);
 
@@ -58,7 +56,7 @@ export default {
             }
 
             const buffer = await sharp(req.file.buffer)
-                            .resize(256, 256, { fit: "fill", background: { r: 255, g: 255, b: 255, alpha: 1 } })
+                            .resize(256, 256, { fit: "cover", background: { r: 255, g: 255, b: 255, alpha: 1 } })
                             .toFormat('png')
                             .toBuffer();
 

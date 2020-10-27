@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_DEV_URL, API_PROD_URL } from '../config';
+import config from '../../dot.config';
 
 export default class APIController {
     public apiHost = "";
@@ -8,7 +8,7 @@ export default class APIController {
     constructor() {
         const env = process.env.NODE_ENV;
 
-        this.apiHost = env == "development" ? API_DEV_URL : API_PROD_URL;
+        this.apiHost = env == "development" ? config.api.uris.dev() : config.api.uris.prod;
     }
 
     get(route: string, vars?: any[]) {

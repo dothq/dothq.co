@@ -15,11 +15,11 @@ import { ButtonV2 } from "../../../components/ButtonV2"
 import { isBrowser } from "../../../helpers/login"
 import { getOS } from "../../../helpers/os"
 
-import * as shield from '../../../images/icons/shield.svg'
-import * as mail from '../../../images/icons/mail.svg'
-import * as sync from '../../../images/icons/sync.svg'
+import * as shield from '../../../assets/images/icons/shield.svg'
+import * as mail from '../../../assets/images/icons/mail.svg'
+import * as sync from '../../../assets/images/icons/sync.svg'
 
-import * as mobileScreenshot from '../../../images/mobile-screenshot.svg'
+import * as mobileScreenshot from '../../../assets/images/mobile-screenshot.svg'
 import { Content } from "../../../components/Hero/style"
 
 class DotBrowserMobilePage extends React.Component {

@@ -14,14 +14,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `fonts`,
-        path: `${__dirname}/src/fonts`,
+        path: `${__dirname}/src/assets/fonts`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -35,7 +35,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#fafafa`,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`,
+        icon: `src/assets/images/icon.png`,
       },
     },
     `gatsby-plugin-offline`,
