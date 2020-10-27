@@ -2,28 +2,26 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 import { EventEmitter } from 'events';
 
-import { LOCALE_DIRECTORY, LOCALE_DEFAULT, GITHUB_REPOSITORY_URL } from "../config";
+import config from "../../dot.config";
 
 import { readYaml } from '../tools/reader';
 import { log } from '../tools/log';
 
-import { Controller } from '..';
-
-import { Req, Res, Route } from '../../types';
+import { Controller } from '../../src';
 
 export class LocaleManager extends EventEmitter {
     private api: Controller;
     public ['en-US'] = {};
 
     public load() {
-        const locales = readdirSync(LOCALE_DIRECTORY);
+        const locales = readdirSync(config.locale.localeData);
 
         locales.forEach(locale => {
             const parent = locale.split(".yml")[0];
 
             this[parent] = {};
 
-            const data = readYaml(resolve(LOCALE_DIRECTORY, locale))
+            const data = readYaml(resolve(config.locale.localeData, locale))
             
             if(!data) return;
             
@@ -47,7 +45,7 @@ export class LocaleManager extends EventEmitter {
         let error = undefined;
 
         if(this[family] == undefined || this[family][key] == undefined) {
-            data = this["en-US"][key]
+            data = this[config.locale.default][key]
             error = `Could not find i18n value by ID \`${key}\` inside the \`${family}\` locale family. Please report this to an administator.`
         } else {
             data = this[family][key]

@@ -4,9 +4,9 @@ import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken, isBrowser } from "../../../helpers/login"
+import { getUserToken, isBrowser } from "../../../../lib/helpers/login"
 
-import { getOS } from "../../../helpers/os";
+import { getOS } from "../../../../lib/helpers/os";
 
 import Skeleton from 'react-loading-skeleton';
 import { HeroButton, IconButton, TextButton } from '../../../components/Button'
@@ -15,7 +15,7 @@ import FeatherIcon from 'feather-icons-react';
 
 import axios from 'axios';
 
-import { useGlobalState } from '../../../context'
+import { useGlobalState } from '../../../../lib/context'
 
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';			   
 import { Spinner } from "../../../components/style"

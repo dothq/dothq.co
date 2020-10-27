@@ -6,7 +6,7 @@ import SEO from '../components/seo'
 import { BlogHero } from '../components/BlogHero'
 import { BlogCard } from '../components/BlogCard'
 import { BlogPosts, BlogMount, BlogSidebar } from '../components/style'
-import { generateEmojiConfig } from '../tools/emoji'
+import { generateEmojiConfig } from '../../lib/tools/emoji'
 import Emoji from 'react-emoji-render'
 import { TextButton } from '../components/Button'
 

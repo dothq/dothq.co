@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Buttons, Title } from "../components/style"
 
-import landingShowcase from '../images/landing-showcase.png'
+import landingShowcase from '../assets/images/landing-showcase.png'
 
 import { ButtonV2 } from "../components/ButtonV2"
 import { Features } from "../components/Features"

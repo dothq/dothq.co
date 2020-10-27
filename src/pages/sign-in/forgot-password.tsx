@@ -7,8 +7,8 @@ import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthField, AuthPlaceholder, Au
 import { ButtonV2 } from '../../components/ButtonV2'
 
 import { parse } from "search-params";
-import { validEmail } from "../../tools/validation"
-import { isBrowser } from "../../helpers/login"
+import { validEmail } from "../../../lib/tools/validation"
+import { isBrowser } from "../../../lib/helpers/login"
 import { Link } from "gatsby"
 
 const ForgotPasswordPage = ({ location }) => {

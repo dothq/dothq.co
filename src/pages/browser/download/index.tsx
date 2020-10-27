@@ -12,12 +12,12 @@ import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import FeatherIcon from 'feather-icons-react';
 import { ButtonV2 } from "../../../components/ButtonV2"
-import { isBrowser } from "../../../helpers/login"
-import { getOS } from "../../../helpers/os"
+import { isBrowser } from "../../../../lib/helpers/login"
+import { getOS } from "../../../../lib/helpers/os"
 
-import * as shield from '../../../images/icons/shield.svg'
-import * as mail from '../../../images/icons/mail.svg'
-import * as sync from '../../../images/icons/sync.svg'
+import * as shield from '../../../assets/images/icons/shield.svg'
+import * as mail from '../../../assets/images/icons/mail.svg'
+import * as sync from '../../../assets/images/icons/sync.svg'
 import { Content } from "../../../components/Hero/style"
 
 class DotBrowserPage extends React.Component {

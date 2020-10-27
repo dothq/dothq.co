@@ -75,3 +75,4 @@ yarn-error.log
 # YOU COULD POTENTIALLY BE EXPOSING SENSITIVE DATA
 credentials.json
 *.key
+dot.credentials.ts

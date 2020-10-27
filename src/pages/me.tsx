@@ -4,15 +4,15 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken, setToken } from "../helpers/login"
-import { getMe } from "../helpers/me"
+import { getUserToken, setToken } from "../../lib/helpers/login"
+import { getMe } from "../../lib/helpers/me"
 
 import Skeleton from 'react-loading-skeleton';
 import { Heading, Avatar } from "../components/style"
 import { HeroButton } from '../components/Button'
 import { Time } from "../components/BlogCard"
 
-import { useGlobalState } from '../context'
+import { useGlobalState } from '../../lib/context'
 
 const MePage = () => {
     const [user, setUser] = useGlobalState('user');

@@ -7,12 +7,12 @@ import { HeroButton, TextButton } from "../components/Button";
 import { Buttons } from "../components/style";
 import FeatherIcon from 'feather-icons-react'
 import { Time } from "../components/BlogCard";
-import { getOS } from "../helpers/os";
-import { isBrowser } from "../helpers/login";
+import { getOS } from "../../lib/helpers/os";
+import { isBrowser } from "../../lib/helpers/login";
 import Emoji from "react-emoji-render";
-import { generateEmojiConfig } from "../tools/emoji";
+import { generateEmojiConfig } from "../../lib/tools/emoji";
 import { ThemeManagerContext } from 'gatsby-styled-components-dark-mode';
-import { useGlobalState } from '../context'				   
+import { useGlobalState } from '../../lib/context'				   
 import Skeleton from "react-loading-skeleton";
 
 const BuildsPage = () => {

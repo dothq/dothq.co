@@ -1,10 +1,10 @@
 import styled, { css, createGlobalStyle } from "styled-components";
 
-import link from '../images/link.svg'
-import jail_cell from '../images/jail-cell.svg'
+import link from '../assets/images/link.svg'
+import jail_cell from '../assets/images/jail-cell.svg'
 
-import authSide from '../images/login-side.png'
-import check from '../images/check.svg'
+import authSide from '../assets/images/login-side.png'
+import check from '../assets/images/check.svg'
 
 export const BackgroundInject = css`
     .links {

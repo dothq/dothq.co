@@ -4,15 +4,15 @@ import NodeRSA from 'node-rsa';
 
 import { Req, Res } from "../../../types";
 
-import User from "../../models/User";
+import User from "../../../lib/models/User";
 
 import { api } from "../..";
 
-import { validPassword, validEmail } from '../../tools/validation';
-import { makeId } from '../../tools/id';
-import { encrypt, encryptWithSalt } from '../../tools/encrypt';
+import { validPassword, validEmail } from '../../../lib/tools/validation';
+import { makeId } from '../../../lib/tools/id';
+import { encrypt, encryptWithSalt } from '../../../lib/tools/encrypt';
 
-import * as credentials from '../../../credentials.json';
+import config from '../../../dot.config';
 
 const sleep = (ms: number) => {
     return new Promise((resolve) => {
@@ -43,7 +43,7 @@ export default {
     }),
     handlers: {
         POST: async (req: Req, res: Res) => {
-            const userExists = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, credentials.EMAIL_SALT) } }).then(exists => { return !!exists })
+            const userExists = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, config.credentials.email.key) } }).then(exists => { return !!exists })
 
             await sleep(userExists ? 500 : 1250);
 
@@ -51,7 +51,7 @@ export default {
                 const id = makeId();
                 const activeToken = res.api.token.createUserToken(id);
                 const password = await encrypt(req.body.password);
-                const email = await encryptWithSalt(req.body.email, credentials.EMAIL_SALT);
+                const email = await encryptWithSalt(req.body.email, config.credentials.email.key);
 
                 req.body = { 
                     ...req.body, 

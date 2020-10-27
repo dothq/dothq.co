@@ -5,8 +5,8 @@ import * as proxy from 'express-http-proxy';
 import { resolve } from 'path';
 
 import { log } from '../tools/log';
-import { api } from '..';
-import { LOCALE_DEFAULT } from '../config';
+import { api } from '../../src';
+import config from '../../dot.config';
 
 export class WebManager {
     public app;
@@ -25,7 +25,7 @@ export class WebManager {
             }));
         } else {
             log("info", "Running in development mode.")
-            log("warning", api.locales.applyContext("en-US", "api_logs_development").data)
+            log("warning", api.locales.applyContext(config.locale.default, "api_logs_development").data)
 
             app.use('/', proxy('http://localhost:8000', {
                 filter: function (req, res) { 

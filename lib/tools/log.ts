@@ -1,8 +1,8 @@
-import { api } from ".."
+import { api } from "../../src"
 
 import chalk from "chalk"
 
-import { LOG_CTX_COLOURS } from "../config"
+import config from "../../dot.config"
 
 const genColouredCtx = (ctx: string) => {
     const locale = {
@@ -13,7 +13,7 @@ const genColouredCtx = (ctx: string) => {
         debug: 'log_ctx_debug'
     }
 
-    return chalk.bold[LOG_CTX_COLOURS[ctx]](api.locales['en-US'][locale[ctx]])
+    return chalk.bold[config.log[ctx]](api.locales['en-US'][locale[ctx]])
 }
 
 export const log = (ctx: 'info' | 'warning' | 'error' | 'success' | 'debug', ...payload: any[]) => {

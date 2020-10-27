@@ -1,13 +1,13 @@
-import { EMAIL_REGEX, USERNAME_REGEX } from "../config"
+import config from "../../dot.config"
 
 import * as checkPasswordStrength from "check-password-strength";
 
 export const validEmail = (email: string) => {
-    return EMAIL_REGEX.test(email);
+    return config.regex.email.test(email);
 }
 
 export const validUsername = (username: string) => {
-    return username.length >= 4 && USERNAME_REGEX.test(username);
+    return username.length >= 4 && config.regex.username.test(username);
 }
 
 export const validPassword = (password: string, maxStrength?: number) => {

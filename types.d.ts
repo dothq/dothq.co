@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Controller } from './src';
-import { User } from './src/models/User';
+import { User } from './lib/models/User';
 
 declare module '*.png'
 declare module '*.svg'

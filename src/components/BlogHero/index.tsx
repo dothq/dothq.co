@@ -2,7 +2,7 @@ import React from 'react';
 import { InputContainer, InputIconContainer, Input, InputHotkey } from "../style"
 import FeatherIcon from 'feather-icons-react';
 import { Link } from 'gatsby';
-import { isBrowser } from '../../helpers/login';
+import { isBrowser } from '../../../lib/helpers/login';
 
 export const BlogHero = () => {
     const searchRef = React.createRef<HTMLInputElement>();

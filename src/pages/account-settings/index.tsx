@@ -3,19 +3,11 @@ import React from "react"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 
-import { Link, navigate } from "gatsby"
-import { getUserToken, setToken } from "../../helpers/login"
-import { getMe } from "../../helpers/me"
+import { navigate } from "gatsby"
 
-import Skeleton from 'react-loading-skeleton';
-import { Heading, Avatar } from "../../components/style"
-import { HeroButton } from '../../components/Button'
-import { Time } from "../../components/BlogCard"
-
-import { useGlobalState } from '../../context'
-import { Content } from "../../components/Hero/style"
+import { useGlobalState } from '../../../lib/context'
 import { Thinker } from "../../components/Thinker"
-import UserController from "../../controllers/User"
+import UserController from "../../../lib/controllers/User"
 import { useCookies } from "react-cookie"
 
 const AccountSettingsPage = () => {

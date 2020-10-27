@@ -4,11 +4,11 @@ import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
 
 import { Link, navigate } from "gatsby"
-import { getUserToken, isBrowser } from "../../../helpers/login"
+import { getUserToken, isBrowser } from "../../../../lib/helpers/login"
 import { HeroButton, IconButton } from '../../../components/Button'
 import FeatherIcon from 'feather-icons-react'
 
-import { useGlobalState } from '../../../context'
+import { useGlobalState } from '../../../../lib/context'
 import { Form, InputContainer, InputIconContainer, Input, Buttons, DateTimePicker, Spinner } from "../../../components/style"
 import axios from "axios"
 
