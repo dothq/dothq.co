@@ -693,7 +693,7 @@ pre tt:after {
 }
 
 input[type="password"] {
-  letter-spacing: 2px;
+  letter-spacing: 6px;
 }
 
 input[type="password"]::placeholder {
@@ -751,7 +751,7 @@ input[type="password"]::placeholder {
 }
 
 .hero-container > .hero-content > p {
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
   max-width: 100%;
   text-align: center;
@@ -793,4 +793,16 @@ twitter-widget {
 
 b {
   font-weight: 600;
+}
+
+input .red {
+  box-shadow: inset 0px 0px 0px 2px #ff0000,0px 0px 0px 4px #ff000080 !important;
+}
+
+input .orange {
+  box-shadow: inset 0px 0px 0px 2px #ffa500,0px 0px 0px 4px #ffa50080 !important;
+}
+
+input .green {
+  box-shadow: inset 0px 0px 0px 2px #008000,0px 0px 0px 4px #00800080 !important;
 }

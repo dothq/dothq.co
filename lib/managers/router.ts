@@ -42,12 +42,6 @@ export class RouteManager {
                 if(route.middleware) middleware = [...middleware, ...route.middleware];
 
                 api.app[method.toLowerCase()]("/api" + route.route, middleware, async (req, res) => { 
-                    if(route.bodySchema) {
-                        const validated = route.bodySchema.validate(req.body);
-
-                        if(validated.error) return api.errors.stop(4006, res, [validated.error.details[0].message], );
-                    }
-                    
                     if(route.flags) {
                         if(route.flags.requireChallenge) {
                             if(!req.body.challenge_token) return api.errors.stop(4011, res);
@@ -57,25 +51,34 @@ export class RouteManager {
                         }
 
                         if(route.flags.requireAuthorization) {
-                            if(!req.headers["authorization"] || !config.regex.token.test(req.headers["authorization"])) return api.errors.stop(4003, res);
-                            else {
-                                const token = req.headers["authorization"].split("Bearer ")[1].replace(/ /g, "");
+                            const raw = (req.headers["authorization"]
+                                        ? req.headers["authorization"] 
+                                        : req.cookies["_dotid_sess"]
+                                            ? req.cookies["_dotid_sess"]
+                                            : "").replace(/Bearer /g, "").replace(/ /g, "")
 
-                                const decrypted = await api.token.get(token)
+                            if(!config.regex.token.test("Bearer " + raw)) return api.errors.stop(4003, res);
 
-                                if(decrypted.error) return api.errors.stop(decrypted.error, res);
+                            const decrypted = await api.token.get(raw)
+
+                            if(decrypted.error) return api.errors.stop(decrypted.error, res);
+                            
+                            if(decrypted.id) {
+                                const User = require("../models/User").default;
+
+                                const user = await User.findOne({ where: { id: decrypted.id } });
+
+                                if(!user) return api.errors.stop(4003, res);
                                 
-                                if(decrypted.id) {
-                                    const User = require("../models/User").default;
-
-                                    const user = await User.findOne({ where: { id: decrypted.id } });
-
-                                    if(!user) return api.errors.stop(4003, res);
-                                    
-                                    res.authorizedUser = user.dataValues;
-                                }
+                                res.authorizedUser = user.dataValues;
                             }
                         }
+                    }
+
+                    if(route.bodySchema) {
+                        const validated = route.bodySchema.validate(req.body);
+
+                        if(validated.error) return api.errors.stop(4006, res, [validated.error.details[0].message], );
                     }
 
                     route.handlers[method](req, res);

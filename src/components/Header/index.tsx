@@ -17,6 +17,8 @@ import { ProductsMenu } from "./menus/Products"
 import { Line } from "../Footer/style"
 import UserController from "../../../lib/controllers/User"
 
+import apiFetch from '../../../lib/tools/fetcher';
+
 const onLogoContextMenu = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -24,29 +26,32 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [state, setState] = React.useState({
+        callingMe: true
+    });
     const [menuVisible, setMenuVisible] = React.useState(false);
 
-    const user = UserController;
-
     const themeContext = React.useContext(ThemeManagerContext)
-    const [userState, setUser] = useGlobalState('user');
+    const [user, setUser] = useGlobalState('user');
 
-    user.getSelf(cookies.token).then(async (r: any) => {
-        if(r.ok) {
-            setUser(r.data.result);
-  
-            const d = new Date()
-            d.setDate(d.getDate() + 2)
-  
-            setCookie("token", cookies.token, { expires: d, sameSite: "strict", secure: true })
+    const fetchUser = async () => {
+        const { data } = await apiFetch.post("/api/id/me", { 
+            fields: ["username", "avatarId"]
+        })
+
+        if(data.ok) {
+            setUser(data)
         }
-    }).catch(e => {
-        removeCookie("token")
-    });
 
-    const onMenuItemHover = () => {
-        setMenuVisible(!menuVisible);
+        setState({ ...state, callingMe: false })
+    }
+
+    React.useEffect(() => {
+        fetchUser()
+    }, [])
+
+    function onMenuItemHover() {
+        setMenuVisible(!menuVisible)
     }
 
     const onMenuParentLeave = () => {
@@ -100,20 +105,24 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                     </a>
                 </div>
                 <div className={"nbtn"}>
-                    {!userState && <>
-                        <Link to={"/sign-in"}>
-                            <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
-                        </Link>
-                        <Link to={"/sign-up"}>
-                            <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
-                        </Link>
-                    </>}
+                    {!state.callingMe && (
+                        <>
+                            {!user && <>
+                                <Link to={"/sign-in"}>
+                                    <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                                </Link>
+                                <Link to={"/sign-up"}>
+                                    <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                                </Link>
+                            </>}
 
-                    {userState && 
-                        <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
-                            <Avatar width={32} noFade src={`https://cdn.dothq.co/avatars/${userState.avatarId}.png`} />
-                        </Link>
-                    }
+                            {user && 
+                                <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
+                                    <Avatar width={32} noFade src={`https://cdn.dothq.co/` + (!user.avatarId ? `assets/defaultAvatar.png` : `avatars/${user.avatarId}.png`)} />
+                                </Link>
+                            }
+                        </>
+                    )}
                 </div>
             </Container>
             <MenuLine visible={menuVisible} />

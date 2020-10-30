@@ -11,5 +11,9 @@ export const validUsername = (username: string) => {
 }
 
 export const validPassword = (password: string, maxStrength?: number) => {
-    return checkPasswordStrength(password).id >= maxStrength ? maxStrength : 2;
+    try {
+        return checkPasswordStrength(password).id;
+    } catch(e) {
+        return 0;
+    }
 }

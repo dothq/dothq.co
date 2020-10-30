@@ -13,6 +13,7 @@ interface Config {
     general: {
         githubRepository: string,
         allowedAvatarMimes: string[],
+        bannedUserFields: string[]
     },
     locale: {
         default: string,
@@ -52,6 +53,7 @@ const config: Config = {
     general: {
         githubRepository: "https://github.com/dothq/dothq.co",
         allowedAvatarMimes: ["png", "jpg"],
+        bannedUserFields: ["password", "activeToken"]
     },
     locale: {
         default: "en-US",
@@ -62,7 +64,7 @@ const config: Config = {
         origins: ["https://dothq.co", "http://localhost:8000"],
         uris: { 
             prod: "https://dothq.co/api",
-            dev: () => { return `http://localhost:${config.api.port}` } 
+            dev: () => { return `http://localhost:${config.api.port}/api` } 
         },
         routesData: resolve(__dirname, "src", "routes")
     },
