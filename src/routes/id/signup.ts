@@ -43,7 +43,7 @@ export default {
     }),
     handlers: {
         POST: async (req: Req, res: Res) => {
-            const userExists = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, config.credentials.email.key) } }).then(exists => { return !!exists })
+            const userExists = await User.findOne({ where: { email: req.body.email } }).then(exists => { return !!exists })
 
             await sleep(userExists ? 500 : 1250);
 
@@ -51,7 +51,7 @@ export default {
                 const id = makeId();
                 const activeToken = res.api.token.createUserToken(id);
                 const password = await encrypt(req.body.password);
-                const email = await encryptWithSalt(req.body.email, config.credentials.email.key);
+                const email = req.body.email;
 
                 req.body = { 
                     ...req.body, 

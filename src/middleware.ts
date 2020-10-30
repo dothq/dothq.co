@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
+const cookieParser = require('cookie-parser');
 
 import { Controller } from ".";
 
@@ -9,6 +10,7 @@ import config from "../dot.config";
 export const runMiddleware = (server: Controller) => {
     server.app.use(helmet())
     server.app.use(bodyParser.json())
+    server.app.use(cookieParser())
 
     server.app.use((req: Req, res: Res, next) => {
         const route = server.router.routes.find((r: Route) => r.route == req.path.split("/api")[1]);

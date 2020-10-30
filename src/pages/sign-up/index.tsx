@@ -1,133 +1,73 @@
 import React from "react"
 
+import useSWR from 'swr';
+
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import { AuthSide, AuthLogo, AuthTitle, AuthDesc, AuthLink, AuthField, AuthPlaceholder, AuthInput, Checkbox, CheckboxField, ButtonTicker, TickerItem } from "../../components/style"
-import { Logo } from "../../components/Header/style"
 import { Link, navigate } from "gatsby"
 
 import { ButtonV2 } from '../../components/ButtonV2'
 
-import UserController from "../../../lib/controllers/User"
-import { isBrowser } from "../../../lib/helpers/login"
 import { validEmail, validPassword, validUsername } from "../../../lib/tools/validation"
-import { ErrorJSON } from "../../types"
 
 import { parse } from "search-params"
-import config from "../../../dot.config"
+
+import apiFetch from "../../../lib/tools/fetcher";
+import config from "../../../dot.config";
 
 const SignupPage = ({ location }) => {
+    const [to, setTo] = React.useState(config.auth.redirectAfterLogin);
+
     const params = parse(location.search)
 
-    const emailRef = React.createRef<HTMLInputElement>();
-    const passwordRef = React.createRef<HTMLInputElement>();
-    const usernameRef = React.createRef<HTMLInputElement>();
-    const rememberMeRef = React.createRef<HTMLInputElement>();
-
-    const [done, sd] = React.useState(false);
-    const [loading, setLoading] = React.useState(false);
-    const [disabled, setDisabled] = React.useState(false);
-    const [btnDisabled, setBTNDisabled] = React.useState(false);
-    const [error, setError] = React.useState("");
-    const [status, setStatus] = React.useState("idle");
-
-    React.useEffect(() => sd(true))
-
-    const [passwordStrength, setPasswordStrength] = React.useState(-1);
-    const [emailOK, setEmailOK] = React.useState(-1);
-    const [usernameOK, setUsernameOK] = React.useState(-1);
-
-    const user = UserController;
-
-    const renderButtonDisabled = () => {
-        if(!emailRef || !passwordRef || !rememberMeRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current) return;
-
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-
-        const emailValid = validEmail(email);
-        const passwordValid = password.length == 0 ? false : validPassword(password);
-
-        if(email.length == 0 || password.length == 0 || username.length == 0 || !emailValid || !passwordValid) return setBTNDisabled(true);
-        else return setBTNDisabled(false);
-    }
-
-    React.useEffect(() => {
-        renderButtonDisabled();
-        isBrowser() && window.addEventListener("keyup", renderButtonDisabled)
-
-        if(isBrowser() && !params.next && window.history.replaceState) {
-            window.history.replaceState({}, null, `${window.location.pathname}?next=${config.auth.redirectAfterLogin}`);
-        }
+    const [formState, setFormState] = React.useState({
+        callInProgress: false,
+        error: {
+            visible: false,
+            message: ""
+        },
+        email: { 
+            value: "", 
+            colour: "" 
+        }, 
+        password: { 
+            value: "", 
+            colour: ""
+        }, 
+        username: { 
+            value: "", 
+            colour: ""
+        } 
     })
 
-    const onPasswordKeyUp = () => {
-        if(!passwordRef || !passwordRef.current) return;
+    const onFormBlur = (form: "email" | "password" | "username") => {
+        const { value } = formState[form]
 
-        const password = passwordRef.current.value;
+        let formColour = "";
 
-        user.getPasswordStrength(password).then((strength: number) => setPasswordStrength(strength))
+        if(form == "email") formColour = validEmail(value) ? "green" : "red"
+        if(form == "password") formColour = validPassword(value) == 2 ? "green" : validPassword(value) == 1 ? "orange" : "red"
+        if(form == "username") formColour = validUsername(value) ? "green" : "red"
+
+        setFormState({ ...formState, [form]: { ...formState[form], colour: formColour }, error: { ...formState.error, visible: false }})
     }
 
-    const onEmailKeyUp = () => {
-        if(!emailRef || !emailRef.current) return;
+    const onSignUpClick = async () => {
+        setFormState({ ...formState, callInProgress: true })
 
-        const email = emailRef.current.value;
+        const { data } = await apiFetch.post("/api/id/sign-up", { 
+            email: formState.email.value,
+            password: formState.password.value,
+            username: formState.username.value
+        })
 
-        setEmailOK(validEmail(email) == false ? -1 : 2);
-    }
+        setFormState({ ...formState, callInProgress: false })
 
-    const onUsernameKeyUp = () => {
-        if(!usernameRef || !usernameRef.current) return;
-
-        const username = usernameRef.current.value;
-
-        setUsernameOK(validUsername(username) == false ? -1 : 2);
-    }
-
-    const onSignUpClick = () => {
-        if(!emailRef || !passwordRef || !rememberMeRef || !usernameRef || !emailRef.current || !passwordRef.current || !rememberMeRef.current || !usernameRef.current) return;
-
-        setLoading(!loading);
-
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const rememberMe = rememberMeRef.current.checked;
-
-        if(email.length == 0 || password.length == 0 || username.length == 0) return;
-
-        user.create({ email, password, username }).then((r: ErrorJSON) => {
-            setLoading(false);
-            setStatus("idle");
-
-            if(r.ok) {
-                if(rememberMe) console.log("Remembering you.")
-                else console.log("I'm a little forgetful, so I won't be remembering you.")
-
-                const token = encodeURIComponent(btoa(JSON.stringify({ email: btoa(email), password: btoa(password) })))
-
-                console.log(token)
-
-                navigate(`/sign-in?next=${params.next ? params.next : config.auth.redirectAfterLogin}`, { state: { email, password } })
-            }
-        }).catch(e => {
-            setLoading(false);
-
-            setError(e.response.data.message)
-            setStatus("error");
-            
-            setTimeout(() => {
-                setStatus("idle");
-            }, 2000);
-        });
-    }
-
-    const onGitHubSignUpClick = () => {
-        setTimeout(() => {
-            navigate("/sso/github");
-        }, 1000);
+        if(data.ok) navigate(`${to}`)
+        else {
+            setFormState({ ...formState, error: { visible: true, message: data.message }})
+        }
     }
 
     return (
@@ -135,7 +75,7 @@ const SignupPage = ({ location }) => {
             <SEO title="Sign up for a Dot ID" />
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
-                    <div style={{ transform: done ? 'translateX(0px)' : 'translateX(-25px)', opacity: done ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
+                    <div style={{ transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
                             <Link to={"/"}>
                                 <AuthLogo />
@@ -144,26 +84,45 @@ const SignupPage = ({ location }) => {
                             <AuthDesc>You can either create a Dot ID using your email address or using GitHub. <br/><br/><Link to={"/sign-in"}><AuthLink>Already have an ID?</AuthLink></Link></AuthDesc>
                         </div>
 
-                        <div style={{ marginTop: '92px', opacity: disabled ? 0.5 : loading ? 0.5 : 1, transition: "0.3s opacity", pointerEvents: disabled ? "none" : loading ? "none" : "all" }}>
-                            <AuthField style={{ width: '525px' }} passwordStrength={usernameOK}>
-                                <AuthInput placeholder={" "} ref={usernameRef} onKeyUp={() => onUsernameKeyUp()} />
-                                <AuthPlaceholder>Username</AuthPlaceholder>
+                        <div style={{ marginTop: '92px', transition: "0.3s opacity" }}>
+                            <AuthField style={{ width: '525px' }}>
+                                <AuthInput 
+                                    placeholder={" "} 
+                                    value={formState.username.value} 
+                                    state={formState.username.colour} 
+                                    onChange={(e) => setFormState({ ...formState, username: { ...formState.username, value: e.target.value } })}
+                                    onBlur={() => onFormBlur("username")}
+                                />
+                                <AuthPlaceholder>Name</AuthPlaceholder>
                             </AuthField>
 
-                            <AuthField style={{ marginTop: '18px', width: '525px' }} passwordStrength={emailOK}>
-                                <AuthInput placeholder={" "} ref={emailRef} onKeyUp={() => onEmailKeyUp()} />
+                            <AuthField style={{ marginTop: '18px', width: '525px' }}>
+                                <AuthInput 
+                                    placeholder={" "} 
+                                    value={formState.email.value} 
+                                    state={formState.email.colour} 
+                                    onChange={(e) => setFormState({ ...formState, email: { ...formState.email, value: e.target.value } })}
+                                    onBlur={() => onFormBlur("email")}
+                                />
                                 <AuthPlaceholder>Email Address</AuthPlaceholder>
                             </AuthField>
 
-                            <AuthField style={{ marginTop: '18px', width: '525px' }} passwordStrength={passwordStrength}>
-                                <AuthInput placeholder={" "} type={"password"} ref={passwordRef} onKeyUp={() => onPasswordKeyUp()} />
+                            <AuthField style={{ marginTop: '18px', width: '525px' }}>
+                                <AuthInput 
+                                    placeholder={" "} 
+                                    type={"password"} 
+                                    value={formState.password.value} 
+                                    state={formState.password.colour} 
+                                    onChange={(e) => setFormState({ ...formState, password: { ...formState.password, value: e.target.value } })}
+                                    onBlur={() => onFormBlur("password")}
+                                />
                                 <AuthPlaceholder>Password</AuthPlaceholder>
                             </AuthField>
 
                             <div style={{ display: 'flex', width: '525px', marginTop: '45px' }}>
                                 <Checkbox style={{ flex: '1', alignItems: 'center' }}>
-                                    <CheckboxField type={"checkbox"} ref={rememberMeRef} />
-                                    <label onClick={() => rememberMeRef.current.checked = !rememberMeRef.current.checked} style={{ height: '22px' }}>Remember my session</label>
+                                    <CheckboxField type={"checkbox"} />
+                                    <label style={{ height: '22px' }}>Remember my session</label>
                                 </Checkbox>
                             </div>
 
@@ -173,19 +132,27 @@ const SignupPage = ({ location }) => {
                                     h={58} 
                                     background={"#4965FF"} 
                                     br={8} 
-                                    fs={18} 
+                                    fs={18}
                                     onClick={() => onSignUpClick()}
-                                    loading={loading}
-                                    disabled={btnDisabled}
+                                    loading={formState.callInProgress}
+                                    disabled={
+                                        formState.email.value.length == 0 || 
+                                        formState.username.value.length == 0 || 
+                                        formState.password.value.length == 0 ||
+                                        formState.email.colour !== "green" ||
+                                        formState.username.colour !== "green" ||
+                                        formState.password.colour !== "green" ||
+                                        formState.error.visible
+                                    }
                                 >
                                     <ButtonTicker>
-                                        <TickerItem bg={"#4965FF"} visible={status == "idle"}>Sign up with email</TickerItem>
-                                        <TickerItem bg={"#4965FF"} visible={status == "error"}>{error}</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={!formState.error.visible}>Sign up with email</TickerItem>
+                                        <TickerItem bg={"#4965FF"} visible={formState.error.visible}>{formState.error.message}</TickerItem>
                                     </ButtonTicker>
                                 </ButtonV2>
                                 <span style={{ margin: '14px auto', fontSize: '15px', color: '#656565' }}>or</span>
 
-                                <ButtonV2 loadOnClick={true} onClick={() => onGitHubSignUpClick()} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
+                                <ButtonV2 loadOnClick={true} w={525} h={58} background={"transparent"} color={"black"} br={8} fs={18} bc={"#D2D2D2"}>
                                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '32px' }}><img style={{ margin: 0, marginRight: '14px' }} src={require("../../assets/images/github.svg")} />Sign up with GitHub</div>
                                 </ButtonV2>
                             </div>

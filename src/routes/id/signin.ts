@@ -33,7 +33,10 @@ export default {
             // Add a delay to slow down brute force attacks on accounts
             await sleep(2000);
 
-            const user = await User.findOne({ where: { email: await encryptWithSalt(req.body.email, config.credentials.email.key) } });
+            if(req.cookies["_dotid_sess"]) return api.errors.stop(4015, res);
+            if(req.headers["authorization"]) return api.errors.stop(4015, res);
+
+            const user = await User.findOne({ where: { email: req.body.email } });
 
             if(!user) return api.errors.stop(4013, res);
             if(!await compare(req.body.password, user.password)) return api.errors.stop(4014, res);
@@ -42,7 +45,9 @@ export default {
 
             await user.save({ fields: ["activeToken"] });
 
-            api.errors.stop(200, res, [], { result: { userId: user.id, token: user.activeToken } });
+            res.cookie("_dotid_sess", user.activeToken, { expires: new Date(Date.now() + 900000000), httpOnly: true, sameSite: "strict" })
+
+            api.errors.stop(200, res);
         },
         OPTIONS: (req: Req, res: Res) => api.errors.stop(200, res),
     }

@@ -7,8 +7,6 @@ import User from "../../../lib/models/User";
 import { validEmail, validPassword } from '../../../lib/tools/validation';
 import { encrypt, encryptWithSalt } from '../../../lib/tools/encrypt';
 
-import config from '../../../dot.config';
-
 export default {
     route: '/id/settings',
     accepts: ['PUT', 'OPTIONS'],
@@ -39,7 +37,7 @@ export default {
 
             if(req.body.username) data._username = req.body.username;
             if(req.body.password) data._password = await encrypt(req.body.password);
-            if(req.body.email) data._email = await encryptWithSalt(req.body.email, config.credentials.email.key);
+            if(req.body.email) data._email = req.body.email;
 
             const queued = {};
 

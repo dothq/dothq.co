@@ -860,18 +860,11 @@ export const AuthField = styled.div`
 
     max-width: 525px;
 
-    transition: 0.2s box-shadow;
     position: relative;
 
     --pad: 19px;
 
-    &:hover {
-        --shadow: inset 0px 0px 0px 2px #AAAAAA;
-    }
-
     &:focus-within {
-        --shadow: inset 0px 0px 0px 2px #4965FF, 0px 0px 0px 4px #4965FF80;
-
         span {
             --pad: 8px !important;
         }
@@ -880,12 +873,6 @@ export const AuthField = styled.div`
     input:not(:placeholder-shown) ~ span {
         --pad: 8px !important;
     }
-
-    ${({ passwordStrength }: { passwordStrength?: number }) => css`
-        &:focus-within {
-            ${typeof(passwordStrength) == "number" ? `box-shadow: inset 0px 0px 0px 2px ${passwordStrength == 0 ? "red" : passwordStrength == 1 ? "orange" : passwordStrength == 2 ? "green" : "NULL"} !important;` : ""};
-        }
-    `};
 
     // , inset 0px 0px 0px 2px #D2D2D2
 `;
@@ -918,6 +905,39 @@ export const AuthInput = styled.input`
     height: 100%;
     padding-top: 28px;
     border-radius: 6px;
+    transition: 0.2s box-shadow;
+
+    ${({ state }: { state?: 'red' | 'orange' | 'green' | '' | string }) => css`
+        ${state == "red" && `
+            --fcbs: #ff000080 !important;
+            --fcbs1: #ff0000 !important;
+            box-shadow: inset 0px 0px 0px 2px var(--fcbs1);
+        `}
+
+        ${state == "orange" && `
+            --fcbs: #ffa50080 !important;
+            --fcbs1: #ffa500 !important;
+            box-shadow: inset 0px 0px 0px 2px var(--fcbs1);
+        `}
+
+        ${state == "green" && `
+            --fcbs: #00800080 !important;
+            --fcbs1: #008000 !important;
+            box-shadow: inset 0px 0px 0px 2px var(--fcbs1);
+        `}
+
+        ${(state == "" || !state) && `
+            &:hover {
+                box-shadow: inset 0px 0px 0px 2px #AAAAAA;
+            }
+        `}
+
+        &:focus {
+            --fcbs: #4965FF80;
+            --fcbs1: #4965FF;
+            box-shadow: inset 0px 0px 0px 2px var(--fcbs1),0px 0px 0px 4px var(--fcbs) !important;
+        }
+    `};
 `;
 
 export const Checkbox = styled.div`
@@ -1049,5 +1069,62 @@ export const IconItem = styled.div`
 
     & > span {
         font-size: 12px;
+    }
+`;
+
+export const HeroTabs = styled.div`
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    margin: 54px auto 0px;
+    flex-direction: row;
+    margin-bottom: -1px;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+
+    ${({ selected }: { selected: number; }) => css`
+        & > *:nth-child(${selected+1}) {
+            border-bottom-color: #000 !important;
+            transition-timing-function: ease-in;
+            transition-duration: 0.4s;
+            color: black;
+
+            img {
+                filter: brightness(0%);
+            }
+        }
+    `};
+`;
+
+export const HeroTab = styled.div`
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 18px;
+    transition: border-bottom-color 0.36s ease-in, 0.3s color;
+    border-bottom: 2px solid #fff0;
+    cursor: pointer;
+    color: #4a4a4a;
+    white-space: pre;
+
+    &:hover {
+        border-bottom-color: #8080805e;
+        transition-timing-function: ease-out;
+        transition-duration: .12s;
+    }
+
+    img {
+        margin-bottom: 0;
+        margin-right: 12px;
+        width: 18px;
+        min-width: 18px;
+        transition: 0.3s filter;
     }
 `;

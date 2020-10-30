@@ -3,6 +3,7 @@ import * as Joi from 'joi';
 import { Req, Res } from "../../../types";
 
 import { api } from "../..";
+import config from '../../../dot.config';
 
 export default {
     route: '/id/me',
@@ -20,12 +21,10 @@ export default {
         POST: (req: Req, res: Res) => {
             if(!res.authorizedUser) return;
 
-            const bannedFields = ["password", "email", "activeToken"]
-
             let fields = req.body.fields;
             const data = {};
 
-            fields = fields.filter(f => { return !bannedFields.includes(f) })
+            fields = fields.filter(f => { return !config.general.bannedUserFields.includes(f) })
 
             for (const field of fields) {
                 data[field] = res.authorizedUser[field]

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Dot Browser`,
+    title: `Dot HQ`,
     description: `Take back your privacy with Dot HQ's Dot Browser, the privacy-conscious web browser that protects you from being tracked and monitored online.`,
     author: `Dot HQ`,
   },

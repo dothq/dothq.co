@@ -8,7 +8,7 @@ export default class APIController {
     constructor() {
         const env = process.env.NODE_ENV;
 
-        this.apiHost = env == "development" ? config.api.uris.dev() : config.api.uris.prod;
+        this.apiHost = env == "development" ? "/api" : config.api.uris.prod;
     }
 
     get(route: string, vars?: any[]) {
@@ -30,6 +30,8 @@ export default class APIController {
     }
 
     post(route: string, body: any, token?: string) {
+        if(token && token.length == 0) return;
+
         return new Promise((resolve, reject) => {
             console.log(`Fullfilling POST request to`, this.apiHost + route)
 
