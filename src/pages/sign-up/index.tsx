@@ -17,6 +17,7 @@ import apiFetch from "../../../lib/tools/fetcher";
 import config from "../../../dot.config";
 
 const SignupPage = ({ location }) => {
+    const [open, setOpen] = React.useState(false);
     const [to, setTo] = React.useState(config.auth.redirectAfterLogin);
 
     const params = parse(location.search)
@@ -70,12 +71,14 @@ const SignupPage = ({ location }) => {
         }
     }
 
+    React.useEffect(() => { setTimeout(setOpen(true), 500) });
+
     return (
         <Layout blank noEnding noHero>
             <SEO title="Sign up for a Dot ID" />
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
-                    <div style={{ transition: '0.3s opacity, 0.3s transform' }}>
+                    <div style={{ transform: open ? "" : "translateX(-35px)", opacity: open ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
                             <Link to={"/"}>
                                 <AuthLogo />

@@ -11,8 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import { createGlobalStyle } from 'styled-components'
 
-import { useCookies } from 'react-cookie';
-
 import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
@@ -30,7 +28,6 @@ import { useGlobalState } from '../../lib/context'
 
 import { Banner } from "./Banner"
 import { isBrowser } from "../../lib/helpers/login"
-import UserController from "../../lib/controllers/User"
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -53,20 +50,17 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
     if(document.getElementsByClassName("twitter-tweet") && document.getElementsByClassName("twitter-tweet")[0]) document.getElementsByClassName("twitter-tweet")[0].appendChild(script);
   }, []);
 
-  let oldY = 0;
-
   const [hidden, setHidden] = React.useState(false);
   const [onTop, setOnTop] = React.useState(false);
 
-  const user = UserController;
-
-  const [setUser] = useGlobalState('user');
   const [builds, setBuilds] = useGlobalState('builds');
 
   const [alfUser, setAlfUser] = useGlobalState('afUser');
   const [alfBuilds, setAlfBuilds] = useGlobalState('afBuilds');
 
   React.useEffect(() => {
+    let oldY = 0;
+
     isBrowser() && window.addEventListener("scroll", (e) => {
       if(window.scrollY >= 500 && oldY < window.scrollY) setHidden(true);
       else setHidden(false);
@@ -89,7 +83,7 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
     setAlfBuilds(true)
 
-  }, [user, setUser, builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
+  }, [builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
 
   return (
     <CookiesProvider>

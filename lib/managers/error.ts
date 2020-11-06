@@ -18,6 +18,7 @@ export class ErrorManager {
 
         error.message = msg.data;
         error.code = error.code ? error.code : code;
+        error.specialCode = code;
         delete error.i18n_id
 
         return error;

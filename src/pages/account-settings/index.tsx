@@ -23,20 +23,20 @@ const AccountSettingsPage = () => {
         email: ""
     });
 
-    const fetchUser = async () => {
-        const { data } = await apiFetch.post("/api/id/me", { 
-            fields: ["username", "avatarId", "email"]
-        })
+    // const fetchUser = async () => {
+    //     const { data } = await apiFetch.post("/api/id/me", { 
+    //         fields: ["username", "avatarId", "email"]
+    //     })
 
-        if(data.ok) {
-            setUser({ ...user, ready: true, ...data.result })
-        }
-        else navigate("/sign-in")
-    }
+    //     if(data.ok) {
+    //         setUser({ ...user, ready: true, ...data.result })
+    //     }
+    //     else navigate("/sign-in")
+    // }
 
-    React.useEffect(() => {
-        fetchUser()
-    }, [])
+    // React.useEffect(() => {
+    //     fetchUser()
+    // }, [])
     
     return (
         <Layout noEnding>

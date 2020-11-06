@@ -53,7 +53,7 @@ export class RouteManager {
                         if(route.flags.requireAuthorization) {
                             const raw = (req.headers["authorization"]
                                         ? req.headers["authorization"] 
-                                        : req.cookies["_dotid_sess"]
+                                        : (req.cookies && req.cookies["_dotid_sess"])
                                             ? req.cookies["_dotid_sess"]
                                             : "").replace(/Bearer /g, "").replace(/ /g, "")
 
