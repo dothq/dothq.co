@@ -8,14 +8,14 @@ export default {
     accepts: ['POST', 'OPTIONS'],
     handlers: {
         POST: async (req: Req, res: Res) => {
-            if(!req.cookies["_dotid_sess"]) return api.errors.stop(200, res);
+            if(!req.cookies["_dotid_sess"]) return api.errors.stop(4003, res);
 
             const user = await User.findOne({ where: { activeToken: req.cookies["_dotid_sess"] } });
 
-            if(!user) return api.errors.stop(4013, res);
-            user.activeToken = null;
-
-            await user.save({ fields: ["activeToken"] });
+            if(user) {
+                user.activeToken = null;
+                await user.save({ fields: ["activeToken"] });
+            }
 
             res.clearCookie("_dotid_sess")
 

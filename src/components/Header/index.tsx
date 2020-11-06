@@ -18,6 +18,7 @@ import { Line } from "../Footer/style"
 import UserController from "../../../lib/controllers/User"
 
 import apiFetch from '../../../lib/tools/fetcher';
+import { getUser } from "../../services/authenticate"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -32,23 +33,6 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
     const [menuVisible, setMenuVisible] = React.useState(false);
 
     const themeContext = React.useContext(ThemeManagerContext)
-    const [user, setUser] = useGlobalState('user');
-
-    const fetchUser = async () => {
-        const { data } = await apiFetch.post("/api/id/me", { 
-            fields: ["username", "avatarId"]
-        })
-
-        if(data.ok) {
-            setUser(data)
-        }
-
-        setState({ ...state, callingMe: false })
-    }
-
-    React.useEffect(() => {
-        fetchUser()
-    }, [])
 
     function onMenuItemHover() {
         setMenuVisible(!menuVisible)
@@ -105,24 +89,20 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                     </a>
                 </div>
                 <div className={"nbtn"}>
-                    {!state.callingMe && (
-                        <>
-                            {!user && <>
-                                <Link to={"/sign-in"}>
-                                    <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
-                                </Link>
-                                <Link to={"/sign-up"}>
-                                    <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
-                                </Link>
-                            </>}
-
-                            {user && 
-                                <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
-                                    <Avatar width={32} noFade src={`https://cdn.dothq.co/` + (!user.avatarId ? `assets/defaultAvatar.png` : `avatars/${user.avatarId}.png`)} />
-                                </Link>
-                            }
-                        </>
-                    )}
+                    <>
+                        <Link to={"/sign-in"}>
+                            <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                        </Link>
+                        <Link to={"/sign-up"}>
+                            <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                        </Link>
+{/* 
+                        {user && 
+                            <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
+                                <Avatar width={32} noFade src={`https://cdn.dothq.co/` + (!user.avatarId ? `assets/defaultAvatar.png` : `avatars/${user.avatarId}.png`)} />
+                            </Link>
+                        } */}
+                    </>
                 </div>
             </Container>
             <MenuLine visible={menuVisible} />

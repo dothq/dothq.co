@@ -210,4 +210,11 @@ exports.createPages = async ({ graphql, actions }) => {
     component: require.resolve("./src/templates/icons.tsx"),
     context: { icons },
   })
+
+  if (page.path.match(/^\/sign-in/)) {
+    page.matchPath = `/sign-in/:path`
+
+    // Update the page.
+    createPage(page)
+  }
 }

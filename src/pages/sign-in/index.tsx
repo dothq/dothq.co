@@ -15,8 +15,14 @@ import { parse } from "search-params"
 
 import apiFetch from "../../../lib/tools/fetcher";
 import config from "../../../dot.config";
+import { isLoggedIn, login } from "../../services/authenticate";
+import { useGlobalState } from "../../../lib/context";
+import { isBrowser } from "../../../lib/helpers/login";
 
 const SigninPage = ({ location }) => {
+    const [user, setUser] = useGlobalState('user');
+
+    const [open, setOpen] = React.useState(false);
     const [to, setTo] = React.useState(config.auth.redirectAfterLogin);
 
     const params = parse(location.search)
@@ -49,27 +55,32 @@ const SigninPage = ({ location }) => {
     }
 
     const onSignInClick = async () => {
+        const email = formState.email.value;
+        const password = formState.password.value;
+
         setFormState({ ...formState, callInProgress: true })
 
-        const { data } = await apiFetch.post("/api/id/sign-in", { 
-            email: formState.email.value,
-            password: formState.password.value
-        })
+        login({ email, password })
+            .then((data: any) => {
+                setFormState({ ...formState, callInProgress: false })
 
-        setFormState({ ...formState, callInProgress: false })
-
-        if(data.ok) navigate(`${to}`)
-        else {
-            setFormState({ ...formState, error: { visible: true, message: data.message }})
-        }
+                if(data.ok && isBrowser()) window.location.href = "/";
+            })
+            .catch(err => {
+                setFormState({ ...formState, error: { visible: true, message: err.message }})
+            })
     }
+
+    React.useEffect(() => { setTimeout(setOpen(true), 500) });
+
+    // if(isLoggedIn) navigate(to);
 
     return (
         <Layout blank noEnding noHero>
             <SEO title="Sign in to your existing Dot ID" />
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '870px', height: '100vh', minWidth: '870px', padding: '0 100px', display: 'flex', alignItems: 'center' }}>
-                    <div style={{ transition: '0.3s opacity, 0.3s transform' }}>
+                    <div style={{ transform: open ? "" : "translateX(-35px)", opacity: open ? 1 : 0, transition: '0.3s opacity, 0.3s transform' }}>
                         <div>
                             <Link to={"/"}>
                                 <AuthLogo />

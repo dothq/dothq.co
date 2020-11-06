@@ -13,6 +13,16 @@ export interface AxiosResponse<T = any>  {
     request?: any;
 }
 
+axios.interceptors.response.use((res) => {
+    console.log(`🚀 ${res.status} ${res.config.method.toUpperCase()} ${res.config.url}`, res.data)
+
+    return res;
+  }, (error) => {
+    console.log(`🚀 ${error.response.status} ${error.response.config.method.toUpperCase()} ${error.response.config.url}`, error.response.data)
+
+    return Promise.reject(error);
+});
+
 export default {
     get: (route: string) => axios.get(route).then(res => res.data),
     post: (route: string, body?: object, config?: object): Promise<AxiosResponse<any>> => axios.post(route, body, config).then(res => res).catch(e => e.response)
