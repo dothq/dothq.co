@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
 import { SController } from 'controller';
 
-@Controller('/id')
+@Controller('id')
 export class IdController extends SController {
-    @Get()
+    @Get('test')
     get() {
     	return { test: true }
     }
