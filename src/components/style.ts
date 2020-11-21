@@ -856,7 +856,10 @@ export const AuthField = styled.div`
 
     box-shadow: var(--shadow);
     border-radius: 8px;
-    height: 58px;
+
+    ${({ compact }: { compact: boolean }) => css`
+        height: ${compact ? "48px" : "58px"};
+    `};
 
     max-width: 525px;
 
@@ -903,11 +906,20 @@ export const AuthInput = styled.input`
     padding-top: 10px;
     width: 100%;
     height: 100%;
-    padding-top: 28px;
     border-radius: 6px;
     transition: 0.2s box-shadow;
 
-    ${({ state }: { state?: 'red' | 'orange' | 'green' | '' | string }) => css`
+    &:placeholder {
+        font-size: 16px;
+    }
+
+    :-moz-ui-invalid {
+        box-shadow: none;
+    }
+
+    ${({ state, compact }: { state?: 'red' | 'orange' | 'green' | '' | string; compact: boolean }) => css`
+        padding-top: ${compact ? "" : "28px"};
+
         ${state == "red" && `
             --fcbs: #ff000080 !important;
             --fcbs1: #ff0000 !important;
@@ -1080,6 +1092,7 @@ export const HeroTabs = styled.div`
     flex-direction: row;
     margin-bottom: -1px;
     scrollbar-width: none;
+    user-select: none;
 
     ::-webkit-scrollbar {
         width: 0px;
@@ -1127,4 +1140,81 @@ export const HeroTab = styled.div`
         min-width: 18px;
         transition: 0.3s filter;
     }
+`;
+
+export const HeaderTabs = styled.div`
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    margin: 0;
+    flex-direction: row;
+    margin-bottom: -1px;
+    scrollbar-width: none;
+    user-select: none;
+
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+`;
+
+export const HeaderTab = styled(HeroTab)`
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 62px;
+    padding: 0 20px;
+    transition: border-bottom-color 0.2s ease, 0.3s color;
+    border-bottom: 2px solid #fff0;
+    cursor: pointer;
+    white-space: pre;
+    color: black;
+
+    &:hover {
+        border-bottom-color: black;
+    }
+`;
+
+export const Box = styled.div`
+    padding: 32px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    max-width: 550px;
+
+    h1 {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    p {
+        opacity: 0.7;
+        font-size: 14px;
+    }
+
+    h1, h2, h3, h4 {
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    ${({ width, height }: { width?: string, height?: string }) => css`
+        width: ${width};
+        height: ${height};
+    `};
 `;

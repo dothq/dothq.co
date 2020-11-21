@@ -16,7 +16,7 @@ export const StyledButtonV2 = styled.button`
         font-weight: 600;
         font-size: ${fs || 15}px;
         line-height: 18px;
-        transition: 0.3s opacity, 0.3s background, 0.3s box-shadow;
+        transition: 0.3s opacity, 0.3s background, 0.2s box-shadow;
         border: ${bc ? `2px solid ${bc}` : ""};
 
         opacity: ${disabled ? "0.5 !important" : ""};

@@ -203,7 +203,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
+  color: hsl(0, 0%, 0%);
   font-family: 'Inter', serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -222,7 +222,6 @@ img {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
 }
 h1 {
   margin-left: 0;
@@ -634,7 +633,8 @@ pre tt:after {
 }
 
 *::selection {
-  background-color: #d4d4d4;
+  background-color: #4965ff;
+  color: white;
 }
 
 .s-center {
@@ -805,4 +805,8 @@ input .orange {
 
 input .green {
   box-shadow: inset 0px 0px 0px 2px #008000,0px 0px 0px 4px #00800080 !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
 }

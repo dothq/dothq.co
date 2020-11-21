@@ -17,9 +17,9 @@ export const Content = styled.div`
             margin: 0 auto;
             flex-direction: column;
             overflow-x: hidden;
+            overflow-y: hidden;
 
             .hero-container {
-                border-bottom: 1px solid #EAEAEA;
                 box-shadow: 0 3.2px 7.2px 0 #0002,0 .6px 1.8px 0 #0000001c;
                 padding-top: calc(64px + var(--spacing, 82px));
                 padding-bottom: var(--spacing, 64px);

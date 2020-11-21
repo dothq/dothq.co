@@ -3,7 +3,7 @@ import apiFetch from '../../lib/tools/fetcher';
 export const getUser = async () => {
     return new Promise(async (resolve, reject) => {
         const { data } = await apiFetch.post("/api/id/me", { 
-            fields: ["username", "avatarId"]
+            fields: ["username", "avatarId", "email"]
         })
     
         if(data.ok) resolve(data);

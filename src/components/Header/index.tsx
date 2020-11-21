@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import { useGlobalState } from "../../../lib/context"
-import { Avatar, HeaderItemBox } from "../style"
+import { Avatar, HeaderItemBox, HeaderTab, HeaderTabs } from "../style"
 import Skeleton from "react-loading-skeleton"
 import { ButtonV2 } from "../ButtonV2"
 import { isBrowser } from "../../../lib/helpers/login"
@@ -19,6 +19,7 @@ import UserController from "../../../lib/controllers/User"
 
 import apiFetch from '../../../lib/tools/fetcher';
 import { getUser } from "../../services/authenticate"
+import { BrowserMenu } from "./menus/Browser"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -26,26 +27,25 @@ const onLogoContextMenu = (e) => {
     navigate("/download")
 }
 
-const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
+const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu }) => {
     const [state, setState] = React.useState({
         callingMe: true
     });
     const [menuVisible, setMenuVisible] = React.useState(false);
+    const [menuItemHovered, setMenuItemHovered] = React.useState(false);
+    const [menuItemSection, setMenuItemSection] = React.useState("browser");
 
     const themeContext = React.useContext(ThemeManagerContext)
 
-    function onMenuItemHover() {
-        setMenuVisible(!menuVisible)
-    }
-
-    const onMenuParentLeave = () => {
-        setMenuVisible(false);
+    const onMenuItemHover = (v, sect) => {
+        setMenuVisible(v);
+        setMenuItemHovered(v);
+        setMenuItemSection(sect);
     }
 
     return (
         <StyledHeader 
             onTop={onTop} 
-            forceShadow={menuVisible} 
             className={"nav"} 
             ref={headerRef} 
             isDark={isDark}
@@ -58,35 +58,33 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                         <Logo isDark={!isDark} onContextMenu={onLogoContextMenu} />
                     </Link>
                 </div>
-                <div className={"links"} onMouseLeave={onMenuParentLeave}>
-                    <a style={{ height: '100%' }}>
-                        <NavItem 
-                            isDark={!isDark} 
-                            style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onClick={onMenuItemHover}
-                        >Products</NavItem>
-                    </a>
-                    <a style={{ marginLeft: '32px', height: '100%' }}> 
-                        <NavItem 
-                            isDark={!isDark} 
-                            style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onClick={onMenuItemHover}
-                        >Company</NavItem> 
-                    </a>
-                    <a style={{ marginLeft: '32px', height: '100%' }}>
-                        <NavItem 
-                            isDark={!isDark} 
-                            style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onClick={onMenuItemHover}
-                        >Community</NavItem> 
-                    </a>
-                    <a target={"_blank"} style={{ marginLeft: '32px', height: '100%' }}>
-                        <NavItem 
-                            isDark={!isDark} 
-                            style={{ height: '100%', display: 'flex', alignItems: 'center' }} 
-                            onClick={onMenuItemHover}
-                        >About</NavItem> 
-                    </a>
+                <div className={"links"}>
+                    <HeaderTabs style={{ margin: 0, display: "flex", justifyContent: "center" }}>
+                        <HeaderTab 
+                            onMouseEnter={() => onMenuItemHover(true, "browser")}
+                            onMouseLeave={() => onMenuItemHover(false, "browser")}
+                        >
+                            Browser
+                        </HeaderTab>
+                        <HeaderTab 
+                            onMouseEnter={() => onMenuItemHover(true, "products")}
+                            onMouseLeave={() => onMenuItemHover(false, "products")}
+                        >
+                            Products
+                        </HeaderTab>
+                        <HeaderTab 
+                            onMouseEnter={() => onMenuItemHover(true, "company")}
+                            onMouseLeave={() => onMenuItemHover(false, "company")}
+                        >
+                            Company
+                        </HeaderTab>
+                        <HeaderTab 
+                            onMouseEnter={() => onMenuItemHover(true, "about")}
+                            onMouseLeave={() => onMenuItemHover(false, "about")}
+                        >
+                            About
+                        </HeaderTab>
+                    </HeaderTabs>
                 </div>
                 <div className={"nbtn"}>
                     <>
@@ -105,9 +103,9 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop }) => {
                     </>
                 </div>
             </Container>
-            <MenuLine visible={menuVisible} />
-            <MenuSlot visible={menuVisible}>
-                <ProductsMenu />
+            <MenuSlot visible={menuVisible && !hideMenu} onMouseEnter={() => onMenuItemHover(true, menuItemSection)} onMouseOut={() => onMenuItemHover(false, menuItemSection)}>
+                {menuItemSection == "browser" && <BrowserMenu />}
+                {menuItemSection == "products" && <ProductsMenu />}
             </MenuSlot>
         </StyledHeader>
     )
@@ -118,13 +116,15 @@ Header.propTypes = {
     isFixed: PropTypes.bool,
     headerRef: PropTypes.any,
     hidden: PropTypes.bool,
-    onTop: PropTypes.bool
-  }
+    onTop: PropTypes.bool,
+    hideMenu: PropTypes.bool
+}
   
 Header.defaultProps = {
     siteTitle: ``,
     hidden: false,
-    onTop: false
+    onTop: false,
+    hideMenu: false
 }
 
 export default Header
