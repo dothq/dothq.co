@@ -11,6 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./api",
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "incremental": true,
   },
   "exclude": ["**/node_modules/**/*", "test", "dist", "**/*spec.ts", "**/src/**/*"]
