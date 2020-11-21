@@ -77,6 +77,7 @@ export const TextButton = styled.div`
             padding: 0;
             color: rgb(0, 112, 243);
             transition: 0.1s box-shadow;
+            font-weight: 500;
 
             &:hover {
                 box-shadow: rgb(0, 112, 243) 0px 1px 0px 0px;

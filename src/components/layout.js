@@ -93,6 +93,7 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
           className={"nav"} 
           siteTitle={data.site.siteMetadata.title} 
           isFixed={false} 
+          hideMenu={hidden}
           isDark={typeof(darkNav) == "undefined" ? false : darkNav}
           hidden={hidden}
           onTop={onTop}

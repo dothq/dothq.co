@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./api",
+    "skipLibCheck": true,
+    "incremental": true,
+  },
+  "exclude": ["**/node_modules/**/*", "test", "dist", "**/*spec.ts", "**/src/**/*"]
+}

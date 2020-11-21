@@ -32,7 +32,7 @@
 }
 
 .legal-content h1, h2, h3, h4 {
-    margin-top: 1.45rem !important;
+    margin-top: 1.45rem;
 }
 
 .legal-content blockquote {

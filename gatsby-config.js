@@ -97,6 +97,6 @@ module.exports = {
       options: {
         allowList: ["NODE_ENV"],
       },
-    },
+    }
   ],
 }

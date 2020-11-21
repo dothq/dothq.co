@@ -9,73 +9,64 @@
 import React from 'react';
 
 import { getUser } from './src/services/authenticate';
+import { isBrowser } from './lib/helpers/login'
 
 import config from './dot.config';
 import { navigate } from 'gatsby';
 
-let isLoggedIn = false;
+import { defaultGlobalState, globalStateContext, dispatchStateContext, useGlobalState } from "./src/store"
 
-class SessionCheck extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        loading: true,
-        isLoggedIn: false
-      };
-    }
-  
-    handleCheckSession = (user) => {
-      this.setState({ loading: false, isLoggedIn: !!user });
-      isLoggedIn = !!user;
-    };
+const GlobalStateProvider = ({ children }) => {
+    const [state, dispatch] = React.useReducer(
+        (state, newValue) => ({ ...state, ...newValue }),
+        defaultGlobalState
+    );
 
-    getCleanRoute = () => {
-        let route = window.location.pathname.split("/");
-        if(route[route.length-1] === "") route.pop();
-        route = route.join("/");
-        route = route.length === 0 ? "/" : route;
+    return (
+        <globalStateContext.Provider value={state}>
+            <dispatchStateContext.Provider value={dispatch}>
+                {children}
+            </dispatchStateContext.Provider>
+        </globalStateContext.Provider>
+    );
+};
 
-        return route;
-    }
+const SessionCheck = ({ children }) => {
+    const location = isBrowser() && window.location;
 
-    isPageProtected = () => {
-        const route = this.getCleanRoute();
+    const [state, dispatch] = useGlobalState();
 
-        if(config.auth.protectedPages.includes(route)) return true;
-        else return false;
-    }
-  
-    componentDidMount() {
+    React.useEffect(() => {
+        if(isBrowser()) window.isLoggedIn = false;
+
         getUser()
-            .then(data => { 
-                const route = this.getCleanRoute();
+            .then(({ ok, result }) => { 
+                if(!ok) return;
+                if(isBrowser()) window.isLoggedIn = !!result;
 
-                if(data.ok) {
-                    if(route === "/sign-in" || route === "/sign-up") navigate("/");
-                    this.handleCheckSession(data.result)
-                }
+                dispatch({ loaded: !!result, user: result });
             })
-            .catch(err => {
-                this.handleCheckSession()
-                if(this.isPageProtected()) navigate("/sign-in");
-            });
-    }
-  
-    render() {
-        return (
-            this.state.loading === false && (
-                <React.Fragment>{this.props.children}</React.Fragment>
-            )
-        );
-    }
+            .catch(err => dispatch({ loaded: true }));
+    }, [dispatch, location]);
+
+    return (
+        state.loaded === true && (
+            <React.Fragment>{children}</React.Fragment>
+        )
+    )
 }
 
-export const onRouteUpdate = ({ location }) => {
-    if((location.pathname.startsWith("/sign-in") || location.pathname.startsWith("/sign-up")) && isLoggedIn) navigate("/");
+export const onPreRouteUpdate = ({ location }) => {
+    const route = location.pathname.replace(/\/$/, "");
+
+    if(config.auth.protectedPages.includes(route) && (isBrowser() && !window.isLoggedIn)) navigate("/sign-in");
+    else if((route.startsWith("/sign-in") || route.startsWith("/sign-up")) && window.isLoggedIn) navigate("/");
 }
   
 export const wrapRootElement = ({ element }) => (
-    <SessionCheck>
-        {element}
-    </SessionCheck>
+    <GlobalStateProvider>
+        <SessionCheck>
+            {element}
+        </SessionCheck>
+    </GlobalStateProvider>
 );

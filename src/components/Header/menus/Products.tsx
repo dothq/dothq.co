@@ -4,6 +4,6 @@ import { StyledMenu } from "./style";
 
 export const ProductsMenu = () => (
     <StyledMenu>
-
+        sdfsdf
     </StyledMenu>
 )
