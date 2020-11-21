@@ -1,10 +1,44 @@
 import { Injectable } from '@nestjs/common';
 
-import { version } from "../../package.json"
+interface User {
+    id: number,
+    username: string,
+    email: string,
+    password: string
+}
 
 @Injectable()
 export class IdService {
-    getInfo() {
-    	return { statusCode: 200, version }
+    public users: User[] = [
+        {
+            id: 0,
+            username: "God",
+            email: "god@heaven.com",
+            password: "Test"
+        },
+        {
+            id: 1,
+            username: "Kieran",
+            email: "kieran@dothq.co",
+            password: "KieranPassword"
+        }
+    ];
+
+    public get(id: number) {
+        return this.users.find(u => u.id == id) ?? null
+    }
+
+    public create(user: User) {
+        this.users.push(user);
+        return user;
+    }
+
+    public update(id: number, data: Partial<User>) {
+        const index = this.users.findIndex(u => u.id == id);
+        if(!index) return false;
+        
+        this.users[index] = { ...this.users[index], ...data }
+
+        return this.users[index];
     }
 }
