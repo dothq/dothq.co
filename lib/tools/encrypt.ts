@@ -1,16 +1,14 @@
 import * as bcrypt from 'bcrypt';
 
-export const encrypt = (text: string) => {
-    return new Promise((resolve, reject) => {
-        bcrypt.genSalt(256, (err: Error, salt: string) => {
-            if (err) return reject(err);
-        
-            bcrypt.hash(text, salt, (err: Error, hash: string) => {
-                if (err) return reject(err);
-                resolve(hash);
-            });
+export const encrypt = (text: string): string => {
+    return bcrypt.genSalt(256, (err: Error, salt: string) => {
+        if (err) throw err;
+    
+        bcrypt.hash(text, salt, (err: Error, hash: string) => {
+            if (err) throw err;
+            return hash;
         });
-    })
+    });
 }
 
 export const encryptWithSalt = (text: string, salt: string) => {
@@ -23,11 +21,9 @@ export const encryptWithSalt = (text: string, salt: string) => {
 }
 
 export const compare = (plain: string, hash: string) => {
-    return new Promise((resolve, reject) => {
-        bcrypt.compare(plain, hash, (err: Error, matches: boolean) => {   
-            if (err) return reject(err);
+    return bcrypt.compare(plain, hash, (err: Error, matches: boolean) => {   
+        if (err) throw err;
 
-            resolve(matches ? true : false);
-        });
-    })
+        return matches ? true : false;
+    });
 }

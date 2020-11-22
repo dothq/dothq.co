@@ -3,15 +3,17 @@ import { NestFactory } from '@nestjs/core';
 
 import controllers from 'controllers';
 import imports from 'imports';
-import services from 'services';
 
-import { IdService } from 'services/id.service';
+import { AppService } from 'modules/app.service';
+import { UsersService } from 'modules/users/users.service';
 
 @Module({
 	imports: [...imports],
-	exports: [IdService],
 	controllers: [...controllers],
-	providers: [...services]
+	providers: [
+		AppService,
+		UsersService
+	]
 })
 export class AppModule {}
 
