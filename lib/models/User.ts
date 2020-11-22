@@ -14,7 +14,7 @@ export interface User extends Model {
   avatarId: string;
 }
 
-export default sequelize.define<User>("User", {
+export default sequelize.define("User", {
   id: {
     primaryKey: true,
     type: DataTypes.STRING,
