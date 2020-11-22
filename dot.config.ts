@@ -4,11 +4,7 @@ import credentials from './dot.credentials';
 
 interface Config {
     credentials: {
-        [key: string]: {
-            issuer: string,
-            uri: string,
-            key: string
-        }
+        [key: string]: any
     },
     general: {
         githubRepository: string,

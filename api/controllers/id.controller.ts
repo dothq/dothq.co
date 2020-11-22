@@ -1,24 +1,23 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Request } from '@nestjs/common';
 
-import { CreateUserSchema } from 'schemas/id.schema';
 import { IdService } from 'services/id.service';
 
 @Controller('id')
 export class IdController {
     public service: IdService = new IdService();
 
-    @Get(':id')
-    get(@Param('id') id: number) {
-        return this.service.get(id);
+    @Post('sign-in')
+    signIn(@Request() req) {
+        
     }
 
-    @Post()
-    post(@Body() body: CreateUserSchema) {
-        return this.service.create(body);
+    @Get()
+    get(@Request() req) {
+        return this.service.get(1);
     }
 
-    @Put(':id')
-    put(@Param('id') id: number, @Body() data: Partial<CreateUserSchema>) {
-        return this.service.update(id, data);
+    @Put()
+    put(@Request() req, @Body() data) {
+        return this.service.update(1, data);
     }
 }
