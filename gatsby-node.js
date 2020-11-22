@@ -202,7 +202,7 @@ exports.createPages = async ({ graphql, actions }) => {
   fs.readdirSync(resolve(process.cwd(), "src", "assets", "images", "doticons")).forEach(icon => {
     const ic = fs.readFileSync(resolve(process.cwd(), "src", "assets", "images", "doticons", icon), "utf-8");
 
-    icons.push({ name: icon.split(".svg")[0], data: ic })
+    icons.push({ name: icon.split(".svg")[0], data: ic, path: resolve(process.cwd(), "src", "assets", "images", "doticons", icon) })
   })
 
   createPage({

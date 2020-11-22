@@ -1081,6 +1081,10 @@ export const IconItem = styled.div`
 
     & > span {
         font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        margin-top: 20px;
+        padding: 0 10px;
     }
 `;
 
@@ -1217,4 +1221,19 @@ export const Box = styled.div`
         width: ${width};
         height: ${height};
     `};
+`;
+
+export const Tag = styled.div`
+    border: 2px solid #000;
+    font-size: 10px;
+    width: min-content;
+    padding: 2px 6px;
+    border-radius: 6px;
+    height: min-content;
+
+    margin: 0 14px;
+
+    ::selection {
+        background-color: black;
+    }
 `;
