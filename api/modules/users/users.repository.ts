@@ -5,6 +5,7 @@ import { col, fn, where } from 'sequelize'
 
 import { User } from 'models/user.model'
 import { encrypt } from '../../../lib/tools/encrypt'
+import { makeId } from '../../../lib/tools/id'
 
 @Injectable()
 export class UsersRepository {
@@ -19,10 +20,11 @@ export class UsersRepository {
 			where: {
 				id,
 			},
+			attributes: { exclude: ["password"] }
 		})
 	}
 
-	public async findBy(key: string, value: string): Promise<User | null> {
+	public async findBy(key: string, value: any): Promise<User | null> {
 		return this.users.findOne({
 			where: {
 				[key]: where(fn('lower', col(key)), value),
@@ -33,9 +35,13 @@ export class UsersRepository {
 	public async create(name: string, email: string, password: string): Promise<User> {
 		const user = new User()
 
+		user.id = makeId();
 		user.name = name;
 		user.email = email;
-		user.password = encrypt(password);
+
+		const hashed: string = await encrypt(password).then(password => password);
+
+		user.password = hashed;
 
 		return user.save()
 	}

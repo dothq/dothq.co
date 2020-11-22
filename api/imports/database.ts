@@ -1,4 +1,7 @@
 import { SequelizeModule } from '@nestjs/sequelize';
+
+import { User } from 'models/user.model';
+
 import credentials from '../../dot.credentials';
 
 export const DatabaseImport = SequelizeModule.forRoot({
@@ -8,5 +11,7 @@ export const DatabaseImport = SequelizeModule.forRoot({
 	password: credentials.postgres.password,
 	username: credentials.postgres.username,
 	database: "dothq",
-	models: [],
+	models: [User],
+	synchronize: true,
+	autoLoadModels: true
 })

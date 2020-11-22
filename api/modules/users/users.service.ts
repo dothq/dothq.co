@@ -5,8 +5,6 @@ import { compare } from '../../../lib/tools/encrypt';
 import { UsersRepository } from './users.repository';
 import { RegisterRequest } from 'requests';
 
-import { EMAIL_ALREADY_IN_USE } from 'statuses';
-
 interface User {
     name: string,
     email: string,
@@ -18,11 +16,15 @@ export class UsersService {
     private readonly users: UsersRepository
 
     public constructor (users: UsersRepository) {
-      this.users = users
+        this.users = users
     }
 
     public get(id: string) {
         return this.users.findById(id);
+    }
+
+    public getBy(key: string, value: any) {
+        return this.users.findBy(key, value);
     }
 
     public create({ name, email, password }: User) {
@@ -30,7 +32,9 @@ export class UsersService {
     }
 
     public async validateCredentials(user: User, password: string): Promise<boolean> {
-        return compare(password, user.password);
+        const matches = await compare(password, user.password).then(matches => matches);
+
+        return matches == true ? true : false;
     }
     
     public async createFromRequest(request: RegisterRequest): Promise<User> {
@@ -38,7 +42,7 @@ export class UsersService {
 
         const emailInUse = await this.users.findBy("email", email);
 
-        if (emailInUse) throw new UnprocessableEntityException(EMAIL_ALREADY_IN_USE);
+        if (emailInUse) throw new UnprocessableEntityException("Email already in use");
 
         return this.create(request);
     }

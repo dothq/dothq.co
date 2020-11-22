@@ -2,19 +2,12 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { SignOptions, TokenExpiredError } from 'jsonwebtoken'
 
-import ms from 'ms'
+import ms = require('ms');
 
 import { RefreshTokensRepository } from './refresh-tokens.repository'
 import { UsersRepository } from 'modules/users/users.repository'
 import { User } from 'models/user.model'
 import { RefreshToken } from 'models/refresh-token.model'
-
-import { 
-	REFRESH_TOKEN_EXPIRED, 
-	REFRESH_TOKEN_MALFORMED, 
-	REFRESH_TOKEN_NON_EXISTANT, 
-	REFRESH_TOKEN_REVOKED 
-} from 'statuses'
 
 const jwtOptions: SignOptions = {
 	issuer: 'https://dothq.co',
@@ -64,12 +57,12 @@ export class TokensService {
 		const payload = await this.decodeRefreshToken(encoded)
 		const token = await this.getTokenFromRefreshToken(payload)
 	
-		if (!token) throw new UnprocessableEntityException(REFRESH_TOKEN_NON_EXISTANT)
-		if (token.revoked) throw new UnprocessableEntityException(REFRESH_TOKEN_REVOKED)
+		if (!token) throw new UnprocessableEntityException("Refresh token does not exist")
+		if (token.revoked) throw new UnprocessableEntityException("Refresh token has been revoked")
 	
 		const user = await this.getUserFromRefreshToken(payload)
 	
-		if (!user) throw new UnprocessableEntityException(REFRESH_TOKEN_MALFORMED)
+		if (!user) throw new UnprocessableEntityException("Refresh token is malformed")
 	
 		return { user, token }
 	}
@@ -86,15 +79,15 @@ export class TokensService {
 		try {
 		  return this.jwt.verifyAsync(token)
 		} catch (e) {
-			if (e instanceof TokenExpiredError) throw new UnprocessableEntityException(REFRESH_TOKEN_EXPIRED)
-			else throw new UnprocessableEntityException(REFRESH_TOKEN_MALFORMED) 
+			if (e instanceof TokenExpiredError) throw new UnprocessableEntityException("Refresh token has expired")
+			else throw new UnprocessableEntityException("Refresh token is malformed") 
 		}
 	}
 	
 	private async getUserFromRefreshToken(payload: RefreshTokenPayload): Promise<User> {
 		const { sub } = payload
 	
-		if (!sub) throw new UnprocessableEntityException(REFRESH_TOKEN_MALFORMED)
+		if (!sub) throw new UnprocessableEntityException("Refresh token is malformed")
 	
 		return this.users.findById(sub)
 	  }
@@ -102,7 +95,7 @@ export class TokensService {
 	private async getTokenFromRefreshToken(payload: RefreshTokenPayload): Promise<RefreshToken | null> {
 		const { jti } = payload
 	
-		if (!jti) throw new UnprocessableEntityException(REFRESH_TOKEN_MALFORMED)
+		if (!jti) throw new UnprocessableEntityException("Refresh token is malformed")
 	
 		return this.tokens.findById(jti)
 	}

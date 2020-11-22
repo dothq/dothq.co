@@ -1,4 +1,4 @@
-import { IsNotEmpty, MinLength } from 'class-validator'
+import { IsNotEmpty, MinLength, IsEmail } from 'class-validator'
 
 import { 
     EMAIL_REQUIRED, 
@@ -10,6 +10,7 @@ import {
 
 export class LoginRequest {
     @IsNotEmpty({ message: EMAIL_REQUIRED })
+    @IsEmail()
     readonly email: string
 
     @IsNotEmpty({ message: PASSWORD_REQUIRED })
@@ -18,9 +19,11 @@ export class LoginRequest {
 
 export class RegisterRequest {
     @IsNotEmpty({ message: NAME_REQUIRED })
+    @MinLength(2, { message: PASSWORD_REQUIREMENTS })
     readonly name: string
 
     @IsNotEmpty({ message: EMAIL_REQUIRED })
+    @IsEmail()
     readonly email: string
 
     @IsNotEmpty({ message: PASSWORD_REQUIRED })
