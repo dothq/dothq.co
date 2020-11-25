@@ -1103,8 +1103,12 @@ export const HeroTabs = styled.div`
         background: transparent;
     }
 
+    a:focus {
+        outline: none;
+    }
+
     ${({ selected }: { selected: number; }) => css`
-        & > *:nth-child(${selected+1}) {
+        & > :nth-child(${selected+1}) > div {
             border-bottom-color: #000 !important;
             transition-timing-function: ease-in;
             transition-duration: 0.4s;
@@ -1130,6 +1134,10 @@ export const HeroTab = styled.div`
     cursor: pointer;
     color: #4a4a4a;
     white-space: pre;
+
+    &:focus {
+        outline: none;
+    }
 
     &:hover {
         border-bottom-color: #8080805e;

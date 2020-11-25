@@ -60,7 +60,7 @@ const SignupPage = ({ location }) => {
         const { data } = await apiFetch.post("/api/id/sign-up", { 
             email: formState.email.value,
             password: formState.password.value,
-            username: formState.username.value
+            name: formState.username.value
         })
 
         setFormState({ ...formState, callInProgress: false })

@@ -20,6 +20,7 @@ import UserController from "../../../lib/controllers/User"
 import apiFetch from '../../../lib/tools/fetcher';
 import { getUser } from "../../services/authenticate"
 import { BrowserMenu } from "./menus/Browser"
+import { globalStateContext } from "../../store"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -28,6 +29,8 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu }) => {
+    const { user, loaded } = React.useContext(globalStateContext);
+
     const [state, setState] = React.useState({
         callingMe: true
     });
@@ -88,18 +91,20 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu 
                 </div>
                 <div className={"nbtn"}>
                     <>
-                        <Link to={"/sign-in"}>
-                            <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
-                        </Link>
-                        <Link to={"/sign-up"}>
-                            <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
-                        </Link>
-{/* 
+                        {!user && <>
+                            <Link to={"/sign-in"}>
+                                <ButtonV2 background={isDark ? 'white' : 'black'} color={isDark ? 'black' : 'white'}>Sign in</ButtonV2>
+                            </Link>
+                            <Link to={"/sign-up"}>
+                                <ButtonV2 background={"transparent"} color={isDark ? 'white' : 'black'} style={{ marginRight: '8px' }}>Register</ButtonV2>
+                            </Link>
+                        </>}
+
                         {user && 
                             <Link to={"/account-settings"} style={{ marginLeft: '20px' }}>
                                 <Avatar width={32} noFade src={`https://cdn.dothq.co/` + (!user.avatarId ? `assets/defaultAvatar.png` : `avatars/${user.avatarId}.png`)} />
                             </Link>
-                        } */}
+                        }
                     </>
                 </div>
             </Container>

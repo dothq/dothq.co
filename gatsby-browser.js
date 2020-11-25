@@ -40,11 +40,11 @@ const SessionCheck = ({ children }) => {
         if(isBrowser()) window.isLoggedIn = false;
 
         getUser()
-            .then(({ ok, result }) => { 
-                if(!ok) return;
-                if(isBrowser()) window.isLoggedIn = !!result;
+            .then((res) => { 
+                if(!res) return;
+                if(isBrowser()) window.isLoggedIn = !!res;
 
-                dispatch({ loaded: !!result, user: result });
+                dispatch({ loaded: !!res, user: res });
             })
             .catch(err => dispatch({ loaded: true }));
     }, [dispatch, location]);
