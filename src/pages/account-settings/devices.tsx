@@ -27,7 +27,7 @@ const AccountSettingsPageDevices = () => {
 
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • Connected Devices" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>

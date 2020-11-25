@@ -27,7 +27,7 @@ const AccountSettingsPageSAP = () => {
     
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • Security & Privacy" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>

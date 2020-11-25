@@ -27,7 +27,7 @@ const AccountSettingsPageSync = () => {
 
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • Synchronisation" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>

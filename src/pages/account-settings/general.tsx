@@ -27,7 +27,7 @@ const AccountSettingsPageGeneral = () => {
 
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • General" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>

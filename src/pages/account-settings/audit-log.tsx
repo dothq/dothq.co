@@ -27,7 +27,7 @@ const AccountSettingsPageAudit = () => {
 
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • Audit Log" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>
