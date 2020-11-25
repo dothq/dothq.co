@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UnauthorizedException, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Req, Response, UnauthorizedException, UseGuards } from '@nestjs/common'
 
 import { UsersService } from 'modules/users/users.service'
 import { TokensService } from 'modules/auth/tokens.service'
@@ -29,19 +29,23 @@ export class IdController {
     }
 
     @Post('/sign-up')
-    async register(@Body() body: RegisterRequest) {
+    async register(@Response() res, @Body() body: RegisterRequest) {
         await sleep(2000);
 
         const user: any = await this.users.createFromRequest(body);
 
-        return {
+        const data = await this.createTokenData(user);
+
+        res.cookie("_dotid_sess", data.payload.token)
+
+        res.json({
             statusCode: 200,
-            data: await this.createTokenData(user)
-        }
+            data
+        })
     }
 
     @Post('/sign-in')
-    async login(@Body() body: LoginRequest) {
+    async login(@Response() res, @Body() body: LoginRequest) {
         await sleep(1000);
 
         const { email, password } = body;
@@ -51,10 +55,14 @@ export class IdController {
 
         if (!valid) throw new UnauthorizedException("Invalid email or password");
 
-        return {
+        const data = await this.createTokenData(user);
+
+        res.cookie("_dotid_sess", data.payload.token)
+
+        res.json({
             statusCode: 200,
-            data: await this.createTokenData(user)
-        }
+            data
+        })
     }
 
     @Post('/refresh-token')

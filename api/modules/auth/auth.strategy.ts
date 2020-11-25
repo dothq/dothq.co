@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 	constructor(users: UsersService) {
 		super({
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+			jwtFromRequest: (req) => this.extractJWT(req),
 			ignoreExpiration: false,
 			secretOrKey: credentials.email.key,
 			signOptions: {
@@ -27,6 +27,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		})
 
 		this.users = users
+	}
+
+	extractJWT(req) {
+		if (req && req.cookies) return req.cookies['_dotid_sess'];
+		else return null;
 	}
 
 	async validate(payload: AccessTokenPayload): Promise<User> {
