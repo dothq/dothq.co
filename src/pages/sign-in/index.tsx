@@ -64,7 +64,7 @@ const SigninPage = ({ location }) => {
             .then((data: any) => {
                 setFormState({ ...formState, callInProgress: false })
 
-                if(data.ok && isBrowser()) window.location.href = "/";
+                if(data.data && isBrowser()) window.location.href = "/";
             })
             .catch(err => {
                 setFormState({ ...formState, error: { visible: true, message: err.message }})

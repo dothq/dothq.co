@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import controllers from 'controllers';
 import * as helmet from 'helmet';
+import * as cookieParser from 'cookie-parser';
 import imports from 'imports';
 
 import { AppService } from 'modules/app.service';
@@ -30,6 +31,7 @@ const bootstrap = async () => {
 	app.useGlobalPipes(new ValidationPipe());
 	app.setGlobalPrefix('api');
 	app.use(helmet());
+	app.use(cookieParser());
 
 	await app.listen(4000);
 }

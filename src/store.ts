@@ -3,7 +3,7 @@ import React from "react";
 export const defaultGlobalState = {
     user: null,
     isLoggedIn: false,
-    loaded: false
+    loaded: true
 };
 
 export const globalStateContext = React.createContext(defaultGlobalState);

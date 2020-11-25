@@ -22,20 +22,18 @@ import { List, ListItem } from "../../components/List"
 import QRCode from 'qrcode.react'
 import { ASHero } from "../../components/ASHero"
 
-const AccountSettingsPage = () => {
+const AccountSettingsPageDevices = () => {
     const { user, loaded } = React.useContext(globalStateContext);
-
-    navigate("general")
 
     return (
         <Layout noEnding>
-            <SEO title="Account Settings" />
+            <SEO title="Account Settings • Connected Devices" />
             <Content hasHero>
                 {(loaded && user) && (
                     <>
-                        <ASHero tab={-1} user={user} />
-                        <div style={{ width: "100%", height: "calc(100vh - 450px)", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Thinker size={12} />
+                        <ASHero tab={3} user={user} />
+                        <div style={{ maxWidth: "1300px", width: "100%", marginTop: "2rem", textAlign: "left" }}>
+                            devices
                         </div>
                     </>
                 )}
@@ -50,4 +48,4 @@ const AccountSettingsPage = () => {
     )
 }
 
-export default AccountSettingsPage
+export default AccountSettingsPageDevices
