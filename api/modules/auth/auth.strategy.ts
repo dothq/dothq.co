@@ -4,7 +4,7 @@ import { PassportStrategy } from '@nestjs/passport'
 import { User } from 'models/user.model'
 import { UsersService } from 'modules/users/users.service'
 
-import { ExtractJwt, Strategy } from 'passport-jwt'
+import { Strategy } from 'passport-jwt'
 
 import credentials from '../../../dot.credentials'
 
@@ -30,7 +30,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	}
 
 	extractJWT(req) {
-		if (req && req.cookies) return req.cookies['_dotid_sess'];
+		if(!req) return null;
+
+		if(req.headers && req.header('authorization')) return req.header('authorization').replace(/Bearer\s?/, "").replace(/ /g, "");
+		if(req.cookies) return req.cookies['_dotid_sess'];
+
 		else return null;
 	}
 
