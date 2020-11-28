@@ -17,9 +17,11 @@ import apiFetch from "../../../lib/tools/fetcher";
 import config from "../../../dot.config";
 import { isLoggedIn, login } from "../../services/authenticate";
 import { useGlobalState } from "../../../lib/context";
+import * as store from "../../store"
 import { isBrowser } from "../../../lib/helpers/login";
 
 const SigninPage = ({ location }) => {
+    const [state, dispatch] = store.useGlobalState();
     const [user, setUser] = useGlobalState('user');
 
     const [open, setOpen] = React.useState(false);
@@ -64,14 +66,17 @@ const SigninPage = ({ location }) => {
             .then((data: any) => {
                 setFormState({ ...formState, callInProgress: false })
 
-                if(data.data && isBrowser()) window.location.href = "/";
+                if(data.data && isBrowser()) window.location.href = ((params.next ? params.next : "/") as string);
             })
             .catch(err => {
                 setFormState({ ...formState, error: { visible: true, message: err.message }})
             })
     }
 
-    React.useEffect(() => { setTimeout(setOpen(true), 500) });
+    React.useEffect(() => { 
+        dispatch({ loaded: true })
+        setTimeout(setOpen(true), 500) 
+    }, []);
 
     // if(isLoggedIn) navigate(to);
 

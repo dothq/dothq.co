@@ -36,7 +36,8 @@ export class IdController {
 
         const data = await this.createTokenData(user);
 
-        res.cookie("_dotid_sess", data.payload.token)
+        res.cookie("_dotid_sess", data.payload.token, { expires: new Date(Date.now() + 900000000), httpOnly: true, sameSite: "strict" })
+        res.cookie("_dotid_loggedin", true, { expires: new Date(Date.now() + 900000000), httpOnly: false, sameSite: "strict" })
 
         res.json({
             statusCode: 200,
@@ -57,7 +58,8 @@ export class IdController {
 
         const data = await this.createTokenData(user);
 
-        res.cookie("_dotid_sess", data.payload.token)
+        res.cookie("_dotid_sess", data.payload.token, { expires: new Date(Date.now() + 900000000), httpOnly: true, sameSite: "strict" })
+        res.cookie("_dotid_loggedin", true, { expires: new Date(Date.now() + 900000000), httpOnly: false, sameSite: "strict" })
 
         res.json({
             statusCode: 200,

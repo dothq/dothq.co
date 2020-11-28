@@ -97,6 +97,7 @@ module.exports = {
       options: {
         allowList: ["NODE_ENV"],
       },
-    }
+    },
+    `gatsby-plugin-remove-trailing-slashes`,
   ],
 }

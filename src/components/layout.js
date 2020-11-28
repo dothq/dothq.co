@@ -44,12 +44,6 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 				  
   const themeContext = React.useContext(ThemeManagerContext)
 
-  React.useEffect(() => {
-    const script = document.createElement("script");
-    script.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    if(document.getElementsByClassName("twitter-tweet") && document.getElementsByClassName("twitter-tweet")[0]) document.getElementsByClassName("twitter-tweet")[0].appendChild(script);
-  }, []);
-
   const [hidden, setHidden] = React.useState(false);
   const [onTop, setOnTop] = React.useState(false);
 

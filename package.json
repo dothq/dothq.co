@@ -40,6 +40,7 @@
     "gatsby-plugin-offline": "^3.0.41",
     "gatsby-plugin-react-helmet": "^3.1.24",
     "gatsby-plugin-react-redux": "^1.1.0",
+    "gatsby-plugin-remove-trailing-slashes": "^2.5.0",
     "gatsby-plugin-scroll-reveal": "^0.0.6",
     "gatsby-plugin-sharp": "^2.4.13",
     "gatsby-plugin-styled-components": "^3.2.1",
