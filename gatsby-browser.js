@@ -14,7 +14,11 @@ import { isBrowser } from './lib/helpers/login'
 import config from './dot.config';
 import { navigate } from 'gatsby';
 
+import { parse } from 'search-params' 
+
 import { defaultGlobalState, globalStateContext, dispatchStateContext, useGlobalState } from "./src/store"
+
+let route = window.location.pathname ?? ""
 
 const GlobalStateProvider = ({ children }) => {
     const [state, dispatch] = React.useReducer(
@@ -31,41 +35,73 @@ const GlobalStateProvider = ({ children }) => {
     );
 };
 
-const SessionCheck = ({ children }) => {
-    const location = isBrowser() && window.location;
+const checkSession = (dispatch) => {
+    if(isBrowser()) window.isLoggedIn = false;
 
+    getUser()
+        .then((res) => { 
+            console.log(res)
+
+            if(!res) return;
+            if(isBrowser()) window.isLoggedIn = !!res;
+
+            dispatch({ loaded: true, user: res, authenticated: true });
+        })
+        .catch(err => {
+            dispatch({ loaded: true, authenticated: false })
+        });
+}
+
+const SessionCheck = ({ children }) => {
     const [state, dispatch] = useGlobalState();
 
-    React.useEffect(() => {
-        if(isBrowser()) window.isLoggedIn = false;
+    const location = isBrowser() && window.location;
+    const query = parse(location.search);
 
-        getUser()
-            .then((res) => { 
-                if(!res) return;
-                if(isBrowser()) window.isLoggedIn = !!res;
+    React.useState(() => {
+        if(document.cookie.indexOf("_dotid_loggedin") === -1) {
+            if(location.pathname.startsWith("/sign-in")) return;
 
-                dispatch({ loaded: !!res, user: res });
-            })
-            .catch(err => dispatch({ loaded: true }));
-    }, [dispatch, location]);
+            if(config.auth.protectedPages.includes(location.pathname.replace(/\/$/, ""))) {
+                return window.___navigate(`/sign-in?next=${encodeURIComponent(location.pathname + location.search)}`)
+            }
+        } else {
+            if(location.pathname.startsWith("/sign-in")) window.___navigate(query.next ? decodeURIComponent(query.next) : "/");
 
-    return (
-        state.loaded === true && (
-            <React.Fragment>{children}</React.Fragment>
-        )
-    )
+            getUser()
+                .then((res) => { 
+                    if(!res) return;
+                    if(isBrowser()) window.isLoggedIn = !!res;
+
+                    dispatch({ loaded: !!res, user: res });
+                })
+                .catch(err => dispatch({ loaded: true }));
+        }
+
+        dispatch({ loaded: true })
+    }, [document.cookie])
+
+    return <div style={{ display: state.loaded ? "" : "none" }}>{children}</div>
 }
 
-export const onPreRouteUpdate = ({ location }) => {
-    const route = location.pathname.replace(/\/$/, "");
+export const onPreRouteUpdate = () => {
+    const location = isBrowser() && window.location;
+    const query = parse(location.search);
 
-    if(config.auth.protectedPages.includes(route) && (isBrowser() && !window.isLoggedIn)) navigate("/sign-in");
-    else if((route.startsWith("/sign-in") || route.startsWith("/sign-up")) && window.isLoggedIn) navigate("/");
+    if(document.cookie.indexOf("_dotid_loggedin") === -1) {
+        if(location.pathname.startsWith("/sign-in")) return;
+
+        if(config.auth.protectedPages.includes(location.pathname.replace(/\/$/, ""))) {
+            return window.___navigate(`/sign-in?next=${encodeURIComponent(location.pathname + location.search)}`)
+        }
+    } else {
+        if(location.pathname.startsWith("/sign-in")) window.___navigate(query.next ? decodeURIComponent(query.next) : "/");
+    }
 }
   
-export const wrapRootElement = ({ element }) => (
+export const wrapRootElement = ({ element, location }) => (
     <GlobalStateProvider>
-        <SessionCheck>
+        <SessionCheck location={location}>
             {element}
         </SessionCheck>
     </GlobalStateProvider>

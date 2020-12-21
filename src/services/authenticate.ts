@@ -2,9 +2,7 @@ import apiFetch from '../../lib/tools/fetcher';
 
 export const getUser = async () => {
     return new Promise(async (resolve, reject) => {
-        const { data } = await apiFetch.get("/api/id/me")
-    
-        resolve(data);
+        apiFetch.get("/api/id/me").then(({ data }) => resolve(data)).catch(({ data }) => reject(data))
     })
 }
 
@@ -14,12 +12,10 @@ export const isLoggedIn = async () => {
 
 export const login = async ({ email, password }) => {
     return new Promise(async (resolve, reject) => {
-        const { data } = await apiFetch.post("/api/id/sign-in", { 
+        apiFetch.post("/api/id/sign-in", { 
             email,
             password
-        })
-
-        resolve(data);
+        }).then(({ data }) => resolve(data)).catch(({ data }) => reject(data))
     })
 }
 

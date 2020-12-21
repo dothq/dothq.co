@@ -29,7 +29,7 @@ const onLogoContextMenu = (e) => {
 }
 
 const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu }) => {
-    const { user, loaded } = React.useContext(globalStateContext);
+    const { user, loaded, authenticated } = React.useContext(globalStateContext);
 
     const [state, setState] = React.useState({
         callingMe: true
