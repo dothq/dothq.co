@@ -22,11 +22,11 @@ const IndexPage = () => {
           
           <div dot-slideup="true" style={{ animationDelay: '0.8s' }}>
             <Buttons style={{ marginBottom: '34px' }} className={"landing-btns"}>
-              <Link to={"/#features"}>
+              <Link to={"/browser/download"}>
                 <ButtonV2 background={"#f6f6f6"} color={"black"}>Learn More</ButtonV2>
               </Link>
-              <Link to={"/#"} style={{ marginLeft: '12px' }}>
-                <ButtonV2>Download Coming Soon</ButtonV2>
+              <Link to={"https://github.com/dothq/browser-pr-builds/releases"} style={{ marginLeft: '12px' }}>
+                <ButtonV2>Download Alpha</ButtonV2>
               </Link>
             </Buttons>
           </div>
