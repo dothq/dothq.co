@@ -37,14 +37,18 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     Once all the dependencies have installed without errors, run the following commands in your terminal.
 
     ```shell
-    yarn develop
+    # Developing the frontend
+    yarn develop:web
+
+    # Developing the api
+    yarn develop:api
     ```
 
 1.  **Start hacking**
 
     You should see a message in the terminal like this:
 
-    ```shell
+    ```
     You can now view dothq.co in the browser.
     ⠀
       http://localhost:8000/
