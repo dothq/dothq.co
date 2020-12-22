@@ -11,7 +11,7 @@ const Ending = () => (
             <Container>
                 <Title>Ready for some privacy?</Title>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <Link to={"/download"}>
+                    <Link to={"https://github.com/dothq/browser-pr-builds/releases"}>
                         <ButtonV2 background={"white"} color={"black"} w={173}>Download</ButtonV2>
                     </Link>
                 </div>

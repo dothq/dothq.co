@@ -79,7 +79,9 @@ class DotBrowserPage extends React.Component {
                                 <HeroTitle color={"white"}>Browse securely without prying eyes</HeroTitle>
                                 <HeroSubtitle color={"white"}>Get Dot Browser to block annoying advertisments and trackers. It’s that simple.</HeroSubtitle>
                                 <Buttons className={"db-download-buttons"} style={{ marginTop: '72px', display: 'flex', justifyContent: 'flex-start' }}>
-                                    <ButtonV2 background={"white"} color={"black"}>Download for {getOS() && getOS().os}</ButtonV2>
+                                    <Link to={"https://github.com/dothq/browser-pr-builds/releases"}>
+                                        <ButtonV2 background={"white"} color={"black"}>Download for {getOS() && getOS().os}</ButtonV2>
+                                    </Link>
                                     <Link to={"/browser/download/mobile"}>
                                         <ButtonV2 background={"transparent"} color={"white"}>Try our mobile version</ButtonV2>
                                     </Link>
