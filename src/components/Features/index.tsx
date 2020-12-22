@@ -38,6 +38,8 @@ export const Features = () => {
 
     return (
         <>
+            <div id="features-section"></div>
+
             <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s', paddingTop: '3rem' }}>
                 <FeatureDisplay>
                     <Feature>

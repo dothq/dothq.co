@@ -37,14 +37,18 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
     Once all the dependencies have installed without errors, run the following commands in your terminal.
 
     ```shell
-    yarn develop
+    # Developing the frontend
+    yarn develop:web
+
+    # Developing the api
+    yarn develop:api
     ```
 
 1.  **Start hacking**
 
     You should see a message in the terminal like this:
 
-    ```shell
+    ```
     You can now view dothq.co in the browser.
     ⠀
       http://localhost:8000/
@@ -59,6 +63,14 @@ _Have an idea for our website? You can drop a suggestion in our [Discord server]
 
     The site is now running and you can visit in your browser of choice *(hopefully [Dot Browser](https://github.com/dothq/browser))* at `localhost:8000/`. If the port is different in the above message, you can substitute `:8000` for what it says above.
  
+
+## 📄 Additional files
+
+To develop the frontend you will need a file called `dot.credentials.ts`. This can contain personal information so is never pushed to git. You can bypass this by creating a file with the same name and adding the following contents:
+
+```ts
+export default {}
+```
 
 ## 🎓 Learning Gatsby
 
