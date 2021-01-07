@@ -7,7 +7,7 @@ export const StyledHero = styled.section`
 export const Content = styled.div`
     margin: 0 auto;
     max-width: 1300px;
-    margin-top: calc(64px + 84px);
+    margin-top: calc(64px + 92px);
 
     ${({ hasHero }: { hasHero?: boolean }) => css`
         ${hasHero ? `

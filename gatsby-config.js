@@ -3,6 +3,7 @@ module.exports = {
     title: `Dot HQ`,
     description: `Take back your privacy with Dot HQ's Dot Browser, the privacy-conscious web browser that protects you from being tracked and monitored online.`,
     author: `Dot HQ`,
+    siteUrl: "https://dothq.co"
   },
   proxy: {
     prefix: "/api",
@@ -80,13 +81,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-ghost`,
-      options: {
-        apiUrl: `https://ghost.dothq.co`,
-        contentApiKey: `7efea324bbf57adf3768570f3d`,
-      },
-    },
-    {
       resolve: "gatsby-plugin-express",
       options: {
         output: "gatsby.json",
@@ -99,5 +93,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-remove-trailing-slashes`,
+    `gatsby-plugin-sitemap`
   ],
 }

@@ -2,19 +2,20 @@ import styled from "styled-components";
 
 export const StyledBanner = styled.div`
     height: 38px;
-    background-color: black;
+    background-color: white;
     width: 100%;
-    color: white;
-    font-size: 15px;
+    color: black;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
+    border-bottom: 1px solid var(--gray-4);
 
     a {
         text-decoration: none;
         opacity: 1;
-        color: #30ffcf;
+        color: var(--azure);
         transition: 0.2s opacity;
     }
 
