@@ -254,12 +254,14 @@ export const Title = styled.h1`
     color: ${colours.black};
     font-weight: bold;
     font-size: 36px;
+    padding: 0 18px;
 `;
 
 export const P = styled.p`
     color: ${colours.gray2};
     font-weight: 500;
     font-size: 16px;
+    padding: 0 18px;
 `;
 
 export const InputHotkey = styled.div`
