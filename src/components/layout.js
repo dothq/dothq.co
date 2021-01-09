@@ -9,12 +9,19 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
+import Markdown from 'markdown-to-jsx';
+
+import axios from 'axios';
+
 import { createGlobalStyle } from 'styled-components'
 
 import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
 import Footer from "./Footer"
+import { Snackbar } from "./Snackbar"
+import { ButtonV2 } from "./ButtonV2"
+import { colours } from '../colours'
 import "./layout.css"
 import "./inter.css"
 
@@ -28,6 +35,8 @@ import { useGlobalState } from '../../lib/context'
 
 import { Banner } from "./Banner"
 import { isBrowser } from "../../lib/helpers/login"
+
+import cookie from '../assets/images/cookie.svg'
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -44,6 +53,9 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 				  
   const themeContext = React.useContext(ThemeManagerContext)
 
+  const [motd, setMotd] = React.useState("");
+  const [cookieBannerVisible, setCBVisible] = React.useState(isBrowser() && !localStorage.getItem("cookie-consented"))
+
   const [hidden, setHidden] = React.useState(false);
   const [onTop, setOnTop] = React.useState(false);
 
@@ -54,6 +66,9 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
   React.useEffect(() => {
     let oldY = 0;
+
+    axios.get("https://raw.githubusercontent.com/dothq/motd/main/motd.md")
+      .then(res => setMotd(res.data))
 
     isBrowser() && window.addEventListener("scroll", (e) => {
       if(window.scrollY >= 500 && oldY < window.scrollY) setHidden(true);
@@ -77,35 +92,35 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
 
     setAlfBuilds(true)
 
-  }, [builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser]);
+  }, [builds, setBuilds, themeContext, alfBuilds, alfUser, setAlfBuilds, setAlfUser, motd]);
 
   return (
     <CookiesProvider>
       <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
         <GS />
-        {!blank && <Header 
-          className={"nav"} 
-          siteTitle={data.site.siteMetadata.title} 
-          isFixed={false} 
-          hideMenu={hidden}
-          isDark={typeof(darkNav) == "undefined" ? false : darkNav}
-          hidden={hidden}
-          onTop={onTop}
-        >
-          {process.env.NODE_ENV === "development" && (
-            <Banner>
-              <span>
-                You're running in development mode. Using <code>http://localhost:4000</code> as the API.
-              </span>
-            </Banner>
-          )}
-        </Header>}
         {!noHero && <Hero>
+          {!blank && <Header 
+            className={"nav"} 
+            siteTitle={data.site.siteMetadata.title} 
+            isFixed={false} 
+            hideMenu={hidden}
+            isDark={typeof(darkNav) == "undefined" ? false : darkNav}
+            hidden={hidden}
+            onTop={onTop}
+          >
+            <Banner>
+              <Markdown options={{ forceInline: true }}>{motd}</Markdown>
+            </Banner>
+          </Header>}
           {children}
         </Hero>}
         {noHero && <>{children}</>}
         {!noEnding && <Ending />}
         {!blank && <Footer />}
+        <Snackbar visible={cookieBannerVisible} icon={cookie}>
+          We use cookies to keep you logged into your account. We do not use cookies if you are browsing as a guest.
+          <ButtonV2 onClick={() => setCBVisible(false)} style={{ marginLeft: "16px" }} background={colours.azure} color={colours.white}>OK</ButtonV2>
+        </Snackbar>
       </SkeletonTheme>
     </CookiesProvider>
   )

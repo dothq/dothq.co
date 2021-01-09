@@ -14,7 +14,7 @@ export const Button = styled.div`
             opacity: ${shade == "white" ? isHome ? 0.6 : 1 : 1};
         }
 
-        padding: 9px 20px;
+        padding: 5px 18px;
 
         ${hasArrow ? `
             position: relative;
@@ -38,8 +38,8 @@ export const Button = styled.div`
         opacity: ${disabled ? 0.5 : 1};
     `}
 
-    border-radius: 100px;
-    font-size: 15px;
+    border-radius: 6px;
+    font-size: 14px;
     font-weight: 600;
     transition: 0.2s background-color, 0.2s box-shadow, 0.3s transform, 0.2s border, 0.2s opacity;
 `;

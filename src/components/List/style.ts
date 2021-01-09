@@ -9,7 +9,7 @@ export const StyledList = styled.ul`
 
 export const StyledListItem = styled.li`
     height: 32px;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--gray-4);
     display: flex;
     align-items: center;
     height: auto;

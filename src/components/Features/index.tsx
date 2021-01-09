@@ -2,120 +2,80 @@ import React from 'react';
 
 import { FeatureDisplay, Feature, FeatureImage, Heading, Description, Title, FeatureIcon } from "../style"
 
-import * as shield from '../../assets/images/icons/shield.svg'
-import * as mail from '../../assets/images/icons/mail.svg'
-import * as sync from '../../assets/images/icons/sync.svg'
-
-import * as blockerFeature from '../../assets/images/features/blocker_feature.svg'
-import * as maskFeature from '../../assets/images/features/mask_feature.svg'
-import * as syncFeature from '../../assets/images/features/sync_feature.svg'
+import lock from '../../assets/images/features/lock.svg'
+import mail from '../../assets/images/features/mail.svg'
+import migrate from '../../assets/images/features/migrate.svg'
+import opensource from '../../assets/images/features/opensource.svg'
+import shield from '../../assets/images/features/shield.svg'
+import sparkles from '../../assets/images/features/sparkles.svg'
 
 import { ButtonV2 } from '../ButtonV2';
 
 import { isBrowser } from "../../../lib/helpers/login"
 
 export const Features = () => {
-    const blockerRef = React.createRef<HTMLDivElement>();
-    const maskRef = React.createRef<HTMLDivElement>();
-    const syncRef = React.createRef<HTMLDivElement>();
-    
-    isBrowser() && window.addEventListener('scroll', () => {
-      if(!isBrowser()) return;
-      if(!blockerRef.current || !maskRef.current || !syncRef.current) return;
-    
-      if(window.scrollY > (blockerRef.current.offsetTop - (blockerRef.current.offsetTop / 4))) {
-        blockerRef.current.style.opacity = "1";
-      } else blockerRef.current.style.opacity = "0";
-    
-      if(window.scrollY > (maskRef.current.offsetTop - (maskRef.current.offsetTop / 4))) {
-        maskRef.current.style.opacity = "1";
-      } else maskRef.current.style.opacity = "0";
-    
-      if(window.scrollY > (syncRef.current.offsetTop - (syncRef.current.offsetTop / 4))) {
-        syncRef.current.style.opacity = "1";
-      } else syncRef.current.style.opacity = "0";
-    })
-
     return (
-        <>
-            <div id="features-section"></div>
-
-            <div id="features" dot-slideup="true" style={{ animationDelay: '1.8s', paddingTop: '3rem' }}>
-                <FeatureDisplay>
-                    <Feature>
-                        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                            <FeatureIcon src={shield} />
-                            <div style={{ marginTop: '58px' }}>
-                                <Heading>Block ads with ease</Heading>
-                                <Description>Dot Browser blocks all those pesky advertisments and trackers you come across while browsing the web.</Description>
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex' }}>
-                            <FeatureImage ref={blockerRef} src={blockerFeature} style={{ width: '623px', height: '325px', opacity: 0 }} />
-                        </div>
-
-                    </Feature>
-
-                    <Feature>
-                        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                            <FeatureImage ref={maskRef} src={maskFeature} style={{ width: '623px', height: '325px', opacity: 0 }} />
-                        </div>
-
-                        <div style={{ display: 'flex' }}>
-                            <div>
-                                <FeatureIcon src={mail} style={{ marginLeft: 'auto' }} />
-                                <Heading style={{ marginTop: '58px', direction: 'rtl' }}>Say goodbye to spam</Heading>
-                                <Description style={{ textAlign: 'right' }}>Dot Browser offers to mask your email with a temporary email address when registering for services online.</Description>
-                            </div>
-                        </div>
-
-
-                    </Feature>
-
-                    <Feature>
-                        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                            <FeatureIcon src={sync} />
-                            <div style={{ marginTop: '58px' }}>
-                                <Heading>Pick up where you left off</Heading>
-                                <Description>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
-
-                                <ButtonV2 w={224} style={{ marginTop: '32px', display: 'block' }}>Learn more about this</ButtonV2>
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex' }}>
-                            <FeatureImage ref={syncRef} src={syncFeature} style={{ width: '623px', height: '325px', opacity: 0, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} />
-                        </div>
-
-                    </Feature>
-
-                </FeatureDisplay>
-            </div>
-
-            <div id={"features-s"} style={{ display: 'none', flexFlow: 'row wrap', justifyContent: 'center', '--spacing': '54px', marginBottom: '8px' }}>
-                <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
-                    <div style={{ maxWidth: '299px', justifySelf: 'center' }}>
-                        <FeatureIcon src={shield} style={{ margin: '0 auto' }} />
-                        <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Block ads with ease</Heading>
-                        <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser blocks all those pesky advertisments and trackers you come across while browsing the web.</Description>
+        <FeatureDisplay>
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={lock} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Respects your privacy</Heading>
+                        <Description>We never send telemetry or crash reports without your consent.</Description>
                     </div>
                 </div>
-                <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
-                    <div style={{ maxWidth: '325px', justifySelf: 'center' }}>
-                        <FeatureIcon src={mail} style={{ margin: '0 auto' }} />
-                        <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Say goodbye to spam</Heading>
-                        <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser offers to mask your email with a temporary email address when registering for services online.</Description>
+            </Feature>
+
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={sparkles} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Make Dot Browser yours</Heading>
+                        <Description>Browse our library of thousands of themes and extensions to get Dot just how you like it.</Description>
                     </div>
                 </div>
-                <div style={{ display: 'flex', margin: '0 var(--spacing)', paddingBottom: '4.25rem' }}>
-                    <div style={{ maxWidth: '377px', justifySelf: 'center' }}>
-                        <FeatureIcon src={sync} style={{ margin: '0 auto' }} />
-                        <Heading style={{ marginTop: '58px', fontSize: '30px', textAlign: 'center' }}>Pick up where you left off</Heading>
-                        <Description style={{ width: 'auto', textAlign: 'center' }}>Dot Browser securely syncs your browsing data between devices linked to your Dot ID.</Description>
+            </Feature>
+
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={shield} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Block nasty ads and trackers</Heading>
+                        <Description>Dot will automatically block all avertisements and trackers while you surf the web.</Description>
                     </div>
                 </div>
-            </div>
-        </>
+            </Feature>
+
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={mail} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Protect your mailbox</Heading>
+                        <Description>We will offer to mask your email address when you sign up for sites or services.</Description>
+                    </div>
+                </div>
+            </Feature>
+
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={migrate} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Migrate from Chrome or Edge</Heading>
+                        <Description>Dot can migrate all your data from your previous browser in just a few clicks.</Description>
+                    </div>
+                </div>
+            </Feature>
+
+            <Feature>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <FeatureIcon src={opensource} />
+                    <div style={{ marginTop: '20px' }}>
+                        <Heading>Powered by Open Source</Heading>
+                        <Description>Dot is built on top of open-source software meaning the source code is open to anyone.</Description>
+                    </div>
+                </div>
+            </Feature>
+
+        </FeatureDisplay>
     )
 }

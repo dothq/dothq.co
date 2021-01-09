@@ -46,10 +46,10 @@ Post.propTypes = {
 
 export default Post
 
-export const postQuery = graphql`
-    query($slug: String!) {
-        ghostPost(slug: { eq: $slug }) {
-            ...GhostPostFields
-        }
-    }
-`
+// export const postQuery = graphql`
+//     // query($slug: String!) {
+//     //     ghostPost(slug: { eq: $slug }) {
+//     //         ...GhostPostFields
+//     //     }
+//     // }
+// `

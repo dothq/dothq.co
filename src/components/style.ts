@@ -5,8 +5,26 @@ import jail_cell from '../assets/images/jail-cell.svg'
 
 import authSide from '../assets/images/login-side.png'
 import check from '../assets/images/check.svg'
+import { colours } from "../colours";
 
 export const BackgroundInject = css`
+    :root {
+        --red: #FF4141;
+        --orange: #FF7A00;
+        --yellow: #FFD600;
+        --green: #2CC74E;
+        --azure: #256EF5;
+        --blue: #3250ED;
+        --purple: #A451FC;
+        --pink: #BD00FF;
+        --black: #030303;
+        --gray-1: #343434;
+        --gray-2: #737373;
+        --gray-3: #B6B6B6;
+        --gray-4: #EAEAEA;
+        --white: #FFFFFF;
+    }
+
     .links {
         -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
@@ -53,7 +71,6 @@ export const BackgroundInject = css`
     @media screen and (max-width: 626px) {
         .landing-btns {
             flex-direction: column;
-            align-items: center;
         }
 
         .landing-btns > a {
@@ -61,7 +78,7 @@ export const BackgroundInject = css`
         }
 
         .landing-btns > a:first-of-type {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .mobile-btns {
@@ -114,38 +131,30 @@ export const FeatureDisplay = styled.div`
     justify-content: center;
     padding-bottom: 48px;
 
-    --spacing: 21.5px;
+    --spacing: 38px;
 `;
 
 export const Feature = styled.div`
     display: flex;
-    width: 100%;
-    margin-bottom: 128px;
+    width: 346px;
+    margin: 0 calc(38px);
+    margin-bottom: 58px;
 `;
 
 export const Heading = styled.div`
-    font-family: Inter, system-ui;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 34px;
-    line-height: 41px;
+    font-weight: 500;
+    font-size: 20px;
     display: flex;
     align-items: center;
-    color: #000000;
+    color: ${colours.gray1};
 `;
 
 export const Description = styled.div`
-    font-family: Inter, system-ui;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 134%;
-    display: flex;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.7);
-    width: 556px;
+    font-weight: 400;
+    font-size: 16px;
+    color: ${colours.gray2};
     text-align: left;
-    margin-top: 18px;
+    margin-top: 12px;
 `;
 
 export const FeatureImage = styled.div`
@@ -242,10 +251,17 @@ export const ProcessChild = styled.div`
 `;
 
 export const Title = styled.h1`
-    background-color: black;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: ${colours.black};
     font-weight: bold;
+    font-size: 36px;
+    padding: 0 18px;
+`;
+
+export const P = styled.p`
+    color: ${colours.gray2};
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 18px;
 `;
 
 export const InputHotkey = styled.div`
@@ -654,14 +670,12 @@ export const ExtraItemText = styled.div`
 
 export const FeatureIcon = styled.div`
     ${({ src }: { src: any; }) => css`
-        background-color: #f2f6ff;
         background-image: url(${src});
-        background-size: 44px;
-        width: 88px;
-        height: 88px;
+        background-size: 32px;
+        width: 32px;
+        height: 32px;
         background-repeat: no-repeat;
         background-position: center;
-        border-radius: 88px;
     `};
 `;
 
@@ -1171,27 +1185,27 @@ export const HeaderTabs = styled.div`
 `;
 
 export const HeaderTab = styled(HeroTab)`
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 62px;
     padding: 0 20px;
-    transition: border-bottom-color 0.2s ease, 0.3s color;
-    border-bottom: 2px solid #fff0;
+    transition: 0.3s color;
     cursor: pointer;
     white-space: pre;
-    color: black;
+    color: inherit;
+    border-bottom: none;
 
     &:hover {
-        border-bottom-color: black;
+        color: ${colours.azure};
     }
 `;
 
 export const Box = styled.div`
     padding: 32px;
-    border: 1px solid #eaeaea;
+    border: 1px solid var(--gray-4);
     border-radius: 6px;
     max-width: 550px;
 

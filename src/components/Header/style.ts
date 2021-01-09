@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { colours } from '../../colours';
 import { TextButton } from '../Button';
 
 export const StyledHeader = styled.div`
@@ -6,12 +7,13 @@ export const StyledHeader = styled.div`
     position: fixed;
     top: 0;
     z-index: 1000;
-    transition: 0.15s box-shadow, 0.3s transform ease-in-out;
+    transition: 0.4s box-shadow, 0.3s transform ease-in-out;
 
     ${({ onTop, isDark, hide }: { onTop: boolean; isDark: boolean; hide: boolean }) => css`
         transform: translateY(${hide ? "-150px" : "0px"});
-        background-color: ${!isDark ? "white" : "black"};
-        box-shadow: ${onTop ? "0 3.2px 7.2px 0 #0000000f,0 .6px 1.8px 0 #0000001c" : ""};
+        background-color: ${isDark ? colours.black : colours.white};
+        box-shadow: ${onTop ? "0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108)" : ""};
+        border-bottom: ${onTop ? "1px solid transparent" : "1px solid var(--gray-4)"};
     `};
 `
 
@@ -79,7 +81,7 @@ export const MenuSlot = styled.div`
     overflow: hidden;
     position: absolute;
     z-index: 5;
-    box-shadow: 0 -1px 0px 0px #EAEAEA;
+    box-shadow: 0 -1px 0px 0px var(--gray-4);
 
     &:after {
         content: "";

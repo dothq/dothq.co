@@ -45,7 +45,7 @@ export const ASTabs = ({ tab }: { tab: number }) => (
 
 export const ASHero = ({ user, tab }: { user: any; tab: number }) => {
     return (
-        <div className={"hero-container"} style={{ paddingBottom: 0, marginBottom: 0, boxShadow: "none", borderBottom: "1px solid #eaeaea" }}>
+        <div className={"hero-container"} style={{ paddingBottom: 0, marginBottom: 0, boxShadow: "none", borderBottom: "1px solid var(--gray-4)" }}>
             <div className={"hero-content"}>
                 <h1 style={{ marginBottom: '8px', textAlign: "left" }}>Welcome, {user.name}</h1>
                 <p style={{ textAlign: "left" }}>Manage your account information, privacy, and security settings all in one place.</p>
