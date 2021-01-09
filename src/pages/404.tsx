@@ -11,22 +11,23 @@ import { Link } from "gatsby"
 import Emoji from "react-emoji-render"
 import { generateEmojiConfig } from "../../lib/tools/emoji"
 import { Content } from "../components/Hero/style"
+import { ButtonV2 } from "../components/ButtonV2"
+import { colours } from "../colours"
 
 const NotFoundPage = () => {
     return (
         <Layout noEnding>
             <SEO title="Page Not Found" />
             <Content hasHero>
-                <div className={"no-shadow hero-container"} style={({ '--spacing': "calc(100vh / 8)", marginBottom: 0 } as any)}>
+                <div className={"no-shadow hero-container"} style={({ '--spacing': "calc(100vh / 8)", marginBottom: 0, display: "flex", flexDirection: "column", alignItems: "center" } as any)}>
                     <Emoji text={"🙄"} options={generateEmojiConfig({ className: 'emoji' })} />
                     <h1 style={{ fontSize: '2.8rem', marginTop: '12px' }}>404</h1>
-                    <p style={{ fontSize: '16px', width: '400px', marginTop: '-8px' }}>We couldn't find that page.</p>
+                    <p style={{ fontSize: '16px', width: '400px', margin: "0 auto", marginTop: '-8px', marginBottom: "18px" }}>We couldn't find that page.</p>
 
                     <Link to={"/"}>
-                        <TextButton style={{ width: "max-content", margin: "0 auto", display: "flex", alignItems: "center" }} isBasic>
-                            <FeatherIcon size={20} icon={"arrow-left"} style={{ marginRight: "6px" }} /> 
+                        <ButtonV2 background={colours.azure} color={colours.white}>
                             Go home
-                        </TextButton>
+                        </ButtonV2>
                     </Link>
                 </div>
             </Content>

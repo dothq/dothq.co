@@ -24,6 +24,8 @@ import { getUser } from "../../services/authenticate"
 import { BrowserMenu } from "./menus/Browser"
 import { globalStateContext } from "../../store"
 import { colours } from "../../colours"
+import { Modal } from "../Modal"
+import { Input } from "../Input"
 
 const onLogoContextMenu = (e) => {
     e.preventDefault()
@@ -40,6 +42,8 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu 
     const [menuVisible, setMenuVisible] = React.useState(false);
     const [menuItemHovered, setMenuItemHovered] = React.useState(false);
     const [menuItemSection, setMenuItemSection] = React.useState("browser");
+
+    const [modalVisible, setModalVisible] = React.useState(false);
 
     const themeContext = React.useContext(ThemeManagerContext)
 
@@ -95,9 +99,7 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu 
                 <div className={"nbtn"}>
                     <>
                         {!user && <>
-                            <Link to={"/sign-in"}>
-                                <ButtonV2 background={isDark ? colours.white : colours.azure} color={colours.white}>Sign in</ButtonV2>
-                            </Link>
+                            <ButtonV2 onClick={() => setModalVisible(!modalVisible)} background={isDark ? colours.white : colours.azure} color={colours.white}>Sign in</ButtonV2>
                             <Link to={"/sign-up"} style={{ marginRight: '16px' }}>
                                 <ButtonV2 background={isDark ? colours.gray1 : colours.gray5} color={isDark ? colours.white : colours.black}>Register</ButtonV2>
                             </Link>
@@ -127,6 +129,9 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu 
                 {menuItemSection == "browser" && <BrowserMenu />}
                 {menuItemSection == "products" && <ProductsMenu />}
             </MenuSlot>
+            <Modal title={"Sign in"} subtitle={"Enter your Dot ID and passphrase to continue."} visible={modalVisible}>
+                <Input compact value={""} width={"100%"} height={"36px"} />
+            </Modal>
         </StyledHeader>
     )
 }

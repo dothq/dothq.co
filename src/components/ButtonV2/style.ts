@@ -15,7 +15,7 @@ export const StyledButtonV2 = styled.button`
         border-radius: ${br || 8}px;
         font-weight: 600;
         font-size: ${fs || 14}px;
-        transition: 0.3s all;
+        transition: 0.2s all;
         border: ${bc ? `2px solid ${bc}` : ""};
 
         opacity: ${disabled ? "0.5 !important" : ""};
