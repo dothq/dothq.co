@@ -10,7 +10,7 @@ use rocket_contrib::json::{JsonValue};
 mod id;
 
 // Extras
-mod catchers;
+mod errors;
 
 #[get("/")]
 pub fn index() -> JsonValue {
@@ -24,8 +24,8 @@ fn main() {
             id::create
         ])
         .register(catchers![
-            catchers::not_found,
-            catchers::unauthorized
+            errors::not_found,
+            errors::unauthorized
         ])
         .launch();
 }
