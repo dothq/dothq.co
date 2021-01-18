@@ -22,7 +22,7 @@
     "eslint": "lb-eslint --report-unused-disable-directives .",
     "eslint:fix": "yarn run eslint --fix",
     "docker:build": "docker build -t api .",
-    "docker:run": "docker run -p 3000:3000 -d api",
+    "docker:run": "docker run -p 4000:4000 -d api",
     "premigrate": "yarn run build",
     "migrate": "node ./dist/migrate",
     "preopenapi-spec": "yarn run build",
