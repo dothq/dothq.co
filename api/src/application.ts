@@ -21,6 +21,7 @@ export class Application extends BootMixin(
 
     this.bind(RestBindings.ERROR_WRITER_OPTIONS).to({ 
       safeFields: ["errorCode"],
+      defaultType: "json",
       negotiateContentType: false
     });
 
