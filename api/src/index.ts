@@ -11,6 +11,7 @@ export async function main(options: ApplicationConfig = {}) {
 
   const url = app.restServer.url;
   log(`Server is running at ${url}`);
+  log(`Visit ${url}/explorer for a Web UI`);
 
   return app;
 }

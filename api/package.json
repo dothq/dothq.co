@@ -6,8 +6,8 @@
     "loopback-application",
     "loopback"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/api/src/index.js",
+  "types": "dist/api/src/index.d.ts",
   "engines": {
     "node": ">=10.16"
   },
@@ -24,9 +24,9 @@
     "docker:build": "docker build -t api .",
     "docker:run": "docker run -p 4000:4000 -d api",
     "premigrate": "yarn run build",
-    "migrate": "node ./dist/migrate",
+    "migrate": "node ./dist/api/src/migrate",
     "preopenapi-spec": "yarn run build",
-    "openapi-spec": "node ./dist/openapi-spec",
+    "openapi-spec": "node ./dist/api/src/openapi-spec",
     "rebuild": "yarn run clean && yarn run build",
     "prestart": "yarn run rebuild",
     "start": "node -r source-map-support/register .",
@@ -44,13 +44,17 @@
     "src"
   ],
   "dependencies": {
+    "@loopback/authentication": "^7.0.5",
     "@loopback/boot": "^3.1.2",
     "@loopback/core": "^2.13.1",
     "@loopback/repository": "^3.3.0",
     "@loopback/rest": "^9.1.1",
     "@loopback/rest-explorer": "^3.0.5",
+    "@loopback/security": "^0.3.5",
     "@loopback/service-proxy": "^3.0.5",
+    "argon2": "^0.27.1",
     "chalk": "^4.1.0",
+    "loopback-connector-postgresql": "^5.0.1",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

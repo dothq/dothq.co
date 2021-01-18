@@ -5,6 +5,10 @@ import {
   RestApplication, 
   RestBindings 
 } from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent,
+} from '@loopback/rest-explorer';
 import { ServiceMixin } from '@loopback/service-proxy';
 
 import { MySequence } from './sequence';
@@ -24,6 +28,11 @@ export class Application extends BootMixin(
       defaultType: "json",
       negotiateContentType: false
     });
+
+    this.configure(RestExplorerBindings.COMPONENT).to({
+      path: '/explorer',
+    });
+    this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
 

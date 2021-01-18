@@ -1,1 +1,1 @@
-export * from './date.controller';
+export * from './dot-id.controller';
