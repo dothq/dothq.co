@@ -17,8 +17,7 @@ const IndexPage = () => {
     <>
       <Layout>
         <SEO title="Dot Browser, the privacy-centric web browser" isHome />
-        <Content style={{ textAlign: "left" }}>
-
+        <Content className={"landing-desktop"} style={{ textAlign: "left" }}>
           <div style={{ display: "flex", flexDirection: "row" }}>
 
             <div style={{ maxWidth: "420px", paddingTop: "60px" }}>
@@ -35,7 +34,7 @@ const IndexPage = () => {
               </Buttons>
             </div>
 
-            <div style={{ width: "907px", display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ width: "907px", display: "flex", justifyContent: "flex-end" }} className={"landing-showoff"}>
               <img src={landingShowcase} width={800} id="browser-ui" />
               <img id="browser-wallpaper" src="https://source.unsplash.com/collection/67042424" width={800} height={522}></img>
             </div>
@@ -48,6 +47,26 @@ const IndexPage = () => {
           </div>
 
           <Features />
+
+          <div style={{ maxWidth: "674px", margin: "0 auto", marginTop: "88px", textAlign: "left" }}>
+            <h4 style={{ color: colours.gray1, lineHeight: "38px", marginBottom: "16px" }}>We built a privacy browser in a world where your personal data is sold to the highest bidder.</h4>
+            <P style={{ maxWidth: "500px", margin: "0 auto", fontWeight: 400 }}>Your data is constantly being sold through large advertisement networks that track what sites you like to visit online.</P>
+          </div>
+        </Content>
+        <Content className={"landing-mobile"} style={{ textAlign: "center" }}>
+          <div style={{ maxWidth: "420px", paddingTop: "18px", margin: "0 auto" }}>
+            <Title className="hero-title">Take back your privacy.</Title>
+            <P className="hero-p" style={{ margin: "18px" }}>Dot Browser is a privacy-conscious web browser with smarts built-in for protection against trackers and advertisments online.</P>
+            
+            <Buttons style={{ margin: '48px 0', flexDirection: "row" }}>
+              <Link to={"/#features"}>
+                <ButtonV2 background={colours.gray4} color={"black"}>Learn More</ButtonV2>
+              </Link>
+              <Link to={"/browser"} style={{ marginLeft: '16px' }}>
+                <ButtonV2>Download Dot</ButtonV2>
+              </Link>
+            </Buttons>
+          </div>
         </Content>
       </Layout>
     </>

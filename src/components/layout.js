@@ -19,9 +19,6 @@ import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
 import Footer from "./Footer"
-import { Snackbar } from "./Snackbar"
-import { ButtonV2 } from "./ButtonV2"
-import { colours } from '../colours'
 import "./layout.css"
 import "./inter.css"
 
@@ -35,8 +32,6 @@ import { useGlobalState } from '../../lib/context'
 
 import { Banner } from "./Banner"
 import { isBrowser } from "../../lib/helpers/login"
-
-import cookie from '../assets/images/cookie.svg'
 
 const GS = createGlobalStyle`${BackgroundInject}`;
 
@@ -54,7 +49,6 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   const themeContext = React.useContext(ThemeManagerContext)
 
   const [motd, setMotd] = React.useState("");
-  const [cookieBannerVisible, setCBVisible] = React.useState(isBrowser() && !localStorage.getItem("cookie-consented"))
 
   const [hidden, setHidden] = React.useState(false);
   const [onTop, setOnTop] = React.useState(false);
@@ -71,6 +65,10 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
       .then(res => setMotd(res.data))
 
     isBrowser() && window.addEventListener("scroll", (e) => {
+      if(window.matchMedia("(max-width: 1280px)").matches) {
+        setOnTop(false)
+        return;
+      };
       if(window.scrollY >= 500 && oldY < window.scrollY) setHidden(true);
       else setHidden(false);
       
@@ -117,10 +115,10 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
         {noHero && <>{children}</>}
         {!noEnding && <Ending />}
         {!blank && <Footer />}
-        <Snackbar visible={cookieBannerVisible} icon={cookie}>
+        {/* <Snackbar visible={cookieBannerVisible} icon={cookie}>
           We use cookies to keep you logged into your account. We do not use cookies if you are browsing as a guest.
           <ButtonV2 onClick={() => setCBVisible(false)} style={{ marginLeft: "16px" }} background={colours.azure} color={colours.white}>OK</ButtonV2>
-        </Snackbar>
+        </Snackbar> */}
       </SkeletonTheme>
     </CookiesProvider>
   )

@@ -18,6 +18,7 @@ import { Line } from "../Footer/style"
 import UserController from "../../../lib/controllers/User"
 
 import more_horizontal from '../../assets/images/doticons/more-horizontal.svg'
+import dark from '../../assets/images/doticons/dark.svg'
 
 import apiFetch from '../../../lib/tools/fetcher';
 import { getUser } from "../../services/authenticate"
@@ -110,18 +111,6 @@ const Header = ({ children, isFixed, headerRef, isDark, hidden, onTop, hideMenu 
                                 <Avatar width={32} noFade src={`https://cdn.dothq.co/` + (!user.avatarId ? `assets/defaultAvatar.png` : `avatars/${user.avatarId}.png`)} />
                             </Link>
                         }
-
-                        <Link to={"#"} style={{ marginRight: '16px' }}>
-                            <ButtonV2 
-                                background={isDark ? colours.gray1 : colours.gray5} 
-                                color={isDark ? colours.white : colours.black} 
-                                w={36} 
-                                h={36}
-                                style={{ padding: 0 }}
-                            >
-                                <img src={more_horizontal} style={{ width: "24px", height: "24px", display: "flex", margin: "0 auto" }} />
-                            </ButtonV2>
-                        </Link>
                     </>
                 </div>
             </Container>

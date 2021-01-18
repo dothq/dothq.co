@@ -51,21 +51,34 @@ export const BackgroundInject = css`
         }
     }
 
-    @media screen and (max-width: 1040px) {
-        .links {
-          display: none;
-        }
-    }
-
     @media screen and (max-width: 1390px) {
         .logotype {
-            padding-left: 15px;
+            padding-left: 32px;
         }
 
         .nbtn {
-            padding-right: 15px;
+            padding-right: 32px;
         }
 
+        .landing-desktop > div > div > h1,
+        .landing-desktop > div > div > p,
+        .landing-desktop > div > div > .landing-btns {
+            padding-left: 32px !important;
+        }
+
+        .landing-desktop > div > .landing-showoff {
+            padding-right: 32px;
+        }
+    }
+
+    @media screen and (max-width: 1280px) {
+        .landing-desktop {
+            display: none;
+        }
+    
+        .landing-mobile {
+            display: flex;
+        }
     }
 
     @media screen and (max-width: 626px) {

@@ -13,6 +13,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "incremental": true,
+    "esModuleInterop": true
   },
   "exclude": ["**/node_modules/**/*", "test", "dist", "**/*spec.ts", "**/src/**/*"]
 }

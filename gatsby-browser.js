@@ -12,13 +12,10 @@ import { getUser } from './src/services/authenticate';
 import { isBrowser } from './lib/helpers/login'
 
 import config from './dot.config';
-import { navigate } from 'gatsby';
 
 import { parse } from 'search-params' 
 
 import { defaultGlobalState, globalStateContext, dispatchStateContext, useGlobalState } from "./src/store"
-
-let route = window.location.pathname ?? ""
 
 const GlobalStateProvider = ({ children }) => {
     const [state, dispatch] = React.useReducer(
@@ -35,22 +32,22 @@ const GlobalStateProvider = ({ children }) => {
     );
 };
 
-const checkSession = (dispatch) => {
-    if(isBrowser()) window.isLoggedIn = false;
+// const checkSession = (dispatch) => {
+//     if(isBrowser()) window.isLoggedIn = false;
 
-    getUser()
-        .then((res) => { 
-            console.log(res)
+//     getUser()
+//         .then((res) => { 
+//             console.log(res)
 
-            if(!res) return;
-            if(isBrowser()) window.isLoggedIn = !!res;
+//             if(!res) return;
+//             if(isBrowser()) window.isLoggedIn = !!res;
 
-            dispatch({ loaded: true, user: res, authenticated: true });
-        })
-        .catch(err => {
-            dispatch({ loaded: true, authenticated: false })
-        });
-}
+//             dispatch({ loaded: true, user: res, authenticated: true });
+//         })
+//         .catch(err => {
+//             dispatch({ loaded: true, authenticated: false })
+//         });
+// }
 
 const SessionCheck = ({ children }) => {
     const [state, dispatch] = useGlobalState();
