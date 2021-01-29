@@ -47,6 +47,7 @@ const Footer = ({ children }) => {
                         <SocialIcon href={"https://twitter.com/DotBrowser"} target={"_blank"} src={twitter} />
                         <SocialIcon href={"https://dothq.co/join"} target={"_blank"} src={discord} />
                         <SocialIcon href={"https://www.youtube.com/channel/UCgmXI2ccMKSTPNCij4_6Ubw"} target={"_blank"} src={youtube} />
+
                     </Socials>
                 </div>
                 <List>
@@ -69,7 +70,7 @@ const Footer = ({ children }) => {
                         <Item href={"/support"}>Support</Item>
                         <Item href={"/contact"}>Contact</Item>
                         <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
-                        <Item href={"https://medium.com/dotblog"}>Blog</Item>
+                        <ExternalItem href={"https://medium.com/dotblog"}>Blog</ExternalItem>
                     </ListGroup>
                     <ListGroup style={{ marginRight: 0 }}>
                         <ListTitle>Legal</ListTitle>
