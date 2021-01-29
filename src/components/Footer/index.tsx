@@ -6,6 +6,8 @@ import { Link, navigate } from "gatsby";
 import twitter from '../../assets/images/icons/twitter.svg'
 import discord from '../../assets/images/icons/discord.svg'
 import youtube from '../../assets/images/icons/youtube.svg'
+import patreon from '../../assets/images/icons/patreon.svg'
+
 
 import { ButtonV2 } from '../ButtonV2'
 
@@ -47,6 +49,7 @@ const Footer = ({ children }) => {
                         <SocialIcon href={"https://twitter.com/DotBrowser"} target={"_blank"} src={twitter} />
                         <SocialIcon href={"https://dothq.co/join"} target={"_blank"} src={discord} />
                         <SocialIcon href={"https://www.youtube.com/channel/UCgmXI2ccMKSTPNCij4_6Ubw"} target={"_blank"} src={youtube} />
+                        <SocialIcon href={"https://www.patreon.com/dothq"} target={"_blank"} src={patreon} />
                     </Socials>
                 </div>
                 <List>
@@ -69,7 +72,7 @@ const Footer = ({ children }) => {
                         <Item href={"/support"}>Support</Item>
                         <Item href={"/contact"}>Contact</Item>
                         <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
-                        <Item href={"/blog"}>Blog</Item>
+                        <ExternalItem href={"https://medium.com/dotblog"}>Blog</ExternalItem>
                     </ListGroup>
                     <ListGroup style={{ marginRight: 0 }}>
                         <ListTitle>Legal</ListTitle>

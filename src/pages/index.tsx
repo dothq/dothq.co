@@ -37,7 +37,7 @@ const IndexPage = () => {
 
             <div style={{ width: "907px", display: "flex", justifyContent: "flex-end" }}>
               <img src={landingShowcase} width={800} id="browser-ui" />
-              <img id="browser-wallpaper" src="https://source.unsplash.com/collection/67042424" width={800} height={522}></img>
+              <img id="browser-wallpaper" src="https://source.unsplash.com/collection/67042424/800x522" width={800} height={522}></img>
             </div>
 
           </div>
