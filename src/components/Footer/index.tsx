@@ -69,7 +69,7 @@ const Footer = ({ children }) => {
                         <Item href={"/support"}>Support</Item>
                         <Item href={"/contact"}>Contact</Item>
                         <ExternalItem href={"https://status.dothq.co"}>Status</ExternalItem>
-                        <Item href={"/blog"}>Blog</Item>
+                        <Item href={"https://medium.com/dotblog"}>Blog</Item>
                     </ListGroup>
                     <ListGroup style={{ marginRight: 0 }}>
                         <ListTitle>Legal</ListTitle>
