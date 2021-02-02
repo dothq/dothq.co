@@ -73,12 +73,12 @@ module.exports = {
         dark: require(`${__dirname}/src/theme.js`).lightTheme,
       },
     },
-    {
-      resolve: `gatsby-source-ghost`,
-      options: {
-        apiUrl: `https://ghost.dothq.co`,
-        contentApiKey: `7efea324bbf57adf3768570f3d`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-ghost`,
+    //   options: {
+    //     apiUrl: `https://ghost.dothq.co`,
+    //     contentApiKey: `7efea324bbf57adf3768570f3d`,
+    //   },
+    // },
   ],
 }
