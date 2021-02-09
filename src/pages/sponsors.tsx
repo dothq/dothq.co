@@ -21,7 +21,7 @@ const SponsorsPage = () => {
 
             </div>
             <div style={{ textAlign: "center" }}>
-              Fosshost - https://fosshost.org
+                Fosshost - <a href={"https://fosshost.org"} style={{ color: "blue" }}>fosshost.org</a>
             </div>
         </Layout>
     )
