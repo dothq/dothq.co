@@ -45,7 +45,7 @@ const Footer = ({ children }) => {
 
                     <Socials>
                         <SocialIcon href={"https://twitter.com/DotBrowser"} target={"_blank"} src={twitter} />
-                        <SocialIcon href={"https://dothq.co/join"} target={"_blank"} src={discord} />
+                        <SocialIcon href={"https://dothq.link/dsc"} target={"_blank"} src={discord} />
                         <SocialIcon href={"https://www.youtube.com/channel/UCgmXI2ccMKSTPNCij4_6Ubw"} target={"_blank"} src={youtube} />
                     </Socials>
                 </div>
