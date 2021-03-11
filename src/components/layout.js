@@ -15,6 +15,7 @@ import Header from "./Header/"
 import Hero from "./Hero"
 import Ending from "./Ending"
 import Footer from "./Footer"
+import { Banner } from "./Banner"
 import "./layout.css"
 import "./inter.css"
 
@@ -77,6 +78,9 @@ const Layout = ({ children, noEnding, noHero, isHome, darkNav, blank }) => {
   return (
     <SkeletonTheme color={themeContext.isDark ? "#0f0f0f" : "#eee"} highlightColor={themeContext.isDark ? "#232323" : "#d8d8d8"}>
       <GS />
+      <Banner>
+        Get a sneak peek of the new version of this website. <a style={{ margin: "0 12px" }} href="https://new.dothq.co">Try it out</a> or <a style={{ marginLeft: "12px" }} href="https://dothq.link/mns">Learn more</a>
+      </Banner>
       {!blank && <Header className={"nav"} siteTitle={data.site.siteMetadata.title} isFixed={false} isDark={typeof(darkNav) == "undefined" ? true : darkNav} />}
       {!noHero && <Hero>
         {children}

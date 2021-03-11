@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledBanner = styled.div`
-    height: 38px;
+    height: 58px;
     background-color: black;
     width: 100%;
     color: white;
