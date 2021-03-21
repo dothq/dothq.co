@@ -72,6 +72,10 @@ function SEO({ description, lang, meta, title, isHome }) {
         {
           name: `og:keywords`,
           content: `dot browser, electron, react, privacy, typescript, browser, web, anonymity, robust, blocker, trackers, mind, free web browser, open source web browser, oss web browser, open source, free, privacy browsers, privacy apps, privacy open source, secure open source, github open source, git open source, open source software, dot-browser, freedoms, dothq, dot hq, wexond, wexond browser, wexond.net, chrome, chromium, google, brave, edge, google browser, edge browser, chromium browser, chrome browser, brave browser, clean, minimal, sleek, adblocker, adblock`
+        },
+        {
+          name: `wot-verification`,
+          content: `b0614e59cea7237abf27`
         }
       ].concat(meta)}
     >
