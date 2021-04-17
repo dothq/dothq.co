@@ -1,3 +1,5 @@
+> **This repository has moved to [dothq/www](https://github.com/dothq/www)**
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://dothq.co">
